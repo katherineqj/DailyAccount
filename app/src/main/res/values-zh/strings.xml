@@ -1,0 +1,565 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">CoCoin</string>
+
+    <string name="custom_view">可选范围视图</string>
+    <string name="tags_view">标签视图</string>
+    <string name="months_view">月视图</string>
+    <string name="list_view">列表视图</string>
+    <string name="expense_report">支出报表</string>
+    <string name="sync">同步</string>
+    <string name="settings">设置</string>
+    <string name="help">帮助</string>
+    <string name="feedback">反馈</string>
+    <string name="about">关于</string>
+
+    <string name="today_empty">新的一天！</string>
+    <string name="yesterday_empty">无记录</string>
+    <string name="this_week_empty">新的一周！</string>
+    <string name="last_week_empty">无记录</string>
+    <string name="this_month_empty">新的一月！</string>
+    <string name="last_month_empty">无记录</string>
+    <string name="this_year_empty">新年快乐！</string>
+    <string name="last_year_empty">无记录</string>
+
+    <string name="january_short">1月</string>
+    <string name="february_short">2月</string>
+    <string name="march_short">3月</string>
+    <string name="april_short">4月</string>
+    <string name="may_short">5月</string>
+    <string name="june_short">6月</string>
+    <string name="july_short">7月</string>
+    <string name="august_short">8月</string>
+    <string name="september_short">9月</string>
+    <string name="october_short">10月</string>
+    <string name="november_short">11月</string>
+    <string name="december_short">12月</string>
+
+    <string name="january">1月</string>
+    <string name="february">2月</string>
+    <string name="march">3月</string>
+    <string name="april">4月</string>
+    <string name="may">5月</string>
+    <string name="june">6月</string>
+    <string name="july">7月</string>
+    <string name="august">8月</string>
+    <string name="september">9月</string>
+    <string name="october">10月</string>
+    <string name="november">11月</string>
+    <string name="december">12月</string>
+
+    <string name="today_date_string">今天</string>
+    <string name="yesterday_date_string">昨天</string>
+    <string name="this_week_date_string">这周</string>
+    <string name="last_week_date_string">上周</string>
+    <string name="this_month_date_string">这个月</string>
+    <string name="last_month_date_string">上个月</string>
+    <string name="this_year_date_string">今年</string>
+    <string name="last_year_date_string">去年</string>
+
+    <string name="at">在</string>
+    <string name="on">在</string>
+    <string name="in">在</string>
+
+    <string name="o_clock">点</string>
+
+    <string name="monday_short">周一</string>
+    <string name="tuesday_short">周二</string>
+    <string name="wednesday_short">周三</string>
+    <string name="thursday_short">周四</string>
+    <string name="friday_short">周五</string>
+    <string name="saturday_short">周六</string>
+    <string name="sunday_short">周日</string>
+
+    <string name="monday">周一</string>
+    <string name="tuesday">周二</string>
+    <string name="wednesday">周三</string>
+    <string name="thursday">周四</string>
+    <string name="friday">周五</string>
+    <string name="saturday">周六</string>
+    <string name="sunday">周日</string>
+
+    <string name="last">上</string>
+
+    <string name="check">查看</string>
+
+    <string name="today_view_today">今天</string>
+    <string name="today_view_yesterday">昨天</string>
+    <string name="today_view_this_week">这周</string>
+    <string name="today_view_last_week">上周</string>
+    <string name="today_view_this_month">这个月</string>
+    <string name="today_view_last_month">上个月</string>
+    <string name="today_view_this_year">今年</string>
+    <string name="today_view_last_year">去年</string>
+
+    <string name="get">嗯</string>
+
+    <string name="tag_sum_pie">总和饼图</string>
+    <string name="tag_sum_histogram">总和直方图</string>
+    <string name="tag_meal">晚餐</string>
+    <string name="tag_closet">衣鞋</string>
+    <string name="tag_home">家居</string>
+    <string name="tag_traffic">交通</string>
+    <string name="tag_vehicle_maintenance">汽车保养</string>
+    <string name="tag_book">书籍</string>
+    <string name="tag_hobby">爱好</string>
+    <string name="tag_internet">网络</string>
+    <string name="tag_friend">朋友</string>
+    <string name="tag_education">教育</string>
+    <string name="tag_entertainment">娱乐</string>
+    <string name="tag_medical">医疗保健</string>
+    <string name="tag_insurance">保险</string>
+    <string name="tag_donation">捐赠</string>
+    <string name="tag_sport">运动</string>
+    <string name="tag_snack">小吃</string>
+    <string name="tag_music">音乐</string>
+    <string name="tag_fund">股票基金</string>
+    <string name="tag_drink">饮料</string>
+    <string name="tag_fruit">水果</string>
+    <string name="tag_film">电影</string>
+    <string name="tag_baby">孩子</string>
+    <string name="tag_partner">伴侣</string>
+    <string name="tag_housing_loan">房贷</string>
+    <string name="tag_pet">宠物</string>
+    <string name="tag_telephone_bill">电话费</string>
+    <string name="tag_travel">旅游</string>
+    <string name="tag_lunch">午餐</string>
+    <string name="tag_breakfast">早餐</string>
+    <string name="tag_midnight_snack">宵夜</string>
+
+    <string name="password_tip">输入密码查阅您的账本</string>
+
+    <string name="toast_no_tag">我需要一个标签</string>
+    <string name="toast_no_money">您花了多少钱？</string>
+    <string name="toast_password_wrong">嗯……错了</string>
+    <string name="toast_password_correct">密码正确</string>
+    <string name="toast_save_successfully">保存成功</string>
+    <string name="toast_save_failed">额……保存失败了</string>
+    <string name="toast_press_again_to_exit">再点一次我就走</string>
+
+    <string name="sort_tags">标签排序</string>
+
+    <string name="from">从</string>
+    <string name="to">到</string>
+
+    <string name="search">查找</string>
+
+    <string name="tag_empty">无记录</string>
+
+    <string name="undo">撤销</string>
+
+    <string name="deleting">删除这条记录</string>
+
+    <string name="from_invalid">起始时间有误</string>
+    <string name="to_invalid">结束时间有误</string>
+
+    <string name="account_book_name_hint">账本名字</string>
+    <string name="user_name_hint">用户名</string>
+    <string name="user_email_hint">邮箱</string>
+
+    <string name="test_user_name">Nightonke</string>
+    <string name="test_user_email">Nightonke@gmail.com</string>
+
+    <string name="expense_text">支出</string>
+    <string name="records_text">记录</string>
+
+    <string name="month_limit_enable">每月最大支出限定</string>
+    <string name="month_limit">每月最大支出额度</string>
+    <string name="month_color_remind">颜色提醒</string>
+    <string name="month_warning">超过此数额时提醒</string>
+    <string name="month_color_remind_type">提醒的颜色</string>
+    <string name="month_forbidden">超出每月额度时无法记录</string>
+
+    <string name="auto_back_up">自动同步</string>
+
+    <string name="account_book_name">账本名字</string>
+
+    <string name="change_password">换个密码</string>
+
+    <string name="sort_tag">标签排序</string>
+
+    <string name="whether_show_picture">在标签视图中显示图片</string>
+
+    <string name="whether_show_circle">甜甜圈饼图</string>
+
+    <string name="default_user_name">您尚未登录！</string>
+    <string name="default_user_email">登录后可备份数据到云端，点我登录吧！</string>
+
+    <string name="set_account_book_dialog_title">给账本来个名字！</string>
+
+    <string name="submit">好！</string>
+    <string name="cancel">算了</string>
+    <string name="custom">自定义</string>
+    <string name="back">返回</string>
+
+    <string name="different_password">两次密码不一致！</string>
+    <string name="set_password_successfully">这密码还不错</string>
+
+    <string name="password_tip_0">请输入旧密码</string>
+    <string name="password_tip_1">请输入新密码</string>
+    <string name="password_tip_2">请再次输入新密码</string>
+
+    <string name="set_month_expense_dialog_title">省着点！</string>
+    <string name="set_warning_expense_dialog_title">制定你的省钱计划</string>
+    <string name="set_remind_color_dialog_title">选色！</string>
+    <string name="set_remind_color_dialog_sub_title">调色！</string>
+
+    <string name="this_month">本月:</string>
+
+    <string name="welcome">欢迎！</string>
+    <string name="login_or_register">请问你有CoCoin账号吗？</string>
+    <string name="login">有的</string>
+    <string name="register">没有</string>
+
+    <string name="register_user_name">来个酷酷的名字</string>
+    <string name="register_user_email">您可以用邮箱来找回密码</string>
+    <string name="register_password">不能说的密码</string>
+    <string name="go_register">注册！</string>
+
+    <string name="welcome_back">欢迎回来！</string>
+
+    <string name="hi">您好！</string>
+    <string name="log_out">登出</string>
+    <string name="whether_logout">真的，要走？</string>
+
+    <string name="go_login">登录!</string>
+    <string name="login_user_name">请输入您的注册名或者邮箱</string>
+    <string name="login_password">请输入您的密码（悄悄地）</string>
+
+    <string name="change_account_book_name_successfully">成功修改账本名字</string>
+    <string name="change_account_book_name_fail">修改账本名字失败</string>
+    <string name="change_and_update_account_book_name_successfully">
+        已修改账本名字并上传成功
+    </string>
+    <string name="change_and_update_account_book_name_fail">
+        已修改账本名字但是上传失败
+    </string>
+
+    <string name="register_successfully">欢迎来到CoCoin！\n</string>
+    <string name="register_fail">注册失败！\n</string>
+    <string name="login_successfully">欢迎回来！\n</string>
+    <string name="login_fail">登录失败！\n</string>
+    <string name="user_name_exist">用户名已存在</string>
+    <string name="user_email_exist">邮箱已存在</string>
+    <string name="user_mobile_exist">
+        这台手机已经注册过CoCoin账号啦！\n
+        请用原来的账号登录吧~
+    </string>
+    <string name="network_disconnection">网络连接断开</string>
+
+    <string name="user_name_or_password_incorrect">用户不存在或密码错误</string>
+    <string name="name_or_email_inexist">用户不存在</string>
+    <string name="password_wrong">密码错误！</string>
+
+    <string name="log_out_successfully">登出成功！</string>
+
+    <string name="sync_dialog_title">同步设置?</string>
+    <string name="sync_dialog_content">
+        您之前已经在CoCoin服务器上同步了设置，您是否想要把之前的设置同步到本地呢？
+    </string>
+    <string name="sync_dialog_sync_to_local">同步以前的设置到本地</string>
+    <string name="sync_dialog_sync_to_server">同步现在的设置到服务器</string>
+    <string name="sync_to_local_successfully_dialog_title">同步成功</string>
+    <string name="sync_to_local_successfully_dialog_content">
+        您之前的设置已经同步到本地
+    </string>
+    <string name="your_current_account_book_password_is">您的账本密码已经同步为：</string>
+    <string name="sync_to_server_successfully">设置已经同步到服务器！</string>
+    <string name="sync_to_server_failed">设置无法同步到服务器！\n</string>
+
+    <string name="change_logo_title">换个样子！</string>
+    <string name="change_logo_content">选择一张图片来改变头像</string>
+    <string name="from_camera">从相机</string>
+    <string name="from_gallery">从相册</string>
+
+    <string name="login_first_title">登录！</string>
+    <string name="login_first_content">请先注册或登录！</string>
+    <string name="ok">好！</string>
+
+    <string name="first_time_set_password">
+        &#160;Hi！\n
+        欢迎使用CoCoin！\n
+        为了您的账本安全，\n
+        我想你需要一个密码
+    </string>
+    <string name="first_time_set_password_again">
+        &#160;差不多了！\n
+        请再输入一遍密码吧
+    </string>
+
+    <string name="change_password_title">更改密码</string>
+
+    <string name="remark_hint">添加备注</string>
+
+    <string name="save_successfully_online">保存并同步成功</string>
+    <string name="save_successfully_locale">保存成功</string>
+    <string name="save_failed_online">保存成功\n上传至服务器失败</string>
+    <string name="save_failed_locale">保存失败</string>
+
+    <string name="delete_successfully_online">删除成功</string>
+    <string name="delete_successfully_locale">删除成功</string>
+    <string name="delete_failed_online">删除失败</string>
+    <string name="delete_failed_locale">删除失败</string>
+
+    <string name="update_successfully_online">修改成功</string>
+    <string name="update_successfully_locale">修改成功</string>
+    <string name="update_failed_online">修改成功</string>
+    <string name="update_failed_locale">修改成功</string>
+
+    <string name="guide">引导</string>
+
+    <string name="hey">嗨！</string>
+    <string name="thank">感谢您使用CoCoin。</string>
+    <string name="me">我是一名安卓开发者。</string>
+    <string name="github">项目已开源：github.com/Nightonke/CoCoin</string>
+    <string name="blog">博客：blog.csdn.net/u012925008</string>
+    <string name="email">邮箱：nightonke@outlook.com</string>
+    <string name="thank_again">如果有任何吐槽，就发邮件给我吧！</string>
+
+    <string name="login_button">登录/注册</string>
+    <string name="logout_button">注销</string>
+
+    <string name="login_idle">登录</string>
+    <string name="login_complete">登录成功</string>
+    <string name="login_error">登录失败，点击重试</string>
+
+    <string name="register_idle">注册</string>
+    <string name="register_complete">注册成功</string>
+    <string name="register_error">注册失败，点击重试</string>
+
+    <string name="saving_tags_title">保存</string>
+    <string name="saving_tags_content">正在保存标签，请稍候。</string>
+
+    <string name="tag_number">个标签</string>
+
+    <string name="whether_save">保存？</string>
+    <string name="whether_save_tag">是否保存对标签所做的更改？</string>
+
+    <string name="save_y">保存</string>
+    <string name="save_n">不保存</string>
+
+    <string name="custom_view_help"> ● 自定义时间范围</string>
+
+    <string name="change_logo_tip">请在设置界面更改头像</string>
+    <string name="login_tip">请在设置界面登录或注册</string>
+
+    <string name="select_title"> ● 筛选条件</string>
+    <string name="select_expense"> ● 金额范围：</string>
+    <string name="select_tag"> ● 标签类型：</string>
+    <string name="select_time"> ● 时间范围：</string>
+    <string name="set_select">设置</string>
+    <string name="any">不限</string>
+    <string name="select">筛选</string>
+
+    <string name="set_expense">金额范围</string>
+    <string name="set_left_expense">设置金额下界（包含）。</string>
+    <string name="set_right_expense">设置金额上界（包含）。</string>
+
+    <string name="set_left_calendar">开始时间</string>
+    <string name="set_right_calendar">结束时间</string>
+
+    <string name="set_tag">标签</string>
+    <string name="set_tag_kind">设置标签</string>
+
+    <string name="selecting_title">筛选中</string>
+    <string name="selecting_content">正在筛选记录，请稍候……</string>
+
+    <string name="input_remark_to_search">输入备注以查找</string>
+
+    <string name="loading">加载中……</string>
+    <string name="loaded">加载完成</string>
+
+    <string name="update_title">更新</string>
+    <string name="update_content_too_old">您的CoCoin版本过旧，可能无法使用。</string>
+    <string name="update_content">我们将为您带来更多的功能，您也可以在设置界面中手动更新。</string>
+    <string name="update_never">此版本不提醒</string>
+    <string name="update_cancel">取消</string>
+    <string name="update_ok">更新</string>
+    <string name="downloading_title">下载安装包……</string>
+    <string name="downloading_content">正在下载最新CoCoin安装包，请稍候。</string>
+
+    <string name="current_version">当前版本：</string>
+    <string name="can_update">可更新</string>
+    <string name="checking_update">正在检测最新版本……</string>
+    <string name="is_newest_version">当前已是最新版本</string>
+
+    <string name="sync_querying_title">同步</string>
+    <string name="sync_querying_content">正在检查同步信息，请稍候……</string>
+    <string name="sync_querying_fail_title">同步失败</string>
+    <string name="sync_querying_fail_content">网络中断，检查同步信息失败</string>
+    <string name="sync_choose_title">同步</string>
+    <string name="sync_info_cloud_record_0">您在云上记有</string>
+    <string name="sync_info_cloud_record_1">条消费记录。</string>
+    <string name="sync_info_cloud_time_0">您最近的上传时间是</string>
+    <string name="sync_info_cloud_time_1">。</string>
+    <string name="sync_info_cloud_time_2">您还未曾上传过。</string>
+    <string name="sync_info_mobile_record_0">您在本地记有</string>
+    <string name="sync_info_mobile_record_1">条消费记录。</string>
+    <string name="sync_info_mobile_time_0">您最近同步到本地的时间是</string>
+    <string name="sync_info_mobile_time_1">。</string>
+    <string name="sync_info_mobile_time_2">您还未曾同步到本地过。</string>
+    <string name="sync_choose_content">您可以选择将本地账本上传到云（覆盖掉原来在云上的账本），或者将云上的账本同步到本地（覆盖掉原来在本地的账本）。</string>
+    <string name="sync_to_mobile">云上账本同步到本地</string>
+    <string name="sync_to_cloud">本地账本上传到云上</string>
+    <string name="sure_to_mobile_0">确定将</string>
+    <string name="sure_to_mobile_1">条消费记录从云上同步到本地账本？本地账本将被覆盖。</string>
+    <string name="sure_to_cloud_0">确定将</string>
+    <string name="sure_to_cloud_1">条消费记录从本地上传到云上账本？云上账本将被覆盖。</string>
+    <string name="mobile_record_empty">您的手机里没有消费记录，不能上传。</string>
+    <string name="cloud_record_empty">您在云上账本里没有消费记录，不能同步到本地。</string>
+    <string name="syncing">正在同步</string>
+    <string name="uploading_0">正在上传第</string>
+    <string name="uploading_1">条消费记录到云，请耐心等候。</string>
+    <string name="downloading_0">正在同步第</string>
+    <string name="downloading_1">条消费记录到本地，请耐心等候。</string>
+    <string name="sync_failed">同步失败</string>
+    <string name="uploading_fail_0">网络中断，上传失败。</string>
+    <string name="uploading_fail_1">条消费记录已上传到云上账本。</string>
+    <string name="downloading_fail_0">网络中断，同步失败。</string>
+    <string name="downloading_fail_1">条消费记录已同步到本地账本。</string>
+    <string name="sync_completely_title">同步完成</string>
+    <string name="sync_completely_content">同步完成。</string>
+
+    <string name="ok_1">确认</string>
+
+    <string name="report_loading_select_list_title">加载中</string>
+    <string name="report_loading_select_list_content">正在加载数据，请稍候。</string>
+
+    <string name="report_select_list_title">报表时间段</string>
+
+    <string name="report_view_help"> ● 支出报表</string>
+    <string name="report_view_records">条支出记录，</string>
+    <string name="report_view_tags">个标签</string>
+    <string name="report_view_highest_tag"> ● 支出最多的标签</string>
+    <string name="report_view_highest_tag_show_more">显示更多</string>
+    <string name="report_view_highest_tag_show_less">隐藏</string>
+    <string name="report_view_lowest_tag"> ● 支出最少的标签</string>
+    <string name="report_view_lowest_tag_show_more">显示更多</string>
+    <string name="report_view_lowest_tag_show_less">隐藏</string>
+    <string name="report_view_please_select_data">请选择时间段</string>
+    <string name="report_view_no_data">您尚未有记录，去记一笔吧！</string>
+    <string name="report_view_pie"> ● 标签饼图</string>
+    <string name="report_view_line"> ● 时间折线图</string>
+    <string name="report_view_highest_month"> ● 每月支出排序</string>
+    <string name="report_view_highest_month_show_more">显示更多</string>
+    <string name="report_view_highest_month_show_less">隐藏</string>
+    <string name="report_view_highest_day"> ● 支出最多的日期</string>
+    <string name="report_view_highest_day_show_more">显示更多</string>
+    <string name="report_view_highest_day_show_less">隐藏</string>
+    <string name="report_view_lowest_day"> ● 支出最少的日期</string>
+    <string name="report_view_lowest_day_show_more">显示更多</string>
+    <string name="report_view_lowest_day_show_less">隐藏</string>
+    <string name="report_view_average_day"> ● 平均每日</string>
+    <string name="report_view_average_month"> ● 平均每月</string>
+    <string name="report_view_foot">支出报表</string>
+
+    <string name="help_cocoin_title">CoCoin</string>
+    <string name="help_feedback_title">反馈</string>
+    <string name="help_open_library_title">开源库</string>
+    <string name="help_me_title">我</string>
+
+    <string name="help_cocoin_content_1"> ● CoCoin，一款多视图记账APP</string>
+    <string name="help_cocoin_content_2">
+        ● 您可以使用CoCoin轻松记账，并使用密码来保护您的账本。
+        账本密码会在您第一次使用CoCoin的时候被设置。
+        在记账的时候，您可以通过左滑显示数字框来为您的记录增加备注。
+        如果您需要查阅账本，可以通过下滑或点击标题栏来进入账本页面。
+    </string>
+    <string name="help_cocoin_content_3">
+        ● 在账本中，有对今天、昨天、这周、上周、这个月、上个月、今年和去年的记录。
+        您可以通过点击饼状图的饼块或者柱状图的柱形来查看详细支出信息。
+        CoCoin的所有图表都可以通过点击来获取详细信息，您也可以通过点击图表旁的选择按钮来对某些不易点击得到的地方进行查阅。
+        点击或选择图表中的某一部分会有弹窗提示相关信息，点击查看可以在弹出的对话框中看到列表，列表中即为每条记录的信息。
+        通过点击列表中的某一条记录，您可以看到更为详细的情况。
+        如果您希望通过更多的视图来查阅自己的支出情况，右滑打开菜单即可。
+    </string>
+    <string name="help_cocoin_content_4">
+        ● 在自定义时间范围视图中，您可以查阅到某一时间段内的所有支出情况。
+        点击右下角的按钮即可设定时间范围。
+    </string>
+    <string name="help_cocoin_content_5">
+        ● 在标签视图中，您可以查阅到自己在不同标签上的支出情况。
+        右滑打开菜单，您可以看到CoCoin的所有标签，点击标签可以跳到该标签的支出情况。
+    </string>
+    <string name="help_cocoin_content_6">
+        ● 在月视图中，您可以查阅到自己在不同月份的支出情况。
+        您可以直观看到自己在某一月份的总支出、总记录数、在不同标签上的支出和占比、具体支出的详细信息。
+        右滑打开菜单，您可以看到自己每月的支出概况，同样的，点击某一月份将会跳到该月份的详细信息。
+    </string>
+    <string name="help_cocoin_content_7">
+        ● 在列表视图中，您可以进行筛选、查询、更改、删除记录的操作。
+        左滑某一记录进行编辑，右滑进行删除。
+        右滑打开菜单，您可以设置支出范围、时间范围、标签来筛选特定的支出记录。
+        点击右上角的搜索按钮，可以通过备注来搜索特定的记录。
+    </string>
+    <string name="help_cocoin_content_8">
+        ● 在报表视图中，您可以生成自己的年度支出报表或月支出报告。
+        通过点击右下角按钮即可以选择报表的时间范围。
+    </string>
+    <string name="help_cocoin_content_9">
+        ● 当您登录了CoCoin之后，您可以通过同步功能进行记录的备份。
+    </string>
+    <string name="help_cocoin_content_10">
+        ● 您可以对自己的账本进行个性化设置。
+        比如，您可以更改账本的名字、对标签进行排序、设置是否提醒每月支出的限额，如果您选择颜色提醒，当每月支出总和达到警告值时，记录的界面将会变色以示提醒。
+    </string>
+    <string name="help_cocoin_content_11"> ● 感谢您使用CoCoin</string>
+
+    <string name="help_feedback_content_1"> ● 很高兴能收到您的反馈，如果您有非文本内容，可以发到我的电子邮箱：Nightonke@outlook.com.</string>
+    <string name="help_feedback_content_2">让CoCoin变得更好</string>
+    <string name="help_feedback_hint">您可以在此处编辑反馈</string>
+    <string name="help_feedback_edit">编辑</string>
+    <string name="help_feedback_send">发送</string>
+    <string name="help_feedback_dialog_title">字数不合法</string>
+    <string name="help_feedback_dialog_content">您输入的反馈字数过多或过少(1~400).</string>
+    <string name="help_feedback_sent">正在发送反馈</string>
+    <string name="help_feedback_sent_fail">发送反馈失败！</string>
+    <string name="help_feedback_sent_successfully">成功发送，谢谢您的反馈</string>
+    <string name="help_feedback_dialog_title_1">发送反馈</string>
+    <string name="help_feedback_dialog_content_1">您已经编辑了反馈但是并未发送，请问是否发送？</string>
+    <string name="help_feedback_dialog_send">发送</string>
+    <string name="help_feedback_dialog_dont_send">不发送</string>
+
+    <string name="help_about_content_0"> ● 关于我</string>
+    <string name="help_about_content_1">Nightonke</string>
+    <string name="help_about_content_2">github.com/Nightonke/CoCoin</string>
+    <string name="help_about_content_3">blog.csdn.net/u012925008</string>
+    <string name="help_about_content_4">Nightonke@outlook.com</string>
+    <string name="help_about_content_5"> ● 所用到的开源库</string>
+    <string name="help_about_content_6">daimajia.androidanimations</string>
+    <string name="help_about_content_7">balysv:material-ripple</string>
+    <string name="help_about_content_8">rengwuxian.materialedittext</string>
+    <string name="help_about_content_9">jakewharton:butterknife</string>
+    <string name="help_about_content_10">florent37:materialviewpager</string>
+    <string name="help_about_content_11">dmytrodanylyk.circular-progress-button</string>
+    <string name="help_about_content_12">wdullaer:materialdatetimepicker</string>
+    <string name="help_about_content_13">melnykov:floatingactionbutton</string>
+    <string name="help_about_content_14">sacot41:scviewpager</string>
+    <string name="help_about_content_15">daimajia.slider</string>
+    <string name="help_about_content_16">aakira:expandable-layout</string>
+    <string name="help_about_content_17">Yalantis:GuillotineMenu-Android</string>
+    <string name="help_about_content_18">lecho:hellocharts</string>
+    <string name="help_about_content_19">nispok:snackbar</string>
+    <string name="help_about_content_20">steamcrafted:materialiconlib</string>
+    <string name="help_about_content_21">johnpersano:supertoasts</string>
+    <string name="help_about_content_22">squareup.leakcanary</string>
+    <string name="help_about_content_23">h6ah4i.android.widget.advrecyclerview:advrecyclerview</string>
+    <string name="help_about_content_24">hdodenhof:circleimageview</string>
+    <string name="help_about_content_25">miguelcatalan:materialsearchview</string>
+    <string name="help_about_content_26">wnafee:vector-compat</string>
+    <string name="help_about_content_27">danoz:recyclerviewfastscroller</string>
+    <string name="help_about_content_28">afollestad.material-dialogs</string>
+    <string name="help_about_content_29">rey5137:material</string>
+    <string name="help_about_content_30">bmob.android</string>
+    <string name="help_about_content_31">koushikdutta.ion</string>
+    <string name="help_about_content_32">tencent.bugly</string>
+    <string name="help_about_content_33">ozodrukh:CircularReveal</string>
+
+    <string name="copy_to_clipboard">已将e-mail复制到剪切板</string>
+
+    <string name="show_text_0">30个标签</string>
+    <string name="show_text_1">多种视图</string>
+    <string name="show_text_2">云同步</string>
+    <string name="show_text_3">智能提醒</string>
+
+</resources>
