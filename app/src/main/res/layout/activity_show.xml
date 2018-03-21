@@ -165,7 +165,7 @@
         android:background="@color/white"
         />
 
-    <com.katherine_qj.saver.ui.kkmoneyUnscrollableViewPager
+    <com.katherine_qj.saver.ui.KKMoneyUnscrollableViewPager
         android:id="@+id/viewpager"
         android:layout_height="wrap_content"
         android:layout_width="match_parent"
