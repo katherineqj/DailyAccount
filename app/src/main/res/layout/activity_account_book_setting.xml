@@ -31,7 +31,7 @@
                 android:layout_height="200dp"
                 android:layout_width="match_parent"
                 android:orientation="vertical"
-                android:background="@color/my_blue"
+                android:background="@color/cyan"
                 android:layout_gravity="top"
                 >
 

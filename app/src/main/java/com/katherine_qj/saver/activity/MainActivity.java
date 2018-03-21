@@ -60,9 +60,7 @@ import butterknife.ButterKnife;
 import butterknife.InjectView;
 import cn.bmob.v3.BmobUser;
 
-public class MainActivity extends AppCompatActivity
-        implements
-        TagChooseFragment.OnTagItemSelectedListener {
+public class MainActivity extends AppCompatActivity implements TagChooseFragment.OnTagItemSelectedListener {
 
     private final int SETTING_TAG = 0;
 
@@ -614,11 +612,11 @@ public class MainActivity extends AppCompatActivity
             guillotineColorLy.setBackgroundColor(SettingManager.getInstance().getRemindColor());
             guillotineToolBar.setBackgroundColor(SettingManager.getInstance().getRemindColor());
         } else {
-            root.setBackgroundColor(CoCoinUtil.getInstance().MY_BLUE);
-            toolbar.setBackgroundColor(CoCoinUtil.getInstance().MY_BLUE);
-            guillotineBackground.setBackgroundColor(CoCoinUtil.getInstance().MY_BLUE);
-            guillotineColorLy.setBackgroundColor(CoCoinUtil.getInstance().MY_BLUE);
-            guillotineToolBar.setBackgroundColor(CoCoinUtil.getInstance().MY_BLUE);
+            root.setBackgroundColor(CoCoinUtil.getInstance().MY_Normally);
+            toolbar.setBackgroundColor(CoCoinUtil.getInstance().MY_Normally);
+            guillotineBackground.setBackgroundColor(CoCoinUtil.getInstance().MY_Normally);
+            guillotineColorLy.setBackgroundColor(CoCoinUtil.getInstance().MY_Normally);
+            guillotineToolBar.setBackgroundColor(CoCoinUtil.getInstance().MY_Normally);
         }
         if (CoCoinFragmentManager.mainActivityEditMoneyFragment != null)
             CoCoinFragmentManager.mainActivityEditMoneyFragment.setEditColor(shouldChange);

@@ -91,10 +91,10 @@ public class ButtonGridViewAdapter extends BaseAdapter {
             holder.iv.setColor(SettingManager.getInstance().getRemindColor());
             holder.tv.setTextColor(SettingManager.getInstance().getRemindColor());
         } else {
-            holder.fl.setBackgroundColor(CoCoinUtil.getAlphaColor(CoCoinUtil.MY_BLUE));
-            holder.ml.setRippleColor(CoCoinUtil.MY_BLUE);
-            holder.iv.setColor(CoCoinUtil.MY_BLUE);
-            holder.tv.setTextColor(CoCoinUtil.MY_BLUE);
+            holder.fl.setBackgroundColor(CoCoinUtil.getAlphaColor(CoCoinUtil.MY_Normally));
+            holder.ml.setRippleColor(CoCoinUtil.MY_Normally);
+            holder.iv.setColor(CoCoinUtil.MY_Normally);
+            holder.tv.setTextColor(CoCoinUtil.MY_Normally);
         }
 
 

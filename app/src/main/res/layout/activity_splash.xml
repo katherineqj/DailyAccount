@@ -14,7 +14,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        android:background="@color/my_blue"
+        android:background="@color/cyan"
         />
 
     <LinearLayout
@@ -114,6 +114,28 @@
             android:background="@color/transparent"
             >
         </lecho.lib.hellocharts.view.LineChartView>
+        <lecho.lib.hellocharts.view.LineChartView
+            android:id="@+id/chart1"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:layout_marginLeft="-30dp"
+            android:layout_marginRight="-40dp"
+            android:background="@color/transparent"
+            >
+        </lecho.lib.hellocharts.view.LineChartView>
+        <lecho.lib.hellocharts.view.LineChartView
+            android:id="@+id/chart2"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:layout_marginLeft="-30dp"
+            android:layout_marginRight="-40dp"
+            android:background="@color/transparent"
+            >
+        </lecho.lib.hellocharts.view.LineChartView>
+
+
 
         <View
             android:layout_width="match_parent"

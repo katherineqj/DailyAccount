@@ -26,6 +26,7 @@ import com.katherine_qj.saver.R;
 import com.katherine_qj.saver.activity.CoCoinApplication;
 import com.katherine_qj.saver.db.DB;
 import com.katherine_qj.saver.db.DBHelper;
+import com.katherine_qj.saver.model.CoCoin;
 import com.katherine_qj.saver.model.CoCoinRecord;
 import com.nineoldandroids.animation.ObjectAnimator;
 import com.rengwuxian.materialedittext.MaterialEditText;
@@ -58,6 +59,7 @@ public class CoCoinUtil {
     public static SuperToast.Animations TOAST_ANIMATION = SuperToast.Animations.FLYIN;
 
     public static int MY_BLUE;
+    public static int MY_Normally;
 
     public static CoCoinRecord backupCoCoinRecord;
 
@@ -432,6 +434,7 @@ public class CoCoinUtil {
         random = new Random();
 
         MY_BLUE = ContextCompat.getColor(CoCoinApplication.getAppContext(), R.color.my_blue);
+        MY_Normally = ContextCompat.getColor(CoCoinApplication.getAppContext(),R.color.my_normally);
     }
 
     public static Typeface GetTypeface() {
@@ -1185,44 +1188,6 @@ public class CoCoinUtil {
         ClipboardManager cmb = (ClipboardManager)context.getSystemService(Context.CLIPBOARD_SERVICE);
         cmb.setText(content.trim());
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

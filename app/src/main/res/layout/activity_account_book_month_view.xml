@@ -12,7 +12,7 @@
         app:viewpager_logo="@layout/header_logo"
         app:viewpager_pagerTitleStrip="@layout/material_view_pager_pagertitlestrip_newstand"
         app:viewpager_logoMarginTop="100dp"
-        app:viewpager_color="@color/colorPrimary"
+        app:viewpager_color="@color/cyan"
         app:viewpager_headerHeight="200dp"
         app:viewpager_headerAlpha="1.0"
         app:viewpager_imageHeaderDarkLayerAlpha="0.2"

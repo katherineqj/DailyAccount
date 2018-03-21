@@ -83,10 +83,10 @@ public class PasswordChangeButtonGridViewAdapter extends BaseAdapter {
         holder.ml.setRippleColor(SettingManager.getInstance().getRemindColor());
         holder.iv.setColor(SettingManager.getInstance().getRemindColor());
         holder.tv.setTextColor(SettingManager.getInstance().getRemindColor());
-        holder.fl.setBackgroundColor(CoCoinUtil.getAlphaColor(CoCoinUtil.MY_BLUE));
-        holder.ml.setRippleColor(CoCoinUtil.MY_BLUE);
-        holder.iv.setColor(CoCoinUtil.MY_BLUE);
-        holder.tv.setTextColor(CoCoinUtil.MY_BLUE);
+        holder.fl.setBackgroundColor(CoCoinUtil.getAlphaColor(CoCoinUtil.MY_Normally));
+        holder.ml.setRippleColor(CoCoinUtil.MY_Normally);
+        holder.iv.setColor(CoCoinUtil.MY_Normally);
+        holder.tv.setTextColor(CoCoinUtil.MY_Normally);
 
 
         return convertView;
