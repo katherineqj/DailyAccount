@@ -5,14 +5,14 @@ import android.support.v4.app.FragmentStatePagerAdapter;
 
 import com.katherine_qj.saver.fragment.MonthViewFragment;
 import com.katherine_qj.saver.model.RecordManager;
-import com.katherine_qj.saver.util.CoCoinUtil;
+import com.katherine_qj.saver.util.KKMoneyUtil;
 
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
 /**
- * Created by 伟平 on 2015/10/20.
+ * Created by katherineqj on 2017/10/20.
  */
 
 // Todo optimize this
@@ -71,6 +71,6 @@ public class MonthViewFragmentAdapter extends FragmentStatePagerAdapter {
         if (IS_EMPTY) return "";
         int nowMonth = (startMonth + (monthNumber - position - 1)) % 12;
         int nowYear = startYear + (startMonth + (monthNumber - position - 1)) / 12;
-        return CoCoinUtil.GetMonthShort(nowMonth + 1) + " " + nowYear;
+        return KKMoneyUtil.GetMonthShort(nowMonth + 1) + " " + nowYear;
     }
 }

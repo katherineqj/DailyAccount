@@ -1,7 +1,7 @@
 package com.katherine_qj.saver.model;
 
 /**
- * Created by 伟平 on 2015/11/3.
+ * Created by katherineqj on 2017/11/3.
  */
 
 public class Tag {

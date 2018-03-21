@@ -3,19 +3,20 @@ package com.katherine_qj.saver.ui;
 import android.content.Context;
 import android.support.v4.view.ViewPager;
 import android.util.AttributeSet;
+import android.view.MotionEvent;
 import android.view.View;
 
 /**
- * Created by 伟平 on 2015/11/27.
+ * Created by katherineqj on 2017/11/27.
  */
-public class CoCoinScrollableViewPager extends ViewPager {
+public class KKMoneyUnscrollableViewPager extends ViewPager {
 
 
-    public CoCoinScrollableViewPager(Context context) {
+    public KKMoneyUnscrollableViewPager(Context context) {
         super(context);
     }
 
-    public CoCoinScrollableViewPager(Context context, AttributeSet attrs) {
+    public KKMoneyUnscrollableViewPager(Context context, AttributeSet attrs) {
         super(context, attrs);
     }
 
@@ -33,6 +34,18 @@ public class CoCoinScrollableViewPager extends ViewPager {
         heightMeasureSpec = MeasureSpec.makeMeasureSpec(height, MeasureSpec.EXACTLY);
 
         super.onMeasure(widthMeasureSpec, heightMeasureSpec);
+    }
+
+    @Override
+    public boolean onInterceptTouchEvent(MotionEvent event) {
+        // Never allow swiping to switch between pages
+        return false;
+    }
+
+    @Override
+    public boolean onTouchEvent(MotionEvent event) {
+        // Never allow swiping to switch between pages
+        return false;
     }
 
 }

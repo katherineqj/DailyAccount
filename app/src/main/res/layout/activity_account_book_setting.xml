@@ -656,7 +656,7 @@
                         android:paddingRight="10dp"
                         android:background="@null"
                         android:textSize="18sp"
-                        android:text="CoCoin"
+                        android:text="KKMoney"
                         android:ellipsize="marquee"
                         android:singleLine="true"
                         />

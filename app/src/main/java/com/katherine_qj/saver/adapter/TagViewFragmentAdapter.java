@@ -3,13 +3,13 @@ package com.katherine_qj.saver.adapter;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentStatePagerAdapter;
 
-import com.katherine_qj.saver.activity.CoCoinApplication;
+import com.katherine_qj.saver.activity.KKMoneyApplication;
 import com.katherine_qj.saver.fragment.TagViewFragment;
 import com.katherine_qj.saver.model.RecordManager;
-import com.katherine_qj.saver.util.CoCoinUtil;
+import com.katherine_qj.saver.util.KKMoneyUtil;
 
 /**
- * Created by 伟平 on 2015/10/20.
+ * Created by katherineqj on 2017/10/20.
  */
 public class TagViewFragmentAdapter extends FragmentStatePagerAdapter {
 
@@ -24,12 +24,12 @@ public class TagViewFragmentAdapter extends FragmentStatePagerAdapter {
 
     @Override
     public int getCount() {
-        return RecordManager.getInstance(CoCoinApplication.getAppContext()).TAGS.size();
+        return RecordManager.getInstance(KKMoneyApplication.getAppContext()).TAGS.size();
     }
 
     @Override
     public CharSequence getPageTitle(int position) {
-        return CoCoinUtil.GetTagName(
-                RecordManager.getInstance(CoCoinApplication.getAppContext()).TAGS.get(position % RecordManager.TAGS.size()).getId());
+        return KKMoneyUtil.GetTagName(
+                RecordManager.getInstance(KKMoneyApplication.getAppContext()).TAGS.get(position % RecordManager.TAGS.size()).getId());
     }
 }

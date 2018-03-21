@@ -1,7 +1,7 @@
 package com.katherine_qj.saver.adapter;
 
 /**
- * Created by 伟平 on 2015/11/13.
+ * Created by katherineqj on 2017/11/13.
  */
 
 import android.content.Context;
@@ -23,11 +23,11 @@ import com.h6ah4i.android.widget.advrecyclerview.swipeable.action.SwipeResultAct
 import com.h6ah4i.android.widget.advrecyclerview.utils.AbstractSwipeableItemViewHolder;
 import com.h6ah4i.android.widget.advrecyclerview.utils.RecyclerViewAdapterUtils;
 import com.katherine_qj.saver.R;
-import com.katherine_qj.saver.activity.CoCoinApplication;
-import com.katherine_qj.saver.model.CoCoinRecord;
+import com.katherine_qj.saver.activity.KKMoneyApplication;
+import com.katherine_qj.saver.model.KKMoneyRecord;
 import com.katherine_qj.saver.model.RecordManager;
 import com.katherine_qj.saver.ui.SwipeableItemOnClickListener;
-import com.katherine_qj.saver.util.CoCoinUtil;
+import com.katherine_qj.saver.util.KKMoneyUtil;
 
 import java.util.HashMap;
 import java.util.List;
@@ -47,7 +47,7 @@ public class MySwipeableItemAdapter
     private EventListener mEventListener;
     private static HashMap<Integer, Boolean> pinned;
 
-    private List<CoCoinRecord> records;
+    private List<KKMoneyRecord> records;
 
     public interface EventListener {
         void onItemRemoved(int position);
@@ -81,7 +81,7 @@ public class MySwipeableItemAdapter
         }
     }
 
-    public MySwipeableItemAdapter(Context inContext, List<CoCoinRecord> records, final OnItemDeleteListener onItemDeleteListener, OnItemClickListener onItemClickListener) {
+    public MySwipeableItemAdapter(Context inContext, List<KKMoneyRecord> records, final OnItemDeleteListener onItemDeleteListener, OnItemClickListener onItemClickListener) {
         mContext = inContext;
         this.records = records;
         this.onItemDeleteListener = onItemDeleteListener;
@@ -146,18 +146,18 @@ public class MySwipeableItemAdapter
 
         // set text
         int tPosition = records.size() - 1 - position;
-        CoCoinRecord record = records.get(tPosition);
+        KKMoneyRecord record = records.get(tPosition);
         holder.tagImage.setImageResource(
-                CoCoinUtil.GetTagIcon(record.getTag()));
+                KKMoneyUtil.GetTagIcon(record.getTag()));
         holder.date.setText(record.getCalendarString());
         holder.money.setText(String.valueOf((int) record.getMoney()));
-        holder.date.setTypeface(CoCoinUtil.typefaceLatoLight);
-        holder.money.setTypeface(CoCoinUtil.typefaceLatoLight);
-        holder.money.setTextColor(ContextCompat.getColor(CoCoinApplication.getAppContext(), R.color.my_blue));
+        holder.date.setTypeface(KKMoneyUtil.typefaceLatoLight);
+        holder.money.setTypeface(KKMoneyUtil.typefaceLatoLight);
+        holder.money.setTextColor(ContextCompat.getColor(KKMoneyApplication.getAppContext(), R.color.my_blue));
         holder.index.setText((position + 1) + "");
-        holder.index.setTypeface(CoCoinUtil.typefaceLatoLight);
+        holder.index.setTypeface(KKMoneyUtil.typefaceLatoLight);
         holder.remark.setText(record.getRemark());
-        holder.remark.setTypeface(CoCoinUtil.typefaceLatoLight);
+        holder.remark.setTypeface(KKMoneyUtil.typefaceLatoLight);
 
         // set background resource (target view ID: container)
         final int swipeState = holder.getSwipeStateFlags();
@@ -293,14 +293,14 @@ public class MySwipeableItemAdapter
         @Override
         protected void onPerformAction() {
             super.onPerformAction();
-            if (CoCoinUtil.backupCoCoinRecord != null) {
-                RecordManager.deleteRecord(CoCoinUtil.backupCoCoinRecord, true);
+            if (KKMoneyUtil.backupKKMoneyRecord != null) {
+                RecordManager.deleteRecord(KKMoneyUtil.backupKKMoneyRecord, true);
             }
-            CoCoinUtil.backupCoCoinRecord = null;
-            CoCoinUtil.backupCoCoinRecord
+            KKMoneyUtil.backupKKMoneyRecord = null;
+            KKMoneyUtil.backupKKMoneyRecord
                     = RecordManager.SELECTED_RECORDS.get(RecordManager.SELECTED_RECORDS.size() - 1 - mPosition);
             RecordManager.SELECTED_RECORDS.remove(RecordManager.SELECTED_RECORDS.size() - 1 - mPosition);
-            RecordManager.SELECTED_SUM -= CoCoinUtil.backupCoCoinRecord.getMoney();
+            RecordManager.SELECTED_SUM -= KKMoneyUtil.backupKKMoneyRecord.getMoney();
             onItemDeleteListener.onSelectSumChanged();
             mAdapter.notifyItemRemoved(mPosition);
         }

@@ -17,7 +17,7 @@ import com.katherine_qj.saver.model.RecordManager;
 import com.katherine_qj.saver.ui.MyGridView;
 
 /**
- * Created by 伟平 on 2015/10/27.
+ * Created by katherineqj on 2017/10/27.
  */
 
 public class TagChooseFragment extends Fragment {
@@ -63,12 +63,12 @@ public class TagChooseFragment extends Fragment {
 
         fragmentPosition = getArguments().getInt("position");
 
-        if (fragmentPosition >= CoCoinFragmentManager.tagChooseFragments.size()) {
-            while (fragmentPosition >= CoCoinFragmentManager.tagChooseFragments.size()) {
-                CoCoinFragmentManager.tagChooseFragments.add(new TagChooseFragment());
+        if (fragmentPosition >= KKMoneyFragmentManager.tagChooseFragments.size()) {
+            while (fragmentPosition >= KKMoneyFragmentManager.tagChooseFragments.size()) {
+                KKMoneyFragmentManager.tagChooseFragments.add(new TagChooseFragment());
             }
         }
-        CoCoinFragmentManager.tagChooseFragments.set(fragmentPosition, this);
+        KKMoneyFragmentManager.tagChooseFragments.set(fragmentPosition, this);
 
         tagAdapter = new TagChooseGridViewAdapter(getActivity(), fragmentPosition);
 

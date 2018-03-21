@@ -48,7 +48,7 @@ import com.katherine_qj.saver.model.User;
 import com.katherine_qj.saver.ui.CustomSliderView;
 import com.katherine_qj.saver.ui.MyQuery;
 import com.katherine_qj.saver.ui.RiseNumberTextView;
-import com.katherine_qj.saver.util.CoCoinUtil;
+import com.katherine_qj.saver.util.KKMoneyUtil;
 
 import net.steamcrafted.materialiconlib.MaterialIconView;
 
@@ -80,8 +80,8 @@ import de.hdodenhof.circleimageview.CircleImageView;
 public class AccountBookTodayViewActivity extends AppCompatActivity {
 
     private static final String FILE_SEPARATOR = "/";
-    private static final String FILE_PATH = Environment.getExternalStorageDirectory() + FILE_SEPARATOR +"CoCoin" + FILE_SEPARATOR;
-    private static final String FILE_NAME = FILE_PATH + "CoCoin Database.db";
+    private static final String FILE_PATH = Environment.getExternalStorageDirectory() + FILE_SEPARATOR +"KKMoney" + FILE_SEPARATOR;
+    private static final String FILE_NAME = FILE_PATH + "KKMoney Database.db";
 
     private MaterialViewPager mViewPager;
 
@@ -128,9 +128,9 @@ public class AccountBookTodayViewActivity extends AppCompatActivity {
         mViewPager = (MaterialViewPager) findViewById(R.id.materialViewPager);
         userName = (TextView)findViewById(R.id.user_name);
         userEmail = (TextView)findViewById(R.id.user_email);
-        userName.setTypeface(CoCoinUtil.typefaceLatoRegular);
-        userEmail.setTypeface(CoCoinUtil.typefaceLatoLight);
-        User user = BmobUser.getCurrentUser(CoCoinApplication.getAppContext(), User.class);
+        userName.setTypeface(KKMoneyUtil.typefaceLatoRegular);
+        userEmail.setTypeface(KKMoneyUtil.typefaceLatoLight);
+        User user = BmobUser.getCurrentUser(KKMoneyApplication.getAppContext(), User.class);
         if (user != null) {
             userName.setText(user.getUsername());
             userEmail.setText(user.getEmail());
@@ -140,10 +140,10 @@ public class AccountBookTodayViewActivity extends AppCompatActivity {
 
         View view = mViewPager.getRootView();
         title = (TextView)view.findViewById(R.id.logo_white);
-        title.setTypeface(CoCoinUtil.typefaceLatoLight);
+        title.setTypeface(KKMoneyUtil.typefaceLatoLight);
         title.setText(SettingManager.getInstance().getAccountBookName());
 
-        mViewPager.getPagerTitleStrip().setTypeface(CoCoinUtil.GetTypeface(), Typeface.NORMAL);
+        mViewPager.getPagerTitleStrip().setTypeface(KKMoneyUtil.GetTypeface(), Typeface.NORMAL);
 
         setTitle("");
 
@@ -163,9 +163,9 @@ public class AccountBookTodayViewActivity extends AppCompatActivity {
         syncIcon = (MaterialIconView)mDrawer.findViewById(R.id.sync_icon);
         setIconEnable(syncIcon, SettingManager.getInstance().getLoggenOn());
         monthExpenseTip = (TextView)mDrawer.findViewById(R.id.month_expense_tip);
-        monthExpenseTip.setTypeface(CoCoinUtil.GetTypeface());
+        monthExpenseTip.setTypeface(KKMoneyUtil.GetTypeface());
         monthExpense = (RiseNumberTextView)mDrawer.findViewById(R.id.month_expense);
-        monthExpense.setTypeface(CoCoinUtil.typefaceLatoLight);
+        monthExpense.setTypeface(KKMoneyUtil.typefaceLatoLight);
 
         if (SettingManager.getInstance().getIsMonthLimit()) {
             monthExpenseTip.setVisibility(View.VISIBLE);
@@ -222,8 +222,8 @@ public class AccountBookTodayViewActivity extends AppCompatActivity {
             @Override
             public HeaderDesign getHeaderDesign(int page) {
                 return HeaderDesign.fromColorAndDrawable(
-                        CoCoinUtil.GetTagColor(page - 2),
-                        CoCoinUtil.GetTagDrawable(-3)
+                        KKMoneyUtil.GetTagColor(page - 2),
+                        KKMoneyUtil.GetTagDrawable(-3)
                 );
             }
         });
@@ -235,16 +235,16 @@ public class AccountBookTodayViewActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if (SettingManager.getInstance().getLoggenOn()) {
-                    CoCoinUtil.showToast(mContext, R.string.change_logo_tip);
+                    KKMoneyUtil.showToast(mContext, R.string.change_logo_tip);
                 } else {
-                    CoCoinUtil.showToast(mContext, R.string.login_tip);
+                    KKMoneyUtil.showToast(mContext, R.string.login_tip);
                 }
             }
         });
 
         mDemoSlider = (SliderLayout)findViewById(R.id.slider);
 
-        HashMap<String, Integer> urls = CoCoinUtil.GetDrawerTopUrl();
+        HashMap<String, Integer> urls = KKMoneyUtil.GetDrawerTopUrl();
 
         for(String name : urls.keySet()){
             CustomSliderView customSliderView = new CustomSliderView(this);
@@ -333,7 +333,7 @@ public class AccountBookTodayViewActivity extends AppCompatActivity {
     MaterialDialog syncProgressDialog;
     private void sync() {
         if (!SettingManager.getInstance().getLoggenOn()) {
-            CoCoinUtil.showToast(mContext, R.string.login_tip);
+            KKMoneyUtil.showToast(mContext, R.string.login_tip);
         } else {
             syncSuccessNumber = 0;
             syncFailedNumber = 0;
@@ -352,13 +352,13 @@ public class AccountBookTodayViewActivity extends AppCompatActivity {
                     })
                     .show();
             final User user = BmobUser
-                    .getCurrentUser(CoCoinApplication.getAppContext(), User.class);
+                    .getCurrentUser(KKMoneyApplication.getAppContext(), User.class);
             final MyQuery myQuery = new MyQuery();
             myQuery.setTask(++TaskManager.QUERY_UPDATE_TASK);
             myQuery.query = new BmobQuery<>();
             myQuery.query.addWhereEqualTo("userId", user.getObjectId());
             myQuery.query.setLimit(1);
-            myQuery.query.findObjects(CoCoinApplication.getAppContext(), new FindListener<UploadInfo>() {
+            myQuery.query.findObjects(KKMoneyApplication.getAppContext(), new FindListener<UploadInfo>() {
                 @Override
                 public void onSuccess(List<UploadInfo> object) {
                     if (myQuery.getTask() != TaskManager.QUERY_UPDATE_TASK) return;
@@ -383,15 +383,15 @@ public class AccountBookTodayViewActivity extends AppCompatActivity {
                             }
                         }
                         String content
-                                = CoCoinUtil.GetString(CoCoinApplication.getAppContext(), R.string.sync_info_cloud_record_0)
+                                = KKMoneyUtil.GetString(KKMoneyApplication.getAppContext(), R.string.sync_info_cloud_record_0)
                                 + cloudRecordNumber
-                                + CoCoinUtil.GetString(CoCoinApplication.getAppContext(), R.string.sync_info_cloud_record_1)
-                                + (cal == null ? CoCoinUtil.GetString(CoCoinApplication.getAppContext(), R.string.sync_info_cloud_time_2) : CoCoinUtil.GetString(CoCoinApplication.getAppContext(), R.string.sync_info_cloud_time_0) + CoCoinUtil.GetCalendarString(CoCoinApplication.getAppContext(), cal) + CoCoinUtil.GetString(CoCoinApplication.getAppContext(), R.string.sync_info_cloud_time_1))
-                                + CoCoinUtil.GetString(CoCoinApplication.getAppContext(), R.string.sync_info_mobile_record_0)
-                                + RecordManager.getInstance(CoCoinApplication.getAppContext()).RECORDS.size()
-                                + CoCoinUtil.GetString(CoCoinApplication.getAppContext(), R.string.sync_info_mobile_record_1)
-                                + (SettingManager.getInstance().getRecentlySyncTime() == null ? CoCoinUtil.GetString(CoCoinApplication.getAppContext(), R.string.sync_info_mobile_time_2) : CoCoinUtil.GetString(CoCoinApplication.getAppContext(), R.string.sync_info_mobile_time_0) + CoCoinUtil.GetCalendarString(CoCoinApplication.getAppContext(), SettingManager.getInstance().getRecentlySyncTime()) + CoCoinUtil.GetString(CoCoinApplication.getAppContext(), R.string.sync_info_mobile_time_1))
-                                + CoCoinUtil.GetString(CoCoinApplication.getAppContext(), R.string.sync_choose_content);
+                                + KKMoneyUtil.GetString(KKMoneyApplication.getAppContext(), R.string.sync_info_cloud_record_1)
+                                + (cal == null ? KKMoneyUtil.GetString(KKMoneyApplication.getAppContext(), R.string.sync_info_cloud_time_2) : KKMoneyUtil.GetString(KKMoneyApplication.getAppContext(), R.string.sync_info_cloud_time_0) + KKMoneyUtil.GetCalendarString(KKMoneyApplication.getAppContext(), cal) + KKMoneyUtil.GetString(KKMoneyApplication.getAppContext(), R.string.sync_info_cloud_time_1))
+                                + KKMoneyUtil.GetString(KKMoneyApplication.getAppContext(), R.string.sync_info_mobile_record_0)
+                                + RecordManager.getInstance(KKMoneyApplication.getAppContext()).RECORDS.size()
+                                + KKMoneyUtil.GetString(KKMoneyApplication.getAppContext(), R.string.sync_info_mobile_record_1)
+                                + (SettingManager.getInstance().getRecentlySyncTime() == null ? KKMoneyUtil.GetString(KKMoneyApplication.getAppContext(), R.string.sync_info_mobile_time_2) : KKMoneyUtil.GetString(KKMoneyApplication.getAppContext(), R.string.sync_info_mobile_time_0) + KKMoneyUtil.GetCalendarString(KKMoneyApplication.getAppContext(), SettingManager.getInstance().getRecentlySyncTime()) + KKMoneyUtil.GetString(KKMoneyApplication.getAppContext(), R.string.sync_info_mobile_time_1))
+                                + KKMoneyUtil.GetString(KKMoneyApplication.getAppContext(), R.string.sync_choose_content);
                         syncChooseDialog = new MaterialDialog.Builder(mContext)
                                 .title(R.string.sync_choose_title)
                                 .content(content)
@@ -405,8 +405,8 @@ public class AccountBookTodayViewActivity extends AppCompatActivity {
                                         if (which == DialogAction.POSITIVE) {
                                             // sync to cloud
                                             String subContent = "";
-                                            if (RecordManager.getInstance(CoCoinApplication.getAppContext()).RECORDS.size() == 0) {
-                                                subContent = CoCoinUtil.GetString(CoCoinApplication.getAppContext(), R.string.mobile_record_empty);
+                                            if (RecordManager.getInstance(KKMoneyApplication.getAppContext()).RECORDS.size() == 0) {
+                                                subContent = KKMoneyUtil.GetString(KKMoneyApplication.getAppContext(), R.string.mobile_record_empty);
                                                 new MaterialDialog.Builder(mContext)
                                                         .title(R.string.sync)
                                                         .content(subContent)
@@ -415,9 +415,9 @@ public class AccountBookTodayViewActivity extends AppCompatActivity {
                                                 return;
                                             } else {
                                                 subContent
-                                                        = CoCoinUtil.GetString(CoCoinApplication.getAppContext(), R.string.sure_to_cloud_0)
-                                                        + RecordManager.getInstance(CoCoinApplication.getAppContext()).RECORDS.size()
-                                                        + CoCoinUtil.GetString(CoCoinApplication.getAppContext(), R.string.sure_to_cloud_1);
+                                                        = KKMoneyUtil.GetString(KKMoneyApplication.getAppContext(), R.string.sure_to_cloud_0)
+                                                        + RecordManager.getInstance(KKMoneyApplication.getAppContext()).RECORDS.size()
+                                                        + KKMoneyUtil.GetString(KKMoneyApplication.getAppContext(), R.string.sure_to_cloud_1);
                                             }
                                             new MaterialDialog.Builder(mContext)
                                                     .title(R.string.sync)
@@ -430,14 +430,14 @@ public class AccountBookTodayViewActivity extends AppCompatActivity {
                                                             if (which == DialogAction.POSITIVE) {
                                                                 syncProgressDialog = new MaterialDialog.Builder(mContext)
                                                                         .title(R.string.syncing)
-                                                                        .content(CoCoinUtil.GetString(CoCoinApplication.getAppContext(), R.string.uploading_0) + "1" + CoCoinUtil.GetString(mContext, R.string.uploading_1))
-                                                                        .progress(false, RecordManager.getInstance(CoCoinApplication.getAppContext()).RECORDS.size(), true)
+                                                                        .content(KKMoneyUtil.GetString(KKMoneyApplication.getAppContext(), R.string.uploading_0) + "1" + KKMoneyUtil.GetString(mContext, R.string.uploading_1))
+                                                                        .progress(false, RecordManager.getInstance(KKMoneyApplication.getAppContext()).RECORDS.size(), true)
                                                                         .cancelable(false)
                                                                         .show();
-                                                                final String databasePath = CoCoinUtil.GetRecordDatabasePath(CoCoinApplication.getAppContext());
+                                                                final String databasePath = KKMoneyUtil.GetRecordDatabasePath(KKMoneyApplication.getAppContext());
 
                                                                 final BmobFile bmobFile = new BmobFile(new File(databasePath));
-                                                                bmobFile.uploadblock(CoCoinApplication.getAppContext(), new UploadFileListener() {
+                                                                bmobFile.uploadblock(KKMoneyApplication.getAppContext(), new UploadFileListener() {
                                                                     @Override
                                                                     public void onSuccess() {
                                                                         // the new database is uploaded successfully
@@ -460,7 +460,7 @@ public class AccountBookTodayViewActivity extends AppCompatActivity {
                                                                                     syncProgressDialog.dismiss();
                                                                                     new MaterialDialog.Builder(mContext)
                                                                                             .title(R.string.sync_completely_title)
-                                                                                            .content(RecordManager.getInstance(mContext).RECORDS.size() + CoCoinUtil.GetString(mContext, R.string.uploading_fail_1))
+                                                                                            .content(RecordManager.getInstance(mContext).RECORDS.size() + KKMoneyUtil.GetString(mContext, R.string.uploading_fail_1))
                                                                                             .positiveText(R.string.ok_1)
                                                                                             .show();
                                                                                 }
@@ -483,7 +483,7 @@ public class AccountBookTodayViewActivity extends AppCompatActivity {
                                                                                     syncProgressDialog.dismiss();
                                                                                     new MaterialDialog.Builder(mContext)
                                                                                             .title(R.string.sync_completely_title)
-                                                                                            .content(RecordManager.getInstance(mContext).RECORDS.size() + CoCoinUtil.GetString(mContext, R.string.uploading_fail_1))
+                                                                                            .content(RecordManager.getInstance(mContext).RECORDS.size() + KKMoneyUtil.GetString(mContext, R.string.uploading_fail_1))
                                                                                             .positiveText(R.string.ok_1)
                                                                                             .show();
                                                                                 }
@@ -508,7 +508,7 @@ public class AccountBookTodayViewActivity extends AppCompatActivity {
                                                                     @Override
                                                                     public void onProgress(Integer value) {
 
-                                                                        syncProgressDialog.setProgress((int)(value * 1.0 / 100 * RecordManager.getInstance(CoCoinApplication.getAppContext()).RECORDS.size()));
+                                                                        syncProgressDialog.setProgress((int)(value * 1.0 / 100 * RecordManager.getInstance(KKMoneyApplication.getAppContext()).RECORDS.size()));
 
                                                                     }
                                                                 });
@@ -518,8 +518,8 @@ public class AccountBookTodayViewActivity extends AppCompatActivity {
 //                                                                    @Override
 //                                                                    public void onSuccess() {
 //                                                                        if (BuildConfig.DEBUG) {
-//                                                                            Log.d("CoCoin", "Upload successfully fileName: " + databasePath);
-//                                                                            Log.d("CoCoin", "Upload successfully url: " + bmobFile.getFileUrl(mContext));
+//                                                                            Log.d("KKMoney", "Upload successfully fileName: " + databasePath);
+//                                                                            Log.d("KKMoney", "Upload successfully url: " + bmobFile.getFileUrl(mContext));
 //                                                                        }
 //                                                                        // the new database is uploaded successfully
 //                                                                        // delete the old database(if there is)
@@ -540,7 +540,7 @@ public class AccountBookTodayViewActivity extends AppCompatActivity {
 //                                                                                    syncProgressDialog.dismiss();
 //                                                                                    new MaterialDialog.Builder(mContext)
 //                                                                                            .title(R.string.sync_completely_title)
-//                                                                                            .content(RecordManager.getInstance(mContext).RECORDS.size() + CoCoinUtil.GetString(mContext, R.string.uploading_fail_1))
+//                                                                                            .content(RecordManager.getInstance(mContext).RECORDS.size() + KKMoneyUtil.GetString(mContext, R.string.uploading_fail_1))
 //                                                                                            .positiveText(R.string.ok_1)
 //                                                                                            .show();
 //                                                                                }
@@ -561,7 +561,7 @@ public class AccountBookTodayViewActivity extends AppCompatActivity {
 //                                                                                    syncProgressDialog.dismiss();
 //                                                                                    new MaterialDialog.Builder(mContext)
 //                                                                                            .title(R.string.sync_completely_title)
-//                                                                                            .content(RecordManager.getInstance(mContext).RECORDS.size() + CoCoinUtil.GetString(mContext, R.string.uploading_fail_1))
+//                                                                                            .content(RecordManager.getInstance(mContext).RECORDS.size() + KKMoneyUtil.GetString(mContext, R.string.uploading_fail_1))
 //                                                                                            .positiveText(R.string.ok_1)
 //                                                                                            .show();
 //                                                                                }
@@ -582,7 +582,7 @@ public class AccountBookTodayViewActivity extends AppCompatActivity {
 //                                                                    @Override
 //                                                                    public void onFailure(int code, String msg) {
 //                                                                        // upload failed
-//                                                                        if (BuildConfig.DEBUG) Log.d("CoCoin", "Upload database failed " + code + " " + msg);
+//                                                                        if (BuildConfig.DEBUG) Log.d("KKMoney", "Upload database failed " + code + " " + msg);
 //                                                                        syncProgressDialog.dismiss();
 //                                                                        new MaterialDialog.Builder(mContext)
 //                                                                                .title(R.string.sync_failed)
@@ -591,13 +591,13 @@ public class AccountBookTodayViewActivity extends AppCompatActivity {
 //                                                                                .show();
 //                                                                    }
 //                                                                });
-                                                                /*BmobProFile.getInstance(CoCoinApplication.getAppContext()).upload(databasePath, new UploadListener() {
+                                                                /*BmobProFile.getInstance(KKMoneyApplication.getAppContext()).upload(databasePath, new UploadListener() {
                                                                     @Override
                                                                     public void onSuccess(String fileName, String url, BmobFile file) {
-                                                                        CoCoinUtil.deleteBmobUploadCach(CoCoinApplication.getAppContext());
+                                                                        KKMoneyUtil.deleteBmobUploadCach(KKMoneyApplication.getAppContext());
                                                                         if (BuildConfig.DEBUG) {
-                                                                            Log.d("CoCoin", "Upload successfully fileName: " + fileName);
-                                                                            Log.d("CoCoin", "Upload successfully url: " + url);
+                                                                            Log.d("KKMoney", "Upload successfully fileName: " + fileName);
+                                                                            Log.d("KKMoney", "Upload successfully url: " + url);
                                                                         }
                                                                         // the new database is uploaded successfully
                                                                         // delete the old database(if there is)
@@ -607,19 +607,19 @@ public class AccountBookTodayViewActivity extends AppCompatActivity {
                                                                         // update the UploadInfo record for the new url
                                                                         UploadInfo uploadInfo = new UploadInfo();
                                                                         uploadInfo.setUserId(user.getObjectId());
-                                                                        uploadInfo.setRecordNumber(RecordManager.getInstance(CoCoinApplication.getAppContext()).RECORDS.size());
-                                                                        uploadInfo.setDatabaseUrl(file.getFileUrl(CoCoinApplication.getAppContext()));
+                                                                        uploadInfo.setRecordNumber(RecordManager.getInstance(KKMoneyApplication.getAppContext()).RECORDS.size());
+                                                                        uploadInfo.setDatabaseUrl(file.getFileUrl(KKMoneyApplication.getAppContext()));
                                                                         uploadInfo.setFileName(fileName);
                                                                         if (uploadObjectId == null) {
                                                                             // insert
-                                                                            uploadInfo.save(CoCoinApplication.getAppContext(), new SaveListener() {
+                                                                            uploadInfo.save(KKMoneyApplication.getAppContext(), new SaveListener() {
                                                                                 @Override
                                                                                 public void onSuccess() {
                                                                                     // upload successfully
                                                                                     syncProgressDialog.dismiss();
                                                                                     new MaterialDialog.Builder(mContext)
                                                                                             .title(R.string.sync_completely_title)
-                                                                                            .content(RecordManager.getInstance(CoCoinApplication.getAppContext()).RECORDS.size() + CoCoinUtil.GetString(CoCoinApplication.getAppContext(), R.string.uploading_fail_1))
+                                                                                            .content(RecordManager.getInstance(KKMoneyApplication.getAppContext()).RECORDS.size() + KKMoneyUtil.GetString(KKMoneyApplication.getAppContext(), R.string.uploading_fail_1))
                                                                                             .positiveText(R.string.ok_1)
                                                                                             .cancelable(false)
                                                                                             .show();
@@ -631,14 +631,14 @@ public class AccountBookTodayViewActivity extends AppCompatActivity {
                                                                             });
                                                                         } else {
                                                                             // update
-                                                                            uploadInfo.update(CoCoinApplication.getAppContext(), uploadObjectId, new UpdateListener() {
+                                                                            uploadInfo.update(KKMoneyApplication.getAppContext(), uploadObjectId, new UpdateListener() {
                                                                                 @Override
                                                                                 public void onSuccess() {
                                                                                     // upload successfully
                                                                                     syncProgressDialog.dismiss();
                                                                                     new MaterialDialog.Builder(mContext)
                                                                                             .title(R.string.sync_completely_title)
-                                                                                            .content(RecordManager.getInstance(CoCoinApplication.getAppContext()).RECORDS.size() + CoCoinUtil.GetString(CoCoinApplication.getAppContext(), R.string.uploading_fail_1))
+                                                                                            .content(RecordManager.getInstance(KKMoneyApplication.getAppContext()).RECORDS.size() + KKMoneyUtil.GetString(KKMoneyApplication.getAppContext(), R.string.uploading_fail_1))
                                                                                             .positiveText(R.string.ok_1)
                                                                                             .cancelable(false)
                                                                                             .show();
@@ -652,7 +652,7 @@ public class AccountBookTodayViewActivity extends AppCompatActivity {
                                                                     }
                                                                     @Override
                                                                     public void onProgress(int progress) {
-                                                                        syncProgressDialog.setProgress((int)(progress * 1.0 / 100 * RecordManager.getInstance(CoCoinApplication.getAppContext()).RECORDS.size()));
+                                                                        syncProgressDialog.setProgress((int)(progress * 1.0 / 100 * RecordManager.getInstance(KKMoneyApplication.getAppContext()).RECORDS.size()));
                                                                     }
 
                                                                     @Override
@@ -668,7 +668,7 @@ public class AccountBookTodayViewActivity extends AppCompatActivity {
                                             // sync to mobile
                                             String subContent = "";
                                             if (cloudRecordNumber == 0) {
-                                                subContent = CoCoinUtil.GetString(CoCoinApplication.getAppContext(), R.string.cloud_record_empty);
+                                                subContent = KKMoneyUtil.GetString(KKMoneyApplication.getAppContext(), R.string.cloud_record_empty);
                                                 new MaterialDialog.Builder(mContext)
                                                         .title(R.string.sync)
                                                         .content(subContent)
@@ -677,9 +677,9 @@ public class AccountBookTodayViewActivity extends AppCompatActivity {
                                                 return;
                                             } else {
                                                 subContent
-                                                        = CoCoinUtil.GetString(CoCoinApplication.getAppContext(), R.string.sure_to_mobile_0)
+                                                        = KKMoneyUtil.GetString(KKMoneyApplication.getAppContext(), R.string.sure_to_mobile_0)
                                                         + cloudRecordNumber
-                                                        + CoCoinUtil.GetString(CoCoinApplication.getAppContext(), R.string.sure_to_mobile_1);
+                                                        + KKMoneyUtil.GetString(KKMoneyApplication.getAppContext(), R.string.sure_to_mobile_1);
                                             }
                                             new MaterialDialog.Builder(mContext)
                                                     .title(R.string.sync)
@@ -692,44 +692,44 @@ public class AccountBookTodayViewActivity extends AppCompatActivity {
                                                             if (which == DialogAction.POSITIVE) {
                                                                 syncProgressDialog = new MaterialDialog.Builder(mContext)
                                                                         .title(R.string.syncing)
-                                                                        .content(CoCoinUtil.GetString(CoCoinApplication.getAppContext(), R.string.downloading_0) + "1" + CoCoinUtil.GetString(CoCoinApplication.getAppContext(), R.string.downloading_1))
+                                                                        .content(KKMoneyUtil.GetString(KKMoneyApplication.getAppContext(), R.string.downloading_0) + "1" + KKMoneyUtil.GetString(KKMoneyApplication.getAppContext(), R.string.downloading_1))
                                                                         .progress(false, cloudRecordNumber, true)
                                                                         .cancelable(false)
                                                                         .show();
 
                                                                 BmobFile bmobFile = new BmobFile(cloudOldDatabaseFileName,"",cloudOldDatabaseUrl);
                                                               //  File saveFile = new File(Environment.getExternalStorageDirectory(),bmobFile.getFilename());
-                                                                bmobFile.download(CoCoinApplication.getAppContext(), new DownloadFileListener() {
+                                                                bmobFile.download(KKMoneyApplication.getAppContext(), new DownloadFileListener() {
                                                                     @Override
                                                                     public void onSuccess(String fullPath) {
                                                                         try {
-                                                                            Log.d("CoCoin", "Download successfully " + fullPath);
+                                                                            Log.d("KKMoney", "Download successfully " + fullPath);
                                                                             syncProgressDialog.setContent(R.string.sync_completely_content);
                                                                             byte[] buffer = new byte[1024];
                                                                             File file = new File(fullPath);
                                                                             InputStream inputStream = new FileInputStream(file);
-                                                                            String outFileNameString = CoCoinUtil.GetRecordDatabasePath(CoCoinApplication.getAppContext());
+                                                                            String outFileNameString = KKMoneyUtil.GetRecordDatabasePath(KKMoneyApplication.getAppContext());
                                                                             OutputStream outputStream = new FileOutputStream(outFileNameString);
                                                                             int length;
                                                                             while ((length = inputStream.read(buffer)) > 0) {
                                                                                 outputStream.write(buffer, 0, length);
                                                                             }
-                                                                            Log.d("CoCoin", "Download successfully copy completely");
+                                                                            Log.d("KKMoney", "Download successfully copy completely");
                                                                             outputStream.flush();
                                                                             outputStream.close();
                                                                             inputStream.close();
                                                                             file.delete();
-                                                                            Log.d("CoCoin", "Download successfully delete completely");
+                                                                            Log.d("KKMoney", "Download successfully delete completely");
                                                                             // refresh data
-                                                                            RecordManager.getInstance(CoCoinApplication.getAppContext()).RECORDS.clear();
-                                                                            RecordManager.getInstance(CoCoinApplication.getAppContext()).RECORDS = null;
-                                                                            RecordManager.getInstance(CoCoinApplication.getAppContext());
+                                                                            RecordManager.getInstance(KKMoneyApplication.getAppContext()).RECORDS.clear();
+                                                                            RecordManager.getInstance(KKMoneyApplication.getAppContext()).RECORDS = null;
+                                                                            RecordManager.getInstance(KKMoneyApplication.getAppContext());
                                                                             todayModeAdapter.notifyDataSetChanged();
-                                                                            Log.d("CoCoin", "Download successfully refresh completely");
+                                                                            Log.d("KKMoney", "Download successfully refresh completely");
                                                                             syncProgressDialog.dismiss();
                                                                             new MaterialDialog.Builder(mContext)
                                                                                     .title(R.string.sync_completely_title)
-                                                                                    .content(cloudRecordNumber + CoCoinUtil.GetString(CoCoinApplication.getAppContext(), R.string.downloading_fail_1))
+                                                                                    .content(cloudRecordNumber + KKMoneyUtil.GetString(KKMoneyApplication.getAppContext(), R.string.downloading_fail_1))
                                                                                     .positiveText(R.string.ok_1)
                                                                                     .cancelable(false)
                                                                                     .show();
@@ -741,7 +741,7 @@ public class AccountBookTodayViewActivity extends AppCompatActivity {
 
                                                                     @Override
                                                                     public void onProgress(Integer progress, long total) {
-                                                                        syncProgressDialog.setProgress((int) (((float) total / 100) * RecordManager.getInstance(CoCoinApplication.getAppContext()).RECORDS.size()));
+                                                                        syncProgressDialog.setProgress((int) (((float) total / 100) * RecordManager.getInstance(KKMoneyApplication.getAppContext()).RECORDS.size()));
 
                                                                     }
 
@@ -754,40 +754,40 @@ public class AccountBookTodayViewActivity extends AppCompatActivity {
 
 
                                                                 // download the database file to mobile
-                             /*                                   BmobProFile.getInstance(CoCoinApplication.getAppContext()).download(cloudOldDatabaseFileName, new DownloadListener() {
+                             /*                                   BmobProFile.getInstance(KKMoneyApplication.getAppContext()).download(cloudOldDatabaseFileName, new DownloadListener() {
                                                                     @Override
                                                                     public void onSuccess(String fullPath) {
                                                                         // download completely
                                                                         // delete the original database in mobile
                                                                         // copy the new database to mobile
                                                                         try {
-                                                                            Log.d("CoCoin", "Download successfully " + fullPath);
+                                                                            Log.d("KKMoney", "Download successfully " + fullPath);
                                                                             syncProgressDialog.setContent(R.string.sync_completely_content);
                                                                             byte[] buffer = new byte[1024];
                                                                             File file = new File(fullPath);
                                                                             InputStream inputStream = new FileInputStream(file);
-                                                                            String outFileNameString = CoCoinUtil.GetRecordDatabasePath(CoCoinApplication.getAppContext());
+                                                                            String outFileNameString = KKMoneyUtil.GetRecordDatabasePath(KKMoneyApplication.getAppContext());
                                                                             OutputStream outputStream = new FileOutputStream(outFileNameString);
                                                                             int length;
                                                                             while ((length = inputStream.read(buffer)) > 0) {
                                                                                 outputStream.write(buffer, 0, length);
                                                                             }
-                                                                            Log.d("CoCoin", "Download successfully copy completely");
+                                                                            Log.d("KKMoney", "Download successfully copy completely");
                                                                             outputStream.flush();
                                                                             outputStream.close();
                                                                             inputStream.close();
                                                                             file.delete();
-                                                                            Log.d("CoCoin", "Download successfully delete completely");
+                                                                            Log.d("KKMoney", "Download successfully delete completely");
                                                                             // refresh data
-                                                                            RecordManager.getInstance(CoCoinApplication.getAppContext()).RECORDS.clear();
-                                                                            RecordManager.getInstance(CoCoinApplication.getAppContext()).RECORDS = null;
-                                                                            RecordManager.getInstance(CoCoinApplication.getAppContext());
+                                                                            RecordManager.getInstance(KKMoneyApplication.getAppContext()).RECORDS.clear();
+                                                                            RecordManager.getInstance(KKMoneyApplication.getAppContext()).RECORDS = null;
+                                                                            RecordManager.getInstance(KKMoneyApplication.getAppContext());
                                                                             todayModeAdapter.notifyDataSetChanged();
-                                                                            Log.d("CoCoin", "Download successfully refresh completely");
+                                                                            Log.d("KKMoney", "Download successfully refresh completely");
                                                                             syncProgressDialog.dismiss();
                                                                             new MaterialDialog.Builder(mContext)
                                                                                     .title(R.string.sync_completely_title)
-                                                                                    .content(cloudRecordNumber + CoCoinUtil.GetString(CoCoinApplication.getAppContext(), R.string.downloading_fail_1))
+                                                                                    .content(cloudRecordNumber + KKMoneyUtil.GetString(KKMoneyApplication.getAppContext(), R.string.downloading_fail_1))
                                                                                     .positiveText(R.string.ok_1)
                                                                                     .cancelable(false)
                                                                                     .show();
@@ -798,7 +798,7 @@ public class AccountBookTodayViewActivity extends AppCompatActivity {
 
                                                                     @Override
                                                                     public void onProgress(String localPath, int percent) {
-                                                                        syncProgressDialog.setProgress((int) (((float) percent / 100) * RecordManager.getInstance(CoCoinApplication.getAppContext()).RECORDS.size()));
+                                                                        syncProgressDialog.setProgress((int) (((float) percent / 100) * RecordManager.getInstance(KKMoneyApplication.getAppContext()).RECORDS.size()));
                                                                     }
 
                                                                     @Override
@@ -820,7 +820,7 @@ public class AccountBookTodayViewActivity extends AppCompatActivity {
                 @Override
                 public void onError(int code, String msg) {
                     syncQueryDialog.dismiss();
-                    if (BuildConfig.DEBUG) Log.d("CoCoin", "Query: " + msg);
+                    if (BuildConfig.DEBUG) Log.d("KKMoney", "Query: " + msg);
                     if (syncQueryDialog != null) syncQueryDialog.dismiss();
                     new MaterialDialog.Builder(mContext)
                             .title(R.string.sync_querying_fail_title)
@@ -835,31 +835,31 @@ public class AccountBookTodayViewActivity extends AppCompatActivity {
     private void deleteOldDatabaseOnCloud(final String fileUrl) {
         BmobFile file = new BmobFile();
         file.setUrl(fileUrl);
-        file.delete(CoCoinApplication.getAppContext(), new DeleteListener() {
+        file.delete(KKMoneyApplication.getAppContext(), new DeleteListener() {
 
             @Override
             public void onSuccess() {
                 // TODO Auto-generated method stub
                 Log.e("delete","ok");
-                if (BuildConfig.DEBUG) Log.d("CoCoin", "Delete old cloud database successfully " + cloudOldDatabaseUrl);
+                if (BuildConfig.DEBUG) Log.d("KKMoney", "Delete old cloud database successfully " + cloudOldDatabaseUrl);
             }
 
             @Override
             public void onFailure(int code, String msg) {
                 // TODO Auto-generated method stub
                 Log.e("delete","no");
-                if (BuildConfig.DEBUG) Log.d("CoCoin", "Delete old cloud database failed " + cloudOldDatabaseUrl);
+                if (BuildConfig.DEBUG) Log.d("KKMoney", "Delete old cloud database failed " + cloudOldDatabaseUrl);
             }
         });
 /*
-        BmobProFile.getInstance(CoCoinApplication.getAppContext()).deleteFile(fileName, new DeleteFileListener() {
+        BmobProFile.getInstance(KKMoneyApplication.getAppContext()).deleteFile(fileName, new DeleteFileListener() {
             @Override
             public void onError(int errorcode, String errormsg) {
-                if (BuildConfig.DEBUG) Log.d("CoCoin", "Delete old cloud database failed " + cloudOldDatabaseUrl);
+                if (BuildConfig.DEBUG) Log.d("KKMoney", "Delete old cloud database failed " + cloudOldDatabaseUrl);
             }
             @Override
             public void onSuccess() {
-                if (BuildConfig.DEBUG) Log.d("CoCoin", "Delete old cloud database successfully " + cloudOldDatabaseUrl);
+                if (BuildConfig.DEBUG) Log.d("KKMoney", "Delete old cloud database successfully " + cloudOldDatabaseUrl);
             }
         });
 */
@@ -867,7 +867,7 @@ public class AccountBookTodayViewActivity extends AppCompatActivity {
 
     private void uploadFailed(int code, String msg) {
         // upload failed
-        if (BuildConfig.DEBUG) Log.d("CoCoin", "Upload database failed " + code + " " + msg);
+        if (BuildConfig.DEBUG) Log.d("KKMoney", "Upload database failed " + code + " " + msg);
         syncProgressDialog.dismiss();
         new MaterialDialog.Builder(mContext)
                 .title(R.string.sync_failed)
@@ -879,7 +879,7 @@ public class AccountBookTodayViewActivity extends AppCompatActivity {
 
     private void downloadFailed(int code, String msg) {
         // upload failed
-        if (BuildConfig.DEBUG) Log.d("CoCoin", "Download database failed " + code + " " + msg);
+        if (BuildConfig.DEBUG) Log.d("KKMoney", "Download database failed " + code + " " + msg);
         syncProgressDialog.dismiss();
         new MaterialDialog.Builder(mContext)
                 .title(R.string.sync_failed)
@@ -897,13 +897,13 @@ public class AccountBookTodayViewActivity extends AppCompatActivity {
             if (syncSuccessNumber == RecordManager.getInstance(mContext).RECORDS.size()) {
                 syncProgressDialog.setContent(R.string.sync_completely_content);
             } else {
-                syncProgressDialog.setContent(CoCoinUtil.GetString(mContext, R.string.uploading_0) + (syncSuccessNumber + 1) + CoCoinUtil.GetString(mContext, R.string.uploading_1));
+                syncProgressDialog.setContent(KKMoneyUtil.GetString(mContext, R.string.uploading_0) + (syncSuccessNumber + 1) + KKMoneyUtil.GetString(mContext, R.string.uploading_1));
             }
             if (syncSuccessNumber + syncFailedNumber == RecordManager.getInstance(mContext).RECORDS.size()) {
                 syncProgressDialog.dismiss();
                 new MaterialDialog.Builder(mContext)
                         .title(R.string.sync_completely_title)
-                        .content(syncSuccessNumber + CoCoinUtil.GetString(mContext, R.string.uploading_fail_1))
+                        .content(syncSuccessNumber + KKMoneyUtil.GetString(mContext, R.string.uploading_fail_1))
                         .positiveText(R.string.ok_1)
                         .show();
             }
@@ -916,7 +916,7 @@ public class AccountBookTodayViewActivity extends AppCompatActivity {
                 syncProgressDialog.dismiss();
                 new MaterialDialog.Builder(mContext)
                         .title(R.string.sync_completely_title)
-                        .content(syncSuccessNumber + CoCoinUtil.GetString(mContext, R.string.uploading_fail_1))
+                        .content(syncSuccessNumber + KKMoneyUtil.GetString(mContext, R.string.uploading_fail_1))
                         .positiveText(R.string.ok_1)
                         .show();
             }
@@ -972,7 +972,7 @@ public class AccountBookTodayViewActivity extends AppCompatActivity {
 
         if (SettingManager.getInstance().getTodayViewInfoShouldChange()) {
             setIconEnable(syncIcon, SettingManager.getInstance().getLoggenOn());
-            User user = BmobUser.getCurrentUser(CoCoinApplication.getAppContext(), User.class);
+            User user = BmobUser.getCurrentUser(KKMoneyApplication.getAppContext(), User.class);
             if (user != null) {
                 userName.setText(user.getUsername());
                 userEmail.setText(user.getEmail());
@@ -1008,18 +1008,18 @@ public class AccountBookTodayViewActivity extends AppCompatActivity {
     }
 
     private void setFonts() {
-        userName.setTypeface(CoCoinUtil.typefaceLatoRegular);
-        userEmail.setTypeface(CoCoinUtil.typefaceLatoLight);
-        ((TextView)findViewById(R.id.custom_text)).setTypeface(CoCoinUtil.GetTypeface());
-        ((TextView)findViewById(R.id.tag_text)).setTypeface(CoCoinUtil.GetTypeface());
-        ((TextView)findViewById(R.id.month_text)).setTypeface(CoCoinUtil.GetTypeface());
-        ((TextView)findViewById(R.id.list_text)).setTypeface(CoCoinUtil.GetTypeface());
-        ((TextView)findViewById(R.id.report_text)).setTypeface(CoCoinUtil.GetTypeface());
-        ((TextView)findViewById(R.id.sync_text)).setTypeface(CoCoinUtil.GetTypeface());
-        ((TextView)findViewById(R.id.settings_text)).setTypeface(CoCoinUtil.GetTypeface());
-        ((TextView)findViewById(R.id.help_text)).setTypeface(CoCoinUtil.GetTypeface());
-        ((TextView)findViewById(R.id.feedback_text)).setTypeface(CoCoinUtil.GetTypeface());
-        ((TextView)findViewById(R.id.about_text)).setTypeface(CoCoinUtil.GetTypeface());
+        userName.setTypeface(KKMoneyUtil.typefaceLatoRegular);
+        userEmail.setTypeface(KKMoneyUtil.typefaceLatoLight);
+        ((TextView)findViewById(R.id.custom_text)).setTypeface(KKMoneyUtil.GetTypeface());
+        ((TextView)findViewById(R.id.tag_text)).setTypeface(KKMoneyUtil.GetTypeface());
+        ((TextView)findViewById(R.id.month_text)).setTypeface(KKMoneyUtil.GetTypeface());
+        ((TextView)findViewById(R.id.list_text)).setTypeface(KKMoneyUtil.GetTypeface());
+        ((TextView)findViewById(R.id.report_text)).setTypeface(KKMoneyUtil.GetTypeface());
+        ((TextView)findViewById(R.id.sync_text)).setTypeface(KKMoneyUtil.GetTypeface());
+        ((TextView)findViewById(R.id.settings_text)).setTypeface(KKMoneyUtil.GetTypeface());
+        ((TextView)findViewById(R.id.help_text)).setTypeface(KKMoneyUtil.GetTypeface());
+        ((TextView)findViewById(R.id.feedback_text)).setTypeface(KKMoneyUtil.GetTypeface());
+        ((TextView)findViewById(R.id.about_text)).setTypeface(KKMoneyUtil.GetTypeface());
     }
 
     private void setListeners() {
@@ -1086,17 +1086,17 @@ public class AccountBookTodayViewActivity extends AppCompatActivity {
     }
 
     private void loadLogo() {
-        User user = BmobUser.getCurrentUser(CoCoinApplication.getAppContext(), User.class);
+        User user = BmobUser.getCurrentUser(KKMoneyApplication.getAppContext(), User.class);
         if (user != null) {
             try {
-                File logoFile = new File(CoCoinApplication.getAppContext().getFilesDir() + CoCoinUtil.LOGO_NAME);
+                File logoFile = new File(KKMoneyApplication.getAppContext().getFilesDir() + KKMoneyUtil.LOGO_NAME);
                 if (!logoFile.exists()) {
                     // the local logo file is missed
                     // try to get from the server
                     BmobQuery<Logo> bmobQuery = new BmobQuery();
-                    Log.d("CoCoin", user.getLogoObjectId());
+                    Log.d("KKMoney", user.getLogoObjectId());
                     bmobQuery.addWhereEqualTo("objectId", user.getLogoObjectId());
-                    bmobQuery.findObjects(CoCoinApplication.getAppContext()
+                    bmobQuery.findObjects(KKMoneyApplication.getAppContext()
                             , new FindListener<Logo>() {
                         @Override
                         public void onSuccess(List<Logo> object) {
@@ -1104,17 +1104,17 @@ public class AccountBookTodayViewActivity extends AppCompatActivity {
                             if (object.size() == 0) {
 
                             } else {
-                                String url = object.get(0).getFile().getFileUrl(CoCoinApplication.getAppContext());
-                                if (BuildConfig.DEBUG) Log.d("CoCoin", "Logo in server: " + url);
-                                Ion.with(CoCoinApplication.getAppContext()).load(url)
-                                        .write(new File(CoCoinApplication.getAppContext().getFilesDir()
-                                                + CoCoinUtil.LOGO_NAME))
+                                String url = object.get(0).getFile().getFileUrl(KKMoneyApplication.getAppContext());
+                                if (BuildConfig.DEBUG) Log.d("KKMoney", "Logo in server: " + url);
+                                Ion.with(KKMoneyApplication.getAppContext()).load(url)
+                                        .write(new File(KKMoneyApplication.getAppContext().getFilesDir()
+                                                + KKMoneyUtil.LOGO_NAME))
                                         .setCallback(new FutureCallback<File>() {
                                             @Override
                                             public void onCompleted(Exception e, File file) {
                                                 profileImage.setImageBitmap(BitmapFactory.decodeFile(
-                                                        CoCoinApplication.getAppContext().getFilesDir()
-                                                                + CoCoinUtil.LOGO_NAME));
+                                                        KKMoneyApplication.getAppContext().getFilesDir()
+                                                                + KKMoneyUtil.LOGO_NAME));
                                             }
                                         });
                             }
@@ -1122,7 +1122,7 @@ public class AccountBookTodayViewActivity extends AppCompatActivity {
                         @Override
                         public void onError(int code, String msg) {
                             // the picture is lost
-                            if (BuildConfig.DEBUG) Log.d("CoCoin", "Can't find the old logo in server.");
+                            if (BuildConfig.DEBUG) Log.d("KKMoney", "Can't find the old logo in server.");
                         }
                     });
                 } else {

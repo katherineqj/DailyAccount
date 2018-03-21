@@ -1,7 +1,7 @@
 package com.katherine_qj.saver.ui;
 
 /**
- * Created by 伟平 on 2015/11/16.
+ * Created by katherineqj on 2017/11/16.
  */
 
 public interface RiseNumberBase {

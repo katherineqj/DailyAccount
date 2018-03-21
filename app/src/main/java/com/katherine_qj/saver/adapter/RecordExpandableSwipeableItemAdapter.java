@@ -1,7 +1,7 @@
 package com.katherine_qj.saver.adapter;
 
 /**
- * Created by 伟平 on 2015/11/12.
+ * Created by katherineqj on 2017/11/12.
  */
 
 import android.support.v4.view.ViewCompat;

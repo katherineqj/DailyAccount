@@ -18,9 +18,9 @@ import com.afollestad.materialdialogs.MaterialDialog;
 import com.github.florent37.materialviewpager.MaterialViewPagerHelper;
 import com.github.ksoichiro.android.observablescrollview.ObservableScrollView;
 import com.katherine_qj.saver.R;
-import com.katherine_qj.saver.activity.CoCoinApplication;
+import com.katherine_qj.saver.activity.KKMoneyApplication;
 import com.katherine_qj.saver.model.Feedback;
-import com.katherine_qj.saver.util.CoCoinUtil;
+import com.katherine_qj.saver.util.KKMoneyUtil;
 
 import cn.bmob.v3.listener.SaveListener;
 
@@ -78,13 +78,13 @@ public class HelpFeedbackFragment extends Fragment {
         MaterialViewPagerHelper.registerScrollView(getActivity(), mScrollView, null);
 
         title = (TextView)view.findViewById(R.id.title);
-        title.setTypeface(CoCoinUtil.getInstance().typefaceLatoLight);
+        title.setTypeface(KKMoneyUtil.getInstance().typefaceLatoLight);
         input = (EditText)view.findViewById(R.id.edittext);
-        input.setTypeface(CoCoinUtil.getInstance().typefaceLatoLight);
+        input.setTypeface(KKMoneyUtil.getInstance().typefaceLatoLight);
         help = (TextView)view.findViewById(R.id.helper);
-        help.setTypeface(CoCoinUtil.getInstance().typefaceLatoLight);
+        help.setTypeface(KKMoneyUtil.getInstance().typefaceLatoLight);
         number = (TextView)view.findViewById(R.id.number);
-        number.setTypeface(CoCoinUtil.getInstance().typefaceLatoLight);
+        number.setTypeface(KKMoneyUtil.getInstance().typefaceLatoLight);
         send = (TextView)view.findViewById(R.id.send);
         send.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -96,18 +96,18 @@ public class HelpFeedbackFragment extends Fragment {
                             .positiveText(R.string.ok_1)
                             .show();
                 } else {
-                    CoCoinUtil.getInstance().showToast(CoCoinApplication.getAppContext(), CoCoinApplication.getAppContext().getResources().getString(R.string.help_feedback_sent));
+                    KKMoneyUtil.getInstance().showToast(KKMoneyApplication.getAppContext(), KKMoneyApplication.getAppContext().getResources().getString(R.string.help_feedback_sent));
                     Feedback feedback = new Feedback();
                     feedback.setContent(input.getText().toString());
-                    feedback.save(CoCoinApplication.getAppContext(), new SaveListener() {
+                    feedback.save(KKMoneyApplication.getAppContext(), new SaveListener() {
                         @Override
                         public void onSuccess() {
-                            CoCoinUtil.getInstance().showToast(CoCoinApplication.getAppContext(), CoCoinApplication.getAppContext().getResources().getString(R.string.help_feedback_sent_successfully));
+                            KKMoneyUtil.getInstance().showToast(KKMoneyApplication.getAppContext(), KKMoneyApplication.getAppContext().getResources().getString(R.string.help_feedback_sent_successfully));
                         }
 
                         @Override
                         public void onFailure(int code, String arg0) {
-                            CoCoinUtil.getInstance().showToast(CoCoinApplication.getAppContext(), CoCoinApplication.getAppContext().getResources().getString(R.string.help_feedback_sent_fail));
+                            KKMoneyUtil.getInstance().showToast(KKMoneyApplication.getAppContext(), KKMoneyApplication.getAppContext().getResources().getString(R.string.help_feedback_sent_fail));
                         }
                     });
                 }
@@ -145,7 +145,7 @@ public class HelpFeedbackFragment extends Fragment {
     private void setNumberText() {
         int count = -1;
         if (chineseIsDoubleCount) {
-            count = CoCoinUtil.getInstance().textCounter(input.getText().toString());
+            count = KKMoneyUtil.getInstance().textCounter(input.getText().toString());
         } else {
             count =input.getText().toString().length();
         }

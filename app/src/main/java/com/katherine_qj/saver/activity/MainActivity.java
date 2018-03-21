@@ -38,20 +38,20 @@ import com.katherine_qj.saver.R;
 import com.katherine_qj.saver.adapter.ButtonGridViewAdapter;
 import com.katherine_qj.saver.adapter.EditMoneyRemarkFragmentAdapter;
 import com.katherine_qj.saver.adapter.TagChooseFragmentAdapter;
-import com.katherine_qj.saver.fragment.CoCoinFragmentManager;
+import com.katherine_qj.saver.fragment.KKMoneyFragmentManager;
 import com.katherine_qj.saver.fragment.TagChooseFragment;
 import com.katherine_qj.saver.model.AppUpdateManager;
-import com.katherine_qj.saver.model.CoCoinRecord;
+import com.katherine_qj.saver.model.KKMoneyRecord;
 import com.katherine_qj.saver.model.RecordManager;
 import com.katherine_qj.saver.model.SettingManager;
 import com.katherine_qj.saver.model.User;
-import com.katherine_qj.saver.ui.CoCoinScrollableViewPager;
+import com.katherine_qj.saver.ui.KKMoneyScrollableViewPager;
 import com.katherine_qj.saver.ui.DummyOperation;
 import com.katherine_qj.saver.ui.MyGridView;
 import com.katherine_qj.saver.ui.guillotine.animation.GuillotineAnimation;
 import com.katherine_qj.saver.ui.guillotine.interfaces.GuillotineListener;
-import com.katherine_qj.saver.util.CoCoinToast;
-import com.katherine_qj.saver.util.CoCoinUtil;
+import com.katherine_qj.saver.util.KKMoneyToast;
+import com.katherine_qj.saver.util.KKMoneyUtil;
 import com.rey.material.widget.RadioButton;
 
 import java.util.Calendar;
@@ -104,7 +104,7 @@ public class MainActivity extends AppCompatActivity implements TagChooseFragment
     private View guillotineMenu;
 
     private ViewPager tagViewPager;
-    private CoCoinScrollableViewPager editViewPager;
+    private KKMoneyScrollableViewPager editViewPager;
     private FragmentPagerAdapter tagAdapter;
     private FragmentPagerAdapter editAdapter;
 
@@ -144,10 +144,10 @@ public class MainActivity extends AppCompatActivity implements TagChooseFragment
 
         mContext = this;
 
-//        Bmob.initialize(CoCoinApplication.getAppContext(), CoCoin.APPLICATION_ID);
-//        CrashReport.initCrashReport(CoCoinApplication.getAppContext(), "900016815", false);
-//        RecordManager.getInstance(CoCoinApplication.getAppContext());
-//        CoCoinUtil.init(CoCoinApplication.getAppContext());
+//        Bmob.initialize(KKMoneyApplication.getAppContext(), KKMoney.APPLICATION_ID);
+//        CrashReport.initCrashReport(KKMoneyApplication.getAppContext(), "900016815", false);
+//        RecordManager.getInstance(KKMoneyApplication.getAppContext());
+//        KKMoneyUtil.init(KKMoneyApplication.getAppContext());
 
         appUpdateManager = new AppUpdateManager(mContext);
         appUpdateManager.checkUpdateInfo(false);
@@ -177,7 +177,7 @@ public class MainActivity extends AppCompatActivity implements TagChooseFragment
             // do something for phones running an SDK before lollipop
         }
 
-        User user = BmobUser.getCurrentUser(CoCoinApplication.getAppContext(), User.class);
+        User user = BmobUser.getCurrentUser(KKMoneyApplication.getAppContext(), User.class);
         if (user != null) {
             SettingManager.getInstance().setLoggenOn(true);
             SettingManager.getInstance().setUserName(user.getUsername());
@@ -192,22 +192,22 @@ public class MainActivity extends AppCompatActivity implements TagChooseFragment
         guillotineBackground = findViewById(R.id.guillotine_background);
 
         toolBarTitle = (TextView)findViewById(R.id.guillotine_title);
-        toolBarTitle.setTypeface(CoCoinUtil.typefaceLatoLight);
+        toolBarTitle.setTypeface(KKMoneyUtil.typefaceLatoLight);
         toolBarTitle.setText(SettingManager.getInstance().getAccountBookName());
 
 // edit viewpager///////////////////////////////////////////////////////////////////////////////////
-        editViewPager = (CoCoinScrollableViewPager) findViewById(R.id.edit_pager);
-        editAdapter = new EditMoneyRemarkFragmentAdapter(getSupportFragmentManager(), CoCoinFragmentManager.MAIN_ACTIVITY_FRAGMENT);
+        editViewPager = (KKMoneyScrollableViewPager) findViewById(R.id.edit_pager);
+        editAdapter = new EditMoneyRemarkFragmentAdapter(getSupportFragmentManager(), KKMoneyFragmentManager.MAIN_ACTIVITY_FRAGMENT);
         
         editViewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
                 if (position == 1) {
-                    if (CoCoinFragmentManager.mainActivityEditRemarkFragment != null)
-                        CoCoinFragmentManager.mainActivityEditRemarkFragment.editRequestFocus();
+                    if (KKMoneyFragmentManager.mainActivityEditRemarkFragment != null)
+                        KKMoneyFragmentManager.mainActivityEditRemarkFragment.editRequestFocus();
                 } else {
-                    if (CoCoinFragmentManager.mainActivityEditMoneyFragment != null)
-                        CoCoinFragmentManager.mainActivityEditMoneyFragment.editRequestFocus();
+                    if (KKMoneyFragmentManager.mainActivityEditMoneyFragment != null)
+                        KKMoneyFragmentManager.mainActivityEditMoneyFragment.editRequestFocus();
                 }
             }
 
@@ -273,7 +273,7 @@ public class MainActivity extends AppCompatActivity implements TagChooseFragment
         guillotineToolBar = (Toolbar)guillotineMenu.findViewById(R.id.toolbar);
 
         menuToolBarTitle = (TextView)guillotineMenu.findViewById(R.id.guillotine_title);
-        menuToolBarTitle.setTypeface(CoCoinUtil.typefaceLatoLight);
+        menuToolBarTitle.setTypeface(KKMoneyUtil.typefaceLatoLight);
         menuToolBarTitle.setText(SettingManager.getInstance().getAccountBookName());
 
         radioButton0 = (RadioButton)guillotineMenu.findViewById(R.id.radio_button_0);
@@ -283,7 +283,7 @@ public class MainActivity extends AppCompatActivity implements TagChooseFragment
 
         passwordTip = (TextView)guillotineMenu.findViewById(R.id.password_tip);
         passwordTip.setText(mContext.getResources().getString(R.string.password_tip));
-        passwordTip.setTypeface(CoCoinUtil.typefaceLatoLight);
+        passwordTip.setTypeface(KKMoneyUtil.typefaceLatoLight);
 
         radioButtonLy = (LinearLayout)guillotineMenu.findViewById(R.id.radio_button_ly);
 
@@ -306,7 +306,7 @@ public class MainActivity extends AppCompatActivity implements TagChooseFragment
                     @Override
                     public void onGuillotineClosed() {
                         isPassword = false;
-                        CoCoinFragmentManager.mainActivityEditMoneyFragment.editRequestFocus();
+                        KKMoneyFragmentManager.mainActivityEditMoneyFragment.editRequestFocus();
                         radioButton0.setChecked(false);
                         radioButton1.setChecked(false);
                         radioButton2.setChecked(false);
@@ -333,7 +333,7 @@ public class MainActivity extends AppCompatActivity implements TagChooseFragment
             boolean wrapInScrollView = true;
             new MaterialDialog.Builder(this)
                     .title(R.string.guide)
-                    .typeface(CoCoinUtil.GetTypeface(), CoCoinUtil.GetTypeface())
+                    .typeface(KKMoneyUtil.GetTypeface(), KKMoneyUtil.GetTypeface())
                     .customView(R.layout.main_activity_guide, wrapInScrollView)
                     .positiveText(R.string.ok)
                     .show();
@@ -397,9 +397,9 @@ public class MainActivity extends AppCompatActivity implements TagChooseFragment
             case SETTING_TAG:
                 if (resultCode == RESULT_OK) {
                     if (data.getBooleanExtra("IS_CHANGED", false)) {
-                        for (int i = 0; i < tagAdapter.getCount() && i < CoCoinFragmentManager.tagChooseFragments.size(); i++) {
-                            if (CoCoinFragmentManager.tagChooseFragments.get(i) != null)
-                                CoCoinFragmentManager.tagChooseFragments.get(i).updateTags();
+                        for (int i = 0; i < tagAdapter.getCount() && i < KKMoneyFragmentManager.tagChooseFragments.size(); i++) {
+                            if (KKMoneyFragmentManager.tagChooseFragments.get(i) != null)
+                                KKMoneyFragmentManager.tagChooseFragments.get(i).updateTags();
                         }
                     }
                 }
@@ -429,45 +429,45 @@ public class MainActivity extends AppCompatActivity implements TagChooseFragment
     private void buttonClickOperation(boolean longClick, int position) {
         if (editViewPager.getCurrentItem() == 1) return;
         if (!isPassword) {
-            if (CoCoinFragmentManager.mainActivityEditMoneyFragment.getNumberText().toString().equals("0")
-                    && !CoCoinUtil.ClickButtonCommit(position)) {
-                if (CoCoinUtil.ClickButtonDelete(position)
-                        || CoCoinUtil.ClickButtonIsZero(position)) {
+            if (KKMoneyFragmentManager.mainActivityEditMoneyFragment.getNumberText().toString().equals("0")
+                    && !KKMoneyUtil.ClickButtonCommit(position)) {
+                if (KKMoneyUtil.ClickButtonDelete(position)
+                        || KKMoneyUtil.ClickButtonIsZero(position)) {
 
                 } else {
-                    CoCoinFragmentManager.mainActivityEditMoneyFragment.setNumberText(CoCoinUtil.BUTTONS[position]);
+                    KKMoneyFragmentManager.mainActivityEditMoneyFragment.setNumberText(KKMoneyUtil.BUTTONS[position]);
                 }
             } else {
-                if (CoCoinUtil.ClickButtonDelete(position)) {
+                if (KKMoneyUtil.ClickButtonDelete(position)) {
                     if (longClick) {
-                        CoCoinFragmentManager.mainActivityEditMoneyFragment.setNumberText("0");
-                        CoCoinFragmentManager.mainActivityEditMoneyFragment.setHelpText(
-                                CoCoinUtil.FLOATINGLABELS[CoCoinFragmentManager.mainActivityEditMoneyFragment
+                        KKMoneyFragmentManager.mainActivityEditMoneyFragment.setNumberText("0");
+                        KKMoneyFragmentManager.mainActivityEditMoneyFragment.setHelpText(
+                                KKMoneyUtil.FLOATINGLABELS[KKMoneyFragmentManager.mainActivityEditMoneyFragment
                                         .getNumberText().toString().length()]);
                     } else {
-                        CoCoinFragmentManager.mainActivityEditMoneyFragment.setNumberText(
-                                CoCoinFragmentManager.mainActivityEditMoneyFragment.getNumberText().toString()
-                                .substring(0, CoCoinFragmentManager.mainActivityEditMoneyFragment
+                        KKMoneyFragmentManager.mainActivityEditMoneyFragment.setNumberText(
+                                KKMoneyFragmentManager.mainActivityEditMoneyFragment.getNumberText().toString()
+                                .substring(0, KKMoneyFragmentManager.mainActivityEditMoneyFragment
                                         .getNumberText().toString().length() - 1));
-                        if (CoCoinFragmentManager.mainActivityEditMoneyFragment
+                        if (KKMoneyFragmentManager.mainActivityEditMoneyFragment
                                 .getNumberText().toString().length() == 0) {
-                            CoCoinFragmentManager.mainActivityEditMoneyFragment.setNumberText("0");
-                            CoCoinFragmentManager.mainActivityEditMoneyFragment.setHelpText(" ");
+                            KKMoneyFragmentManager.mainActivityEditMoneyFragment.setNumberText("0");
+                            KKMoneyFragmentManager.mainActivityEditMoneyFragment.setHelpText(" ");
                         }
                     }
-                } else if (CoCoinUtil.ClickButtonCommit(position)) {
+                } else if (KKMoneyUtil.ClickButtonCommit(position)) {
                     commit();
                 } else {
-                    CoCoinFragmentManager.mainActivityEditMoneyFragment.setNumberText(
-                            CoCoinFragmentManager.mainActivityEditMoneyFragment.getNumberText().toString()
-                                    + CoCoinUtil.BUTTONS[position]);
+                    KKMoneyFragmentManager.mainActivityEditMoneyFragment.setNumberText(
+                            KKMoneyFragmentManager.mainActivityEditMoneyFragment.getNumberText().toString()
+                                    + KKMoneyUtil.BUTTONS[position]);
                 }
             }
-            CoCoinFragmentManager.mainActivityEditMoneyFragment
-                    .setHelpText(CoCoinUtil.FLOATINGLABELS[
-                            CoCoinFragmentManager.mainActivityEditMoneyFragment.getNumberText().toString().length()]);
+            KKMoneyFragmentManager.mainActivityEditMoneyFragment
+                    .setHelpText(KKMoneyUtil.FLOATINGLABELS[
+                            KKMoneyFragmentManager.mainActivityEditMoneyFragment.getNumberText().toString().length()]);
         } else {
-            if (CoCoinUtil.ClickButtonDelete(position)) {
+            if (KKMoneyUtil.ClickButtonDelete(position)) {
                 if (longClick) {
                     radioButton0.setChecked(false);
                     radioButton1.setChecked(false);
@@ -490,7 +490,7 @@ public class MainActivity extends AppCompatActivity implements TagChooseFragment
                         inputPassword = inputPassword.substring(0, inputPassword.length() - 1);
                     }
                 }
-            } else if (CoCoinUtil.ClickButtonCommit(position)) {
+            } else if (KKMoneyUtil.ClickButtonCommit(position)) {
             } else {
                 if (statusButton.getState() == MaterialMenuDrawable.IconState.X) {
                     statusButton.animateState(MaterialMenuDrawable.IconState.ARROW);
@@ -508,7 +508,7 @@ public class MainActivity extends AppCompatActivity implements TagChooseFragment
                     radioButton3.setChecked(true);
                 }
                 if (inputPassword.length() < 4) {
-                    inputPassword += CoCoinUtil.BUTTONS[position];
+                    inputPassword += KKMoneyUtil.BUTTONS[position];
                 }
             }
             checkPassword();
@@ -516,31 +516,31 @@ public class MainActivity extends AppCompatActivity implements TagChooseFragment
     }
 
     private void commit() {
-        if (CoCoinFragmentManager.mainActivityEditMoneyFragment.getTagId() == -1) {
+        if (KKMoneyFragmentManager.mainActivityEditMoneyFragment.getTagId() == -1) {
             showToast(NO_TAG_TOAST);
-        } else if (CoCoinFragmentManager.mainActivityEditMoneyFragment.getNumberText().toString().equals("0")) {
+        } else if (KKMoneyFragmentManager.mainActivityEditMoneyFragment.getNumberText().toString().equals("0")) {
             showToast(NO_MONEY_TOAST);
         } else  {
             Calendar calendar = Calendar.getInstance();
-            CoCoinRecord coCoinRecord = new CoCoinRecord(
+            KKMoneyRecord KKMoneyRecord = new KKMoneyRecord(
                     -1,
-                    Float.valueOf(CoCoinFragmentManager.mainActivityEditMoneyFragment.getNumberText().toString()),
+                    Float.valueOf(KKMoneyFragmentManager.mainActivityEditMoneyFragment.getNumberText().toString()),
                     "RMB",
-                    CoCoinFragmentManager.mainActivityEditMoneyFragment.getTagId(),
+                    KKMoneyFragmentManager.mainActivityEditMoneyFragment.getTagId(),
                     calendar);
-            coCoinRecord.setRemark(CoCoinFragmentManager.mainActivityEditRemarkFragment.getRemark());
-            long saveId = RecordManager.saveRecord(coCoinRecord);
+            KKMoneyRecord.setRemark(KKMoneyFragmentManager.mainActivityEditRemarkFragment.getRemark());
+            long saveId = RecordManager.saveRecord(KKMoneyRecord);
             if (saveId == -1) {
 
             } else {
                 if (!superToast.isShowing()) {
                     changeColor();
                 }
-                CoCoinFragmentManager.mainActivityEditMoneyFragment.setTagImage(R.color.transparent);
-                CoCoinFragmentManager.mainActivityEditMoneyFragment.setTagName("");
+                KKMoneyFragmentManager.mainActivityEditMoneyFragment.setTagImage(R.color.transparent);
+                KKMoneyFragmentManager.mainActivityEditMoneyFragment.setTagName("");
             }
-            CoCoinFragmentManager.mainActivityEditMoneyFragment.setNumberText("0");
-            CoCoinFragmentManager.mainActivityEditMoneyFragment.setHelpText(" ");
+            KKMoneyFragmentManager.mainActivityEditMoneyFragment.setNumberText("0");
+            KKMoneyFragmentManager.mainActivityEditMoneyFragment.setHelpText(" ");
         }
     }
 
@@ -551,29 +551,29 @@ public class MainActivity extends AppCompatActivity implements TagChooseFragment
     private void showToast(int toastType) {
         switch (toastType) {
             case NO_TAG_TOAST:
-                CoCoinToast.getInstance().showToast(R.string.toast_no_tag, SuperToast.Background.RED);
+                KKMoneyToast.getInstance().showToast(R.string.toast_no_tag, SuperToast.Background.RED);
                 tagAnimation();
                 break;
             case NO_MONEY_TOAST:
-                CoCoinToast.getInstance().showToast(R.string.toast_no_money, SuperToast.Background.RED);
+                KKMoneyToast.getInstance().showToast(R.string.toast_no_money, SuperToast.Background.RED);
                 break;
             case PASSWORD_WRONG_TOAST:
-                CoCoinToast.getInstance().showToast(R.string.toast_password_wrong, SuperToast.Background.RED);
+                KKMoneyToast.getInstance().showToast(R.string.toast_password_wrong, SuperToast.Background.RED);
                 break;
             case PASSWORD_CORRECT_TOAST:
-                CoCoinToast.getInstance().showToast(R.string.toast_password_correct, SuperToast.Background.BLUE);
+                KKMoneyToast.getInstance().showToast(R.string.toast_password_correct, SuperToast.Background.GRAY);
                 break;
             case SAVE_SUCCESSFULLY_TOAST:
                 break;
             case SAVE_FAILED_TOAST:
                 break;
             case PRESS_AGAIN_TO_EXIT:
-                CoCoinToast.getInstance().showToast(R.string.toast_press_again_to_exit, SuperToast.Background.BLUE);
+                KKMoneyToast.getInstance().showToast(R.string.toast_press_again_to_exit, SuperToast.Background.GRAY);
                 break;
             case WELCOME_BACK:
-                CoCoinToast.getInstance().showToast(CoCoinApplication.getAppContext()
+                KKMoneyToast.getInstance().showToast(KKMoneyApplication.getAppContext()
                         .getResources().getString(R.string.welcome_back)
-                        + "\n" + SettingManager.getInstance().getUserName(), SuperToast.Background.BLUE);
+                        + "\n" + SettingManager.getInstance().getUserName(), SuperToast.Background.GRAY);
             default:
                 break;
         }
@@ -596,7 +596,7 @@ public class MainActivity extends AppCompatActivity implements TagChooseFragment
 
             if (shouldChange) {
                 window.setStatusBarColor(
-                        CoCoinUtil.getInstance().getDeeperColor(SettingManager.getInstance().getRemindColor()));
+                        KKMoneyUtil.getInstance().getDeeperColor(SettingManager.getInstance().getRemindColor()));
             } else {
                 window.setStatusBarColor(ContextCompat.getColor(mContext, R.color.statusBarColor));
             }
@@ -612,16 +612,16 @@ public class MainActivity extends AppCompatActivity implements TagChooseFragment
             guillotineColorLy.setBackgroundColor(SettingManager.getInstance().getRemindColor());
             guillotineToolBar.setBackgroundColor(SettingManager.getInstance().getRemindColor());
         } else {
-            root.setBackgroundColor(CoCoinUtil.getInstance().MY_Normally);
-            toolbar.setBackgroundColor(CoCoinUtil.getInstance().MY_Normally);
-            guillotineBackground.setBackgroundColor(CoCoinUtil.getInstance().MY_Normally);
-            guillotineColorLy.setBackgroundColor(CoCoinUtil.getInstance().MY_Normally);
-            guillotineToolBar.setBackgroundColor(CoCoinUtil.getInstance().MY_Normally);
+            root.setBackgroundColor(KKMoneyUtil.getInstance().MY_Normally);
+            toolbar.setBackgroundColor(KKMoneyUtil.getInstance().MY_Normally);
+            guillotineBackground.setBackgroundColor(KKMoneyUtil.getInstance().MY_Normally);
+            guillotineColorLy.setBackgroundColor(KKMoneyUtil.getInstance().MY_Normally);
+            guillotineToolBar.setBackgroundColor(KKMoneyUtil.getInstance().MY_Normally);
         }
-        if (CoCoinFragmentManager.mainActivityEditMoneyFragment != null)
-            CoCoinFragmentManager.mainActivityEditMoneyFragment.setEditColor(shouldChange);
-        if (CoCoinFragmentManager.mainActivityEditRemarkFragment != null)
-            CoCoinFragmentManager.mainActivityEditRemarkFragment.setEditColor(shouldChange);
+        if (KKMoneyFragmentManager.mainActivityEditMoneyFragment != null)
+            KKMoneyFragmentManager.mainActivityEditMoneyFragment.setEditColor(shouldChange);
+        if (KKMoneyFragmentManager.mainActivityEditRemarkFragment != null)
+            KKMoneyFragmentManager.mainActivityEditRemarkFragment.setEditColor(shouldChange);
         myGridViewAdapter.notifyDataSetInvalidated();
     }
 
@@ -651,8 +651,8 @@ public class MainActivity extends AppCompatActivity implements TagChooseFragment
                     }
                 } else {
                     if (editViewPager.getCurrentItem() == 0
-                            && CoCoinUtil.isPointInsideView(x2, y2, editViewPager)
-                            && CoCoinUtil.GetScreenWidth(mContext) - x2 <= 60) {
+                            && KKMoneyUtil.isPointInsideView(x2, y2, editViewPager)
+                            && KKMoneyUtil.GetScreenWidth(mContext) - x2 <= 60) {
                         return true;
                     }
                 }
@@ -695,9 +695,9 @@ public class MainActivity extends AppCompatActivity implements TagChooseFragment
         // if the tags' order has been changed
         if (SettingManager.getInstance().getMainActivityTagShouldChange()) {
             // change the tag fragment
-            for (int i = 0; i < tagAdapter.getCount() && i < CoCoinFragmentManager.tagChooseFragments.size(); i++) {
-                if (CoCoinFragmentManager.tagChooseFragments.get(i) != null)
-                    CoCoinFragmentManager.tagChooseFragments.get(i).updateTags();
+            for (int i = 0; i < tagAdapter.getCount() && i < KKMoneyFragmentManager.tagChooseFragments.size(); i++) {
+                if (KKMoneyFragmentManager.tagChooseFragments.get(i) != null)
+                    KKMoneyFragmentManager.tagChooseFragments.get(i).updateTags();
             }
             // and tell others that main activity has changed
             SettingManager.getInstance().setMainActivityTagShouldChange(false);
@@ -732,8 +732,8 @@ public class MainActivity extends AppCompatActivity implements TagChooseFragment
 
     @Override
     public void onTagItemPicked(int position) {
-        if (CoCoinFragmentManager.mainActivityEditMoneyFragment != null)
-            CoCoinFragmentManager.mainActivityEditMoneyFragment.setTag(tagViewPager.getCurrentItem() * 8 + position + 2);
+        if (KKMoneyFragmentManager.mainActivityEditMoneyFragment != null)
+            KKMoneyFragmentManager.mainActivityEditMoneyFragment.setTag(tagViewPager.getCurrentItem() * 8 + position + 2);
     }
 
     @Override

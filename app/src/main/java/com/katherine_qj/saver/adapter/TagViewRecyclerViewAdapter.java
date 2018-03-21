@@ -12,11 +12,11 @@ import android.widget.TextView;
 
 import com.katherine_qj.saver.R;
 import com.katherine_qj.saver.fragment.RecordCheckDialogFragment;
-import com.katherine_qj.saver.model.CoCoinRecord;
+import com.katherine_qj.saver.model.KKMoneyRecord;
 import com.katherine_qj.saver.model.RecordManager;
 import com.katherine_qj.saver.model.SettingManager;
 import com.katherine_qj.saver.model.Tag;
-import com.katherine_qj.saver.util.CoCoinUtil;
+import com.katherine_qj.saver.util.KKMoneyUtil;
 import com.nispok.snackbar.Snackbar;
 import com.nispok.snackbar.SnackbarManager;
 import com.nispok.snackbar.enums.SnackbarType;
@@ -50,7 +50,7 @@ import lecho.lib.hellocharts.view.ColumnChartView;
 import lecho.lib.hellocharts.view.PieChartView;
 
 /**
- * Created by 伟平 on 2015/10/20.
+ * Created by katherineqj on 2017/10/20.
  */
 
 // Todo optimize this
@@ -60,7 +60,7 @@ public class TagViewRecyclerViewAdapter
 
     private Context mContext;
 
-    private List<List<CoCoinRecord>> contents;
+    private List<List<KKMoneyRecord>> contents;
     private List<Integer> type;
     private List<Double> SumList;
     private List<Map<Integer, Double>> AllTagExpanse;
@@ -94,7 +94,7 @@ public class TagViewRecyclerViewAdapter
 
     private boolean IS_EMPTY = false;
 
-    public TagViewRecyclerViewAdapter(List<CoCoinRecord> coCoinRecords, Context context, int position) {
+    public TagViewRecyclerViewAdapter(List<KKMoneyRecord> KKMoneyRecords, Context context, int position) {
 
         mContext = context;
         fragmentPosition = position;
@@ -106,68 +106,68 @@ public class TagViewRecyclerViewAdapter
             chartType = HISTOGRAM;
         }
 
-        IS_EMPTY = coCoinRecords.isEmpty();
+        IS_EMPTY = KKMoneyRecords.isEmpty();
 
         Sum = 0;
 
         if (!IS_EMPTY) {
 
-            Collections.sort(coCoinRecords, new Comparator<CoCoinRecord>() {
+            Collections.sort(KKMoneyRecords, new Comparator<KKMoneyRecord>() {
                 @Override
-                public int compare(CoCoinRecord lhs, CoCoinRecord rhs) {
+                public int compare(KKMoneyRecord lhs, KKMoneyRecord rhs) {
                     return rhs.getCalendar().compareTo(lhs.getCalendar());
                 }
             });
             contents = new ArrayList<>();
             SumList = new ArrayList<>();
             type = new ArrayList<>();
-            year = coCoinRecords.get(0).getCalendar().get(Calendar.YEAR);
-            month = coCoinRecords.get(0).getCalendar().get(Calendar.MONTH) + 1;
+            year = KKMoneyRecords.get(0).getCalendar().get(Calendar.YEAR);
+            month = KKMoneyRecords.get(0).getCalendar().get(Calendar.MONTH) + 1;
             endYear = year;
             endMonth = month;
             int yearPosition = 0;
             double monthSum = 0;
             double yearSum = 0;
-            List<CoCoinRecord> yearSet = new ArrayList<>();
-            List<CoCoinRecord> monthSet = new ArrayList<>();
+            List<KKMoneyRecord> yearSet = new ArrayList<>();
+            List<KKMoneyRecord> monthSet = new ArrayList<>();
 
-            for (CoCoinRecord coCoinRecord : coCoinRecords) {
-                Sum += coCoinRecord.getMoney();
-                if (coCoinRecord.getCalendar().get(Calendar.YEAR) == year) {
-                    yearSet.add(coCoinRecord);
-                    yearSum += coCoinRecord.getMoney();
-                    if (coCoinRecord.getCalendar().get(Calendar.MONTH) == month - 1) {
-                        monthSet.add(coCoinRecord);
-                        monthSum += coCoinRecord.getMoney();
+            for (KKMoneyRecord KKMoneyRecord : KKMoneyRecords) {
+                Sum += KKMoneyRecord.getMoney();
+                if (KKMoneyRecord.getCalendar().get(Calendar.YEAR) == year) {
+                    yearSet.add(KKMoneyRecord);
+                    yearSum += KKMoneyRecord.getMoney();
+                    if (KKMoneyRecord.getCalendar().get(Calendar.MONTH) == month - 1) {
+                        monthSet.add(KKMoneyRecord);
+                        monthSum += KKMoneyRecord.getMoney();
                     } else {
                         contents.add(monthSet);
                         SumList.add(monthSum);
-                        monthSum = coCoinRecord.getMoney();
+                        monthSum = KKMoneyRecord.getMoney();
                         type.add(SHOW_IN_MONTH);
                         monthSet = new ArrayList<>();
-                        monthSet.add(coCoinRecord);
-                        month = coCoinRecord.getCalendar().get(Calendar.MONTH) + 1;
+                        monthSet.add(KKMoneyRecord);
+                        month = KKMoneyRecord.getCalendar().get(Calendar.MONTH) + 1;
                     }
                 } else {
                     contents.add(monthSet);
                     SumList.add(monthSum);
-                    monthSum = coCoinRecord.getMoney();
+                    monthSum = KKMoneyRecord.getMoney();
                     type.add(SHOW_IN_MONTH);
                     monthSet = new ArrayList<>();
-                    monthSet.add(coCoinRecord);
-                    month = coCoinRecord.getCalendar().get(Calendar.MONTH) + 1;
+                    monthSet.add(KKMoneyRecord);
+                    month = KKMoneyRecord.getCalendar().get(Calendar.MONTH) + 1;
 
                     contents.add(yearPosition, yearSet);
                     SumList.add(yearPosition, yearSum);
-                    yearSum = coCoinRecord.getMoney();
+                    yearSum = KKMoneyRecord.getMoney();
                     type.add(yearPosition, SHOW_IN_YEAR);
                     yearPosition = contents.size();
                     yearSet = new ArrayList<>();
-                    yearSet.add(coCoinRecord);
-                    year = coCoinRecord.getCalendar().get(Calendar.YEAR);
+                    yearSet.add(KKMoneyRecord);
+                    year = KKMoneyRecord.getCalendar().get(Calendar.YEAR);
                     monthSet = new ArrayList<>();
-                    monthSet.add(coCoinRecord);
-                    month = coCoinRecord.getCalendar().get(Calendar.MONTH) + 1;
+                    monthSet.add(KKMoneyRecord);
+                    month = KKMoneyRecord.getCalendar().get(Calendar.MONTH) + 1;
                 }
             }
             contents.add(monthSet);
@@ -190,13 +190,13 @@ public class TagViewRecyclerViewAdapter
                         tagExpanse.put(tag.getId(), Double.valueOf(0));
                     }
 
-                    for (CoCoinRecord coCoinRecord : contents.get(i)) {
-                        double d = tagExpanse.get(coCoinRecord.getTag());
-                        d += coCoinRecord.getMoney();
-                        tagExpanse.put(coCoinRecord.getTag(), d);
+                    for (KKMoneyRecord KKMoneyRecord : contents.get(i)) {
+                        double d = tagExpanse.get(KKMoneyRecord.getTag());
+                        d += KKMoneyRecord.getMoney();
+                        tagExpanse.put(KKMoneyRecord.getTag(), d);
                     }
 
-                    tagExpanse = CoCoinUtil.SortTreeMapByValues(tagExpanse);
+                    tagExpanse = KKMoneyUtil.SortTreeMapByValues(tagExpanse);
 
                     AllTagExpanse.add(tagExpanse);
                 }
@@ -204,17 +204,17 @@ public class TagViewRecyclerViewAdapter
 
             if (chartType == SUM_HISTOGRAM) {
                 DayExpanseSum = new int[(endYear - startYear + 1) * 372];
-                for (CoCoinRecord coCoinRecord : coCoinRecords) {
-                    DayExpanseSum[(coCoinRecord.getCalendar().get(Calendar.YEAR) - startYear) * 372 +
-                            coCoinRecord.getCalendar().get(Calendar.MONTH) * 31 +
-                            coCoinRecord.getCalendar().get(Calendar.DAY_OF_MONTH) - 1] += (int) coCoinRecord.getMoney();
+                for (KKMoneyRecord KKMoneyRecord : KKMoneyRecords) {
+                    DayExpanseSum[(KKMoneyRecord.getCalendar().get(Calendar.YEAR) - startYear) * 372 +
+                            KKMoneyRecord.getCalendar().get(Calendar.MONTH) * 31 +
+                            KKMoneyRecord.getCalendar().get(Calendar.DAY_OF_MONTH) - 1] += (int) KKMoneyRecord.getMoney();
                 }
             }
 
             MonthExpanseSum = new int[(endYear - startYear + 1) * 12];
-            for (CoCoinRecord coCoinRecord : coCoinRecords) {
-                MonthExpanseSum[(coCoinRecord.getCalendar().get(Calendar.YEAR) - startYear) * 12 +
-                        coCoinRecord.getCalendar().get(Calendar.MONTH)] += (int) coCoinRecord.getMoney();
+            for (KKMoneyRecord KKMoneyRecord : KKMoneyRecords) {
+                MonthExpanseSum[(KKMoneyRecord.getCalendar().get(Calendar.YEAR) - startYear) * 12 +
+                        KKMoneyRecord.getCalendar().get(Calendar.MONTH)] += (int) KKMoneyRecord.getMoney();
             }
 
             SelectedPosition = new int[contents.size() + 1];
@@ -298,15 +298,15 @@ public class TagViewRecyclerViewAdapter
                 } else {
                     holder.from.setText(
                             mContext.getResources().getString(R.string.from) + " " +
-                                    startYear + " " + CoCoinUtil.GetMonthShort(startMonth));
-                    holder.sum.setText(CoCoinUtil.GetInMoney((int)Sum));
+                                    startYear + " " + KKMoneyUtil.GetMonthShort(startMonth));
+                    holder.sum.setText(KKMoneyUtil.GetInMoney((int)Sum));
                     holder.to.setText(
                             mContext.getResources().getString(R.string.to) + " " +
-                                    endYear + " " + CoCoinUtil.GetMonthShort(endMonth));
-                    holder.to.setTypeface(CoCoinUtil.GetTypeface());
-                    holder.from.setTypeface(CoCoinUtil.GetTypeface());
+                                    endYear + " " + KKMoneyUtil.GetMonthShort(endMonth));
+                    holder.to.setTypeface(KKMoneyUtil.GetTypeface());
+                    holder.from.setTypeface(KKMoneyUtil.GetTypeface());
                 }
-                holder.sum.setTypeface(CoCoinUtil.typefaceLatoLight);
+                holder.sum.setTypeface(KKMoneyUtil.typefaceLatoLight);
                 break;
             case TYPE_CELL:
                 int year = contents.get(position - 1).get(0).getCalendar().get(Calendar.YEAR);
@@ -316,8 +316,8 @@ public class TagViewRecyclerViewAdapter
                 final List<Column> columns;
                 ColumnChartData columnChartData;
                 final List<SliceValue> sliceValues;
-                holder.date.setTypeface(CoCoinUtil.GetTypeface());
-                holder.expanse.setTypeface(CoCoinUtil.GetTypeface());
+                holder.date.setTypeface(KKMoneyUtil.GetTypeface());
+                holder.expanse.setTypeface(KKMoneyUtil.GetTypeface());
                 switch (chartType) {
                     case PIE:
                         sliceValues = new ArrayList<>();
@@ -327,7 +327,7 @@ public class TagViewRecyclerViewAdapter
                                 SliceValue sliceValue = new SliceValue(
                                         (float)(double)entry.getValue(),
                                         mContext.getResources().
-                                                getColor(CoCoinUtil.GetTagColorResource(entry.getKey())));
+                                                getColor(KKMoneyUtil.GetTagColorResource(entry.getKey())));
                                 sliceValue.setLabel(String.valueOf(entry.getKey()));
                                 sliceValues.add(sliceValue);
                             }
@@ -344,12 +344,12 @@ public class TagViewRecyclerViewAdapter
                         holder.pie.setChartRotationEnabled(false);
 
                         if (type.get(position - 1).equals(SHOW_IN_MONTH)) {
-                            holder.date.setText(year + " " + CoCoinUtil.GetMonthShort(month));
+                            holder.date.setText(year + " " + KKMoneyUtil.GetMonthShort(month));
                         } else {
                             holder.date.setText(year + " ");
                         }
 
-                        holder.expanse.setText(CoCoinUtil.GetInMoney((int) (double) SumList.get(position - 1)));
+                        holder.expanse.setText(KKMoneyUtil.GetInMoney((int) (double) SumList.get(position - 1)));
 
                         holder.iconRight.setOnClickListener(new View.OnClickListener() {
                             @Override
@@ -388,8 +388,8 @@ public class TagViewRecyclerViewAdapter
                                 subcolumnValues = new ArrayList<>();
                                 SubcolumnValue value = new SubcolumnValue(
                                         MonthExpanseSum[(year - startYear) * 12 + i],
-                                        CoCoinUtil.GetRandomColor());
-                                value.setLabel(CoCoinUtil.MONTHS_SHORT[month] + " " + year);
+                                        KKMoneyUtil.GetRandomColor());
+                                value.setLabel(KKMoneyUtil.MONTHS_SHORT[month] + " " + year);
                                 subcolumnValues.add(value);
                                 Column column = new Column(subcolumnValues);
                                 column.setHasLabels(false);
@@ -403,7 +403,7 @@ public class TagViewRecyclerViewAdapter
                             List<AxisValue> axisValueList = new ArrayList<>();
                             for (int i = 0; i < numColumns; i++) {
                                 axisValueList.add(new AxisValue(i)
-                                        .setLabel(CoCoinUtil.GetMonthShort(i + 1)));
+                                        .setLabel(KKMoneyUtil.GetMonthShort(i + 1)));
                             }
                             axisX.setValues(axisValueList);
                             Axis axisY = new Axis().setHasLines(true);
@@ -417,7 +417,7 @@ public class TagViewRecyclerViewAdapter
                                     new ValueTouchListener(position - 1));
 
                             holder.date.setText(year + "");
-                            holder.expanse.setText(CoCoinUtil.GetInMoney((int)(double)SumList.get(position - 1)));
+                            holder.expanse.setText(KKMoneyUtil.GetInMoney((int)(double)SumList.get(position - 1)));
                         }
                         if (type.get(position - 1).equals(SHOW_IN_MONTH)) {
                             Calendar tempCal = new GregorianCalendar(year, month - 1, 1);
@@ -430,8 +430,8 @@ public class TagViewRecyclerViewAdapter
                                 SubcolumnValue value = new SubcolumnValue((float)
                                         DayExpanseSum[(year - startYear) * 372
                                                 + (month - 1) * 31 + i],
-                                        CoCoinUtil.GetRandomColor());
-                                value.setLabel(CoCoinUtil.MONTHS_SHORT[month] + " " + (i + 1) + " " + year);
+                                        KKMoneyUtil.GetRandomColor());
+                                value.setLabel(KKMoneyUtil.MONTHS_SHORT[month] + " " + (i + 1) + " " + year);
                                 subcolumnValues.add(value);
                                 Column column = new Column(subcolumnValues);
                                 column.setHasLabels(false);
@@ -456,8 +456,8 @@ public class TagViewRecyclerViewAdapter
                             holder.chart.setZoomEnabled(false);
                             holder.chart.setOnValueTouchListener(new ValueTouchListener(position - 1));
 
-                            holder.date.setText(year + " " + CoCoinUtil.GetMonthShort(month));
-                            holder.expanse.setText(CoCoinUtil.GetInMoney((int)(double)SumList.get(position - 1)));
+                            holder.date.setText(year + " " + KKMoneyUtil.GetMonthShort(month));
+                            holder.expanse.setText(KKMoneyUtil.GetInMoney((int)(double)SumList.get(position - 1)));
                         }
 
                         holder.iconRight.setOnClickListener(new View.OnClickListener() {
@@ -512,8 +512,8 @@ public class TagViewRecyclerViewAdapter
                                 subcolumnValues = new ArrayList<>();
                                 SubcolumnValue value = new SubcolumnValue(
                                         MonthExpanseSum[(year - startYear) * 12 + i],
-                                        CoCoinUtil.GetRandomColor());
-                                value.setLabel(CoCoinUtil.MONTHS_SHORT[month] + " " + year);
+                                        KKMoneyUtil.GetRandomColor());
+                                value.setLabel(KKMoneyUtil.MONTHS_SHORT[month] + " " + year);
                                 subcolumnValues.add(value);
                                 Column column = new Column(subcolumnValues);
                                 column.setHasLabels(false);
@@ -527,7 +527,7 @@ public class TagViewRecyclerViewAdapter
                             List<AxisValue> axisValueList = new ArrayList<>();
                             for (int i = 0; i < numColumns; i++) {
                                 axisValueList.add(new AxisValue(i)
-                                        .setLabel(CoCoinUtil.GetMonthShort(i + 1)));
+                                        .setLabel(KKMoneyUtil.GetMonthShort(i + 1)));
                             }
                             axisX.setValues(axisValueList);
                             Axis axisY = new Axis().setHasLines(true);
@@ -541,7 +541,7 @@ public class TagViewRecyclerViewAdapter
                                     new ValueTouchListener(position - 1));
 
                             holder.date.setText(year + "");
-                            holder.expanse.setText(CoCoinUtil.GetInMoney((int)(double)SumList.get(position - 1)));
+                            holder.expanse.setText(KKMoneyUtil.GetInMoney((int)(double)SumList.get(position - 1)));
 
                         }
                         if (type.get(position - 1).equals(SHOW_IN_MONTH)) {
@@ -555,7 +555,7 @@ public class TagViewRecyclerViewAdapter
                             for (int i = 0; i < numColumns; ++i) {
                                 subcolumnValues = new ArrayList<>();
                                 SubcolumnValue value = new SubcolumnValue(0,
-                                        CoCoinUtil.GetRandomColor());
+                                        KKMoneyUtil.GetRandomColor());
                                 subcolumnValues.add(value);
                                 while (p >= 0
                                         && contents.get(position - 1).get(p).getCalendar().
@@ -589,8 +589,8 @@ public class TagViewRecyclerViewAdapter
                             holder.chart.setZoomEnabled(false);
                             holder.chart.setOnValueTouchListener(new ValueTouchListener(position - 1));
 
-                            holder.date.setText(year + " " + CoCoinUtil.GetMonthShort(month));
-                            holder.expanse.setText(CoCoinUtil.GetInMoney((int)(double)SumList.get(position - 1)));
+                            holder.date.setText(year + " " + KKMoneyUtil.GetMonthShort(month));
+                            holder.expanse.setText(KKMoneyUtil.GetInMoney((int)(double)SumList.get(position - 1)));
                         }
 
                         holder.iconRight.setOnClickListener(new View.OnClickListener() {
@@ -692,40 +692,40 @@ public class TagViewRecyclerViewAdapter
                             .duration(Snackbar.SnackbarDuration.LENGTH_SHORT)
                             .position(Snackbar.SnackbarPosition.BOTTOM)
                             .margin(15, 15)
-                            .backgroundDrawable(CoCoinUtil.GetSnackBarBackground(fragmentTagId))
+                            .backgroundDrawable(KKMoneyUtil.GetSnackBarBackground(fragmentTagId))
                             .textColor(Color.WHITE)
-                            .textTypeface(CoCoinUtil.GetTypeface())
+                            .textTypeface(KKMoneyUtil.GetTypeface())
                             .actionLabel(mContext.getResources().getString(R.string.check))
-                            .actionLabelTypeface(CoCoinUtil.typefaceLatoLight)
+                            .actionLabelTypeface(KKMoneyUtil.typefaceLatoLight)
                             .actionColor(Color.WHITE);
             if (fragmentPosition == SUM_HISTOGRAM) {
                 if (type.get(position).equals(SHOW_IN_MONTH)) {
                     String text = "";
                     String timeString = contents.get(position).get(0).getCalendarString();
                     int month = contents.get(position).get(0).getCalendar().get(Calendar.MONTH) + 1;
-                    timeString = " " + CoCoinUtil.GetMonthShort(month)
+                    timeString = " " + KKMoneyUtil.GetMonthShort(month)
                             + " " + (columnIndex + 1) + " "
                             + timeString.substring(timeString.length() - 4, timeString.length());
-                    if ("zh".equals(CoCoinUtil.GetLanguage())) {
+                    if ("zh".equals(KKMoneyUtil.GetLanguage())) {
                         text = mContext.getResources().getString(R.string.on) + timeString + "\n" +
-                                CoCoinUtil.GetSpendString((int) value.getValue());
+                                KKMoneyUtil.GetSpendString((int) value.getValue());
                         dialogTitle = mContext.getResources().getString(R.string.on) + timeString +
-                                CoCoinUtil.GetSpendString((int) value.getValue());
+                                KKMoneyUtil.GetSpendString((int) value.getValue());
                     } else {
-                        text = CoCoinUtil.GetSpendString((int) value.getValue()) + "\n" +
+                        text = KKMoneyUtil.GetSpendString((int) value.getValue()) + "\n" +
                                 mContext.getResources().getString(R.string.on) + timeString;
-                        dialogTitle = CoCoinUtil.GetSpendString((int) value.getValue()) +
+                        dialogTitle = KKMoneyUtil.GetSpendString((int) value.getValue()) +
                                 mContext.getResources().getString(R.string.on) + timeString;
                     }
                     snackbar.text(text);
                     snackbar.actionListener(new ActionClickListener() {
                         @Override
                         public void onActionClicked(Snackbar snackbar) {
-                            List<CoCoinRecord> shownCoCoinRecords = new ArrayList<>();
+                            List<KKMoneyRecord> shownKKMoneyRecords = new ArrayList<>();
                             boolean isSamed = false;
-                            for (CoCoinRecord coCoinRecord : contents.get(position)) {
-                                if (coCoinRecord.getCalendar().get(Calendar.DAY_OF_MONTH) == columnIndex + 1) {
-                                    shownCoCoinRecords.add(coCoinRecord);
+                            for (KKMoneyRecord KKMoneyRecord : contents.get(position)) {
+                                if (KKMoneyRecord.getCalendar().get(Calendar.DAY_OF_MONTH) == columnIndex + 1) {
+                                    shownKKMoneyRecords.add(KKMoneyRecord);
                                     isSamed = true;
                                 } else {
                                     if (isSamed) {
@@ -736,7 +736,7 @@ public class TagViewRecyclerViewAdapter
                             ((FragmentActivity)mContext).getSupportFragmentManager()
                                     .beginTransaction()
                                     .add(new RecordCheckDialogFragment(
-                                            mContext, shownCoCoinRecords, dialogTitle), "MyDialog")
+                                            mContext, shownKKMoneyRecords, dialogTitle), "MyDialog")
                                     .commit();
                         }
                     });
@@ -746,28 +746,28 @@ public class TagViewRecyclerViewAdapter
                     String text;
                     String timeString = " " +
                             contents.get(position).get(0).getCalendar().get(Calendar.YEAR);
-                    timeString = " " + CoCoinUtil.GetMonthShort(columnIndex + 1) + " "
+                    timeString = " " + KKMoneyUtil.GetMonthShort(columnIndex + 1) + " "
                             + timeString.substring(timeString.length() - 4, timeString.length());
-                    if ("zh".equals(CoCoinUtil.GetLanguage())) {
+                    if ("zh".equals(KKMoneyUtil.GetLanguage())) {
                         text = mContext.getResources().getString(R.string.in) + timeString + "\n" +
-                                CoCoinUtil.GetSpendString((int) value.getValue());
+                                KKMoneyUtil.GetSpendString((int) value.getValue());
                         dialogTitle = mContext.getResources().getString(R.string.in) + timeString +
-                                CoCoinUtil.GetSpendString((int) value.getValue());
+                                KKMoneyUtil.GetSpendString((int) value.getValue());
                     } else {
-                        text = CoCoinUtil.GetSpendString((int) value.getValue()) + "\n" +
+                        text = KKMoneyUtil.GetSpendString((int) value.getValue()) + "\n" +
                                 mContext.getResources().getString(R.string.in) + timeString;
-                        dialogTitle = CoCoinUtil.GetSpendString((int) value.getValue()) +
+                        dialogTitle = KKMoneyUtil.GetSpendString((int) value.getValue()) +
                                 mContext.getResources().getString(R.string.in) + timeString;
                     }
                     snackbar.text(text);
                     snackbar.actionListener(new ActionClickListener() {
                         @Override
                         public void onActionClicked(Snackbar snackbar) {
-                            List<CoCoinRecord> shownCoCoinRecords = new ArrayList<>();
+                            List<KKMoneyRecord> shownKKMoneyRecords = new ArrayList<>();
                             boolean isSamed = false;
-                            for (CoCoinRecord coCoinRecord : contents.get(position)) {
-                                if (coCoinRecord.getCalendar().get(Calendar.MONTH) == columnIndex) {
-                                    shownCoCoinRecords.add(coCoinRecord);
+                            for (KKMoneyRecord KKMoneyRecord : contents.get(position)) {
+                                if (KKMoneyRecord.getCalendar().get(Calendar.MONTH) == columnIndex) {
+                                    shownKKMoneyRecords.add(KKMoneyRecord);
                                     isSamed = true;
                                 } else {
                                     if (isSamed) {
@@ -778,7 +778,7 @@ public class TagViewRecyclerViewAdapter
                             ((FragmentActivity)mContext).getSupportFragmentManager()
                                     .beginTransaction()
                                     .add(new RecordCheckDialogFragment(
-                                            mContext, shownCoCoinRecords, dialogTitle), "MyDialog")
+                                            mContext, shownKKMoneyRecords, dialogTitle), "MyDialog")
                                     .commit();
                         }
                     });
@@ -790,34 +790,34 @@ public class TagViewRecyclerViewAdapter
                     String timeString = contents.get(position).get(0).getCalendarString();
                     timeString = timeString.substring(6, timeString.length());
                     int month = contents.get(position).get(0).getCalendar().get(Calendar.MONTH) + 1;
-                    timeString = " " + CoCoinUtil.GetMonthShort(month)
+                    timeString = " " + KKMoneyUtil.GetMonthShort(month)
                             + " " + (columnIndex + 1) + " "
                             + timeString.substring(timeString.length() - 4, timeString.length());
-                    if ("zh".equals(CoCoinUtil.GetLanguage())) {
+                    if ("zh".equals(KKMoneyUtil.GetLanguage())) {
                         text = mContext.getResources().getString(R.string.on) + timeString +
-                                CoCoinUtil.GetSpendString((int) value.getValue()) + "\n" +
-                                "于" + CoCoinUtil.GetTagName(contents.get(position).get(0).getTag());
+                                KKMoneyUtil.GetSpendString((int) value.getValue()) + "\n" +
+                                "于" + KKMoneyUtil.GetTagName(contents.get(position).get(0).getTag());
                         dialogTitle = mContext.getResources().getString(R.string.on) + timeString +
-                                CoCoinUtil.GetSpendString((int) value.getValue()) + "\n" +
-                                "于" + CoCoinUtil.GetTagName(contents.get(position).get(0).getTag());
+                                KKMoneyUtil.GetSpendString((int) value.getValue()) + "\n" +
+                                "于" + KKMoneyUtil.GetTagName(contents.get(position).get(0).getTag());
                     } else {
-                        text = CoCoinUtil.GetSpendString((int) value.getValue()) +
+                        text = KKMoneyUtil.GetSpendString((int) value.getValue()) +
                                 mContext.getResources().getString(R.string.on) + timeString + "\n"
-                                + "in " + CoCoinUtil.GetTagName(contents.get(position).get(0).getTag());
-                        dialogTitle = CoCoinUtil.GetSpendString((int) value.getValue()) +
+                                + "in " + KKMoneyUtil.GetTagName(contents.get(position).get(0).getTag());
+                        dialogTitle = KKMoneyUtil.GetSpendString((int) value.getValue()) +
                                 mContext.getResources().getString(R.string.on) + timeString + "\n"
-                                + "in " + CoCoinUtil.GetTagName(contents.get(position).get(0).getTag());
+                                + "in " + KKMoneyUtil.GetTagName(contents.get(position).get(0).getTag());
                     }
                     snackbar.text(text);
                     snackbar.actionListener(new ActionClickListener() {
                         @Override
                         public void onActionClicked(Snackbar snackbar) {
-                            List<CoCoinRecord> shownCoCoinRecords = new ArrayList<>();
+                            List<KKMoneyRecord> shownKKMoneyRecords = new ArrayList<>();
                             boolean isSamed = false;
-                            for (CoCoinRecord coCoinRecord : contents.get(position)) {
-                                if (coCoinRecord.getCalendar().
+                            for (KKMoneyRecord KKMoneyRecord : contents.get(position)) {
+                                if (KKMoneyRecord.getCalendar().
                                         get(Calendar.DAY_OF_MONTH) == columnIndex + 1) {
-                                    shownCoCoinRecords.add(coCoinRecord);
+                                    shownKKMoneyRecords.add(KKMoneyRecord);
                                     isSamed = true;
                                 } else {
                                     if (isSamed) {
@@ -828,7 +828,7 @@ public class TagViewRecyclerViewAdapter
                             ((FragmentActivity)mContext).getSupportFragmentManager()
                                     .beginTransaction()
                                     .add(new RecordCheckDialogFragment(
-                                            mContext, shownCoCoinRecords, dialogTitle), "MyDialog")
+                                            mContext, shownKKMoneyRecords, dialogTitle), "MyDialog")
                                     .commit();
                         }
                     });
@@ -838,32 +838,32 @@ public class TagViewRecyclerViewAdapter
                     String text;
                     String timeString = "" +
                             contents.get(position).get(0).getCalendar().get(Calendar.YEAR);
-                    timeString = " " + CoCoinUtil.GetMonthShort(columnIndex + 1) + " "
+                    timeString = " " + KKMoneyUtil.GetMonthShort(columnIndex + 1) + " "
                             + timeString.substring(timeString.length() - 4, timeString.length());
-                    if ("zh".equals(CoCoinUtil.GetLanguage())) {
+                    if ("zh".equals(KKMoneyUtil.GetLanguage())) {
                         text = mContext.getResources().getString(R.string.in) + timeString +
-                                CoCoinUtil.GetSpendString((int) value.getValue()) + "\n" +
-                                "于" + CoCoinUtil.GetTagName(contents.get(position).get(0).getTag());
+                                KKMoneyUtil.GetSpendString((int) value.getValue()) + "\n" +
+                                "于" + KKMoneyUtil.GetTagName(contents.get(position).get(0).getTag());
                         dialogTitle = mContext.getResources().getString(R.string.in) + timeString +
-                                CoCoinUtil.GetSpendString((int) value.getValue()) + "\n" +
-                                "于" + CoCoinUtil.GetTagName(contents.get(position).get(0).getTag());
+                                KKMoneyUtil.GetSpendString((int) value.getValue()) + "\n" +
+                                "于" + KKMoneyUtil.GetTagName(contents.get(position).get(0).getTag());
                     } else {
-                        text = CoCoinUtil.GetSpendString((int) value.getValue()) +
+                        text = KKMoneyUtil.GetSpendString((int) value.getValue()) +
                                 mContext.getResources().getString(R.string.in) + timeString + "\n"
-                                + "in " + CoCoinUtil.GetTagName(contents.get(position).get(0).getTag());
-                        dialogTitle = CoCoinUtil.GetSpendString((int) value.getValue()) +
+                                + "in " + KKMoneyUtil.GetTagName(contents.get(position).get(0).getTag());
+                        dialogTitle = KKMoneyUtil.GetSpendString((int) value.getValue()) +
                                 mContext.getResources().getString(R.string.in) + timeString + "\n"
-                                + "in " + CoCoinUtil.GetTagName(contents.get(position).get(0).getTag());
+                                + "in " + KKMoneyUtil.GetTagName(contents.get(position).get(0).getTag());
                     }
                     snackbar.text(text);
                     snackbar.actionListener(new ActionClickListener() {
                         @Override
                         public void onActionClicked(Snackbar snackbar) {
-                            List<CoCoinRecord> shownCoCoinRecords = new ArrayList<>();
+                            List<KKMoneyRecord> shownKKMoneyRecords = new ArrayList<>();
                             boolean isSamed = false;
-                            for (CoCoinRecord coCoinRecord : contents.get(position)) {
-                                if (coCoinRecord.getCalendar().get(Calendar.MONTH) == columnIndex) {
-                                    shownCoCoinRecords.add(coCoinRecord);
+                            for (KKMoneyRecord KKMoneyRecord : contents.get(position)) {
+                                if (KKMoneyRecord.getCalendar().get(Calendar.MONTH) == columnIndex) {
+                                    shownKKMoneyRecords.add(KKMoneyRecord);
                                     isSamed = true;
                                 } else {
                                     if (isSamed) {
@@ -874,7 +874,7 @@ public class TagViewRecyclerViewAdapter
                             ((FragmentActivity)mContext).getSupportFragmentManager()
                                     .beginTransaction()
                                     .add(new RecordCheckDialogFragment(
-                                            mContext, shownCoCoinRecords, dialogTitle), "MyDialog")
+                                            mContext, shownKKMoneyRecords, dialogTitle), "MyDialog")
                                     .commit();
                         }
                     });
@@ -907,26 +907,26 @@ public class TagViewRecyclerViewAdapter
             if (type.get(position).equals(SHOW_IN_YEAR)) {
                 timeString = timeString.substring(timeString.length() - 4, timeString.length());
             } else {
-                timeString = CoCoinUtil.GetMonthShort(month) + " " +
+                timeString = KKMoneyUtil.GetMonthShort(month) + " " +
                         timeString.substring(timeString.length() - 4, timeString.length());
             }
             final int tagId = Integer.valueOf(String.valueOf(sliceValue.getLabelAsChars()));
             Double percent = sliceValue.getValue() / SumList.get(position) * 100;
-            if ("zh".equals(CoCoinUtil.GetLanguage())) {
-                text = CoCoinUtil.GetSpendString((int) sliceValue.getValue()) +
-                        CoCoinUtil.GetPercentString(percent) + "\n" +
-                        "于" + CoCoinUtil.GetTagName(tagId);
+            if ("zh".equals(KKMoneyUtil.GetLanguage())) {
+                text = KKMoneyUtil.GetSpendString((int) sliceValue.getValue()) +
+                        KKMoneyUtil.GetPercentString(percent) + "\n" +
+                        "于" + KKMoneyUtil.GetTagName(tagId);
                     dialogTitle = mContext.getResources().getString(R.string.in) + timeString +
-                            CoCoinUtil.GetSpendString((int) sliceValue.getValue()) + "\n" +
-                            "于" + CoCoinUtil.GetTagName(tagId);
+                            KKMoneyUtil.GetSpendString((int) sliceValue.getValue()) + "\n" +
+                            "于" + KKMoneyUtil.GetTagName(tagId);
 
             } else {
-                text = CoCoinUtil.GetSpendString((int) sliceValue.getValue()) +
-                        CoCoinUtil.GetPercentString(percent) + "\n" +
-                        "in " + CoCoinUtil.GetTagName(RecordManager.TAGS.get(tagId).getId());
-                dialogTitle = CoCoinUtil.GetSpendString((int) sliceValue.getValue()) +
+                text = KKMoneyUtil.GetSpendString((int) sliceValue.getValue()) +
+                        KKMoneyUtil.GetPercentString(percent) + "\n" +
+                        "in " + KKMoneyUtil.GetTagName(RecordManager.TAGS.get(tagId).getId());
+                dialogTitle = KKMoneyUtil.GetSpendString((int) sliceValue.getValue()) +
                         mContext.getResources().getString(R.string.in) + timeString + "\n" +
-                        "in " + CoCoinUtil.GetTagName(RecordManager.TAGS.get(tagId).getId());
+                        "in " + KKMoneyUtil.GetTagName(RecordManager.TAGS.get(tagId).getId());
             }
             Snackbar snackbar =
                     Snackbar
@@ -935,26 +935,26 @@ public class TagViewRecyclerViewAdapter
                             .duration(Snackbar.SnackbarDuration.LENGTH_SHORT)
                             .position(Snackbar.SnackbarPosition.BOTTOM)
                             .margin(15, 15)
-                            .backgroundDrawable(CoCoinUtil.GetSnackBarBackground(fragmentTagId))
+                            .backgroundDrawable(KKMoneyUtil.GetSnackBarBackground(fragmentTagId))
                             .text(text)
-                            .textTypeface(CoCoinUtil.GetTypeface())
+                            .textTypeface(KKMoneyUtil.GetTypeface())
                             .textColor(Color.WHITE)
-                            .actionLabelTypeface(CoCoinUtil.typefaceLatoLight)
+                            .actionLabelTypeface(KKMoneyUtil.typefaceLatoLight)
                             .actionLabel(mContext.getResources().getString(R.string.check))
                             .actionColor(Color.WHITE)
                             .actionListener(new ActionClickListener() {
                                 @Override
                                 public void onActionClicked(Snackbar snackbar) {
-                                    List<CoCoinRecord> shownCoCoinRecords = new ArrayList<>();
-                                    for (CoCoinRecord record : contents.get(position)) {
+                                    List<KKMoneyRecord> shownKKMoneyRecords = new ArrayList<>();
+                                    for (KKMoneyRecord record : contents.get(position)) {
                                         if (record.getTag() == tagId) {
-                                            shownCoCoinRecords.add(record);
+                                            shownKKMoneyRecords.add(record);
                                         }
                                     }
                                     ((FragmentActivity) mContext).getSupportFragmentManager()
                                             .beginTransaction()
                                             .add(new RecordCheckDialogFragment(
-                                                    mContext, shownCoCoinRecords, dialogTitle), "MyDialog")
+                                                    mContext, shownKKMoneyRecords, dialogTitle), "MyDialog")
                                             .commit();
                                 }
                             });

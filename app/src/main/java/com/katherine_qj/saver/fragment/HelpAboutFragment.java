@@ -16,7 +16,7 @@ import com.balysv.materialripple.MaterialRippleLayout;
 import com.github.florent37.materialviewpager.MaterialViewPagerHelper;
 import com.github.ksoichiro.android.observablescrollview.ObservableScrollView;
 import com.katherine_qj.saver.R;
-import com.katherine_qj.saver.util.CoCoinUtil;
+import com.katherine_qj.saver.util.KKMoneyUtil;
 
 /**
  * Created by Weiping on 2016/2/2.
@@ -60,45 +60,45 @@ public class HelpAboutFragment extends Fragment {
         mScrollView = (ObservableScrollView) view.findViewById(R.id.scrollView);
         MaterialViewPagerHelper.registerScrollView(getActivity(), mScrollView, null);
 
-        ((TextView)view.findViewById(R.id.content_0)).setTypeface(CoCoinUtil.getInstance().typefaceLatoLight);
-        ((TextView)view.findViewById(R.id.content_1)).setTypeface(CoCoinUtil.getInstance().typefaceLatoLight);
-        ((TextView)view.findViewById(R.id.content_2)).setTypeface(CoCoinUtil.getInstance().typefaceLatoLight);
-        ((TextView)view.findViewById(R.id.content_3)).setTypeface(CoCoinUtil.getInstance().typefaceLatoLight);
-        ((TextView)view.findViewById(R.id.content_4)).setTypeface(CoCoinUtil.getInstance().typefaceLatoLight);
-        ((TextView)view.findViewById(R.id.content_5)).setTypeface(CoCoinUtil.getInstance().typefaceLatoLight);
-        ((TextView)view.findViewById(R.id.content_6)).setTypeface(CoCoinUtil.getInstance().typefaceLatoLight);
-        ((TextView)view.findViewById(R.id.content_7)).setTypeface(CoCoinUtil.getInstance().typefaceLatoLight);
-        ((TextView)view.findViewById(R.id.content_8)).setTypeface(CoCoinUtil.getInstance().typefaceLatoLight);
-        ((TextView)view.findViewById(R.id.content_9)).setTypeface(CoCoinUtil.getInstance().typefaceLatoLight);
-        ((TextView)view.findViewById(R.id.content_10)).setTypeface(CoCoinUtil.getInstance().typefaceLatoLight);
-        ((TextView)view.findViewById(R.id.content_11)).setTypeface(CoCoinUtil.getInstance().typefaceLatoLight);
-        ((TextView)view.findViewById(R.id.content_12)).setTypeface(CoCoinUtil.getInstance().typefaceLatoLight);
-        ((TextView)view.findViewById(R.id.content_13)).setTypeface(CoCoinUtil.getInstance().typefaceLatoLight);
-        ((TextView)view.findViewById(R.id.content_14)).setTypeface(CoCoinUtil.getInstance().typefaceLatoLight);
-        ((TextView)view.findViewById(R.id.content_15)).setTypeface(CoCoinUtil.getInstance().typefaceLatoLight);
-        ((TextView)view.findViewById(R.id.content_16)).setTypeface(CoCoinUtil.getInstance().typefaceLatoLight);
-        ((TextView)view.findViewById(R.id.content_17)).setTypeface(CoCoinUtil.getInstance().typefaceLatoLight);
-        ((TextView)view.findViewById(R.id.content_18)).setTypeface(CoCoinUtil.getInstance().typefaceLatoLight);
-        ((TextView)view.findViewById(R.id.content_19)).setTypeface(CoCoinUtil.getInstance().typefaceLatoLight);
-        ((TextView)view.findViewById(R.id.content_20)).setTypeface(CoCoinUtil.getInstance().typefaceLatoLight);
-        ((TextView)view.findViewById(R.id.content_21)).setTypeface(CoCoinUtil.getInstance().typefaceLatoLight);
-        ((TextView)view.findViewById(R.id.content_22)).setTypeface(CoCoinUtil.getInstance().typefaceLatoLight);
-        ((TextView)view.findViewById(R.id.content_23)).setTypeface(CoCoinUtil.getInstance().typefaceLatoLight);
-        ((TextView)view.findViewById(R.id.content_24)).setTypeface(CoCoinUtil.getInstance().typefaceLatoLight);
-        ((TextView)view.findViewById(R.id.content_25)).setTypeface(CoCoinUtil.getInstance().typefaceLatoLight);
-        ((TextView)view.findViewById(R.id.content_26)).setTypeface(CoCoinUtil.getInstance().typefaceLatoLight);
-        ((TextView)view.findViewById(R.id.content_27)).setTypeface(CoCoinUtil.getInstance().typefaceLatoLight);
-        ((TextView)view.findViewById(R.id.content_28)).setTypeface(CoCoinUtil.getInstance().typefaceLatoLight);
-        ((TextView)view.findViewById(R.id.content_29)).setTypeface(CoCoinUtil.getInstance().typefaceLatoLight);
-        ((TextView)view.findViewById(R.id.content_30)).setTypeface(CoCoinUtil.getInstance().typefaceLatoLight);
-        ((TextView)view.findViewById(R.id.content_31)).setTypeface(CoCoinUtil.getInstance().typefaceLatoLight);
-        ((TextView)view.findViewById(R.id.content_32)).setTypeface(CoCoinUtil.getInstance().typefaceLatoLight);
-        ((TextView)view.findViewById(R.id.content_33)).setTypeface(CoCoinUtil.getInstance().typefaceLatoLight);
+        ((TextView)view.findViewById(R.id.content_0)).setTypeface(KKMoneyUtil.getInstance().typefaceLatoLight);
+        ((TextView)view.findViewById(R.id.content_1)).setTypeface(KKMoneyUtil.getInstance().typefaceLatoLight);
+        ((TextView)view.findViewById(R.id.content_2)).setTypeface(KKMoneyUtil.getInstance().typefaceLatoLight);
+        ((TextView)view.findViewById(R.id.content_3)).setTypeface(KKMoneyUtil.getInstance().typefaceLatoLight);
+        ((TextView)view.findViewById(R.id.content_4)).setTypeface(KKMoneyUtil.getInstance().typefaceLatoLight);
+        ((TextView)view.findViewById(R.id.content_5)).setTypeface(KKMoneyUtil.getInstance().typefaceLatoLight);
+        ((TextView)view.findViewById(R.id.content_6)).setTypeface(KKMoneyUtil.getInstance().typefaceLatoLight);
+        ((TextView)view.findViewById(R.id.content_7)).setTypeface(KKMoneyUtil.getInstance().typefaceLatoLight);
+        ((TextView)view.findViewById(R.id.content_8)).setTypeface(KKMoneyUtil.getInstance().typefaceLatoLight);
+        ((TextView)view.findViewById(R.id.content_9)).setTypeface(KKMoneyUtil.getInstance().typefaceLatoLight);
+        ((TextView)view.findViewById(R.id.content_10)).setTypeface(KKMoneyUtil.getInstance().typefaceLatoLight);
+        ((TextView)view.findViewById(R.id.content_11)).setTypeface(KKMoneyUtil.getInstance().typefaceLatoLight);
+        ((TextView)view.findViewById(R.id.content_12)).setTypeface(KKMoneyUtil.getInstance().typefaceLatoLight);
+        ((TextView)view.findViewById(R.id.content_13)).setTypeface(KKMoneyUtil.getInstance().typefaceLatoLight);
+        ((TextView)view.findViewById(R.id.content_14)).setTypeface(KKMoneyUtil.getInstance().typefaceLatoLight);
+        ((TextView)view.findViewById(R.id.content_15)).setTypeface(KKMoneyUtil.getInstance().typefaceLatoLight);
+        ((TextView)view.findViewById(R.id.content_16)).setTypeface(KKMoneyUtil.getInstance().typefaceLatoLight);
+        ((TextView)view.findViewById(R.id.content_17)).setTypeface(KKMoneyUtil.getInstance().typefaceLatoLight);
+        ((TextView)view.findViewById(R.id.content_18)).setTypeface(KKMoneyUtil.getInstance().typefaceLatoLight);
+        ((TextView)view.findViewById(R.id.content_19)).setTypeface(KKMoneyUtil.getInstance().typefaceLatoLight);
+        ((TextView)view.findViewById(R.id.content_20)).setTypeface(KKMoneyUtil.getInstance().typefaceLatoLight);
+        ((TextView)view.findViewById(R.id.content_21)).setTypeface(KKMoneyUtil.getInstance().typefaceLatoLight);
+        ((TextView)view.findViewById(R.id.content_22)).setTypeface(KKMoneyUtil.getInstance().typefaceLatoLight);
+        ((TextView)view.findViewById(R.id.content_23)).setTypeface(KKMoneyUtil.getInstance().typefaceLatoLight);
+        ((TextView)view.findViewById(R.id.content_24)).setTypeface(KKMoneyUtil.getInstance().typefaceLatoLight);
+        ((TextView)view.findViewById(R.id.content_25)).setTypeface(KKMoneyUtil.getInstance().typefaceLatoLight);
+        ((TextView)view.findViewById(R.id.content_26)).setTypeface(KKMoneyUtil.getInstance().typefaceLatoLight);
+        ((TextView)view.findViewById(R.id.content_27)).setTypeface(KKMoneyUtil.getInstance().typefaceLatoLight);
+        ((TextView)view.findViewById(R.id.content_28)).setTypeface(KKMoneyUtil.getInstance().typefaceLatoLight);
+        ((TextView)view.findViewById(R.id.content_29)).setTypeface(KKMoneyUtil.getInstance().typefaceLatoLight);
+        ((TextView)view.findViewById(R.id.content_30)).setTypeface(KKMoneyUtil.getInstance().typefaceLatoLight);
+        ((TextView)view.findViewById(R.id.content_31)).setTypeface(KKMoneyUtil.getInstance().typefaceLatoLight);
+        ((TextView)view.findViewById(R.id.content_32)).setTypeface(KKMoneyUtil.getInstance().typefaceLatoLight);
+        ((TextView)view.findViewById(R.id.content_33)).setTypeface(KKMoneyUtil.getInstance().typefaceLatoLight);
 
         ((MaterialRippleLayout)view.findViewById(R.id.layout_2)).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://github.com/Nightonke/CoCoin")));
+                startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://github.com/Nightonke/KKMoney")));
             }
         });
         ((MaterialRippleLayout)view.findViewById(R.id.layout_3)).setOnClickListener(new View.OnClickListener() {
@@ -110,8 +110,8 @@ public class HelpAboutFragment extends Fragment {
         ((MaterialRippleLayout)view.findViewById(R.id.layout_4)).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                CoCoinUtil.getInstance().copyToClipboard("Nightonke@outlook.com", mContext);
-                CoCoinUtil.getInstance().showToast(mContext, mContext.getResources().getString(R.string.copy_to_clipboard));
+                KKMoneyUtil.getInstance().copyToClipboard("Nightonke@outlook.com", mContext);
+                KKMoneyUtil.getInstance().showToast(mContext, mContext.getResources().getString(R.string.copy_to_clipboard));
             }
         });
     }

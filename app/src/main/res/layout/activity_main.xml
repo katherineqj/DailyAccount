@@ -62,7 +62,7 @@
                     android:orientation="vertical"
                     >
 
-                    <com.katherine_qj.saver.ui.CoCoinScrollableViewPager
+                    <com.katherine_qj.saver.ui.KKMoneyScrollableViewPager
                         android:id="@+id/edit_pager"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"

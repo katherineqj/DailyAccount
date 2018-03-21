@@ -23,11 +23,11 @@ import com.daimajia.androidanimations.library.BaseViewAnimator;
 import com.github.johnpersano.supertoasts.SuperToast;
 import com.katherine_qj.saver.BuildConfig;
 import com.katherine_qj.saver.R;
-import com.katherine_qj.saver.activity.CoCoinApplication;
+import com.katherine_qj.saver.activity.KKMoneyApplication;
 import com.katherine_qj.saver.db.DB;
 import com.katherine_qj.saver.db.DBHelper;
-import com.katherine_qj.saver.model.CoCoin;
-import com.katherine_qj.saver.model.CoCoinRecord;
+import com.katherine_qj.saver.model.KKMoney;
+import com.katherine_qj.saver.model.KKMoneyRecord;
 import com.nineoldandroids.animation.ObjectAnimator;
 import com.rengwuxian.materialedittext.MaterialEditText;
 
@@ -42,13 +42,13 @@ import java.util.Random;
 import java.util.TreeMap;
 
 /**
- * Created by 伟平 on 2015/10/16.
+ * Created by katherineqj on 2017/10/16.
  */
 
-// Todo make CoCoinUtil singleton
+// Todo make KKMoneyUtil singleton
 // Todo floating labels in english
 
-public class CoCoinUtil {
+public class KKMoneyUtil {
 
     public static int editRecordPosition = -1;
 
@@ -61,7 +61,7 @@ public class CoCoinUtil {
     public static int MY_BLUE;
     public static int MY_Normally;
 
-    public static CoCoinRecord backupCoCoinRecord;
+    public static KKMoneyRecord backupKKMoneyRecord;
 
     public static String PASSWORD = "1234";
 
@@ -433,12 +433,12 @@ public class CoCoinUtil {
 
         random = new Random();
 
-        MY_BLUE = ContextCompat.getColor(CoCoinApplication.getAppContext(), R.color.my_blue);
-        MY_Normally = ContextCompat.getColor(CoCoinApplication.getAppContext(),R.color.my_normally);
+        MY_BLUE = ContextCompat.getColor(KKMoneyApplication.getAppContext(), R.color.my_blue);
+        MY_Normally = ContextCompat.getColor(KKMoneyApplication.getAppContext(),R.color.my_normally);
     }
 
     public static Typeface GetTypeface() {
-        if (typefaceLatoLight == null) init(CoCoinApplication.getAppContext());
+        if (typefaceLatoLight == null) init(KKMoneyApplication.getAppContext());
         if ("en".equals(Locale.getDefault().getLanguage()))
             return typefaceLatoLight;
         if ("zh".equals(Locale.getDefault().getLanguage()))
@@ -504,7 +504,7 @@ public class CoCoinUtil {
     }
 
     public static String GetTodayViewTitle(int fragmentPosition) {
-        return CoCoinApplication.getAppContext().getString(TODAY_VIEW_TITLE[fragmentPosition]);
+        return KKMoneyApplication.getAppContext().getString(TODAY_VIEW_TITLE[fragmentPosition]);
     }
 
     public static boolean WEEK_START_WITH_SUNDAY = false;
@@ -514,14 +514,14 @@ public class CoCoinUtil {
             case Calendar.HOUR_OF_DAY:
                 return position + "";
             case Calendar.DAY_OF_WEEK:
-                if (WEEK_START_WITH_SUNDAY) return CoCoinApplication.getAppContext().getResources()
+                if (WEEK_START_WITH_SUNDAY) return KKMoneyApplication.getAppContext().getResources()
                         .getString(WEEKDAY_SHORT_START_ON_SUNDAY[position + 1]);
-                else return CoCoinApplication.getAppContext().getResources()
+                else return KKMoneyApplication.getAppContext().getResources()
                         .getString(WEEKDAY_SHORT_START_ON_MONDAY[position + 1]);
             case Calendar.DAY_OF_MONTH:
                 return (position + 1) + "";
             case Calendar.MONTH:
-                return CoCoinApplication.getAppContext().getResources()
+                return KKMoneyApplication.getAppContext().getResources()
                         .getString(MONTHS_SHORT[position + 1]);
             default:
                 return "";
@@ -533,17 +533,17 @@ public class CoCoinUtil {
     }
 
     public static String GetMonthShort(int i) {
-        return CoCoinApplication.getAppContext().getResources().getString(MONTHS_SHORT[i]);
+        return KKMoneyApplication.getAppContext().getResources().getString(MONTHS_SHORT[i]);
     }
 
     public static String GetMonth(int i) {
-        return CoCoinApplication.getAppContext().getResources().getString(MONTHS[i]);
+        return KKMoneyApplication.getAppContext().getResources().getString(MONTHS[i]);
     }
 
     public static String GetWeekDay(int position) {
-        if (WEEK_START_WITH_SUNDAY) return CoCoinApplication.getAppContext().getResources()
+        if (WEEK_START_WITH_SUNDAY) return KKMoneyApplication.getAppContext().getResources()
                 .getString(WEEKDAY_START_ON_SUNDAY[position + 1]);
-        else return CoCoinApplication.getAppContext().getResources()
+        else return KKMoneyApplication.getAppContext().getResources()
                 .getString(WEEKDAY_START_ON_MONDAY[position + 1]);
     }
 
@@ -597,7 +597,7 @@ public class CoCoinUtil {
         calendar.set(Calendar.SECOND, 0);
         calendar.set(Calendar.MILLISECOND, 0);
         calendar.add(Calendar.MINUTE, 0);
-        if (CoCoinUtil.WEEK_START_WITH_SUNDAY) {
+        if (KKMoneyUtil.WEEK_START_WITH_SUNDAY) {
             int[] diff = new int[]{0, 0, -1, -2, -3, -4, -5, -6};
             calendar.add(Calendar.DATE, diff[nowDayOfWeek]);
         } else {
@@ -621,7 +621,7 @@ public class CoCoinUtil {
         calendar.set(Calendar.SECOND, 0);
         calendar.set(Calendar.MILLISECOND, 0);
         calendar.add(Calendar.MINUTE, 0);
-        if (CoCoinUtil.WEEK_START_WITH_SUNDAY) {
+        if (KKMoneyUtil.WEEK_START_WITH_SUNDAY) {
             int[] diff = new int[]{0, 0, -1, -2, -3, -4, -5, -6};
             calendar.add(Calendar.DATE, diff[nowDayOfWeek] - 7);
         } else {
@@ -645,7 +645,7 @@ public class CoCoinUtil {
         calendar.set(Calendar.SECOND, 0);
         calendar.set(Calendar.MILLISECOND, 0);
         calendar.add(Calendar.MINUTE, 0);
-        if (CoCoinUtil.WEEK_START_WITH_SUNDAY) {
+        if (KKMoneyUtil.WEEK_START_WITH_SUNDAY) {
             int[] diff = new int[]{0, 0, -1, -2, -3, -4, -5, -6};
             calendar.add(Calendar.DATE, diff[nowDayOfWeek] + 7);
         } else {
@@ -845,12 +845,12 @@ public class CoCoinUtil {
     }
 
     public static int GetTagColor(int tag) {
-        return ContextCompat.getColor(CoCoinApplication.getAppContext(), TAG_COLOR[tag + 3]);
+        return ContextCompat.getColor(KKMoneyApplication.getAppContext(), TAG_COLOR[tag + 3]);
     }
 
     public static Drawable GetTagDrawable(int tagId) {
         return ContextCompat.getDrawable(
-                CoCoinApplication.getAppContext(), TAG_DRAWABLE[tagId + 3]);
+                KKMoneyApplication.getAppContext(), TAG_DRAWABLE[tagId + 3]);
     }
 
     public static String GetTagUrl(int tagId) {
@@ -867,11 +867,11 @@ public class CoCoinUtil {
 
     public static Drawable GetTagIconDrawable(int tagId) {
         return ContextCompat.getDrawable(
-                CoCoinApplication.getAppContext(), TAG_ICON[tagId + 2]);
+                KKMoneyApplication.getAppContext(), TAG_ICON[tagId + 2]);
     }
 
     public static String GetTagName(int tagId) {
-        return CoCoinApplication.getAppContext().getResources().getString(TAG_NAME[tagId + 2]);
+        return KKMoneyApplication.getAppContext().getResources().getString(TAG_NAME[tagId + 2]);
     }
 
     public static <K, V extends Comparable<V>> Map<K, V> SortTreeMapByValues(final Map<K, V> map) {
@@ -925,10 +925,10 @@ public class CoCoinUtil {
 
     public static int getStatusBarHeight() {
         int result = 0;
-        int resourceId = CoCoinApplication.getAppContext()
+        int resourceId = KKMoneyApplication.getAppContext()
                 .getResources().getIdentifier("status_bar_height", "dimen", "android");
         if (resourceId > 0) {
-            result = CoCoinApplication.getAppContext()
+            result = KKMoneyApplication.getAppContext()
                     .getResources().getDimensionPixelSize(resourceId);
         }
         return result;
@@ -960,12 +960,12 @@ public class CoCoinUtil {
     public static void getKeyBoard(EditText editText) {
         editText.requestFocus();
         InputMethodManager keyboard = (InputMethodManager)
-                CoCoinApplication.getAppContext().getSystemService(Context.INPUT_METHOD_SERVICE);
+                KKMoneyApplication.getAppContext().getSystemService(Context.INPUT_METHOD_SERVICE);
         keyboard.showSoftInput(editText, InputMethodManager.SHOW_IMPLICIT);
     }
 
     public static int dpToPx(int dp) {
-        DisplayMetrics displayMetrics = CoCoinApplication.getAppContext().getResources().getDisplayMetrics();
+        DisplayMetrics displayMetrics = KKMoneyApplication.getAppContext().getResources().getDisplayMetrics();
         int px = Math.round(dp * (displayMetrics.xdpi / DisplayMetrics.DENSITY_DEFAULT));
         return px;
     }
@@ -1083,7 +1083,7 @@ public class CoCoinUtil {
     public static Double INPUT_MAX_EXPENSE = 99999d;
 
     public static String GetCurrentVersion() {
-        return "CoCoin V" + CoCoinApplication.VERSION / 100 + "." + CoCoinApplication.VERSION % 100 / 10 + "." + CoCoinApplication.VERSION % 10;
+        return "KKMoney V" + KKMoneyApplication.VERSION / 100 + "." + KKMoneyApplication.VERSION % 100 / 10 + "." + KKMoneyApplication.VERSION % 10;
     }
 
     public static String GetString(Context context, int i) {
@@ -1145,7 +1145,7 @@ public class CoCoinUtil {
             databasePath = "/data/data/" + context.getPackageName() + "/databases/";
         }
         databasePath += DB.DB_NAME_STRING;
-        if (BuildConfig.DEBUG) Log.d("CoCoin", "Get record database path " + databasePath);
+        if (BuildConfig.DEBUG) Log.d("KKMoney", "Get record database path " + databasePath);
         return databasePath;
     }
 
@@ -1192,16 +1192,16 @@ public class CoCoinUtil {
 
 
 
-    private static CoCoinUtil ourInstance = new CoCoinUtil();
+    private static KKMoneyUtil ourInstance = new KKMoneyUtil();
 
-    public static CoCoinUtil getInstance() {
+    public static KKMoneyUtil getInstance() {
         if (ourInstance == null || typefaceLatoLight == null || typefaceLatoHairline == null) {
-            ourInstance = new CoCoinUtil();
-            init(CoCoinApplication.getAppContext());
+            ourInstance = new KKMoneyUtil();
+            init(KKMoneyApplication.getAppContext());
         }
         return ourInstance;
     }
 
-    private CoCoinUtil() {
+    private KKMoneyUtil() {
     }
 }

@@ -1,7 +1,7 @@
 package com.katherine_qj.saver.util;
 
 /**
- * Created by 伟平 on 2015/11/12.
+ * Created by katherineqj on 2017/11/12.
  */
 
 import android.content.Context;

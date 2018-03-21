@@ -11,14 +11,14 @@ import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
 
 import com.katherine_qj.saver.R;
-import com.katherine_qj.saver.activity.CoCoinApplication;
+import com.katherine_qj.saver.activity.KKMoneyApplication;
 import com.katherine_qj.saver.model.RecordManager;
 import com.katherine_qj.saver.model.SettingManager;
-import com.katherine_qj.saver.util.CoCoinUtil;
+import com.katherine_qj.saver.util.KKMoneyUtil;
 import com.rengwuxian.materialedittext.MaterialEditText;
 
 /**
- * Created by 伟平 on 2015/10/27.
+ * Created by katherineqj on 2017/10/27.
  */
 
 public class EditRemarkFragment extends Fragment {
@@ -49,10 +49,10 @@ public class EditRemarkFragment extends Fragment {
         mView = inflater.inflate(R.layout.edit_remark_fragment, container, false);
         editView = (MaterialEditText)mView.findViewById(R.id.remark);
 
-        if (getArguments().getInt("type") == CoCoinFragmentManager.MAIN_ACTIVITY_FRAGMENT) {
-            CoCoinFragmentManager.mainActivityEditRemarkFragment = this;
-        } else if (getArguments().getInt("type") == CoCoinFragmentManager.EDIT_RECORD_ACTIVITY_FRAGMENT) {
-            CoCoinFragmentManager.editRecordActivityEditRemarkFragment = this;
+        if (getArguments().getInt("type") == KKMoneyFragmentManager.MAIN_ACTIVITY_FRAGMENT) {
+            KKMoneyFragmentManager.mainActivityEditRemarkFragment = this;
+        } else if (getArguments().getInt("type") == KKMoneyFragmentManager.EDIT_RECORD_ACTIVITY_FRAGMENT) {
+            KKMoneyFragmentManager.editRecordActivityEditRemarkFragment = this;
         }
 
         boolean shouldChange
@@ -63,11 +63,11 @@ public class EditRemarkFragment extends Fragment {
 
         setEditColor(shouldChange);
 
-        if (getArguments().getInt("type") == CoCoinFragmentManager.EDIT_RECORD_ACTIVITY_FRAGMENT
-                && CoCoinUtil.editRecordPosition != -1) {
-            CoCoinFragmentManager.editRecordActivityEditRemarkFragment
-                    .setRemark(RecordManager.SELECTED_RECORDS.get(CoCoinUtil.editRecordPosition).getRemark());
-            CoCoinFragmentManager.editRecordActivityEditRemarkFragment.setLastSelection();
+        if (getArguments().getInt("type") == KKMoneyFragmentManager.EDIT_RECORD_ACTIVITY_FRAGMENT
+                && KKMoneyUtil.editRecordPosition != -1) {
+            KKMoneyFragmentManager.editRecordActivityEditRemarkFragment
+                    .setRemark(RecordManager.SELECTED_RECORDS.get(KKMoneyUtil.editRecordPosition).getRemark());
+            KKMoneyFragmentManager.editRecordActivityEditRemarkFragment.setLastSelection();
         }
 
         return mView;
@@ -112,7 +112,7 @@ public class EditRemarkFragment extends Fragment {
     public void editRequestFocus() {
         editView.requestFocus();
         InputMethodManager keyboard = (InputMethodManager)
-                CoCoinApplication.getAppContext().getSystemService(Context.INPUT_METHOD_SERVICE);
+                KKMoneyApplication.getAppContext().getSystemService(Context.INPUT_METHOD_SERVICE);
         keyboard.showSoftInput(editView, InputMethodManager.SHOW_IMPLICIT);
     }
 
@@ -122,9 +122,9 @@ public class EditRemarkFragment extends Fragment {
             editView.setPrimaryColor(SettingManager.getInstance().getRemindColor());
             editView.setHelperTextColor(SettingManager.getInstance().getRemindColor());
         } else {
-            editView.setTextColor(CoCoinUtil.getInstance().MY_Normally);
-            editView.setPrimaryColor(CoCoinUtil.getInstance().MY_Normally);
-            editView.setHelperTextColor(CoCoinUtil.getInstance().MY_Normally);
+            editView.setTextColor(KKMoneyUtil.getInstance().MY_Normally);
+            editView.setPrimaryColor(KKMoneyUtil.getInstance().MY_Normally);
+            editView.setHelperTextColor(KKMoneyUtil.getInstance().MY_Normally);
         }
     }
 

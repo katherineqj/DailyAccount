@@ -7,7 +7,7 @@ import java.util.ArrayList;
 /**
  * Created by Weiping on 2016/1/19.
  */
-public class CoCoinFragmentManager {
+public class KKMoneyFragmentManager {
 
     public static int MAIN_ACTIVITY_FRAGMENT = 0;
     public static EditMoneyFragment mainActivityEditMoneyFragment = null;
@@ -30,12 +30,12 @@ public class CoCoinFragmentManager {
 
 
 
-    private static CoCoinFragmentManager ourInstance = new CoCoinFragmentManager();
+    private static KKMoneyFragmentManager ourInstance = new KKMoneyFragmentManager();
 
-    public static CoCoinFragmentManager getInstance() {
+    public static KKMoneyFragmentManager getInstance() {
         return ourInstance;
     }
 
-    private CoCoinFragmentManager() {
+    private KKMoneyFragmentManager() {
     }
 }

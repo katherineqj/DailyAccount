@@ -4,9 +4,9 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentStatePagerAdapter;
 
 import com.katherine_qj.saver.R;
-import com.katherine_qj.saver.activity.CoCoinApplication;
+import com.katherine_qj.saver.activity.KKMoneyApplication;
 import com.katherine_qj.saver.fragment.HelpAboutFragment;
-import com.katherine_qj.saver.fragment.HelpCoCoinFragment;
+import com.katherine_qj.saver.fragment.HelpKKMoneyFragment;
 import com.katherine_qj.saver.fragment.HelpFeedbackFragment;
 
 /**
@@ -29,7 +29,7 @@ public class HelpFragmentAdapter extends FragmentStatePagerAdapter {
     @Override
     public Fragment getItem(int position) {
         switch (this.position) {
-            case 0: return HelpCoCoinFragment.newInstance();
+            case 0: return HelpKKMoneyFragment.newInstance();
             case 1: return HelpFeedbackFragment.newInstance();
             case 2: return HelpAboutFragment.newInstance();
         }
@@ -44,9 +44,9 @@ public class HelpFragmentAdapter extends FragmentStatePagerAdapter {
     @Override
     public CharSequence getPageTitle(int position) {
         switch (this.position) {
-            case 0: return CoCoinApplication.getAppContext().getResources().getString(R.string.app_name);
-            case 1: return CoCoinApplication.getAppContext().getResources().getString(R.string.feedback);
-            case 2: return CoCoinApplication.getAppContext().getResources().getString(R.string.about);
+            case 0: return KKMoneyApplication.getAppContext().getResources().getString(R.string.app_name);
+            case 1: return KKMoneyApplication.getAppContext().getResources().getString(R.string.feedback);
+            case 2: return KKMoneyApplication.getAppContext().getResources().getString(R.string.about);
         }
         return "";
     }

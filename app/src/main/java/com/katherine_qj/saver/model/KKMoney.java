@@ -4,7 +4,7 @@ package com.katherine_qj.saver.model;
  * Created by Weiping on 2016/1/21.
  */
 
-public class CoCoin {
+public class KKMoney {
 
     //public static String APPLICATION_ID = "9d30e7692a56a79d7600b95cbff43283";
     public static String Bomb_APPLICATION_ID =  "69e8db493350f737c3224db78335a690";

@@ -13,14 +13,14 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.katherine_qj.saver.R;
-import com.katherine_qj.saver.activity.CoCoinApplication;
+import com.katherine_qj.saver.activity.KKMoneyApplication;
 import com.katherine_qj.saver.model.RecordManager;
 import com.katherine_qj.saver.model.SettingManager;
-import com.katherine_qj.saver.util.CoCoinUtil;
+import com.katherine_qj.saver.util.KKMoneyUtil;
 import com.rengwuxian.materialedittext.MaterialEditText;
 
 /**
- * Created by 伟平 on 2015/10/27.
+ * Created by katherineqj on 2017/10/27.
  */
 
 public class EditMoneyFragment extends Fragment {
@@ -53,19 +53,19 @@ public class EditMoneyFragment extends Fragment {
                              @Nullable Bundle savedInstanceState) {
         mView = inflater.inflate(R.layout.edit_money_fragment, container, false);
 
-        if (getArguments().getInt("type") == CoCoinFragmentManager.MAIN_ACTIVITY_FRAGMENT) {
-            CoCoinFragmentManager.mainActivityEditMoneyFragment = this;
-        } else if (getArguments().getInt("type") == CoCoinFragmentManager.EDIT_RECORD_ACTIVITY_FRAGMENT) {
-            CoCoinFragmentManager.editRecordActivityEditMoneyFragment = this;
+        if (getArguments().getInt("type") == KKMoneyFragmentManager.MAIN_ACTIVITY_FRAGMENT) {
+            KKMoneyFragmentManager.mainActivityEditMoneyFragment = this;
+        } else if (getArguments().getInt("type") == KKMoneyFragmentManager.EDIT_RECORD_ACTIVITY_FRAGMENT) {
+            KKMoneyFragmentManager.editRecordActivityEditMoneyFragment = this;
         }
 
         fragmentPosition = getArguments().getInt("position");
         editView = (MaterialEditText)mView.findViewById(R.id.money);
         tagImage = (ImageView)mView.findViewById(R.id.tag_image);
         tagName = (TextView)mView.findViewById(R.id.tag_name);
-        tagName.setTypeface(CoCoinUtil.typefaceLatoLight);
+        tagName.setTypeface(KKMoneyUtil.typefaceLatoLight);
 
-        editView.setTypeface(CoCoinUtil.typefaceLatoHairline);
+        editView.setTypeface(KKMoneyUtil.typefaceLatoHairline);
         editView.setText("0");
         editView.requestFocus();
         editView.setHelperText(" ");
@@ -81,18 +81,18 @@ public class EditMoneyFragment extends Fragment {
 
         setEditColor(shouldChange);
 
-        if (getArguments().getInt("type") == CoCoinFragmentManager.EDIT_RECORD_ACTIVITY_FRAGMENT
-                && CoCoinUtil.editRecordPosition != -1) {
-            CoCoinFragmentManager.editRecordActivityEditMoneyFragment
-                    .setTagImage(CoCoinUtil.GetTagIcon(
-                            (int)RecordManager.SELECTED_RECORDS.get(CoCoinUtil.editRecordPosition).getTag()));
-            CoCoinFragmentManager.editRecordActivityEditMoneyFragment
-                    .setTagName(CoCoinUtil.GetTagName(
-                            (int)RecordManager.SELECTED_RECORDS.get(CoCoinUtil.editRecordPosition).getTag()));
-            CoCoinFragmentManager.editRecordActivityEditMoneyFragment
-                    .setTagId(RecordManager.SELECTED_RECORDS.get(CoCoinUtil.editRecordPosition).getTag());
-            CoCoinFragmentManager.editRecordActivityEditMoneyFragment
-                    .setNumberText(String.format("%.0f", RecordManager.SELECTED_RECORDS.get(CoCoinUtil.editRecordPosition).getMoney()));
+        if (getArguments().getInt("type") == KKMoneyFragmentManager.EDIT_RECORD_ACTIVITY_FRAGMENT
+                && KKMoneyUtil.editRecordPosition != -1) {
+            KKMoneyFragmentManager.editRecordActivityEditMoneyFragment
+                    .setTagImage(KKMoneyUtil.GetTagIcon(
+                            (int)RecordManager.SELECTED_RECORDS.get(KKMoneyUtil.editRecordPosition).getTag()));
+            KKMoneyFragmentManager.editRecordActivityEditMoneyFragment
+                    .setTagName(KKMoneyUtil.GetTagName(
+                            (int)RecordManager.SELECTED_RECORDS.get(KKMoneyUtil.editRecordPosition).getTag()));
+            KKMoneyFragmentManager.editRecordActivityEditMoneyFragment
+                    .setTagId(RecordManager.SELECTED_RECORDS.get(KKMoneyUtil.editRecordPosition).getTag());
+            KKMoneyFragmentManager.editRecordActivityEditMoneyFragment
+                    .setNumberText(String.format("%.0f", RecordManager.SELECTED_RECORDS.get(KKMoneyUtil.editRecordPosition).getMoney()));
         }
 
         return mView;
@@ -116,8 +116,8 @@ public class EditMoneyFragment extends Fragment {
 
     public void setTag(int p) {
         tagId = RecordManager.TAGS.get(p).getId();
-        tagName.setText(CoCoinUtil.GetTagName(RecordManager.TAGS.get(p).getId()));
-        tagImage.setImageResource(CoCoinUtil.GetTagIcon(RecordManager.TAGS.get(p).getId()));
+        tagName.setText(KKMoneyUtil.GetTagName(RecordManager.TAGS.get(p).getId()));
+        tagImage.setImageResource(KKMoneyUtil.GetTagIcon(RecordManager.TAGS.get(p).getId()));
     }
 
     public String getNumberText() {
@@ -139,7 +139,7 @@ public class EditMoneyFragment extends Fragment {
     public void editRequestFocus() {
         editView.requestFocus();
         InputMethodManager imm = (InputMethodManager)
-                CoCoinApplication.getAppContext().getSystemService(Context.INPUT_METHOD_SERVICE);
+                KKMoneyApplication.getAppContext().getSystemService(Context.INPUT_METHOD_SERVICE);
         imm.hideSoftInputFromWindow(mView.getWindowToken(), 0);
     }
 
@@ -149,9 +149,9 @@ public class EditMoneyFragment extends Fragment {
             editView.setPrimaryColor(SettingManager.getInstance().getRemindColor());
             editView.setHelperTextColor(SettingManager.getInstance().getRemindColor());
         } else {
-            editView.setTextColor(CoCoinUtil.getInstance().MY_Normally);
-            editView.setPrimaryColor(CoCoinUtil.getInstance().MY_Normally);
-            editView.setHelperTextColor(CoCoinUtil.getInstance().MY_Normally);
+            editView.setTextColor(KKMoneyUtil.getInstance().MY_Normally);
+            editView.setPrimaryColor(KKMoneyUtil.getInstance().MY_Normally);
+            editView.setHelperTextColor(KKMoneyUtil.getInstance().MY_Normally);
         }
     }
 

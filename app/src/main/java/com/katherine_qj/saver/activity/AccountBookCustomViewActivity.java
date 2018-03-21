@@ -16,7 +16,7 @@ import com.github.florent37.materialviewpager.header.HeaderDesign;
 import com.katherine_qj.saver.R;
 import com.katherine_qj.saver.adapter.CustomViewFragmentAdapter;
 import com.katherine_qj.saver.model.SettingManager;
-import com.katherine_qj.saver.util.CoCoinUtil;
+import com.katherine_qj.saver.util.KKMoneyUtil;
 
 public class AccountBookCustomViewActivity extends AppCompatActivity {
 
@@ -39,10 +39,10 @@ public class AccountBookCustomViewActivity extends AppCompatActivity {
 
         View view = mViewPager.getRootView();
         TextView title = (TextView)view.findViewById(R.id.logo_white);
-        title.setTypeface(CoCoinUtil.getInstance().typefaceLatoLight);
+        title.setTypeface(KKMoneyUtil.getInstance().typefaceLatoLight);
         title.setText(SettingManager.getInstance().getAccountBookName());
 
-        mViewPager.getPagerTitleStrip().setTypeface(CoCoinUtil.GetTypeface(), Typeface.NORMAL);
+        mViewPager.getPagerTitleStrip().setTypeface(KKMoneyUtil.GetTypeface(), Typeface.NORMAL);
         mViewPager.getPagerTitleStrip().setVisibility(View.INVISIBLE);
 
         setTitle("");
@@ -81,8 +81,8 @@ public class AccountBookCustomViewActivity extends AppCompatActivity {
             @Override
             public HeaderDesign getHeaderDesign(int page) {
                 return HeaderDesign.fromColorAndDrawable(
-                        CoCoinUtil.GetTagColor(-3),
-                        CoCoinUtil.GetTagDrawable(-3)
+                        KKMoneyUtil.GetTagColor(-3),
+                        KKMoneyUtil.GetTagDrawable(-3)
                 );
             }
         });

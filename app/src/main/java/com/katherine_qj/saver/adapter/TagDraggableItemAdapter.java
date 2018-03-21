@@ -15,12 +15,12 @@ import com.h6ah4i.android.widget.advrecyclerview.utils.AbstractDraggableItemView
 import com.katherine_qj.saver.R;
 import com.katherine_qj.saver.model.RecordManager;
 import com.katherine_qj.saver.model.Tag;
-import com.katherine_qj.saver.util.CoCoinUtil;
+import com.katherine_qj.saver.util.KKMoneyUtil;
 
 import java.util.ArrayList;
 
 /**
- * Created by 伟平 on 2015/11/7.
+ * Created by katherineqj on 2017/11/7.
  */
 
 public class TagDraggableItemAdapter
@@ -103,9 +103,9 @@ public class TagDraggableItemAdapter
         // set background resource (target view ID: container)
         final int dragState = holder.getDragStateFlags();
 
-        holder.tagImage.setImageResource(CoCoinUtil.GetTagIcon(tags.get(position).getId()));
-        holder.tagName.setText(CoCoinUtil.GetTagName(tags.get(position).getId()));
-        holder.tagName.setTypeface(CoCoinUtil.typefaceLatoLight);
+        holder.tagImage.setImageResource(KKMoneyUtil.GetTagIcon(tags.get(position).getId()));
+        holder.tagName.setText(KKMoneyUtil.GetTagName(tags.get(position).getId()));
+        holder.tagName.setTypeface(KKMoneyUtil.typefaceLatoLight);
 
         if (((dragState & Draggable.STATE_FLAG_IS_UPDATED) != 0)) {
             int bgResId;
@@ -114,7 +114,7 @@ public class TagDraggableItemAdapter
                 bgResId = R.drawable.bg_item_dragging_active_state;
 
                 // need to clear drawable state here to get correct appearance of the dragging item.
-                CoCoinUtil.clearState(holder.mContainer.getForeground());
+                KKMoneyUtil.clearState(holder.mContainer.getForeground());
             } else if ((dragState & Draggable.STATE_FLAG_DRAGGING) != 0) {
                 bgResId = R.drawable.bg_item_normal_state;
             } else {

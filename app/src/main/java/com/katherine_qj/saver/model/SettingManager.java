@@ -3,17 +3,17 @@ package com.katherine_qj.saver.model;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 
-import com.katherine_qj.saver.activity.CoCoinApplication;
+import com.katherine_qj.saver.activity.KKMoneyApplication;
 
 /**
- * Created by 伟平 on 2015/11/17.
+ * Created by katherineqj on 2017/11/17.
  */
 
 public class SettingManager {
 
 // store value//////////////////////////////////////////////////////////////////////////////////////
 
-    // whether it is CoCoin's first time
+    // whether it is KKMoney's first time
     private Boolean FIRST_TIME;
     // whether is logged on
     private Boolean LOGGED_ON;
@@ -111,7 +111,7 @@ public class SettingManager {
     // whether is able to be recorded when over the limit by default
     private final Boolean DEFAULT_IS_FORBIDDEN = false;
     // account bool name by default
-    private final String DEFAULT_ACCOUNT_BOOK_NAME = "CoCoin";
+    private final String DEFAULT_ACCOUNT_BOOK_NAME = "KKMoney";
     // the password
     private final String DEFAULT_PASSWORD = "1234";
     // whether show picture in account book
@@ -144,14 +144,14 @@ public class SettingManager {
 
     public Boolean getFirstTime() {
         FIRST_TIME = PreferenceManager.
-                getDefaultSharedPreferences(CoCoinApplication.getAppContext())
+                getDefaultSharedPreferences(KKMoneyApplication.getAppContext())
                 .getBoolean("FIRST_TIME", DEFAULT_FIRST_TIME);
         return FIRST_TIME;
     }
 
     public void setFirstTime(Boolean FIRST_TIME) {
         SharedPreferences.Editor editor = PreferenceManager
-                .getDefaultSharedPreferences(CoCoinApplication.getAppContext()).edit();
+                .getDefaultSharedPreferences(KKMoneyApplication.getAppContext()).edit();
         editor.putBoolean("FIRST_TIME", FIRST_TIME);
         editor.commit();
         this.FIRST_TIME = FIRST_TIME;
@@ -159,14 +159,14 @@ public class SettingManager {
 
     public Boolean getLoggenOn() {
         LOGGED_ON = PreferenceManager.
-                getDefaultSharedPreferences(CoCoinApplication.getAppContext())
+                getDefaultSharedPreferences(KKMoneyApplication.getAppContext())
                 .getBoolean("LOGGED_ON", DEFAULT_LOGGED_ON);
         return LOGGED_ON;
     }
 
     public void setLoggenOn(Boolean LOGGED_ON) {
         SharedPreferences.Editor editor = PreferenceManager
-                .getDefaultSharedPreferences(CoCoinApplication.getAppContext()).edit();
+                .getDefaultSharedPreferences(KKMoneyApplication.getAppContext()).edit();
         editor.putBoolean("LOGGED_ON", LOGGED_ON);
         editor.commit();
         this.LOGGED_ON = LOGGED_ON;
@@ -174,14 +174,14 @@ public class SettingManager {
 
     public String getUserName() {
         USER_NAME = PreferenceManager.
-                getDefaultSharedPreferences(CoCoinApplication.getAppContext())
+                getDefaultSharedPreferences(KKMoneyApplication.getAppContext())
                 .getString("USER_NAME", DEFAULT_USER_NAME);
         return USER_NAME;
     }
 
     public void setUserName(String USER_NAME) {
         SharedPreferences.Editor editor = PreferenceManager
-                .getDefaultSharedPreferences(CoCoinApplication.getAppContext()).edit();
+                .getDefaultSharedPreferences(KKMoneyApplication.getAppContext()).edit();
         editor.putString("USER_NAME", USER_NAME);
         editor.commit();
         this.USER_NAME = USER_NAME;
@@ -189,14 +189,14 @@ public class SettingManager {
 
     public String getUserEmail() {
         USER_EMAIL = PreferenceManager.
-                getDefaultSharedPreferences(CoCoinApplication.getAppContext())
+                getDefaultSharedPreferences(KKMoneyApplication.getAppContext())
                 .getString("USER_EMAIL", DEFAULT_USER_EMAIL);
         return USER_EMAIL;
     }
 
     public void setUserEmail(String USER_EMAIL) {
         SharedPreferences.Editor editor = PreferenceManager
-                .getDefaultSharedPreferences(CoCoinApplication.getAppContext()).edit();
+                .getDefaultSharedPreferences(KKMoneyApplication.getAppContext()).edit();
         editor.putString("USER_EMAIL", USER_EMAIL);
         editor.commit();
         this.USER_EMAIL = USER_EMAIL;
@@ -204,14 +204,14 @@ public class SettingManager {
 
     public Boolean getHasLogo() {
         HAS_LOGO = PreferenceManager.
-                getDefaultSharedPreferences(CoCoinApplication.getAppContext())
+                getDefaultSharedPreferences(KKMoneyApplication.getAppContext())
                 .getBoolean("HAS_LOGO", DEFAULT_HAS_LOGO);
         return HAS_LOGO;
     }
 
     public void setHasLogo(Boolean HAS_LOGO) {
         SharedPreferences.Editor editor = PreferenceManager
-                .getDefaultSharedPreferences(CoCoinApplication.getAppContext()).edit();
+                .getDefaultSharedPreferences(KKMoneyApplication.getAppContext()).edit();
         editor.putBoolean("HAS_LOGO", HAS_LOGO);
         editor.commit();
         this.HAS_LOGO = HAS_LOGO;
@@ -219,14 +219,14 @@ public class SettingManager {
 
     public String getLogoNameInServer() {
         LOGO_NAME_IN_SERVER = PreferenceManager.
-                getDefaultSharedPreferences(CoCoinApplication.getAppContext())
+                getDefaultSharedPreferences(KKMoneyApplication.getAppContext())
                 .getString("LOGO_NAME_IN_SERVER", null);
         return LOGO_NAME_IN_SERVER;
     }
 
     public void setLogoNameInServer(String LOGO_NAME_IN_SERVER) {
         SharedPreferences.Editor editor = PreferenceManager
-                .getDefaultSharedPreferences(CoCoinApplication.getAppContext()).edit();
+                .getDefaultSharedPreferences(KKMoneyApplication.getAppContext()).edit();
         editor.putString("LOGO_NAME_IN_SERVER", LOGO_NAME_IN_SERVER);
         editor.commit();
         this.LOGO_NAME_IN_SERVER = LOGO_NAME_IN_SERVER;
@@ -234,14 +234,14 @@ public class SettingManager {
 
     public String getLogoObjectId() {
         LOGO_OBJECT_ID = PreferenceManager.
-                getDefaultSharedPreferences(CoCoinApplication.getAppContext())
+                getDefaultSharedPreferences(KKMoneyApplication.getAppContext())
                 .getString("LOGO_OBJECT_ID", null);
         return LOGO_OBJECT_ID;
     }
 
     public void setLogoObjectId(String LOGO_OBJECT_ID) {
         SharedPreferences.Editor editor = PreferenceManager
-                .getDefaultSharedPreferences(CoCoinApplication.getAppContext()).edit();
+                .getDefaultSharedPreferences(KKMoneyApplication.getAppContext()).edit();
         editor.putString("LOGO_OBJECT_ID", LOGO_OBJECT_ID);
         editor.commit();
         this.LOGO_OBJECT_ID = LOGO_OBJECT_ID;
@@ -249,14 +249,14 @@ public class SettingManager {
 
     public Boolean getIsMonthLimit() {
         IS_MONTH_LIMIT = PreferenceManager.
-                getDefaultSharedPreferences(CoCoinApplication.getAppContext())
+                getDefaultSharedPreferences(KKMoneyApplication.getAppContext())
                 .getBoolean("IS_MONTH_LIMIT", DEFAULT_IS_MONTH_LIMIT);
         return IS_MONTH_LIMIT;
     }
 
     public void setIsMonthLimit(Boolean IS_MONTH_LIMIT) {
         SharedPreferences.Editor editor = PreferenceManager
-                .getDefaultSharedPreferences(CoCoinApplication.getAppContext()).edit();
+                .getDefaultSharedPreferences(KKMoneyApplication.getAppContext()).edit();
         editor.putBoolean("IS_MONTH_LIMIT", IS_MONTH_LIMIT);
         editor.commit();
         this.IS_MONTH_LIMIT = IS_MONTH_LIMIT;
@@ -264,14 +264,14 @@ public class SettingManager {
 
     public Integer getMonthLimit() {
         MONTH_LIMIT = PreferenceManager.
-                getDefaultSharedPreferences(CoCoinApplication.getAppContext())
+                getDefaultSharedPreferences(KKMoneyApplication.getAppContext())
                 .getInt("MONTH_LIMIT", DEFAULT_MONTH_LIMIT);
         return MONTH_LIMIT;
     }
 
     public void setMonthLimit(Integer MONTH_LIMIT) {
         SharedPreferences.Editor editor = PreferenceManager
-                .getDefaultSharedPreferences(CoCoinApplication.getAppContext()).edit();
+                .getDefaultSharedPreferences(KKMoneyApplication.getAppContext()).edit();
         editor.putInt("MONTH_LIMIT", MONTH_LIMIT);
         editor.commit();
         this.MONTH_LIMIT = MONTH_LIMIT;
@@ -279,14 +279,14 @@ public class SettingManager {
 
     public Integer getMonthWarning() {
         MONTH_WARNING = PreferenceManager.
-                getDefaultSharedPreferences(CoCoinApplication.getAppContext())
+                getDefaultSharedPreferences(KKMoneyApplication.getAppContext())
                 .getInt("MONTH_WARNING", DEFAULT_MONTH_WARNING);
         return MONTH_WARNING;
     }
 
     public void setMonthWarning(Integer MONTH_WARNING) {
         SharedPreferences.Editor editor = PreferenceManager
-                .getDefaultSharedPreferences(CoCoinApplication.getAppContext()).edit();
+                .getDefaultSharedPreferences(KKMoneyApplication.getAppContext()).edit();
         editor.putInt("MONTH_WARNING", MONTH_WARNING);
         editor.commit();
         this.MONTH_WARNING = MONTH_WARNING;
@@ -294,14 +294,14 @@ public class SettingManager {
 
     public Boolean getIsColorRemind() {
         IS_COLOR_REMIND = PreferenceManager.
-                getDefaultSharedPreferences(CoCoinApplication.getAppContext())
+                getDefaultSharedPreferences(KKMoneyApplication.getAppContext())
                 .getBoolean("IS_COLOR_REMIND", DEFAULT_IS_COLOR_REMIND);
         return IS_COLOR_REMIND;
     }
 
     public void setIsColorRemind(Boolean IS_COLOR_REMIND) {
         SharedPreferences.Editor editor = PreferenceManager
-                .getDefaultSharedPreferences(CoCoinApplication.getAppContext()).edit();
+                .getDefaultSharedPreferences(KKMoneyApplication.getAppContext()).edit();
         editor.putBoolean("IS_COLOR_REMIND", IS_COLOR_REMIND);
         editor.commit();
         this.IS_COLOR_REMIND = IS_COLOR_REMIND;
@@ -309,14 +309,14 @@ public class SettingManager {
 
     public int getRemindColor() {
         REMIND_COLOR = PreferenceManager.
-                getDefaultSharedPreferences(CoCoinApplication.getAppContext())
+                getDefaultSharedPreferences(KKMoneyApplication.getAppContext())
                 .getInt("REMIND_COLOR", DEFAULT_REMIND_COLOR);
         return REMIND_COLOR;
     }
 
     public void setRemindColor(int REMIND_COLOR) {
         SharedPreferences.Editor editor = PreferenceManager
-                .getDefaultSharedPreferences(CoCoinApplication.getAppContext()).edit();
+                .getDefaultSharedPreferences(KKMoneyApplication.getAppContext()).edit();
         editor.putInt("REMIND_COLOR", REMIND_COLOR);
         editor.commit();
         this.REMIND_COLOR = REMIND_COLOR;
@@ -324,14 +324,14 @@ public class SettingManager {
 
     public Boolean getIsForbidden() {
         IS_FORBIDDEN = PreferenceManager.
-                getDefaultSharedPreferences(CoCoinApplication.getAppContext())
+                getDefaultSharedPreferences(KKMoneyApplication.getAppContext())
                 .getBoolean("IS_FORBIDDEN", DEFAULT_IS_FORBIDDEN);
         return IS_FORBIDDEN;
     }
 
     public void setIsForbidden(Boolean IS_FORBIDDEN) {
         SharedPreferences.Editor editor = PreferenceManager
-                .getDefaultSharedPreferences(CoCoinApplication.getAppContext()).edit();
+                .getDefaultSharedPreferences(KKMoneyApplication.getAppContext()).edit();
         editor.putBoolean("IS_FORBIDDEN", IS_FORBIDDEN);
         editor.commit();
         this.IS_FORBIDDEN = IS_FORBIDDEN;
@@ -339,14 +339,14 @@ public class SettingManager {
 
     public String getAccountBookName() {
         ACCOUNT_BOOK_NAME = PreferenceManager.
-                getDefaultSharedPreferences(CoCoinApplication.getAppContext())
+                getDefaultSharedPreferences(KKMoneyApplication.getAppContext())
                 .getString("ACCOUNT_BOOK_NAME", DEFAULT_ACCOUNT_BOOK_NAME);
         return ACCOUNT_BOOK_NAME;
     }
 
     public void setAccountBookName(String ACCOUNT_BOOK_NAME) {
         SharedPreferences.Editor editor = PreferenceManager
-                .getDefaultSharedPreferences(CoCoinApplication.getAppContext()).edit();
+                .getDefaultSharedPreferences(KKMoneyApplication.getAppContext()).edit();
         editor.putString("ACCOUNT_BOOK_NAME", ACCOUNT_BOOK_NAME);
         editor.commit();
         this.ACCOUNT_BOOK_NAME = ACCOUNT_BOOK_NAME;
@@ -354,14 +354,14 @@ public class SettingManager {
 
     public String getPassword() {
         PASSWORD = PreferenceManager.
-                getDefaultSharedPreferences(CoCoinApplication.getAppContext())
+                getDefaultSharedPreferences(KKMoneyApplication.getAppContext())
                 .getString("PASSWORD", DEFAULT_PASSWORD);
         return PASSWORD;
     }
 
     public void setPassword(String PASSWORD) {
         SharedPreferences.Editor editor = PreferenceManager
-                .getDefaultSharedPreferences(CoCoinApplication.getAppContext()).edit();
+                .getDefaultSharedPreferences(KKMoneyApplication.getAppContext()).edit();
         editor.putString("PASSWORD", PASSWORD);
         editor.commit();
         this.PASSWORD = PASSWORD;
@@ -369,14 +369,14 @@ public class SettingManager {
 
     public String getUserPassword() {
         USER_PASSWORD = PreferenceManager.
-                getDefaultSharedPreferences(CoCoinApplication.getAppContext())
+                getDefaultSharedPreferences(KKMoneyApplication.getAppContext())
                 .getString("USER_PASSWORD", "");
         return USER_PASSWORD;
     }
 
     public void setUserPassword(String USER_PASSWORD) {
         SharedPreferences.Editor editor = PreferenceManager
-                .getDefaultSharedPreferences(CoCoinApplication.getAppContext()).edit();
+                .getDefaultSharedPreferences(KKMoneyApplication.getAppContext()).edit();
         editor.putString("USER_PASSWORD", USER_PASSWORD);
         editor.commit();
         this.USER_PASSWORD = USER_PASSWORD;
@@ -384,14 +384,14 @@ public class SettingManager {
 
     public Boolean getShowPicture() {
         SHOW_PICTURE = PreferenceManager.
-                getDefaultSharedPreferences(CoCoinApplication.getAppContext())
+                getDefaultSharedPreferences(KKMoneyApplication.getAppContext())
                 .getBoolean("SHOW_PICTURE", DEFAULT_SHOW_PICTURE);
         return SHOW_PICTURE;
     }
 
     public void setShowPicture(Boolean SHOW_PICTURE) {
         SharedPreferences.Editor editor = PreferenceManager
-                .getDefaultSharedPreferences(CoCoinApplication.getAppContext()).edit();
+                .getDefaultSharedPreferences(KKMoneyApplication.getAppContext()).edit();
         editor.putBoolean("SHOW_PICTURE", SHOW_PICTURE);
         editor.commit();
         this.SHOW_PICTURE = SHOW_PICTURE;
@@ -399,14 +399,14 @@ public class SettingManager {
 
     public Boolean getIsHollow() {
         IS_HOLLOW = PreferenceManager.
-                getDefaultSharedPreferences(CoCoinApplication.getAppContext())
+                getDefaultSharedPreferences(KKMoneyApplication.getAppContext())
                 .getBoolean("IS_HOLLOW", DEFAULT_IS_HOLLOW);
         return IS_HOLLOW;
     }
 
     public void setIsHollow(Boolean IS_HOLLOW) {
         SharedPreferences.Editor editor = PreferenceManager
-                .getDefaultSharedPreferences(CoCoinApplication.getAppContext()).edit();
+                .getDefaultSharedPreferences(KKMoneyApplication.getAppContext()).edit();
         editor.putBoolean("IS_HOLLOW", IS_HOLLOW);
         editor.commit();
         this.IS_HOLLOW = IS_HOLLOW;
@@ -414,14 +414,14 @@ public class SettingManager {
 
     public Boolean getRemindUpdate() {
         REMIND_UPDATE = PreferenceManager.
-                getDefaultSharedPreferences(CoCoinApplication.getAppContext())
+                getDefaultSharedPreferences(KKMoneyApplication.getAppContext())
                 .getBoolean("REMIND_UPDATE", DEFAULT_REMIND_UPDATE);
         return REMIND_UPDATE;
     }
 
     public void setRemindUpdate(Boolean REMIND_UPDATE) {
         SharedPreferences.Editor editor = PreferenceManager
-                .getDefaultSharedPreferences(CoCoinApplication.getAppContext()).edit();
+                .getDefaultSharedPreferences(KKMoneyApplication.getAppContext()).edit();
         editor.putBoolean("REMIND_UPDATE", REMIND_UPDATE);
         editor.commit();
         this.REMIND_UPDATE = REMIND_UPDATE;
@@ -429,14 +429,14 @@ public class SettingManager {
 
     public Boolean getCanBeUpdated() {
         CAN_BE_UPDATED = PreferenceManager.
-                getDefaultSharedPreferences(CoCoinApplication.getAppContext())
+                getDefaultSharedPreferences(KKMoneyApplication.getAppContext())
                 .getBoolean("CAN_BE_UPDATED", DEFAULT_CAN_BE_UPDATED);
         return CAN_BE_UPDATED;
     }
 
     public void setCanBeUpdated(Boolean CAN_BE_UPDATED) {
         SharedPreferences.Editor editor = PreferenceManager
-                .getDefaultSharedPreferences(CoCoinApplication.getAppContext()).edit();
+                .getDefaultSharedPreferences(KKMoneyApplication.getAppContext()).edit();
         editor.putBoolean("CAN_BE_UPDATED", CAN_BE_UPDATED);
         editor.commit();
         this.CAN_BE_UPDATED = CAN_BE_UPDATED;
@@ -444,14 +444,14 @@ public class SettingManager {
 
     public String getRecentlySyncTime() {
         RECENTLY_SYNC_TIME = PreferenceManager.
-                getDefaultSharedPreferences(CoCoinApplication.getAppContext())
+                getDefaultSharedPreferences(KKMoneyApplication.getAppContext())
                 .getString("RECENTLY_SYNC_TIME", DEFAULT_RECENTLY_SYNC_TIME);
         return RECENTLY_SYNC_TIME;
     }
 
     public void setRecentlySyncTime(String RECENTLY_SYNC_TIME) {
         SharedPreferences.Editor editor = PreferenceManager
-                .getDefaultSharedPreferences(CoCoinApplication.getAppContext()).edit();
+                .getDefaultSharedPreferences(KKMoneyApplication.getAppContext()).edit();
         editor.putString("RECENTLY_SYNC_TIME", RECENTLY_SYNC_TIME);
         editor.commit();
         this.RECENTLY_SYNC_TIME = RECENTLY_SYNC_TIME;
@@ -547,14 +547,14 @@ public class SettingManager {
 
     public boolean getShowMainActivityGuide() {
         SHOW_MAIN_ACTIVITY_GUIDE = PreferenceManager.
-                getDefaultSharedPreferences(CoCoinApplication.getAppContext())
+                getDefaultSharedPreferences(KKMoneyApplication.getAppContext())
                 .getBoolean("SHOW_MAIN_ACTIVITY_GUIDE", false);
         return SHOW_MAIN_ACTIVITY_GUIDE;
     }
 
     public void setShowMainActivityGuide(boolean SHOW_MAIN_ACTIVITY_GUIDE) {
         SharedPreferences.Editor editor = PreferenceManager
-                .getDefaultSharedPreferences(CoCoinApplication.getAppContext()).edit();
+                .getDefaultSharedPreferences(KKMoneyApplication.getAppContext()).edit();
         editor.putBoolean("SHOW_MAIN_ACTIVITY_GUIDE", SHOW_MAIN_ACTIVITY_GUIDE);
         editor.commit();
         this.SHOW_MAIN_ACTIVITY_GUIDE = SHOW_MAIN_ACTIVITY_GUIDE;
@@ -562,14 +562,14 @@ public class SettingManager {
 
     public boolean getListViewGuide() {
         SHOW_LIST_VIEW_GUIDE = PreferenceManager.
-                getDefaultSharedPreferences(CoCoinApplication.getAppContext())
+                getDefaultSharedPreferences(KKMoneyApplication.getAppContext())
                 .getBoolean("SHOW_LIST_VIEW_GUIDE", false);
         return SHOW_LIST_VIEW_GUIDE;
     }
 
     public void setListViewGuide(boolean SHOW_LIST_VIEW_GUIDE) {
         SharedPreferences.Editor editor = PreferenceManager
-                .getDefaultSharedPreferences(CoCoinApplication.getAppContext()).edit();
+                .getDefaultSharedPreferences(KKMoneyApplication.getAppContext()).edit();
         editor.putBoolean("SHOW_LIST_VIEW_GUIDE", SHOW_LIST_VIEW_GUIDE);
         editor.commit();
         this.SHOW_LIST_VIEW_GUIDE = SHOW_LIST_VIEW_GUIDE;

@@ -30,11 +30,11 @@ import com.github.johnpersano.supertoasts.SuperToast;
 import com.katherine_qj.saver.R;
 import com.katherine_qj.saver.adapter.PasswordChangeButtonGridViewAdapter;
 import com.katherine_qj.saver.adapter.PasswordChangeFragmentAdapter;
-import com.katherine_qj.saver.fragment.CoCoinFragmentManager;
+import com.katherine_qj.saver.fragment.KKMoneyFragmentManager;
 import com.katherine_qj.saver.model.SettingManager;
 import com.katherine_qj.saver.model.User;
 import com.katherine_qj.saver.ui.MyGridView;
-import com.katherine_qj.saver.util.CoCoinUtil;
+import com.katherine_qj.saver.util.KKMoneyUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -99,8 +99,8 @@ public class ShowActivity extends AppCompatActivity {
         mContext = this;
 
         title = (TextView)findViewById(R.id.title);
-        CoCoinUtil.init(mContext);
-        title.setTypeface(CoCoinUtil.typefaceLatoLight);
+        KKMoneyUtil.init(mContext);
+        title.setTypeface(KKMoneyUtil.typefaceLatoLight);
         title.setText(mContext.getResources().getString(R.string.app_name));
 
         mViewPager = (SCViewPager) findViewById(R.id.viewpager_main_activity);
@@ -131,8 +131,8 @@ public class ShowActivity extends AppCompatActivity {
 
         final Point size = SCViewAnimationUtil.getDisplaySize(this);
 
-        int iconOffsetX = CoCoinUtil.getInstance().dpToPx(28);
-        int iconOffsetY = CoCoinUtil.getInstance().dpToPx(28);
+        int iconOffsetX = KKMoneyUtil.getInstance().dpToPx(28);
+        int iconOffsetY = KKMoneyUtil.getInstance().dpToPx(28);
 
         SCViewAnimation sc0 = new SCViewAnimation(findViewById(R.id.icon_4));
         sc0.startToPosition(size.x / 4 - iconOffsetX, size.y * 2 / 7 - iconOffsetY);
@@ -154,7 +154,7 @@ public class ShowActivity extends AppCompatActivity {
         sc3.addPageAnimation(new SCPositionAnimation(this, 0, 0, -size.y));
         mViewPager.addAnimation(sc3);
 
-        ((TextView)findViewById(R.id.text_0)).setTypeface(CoCoinUtil.getInstance().typefaceLatoLight);
+        ((TextView)findViewById(R.id.text_0)).setTypeface(KKMoneyUtil.getInstance().typefaceLatoLight);
         SCViewAnimation sc4 = new SCViewAnimation(findViewById(R.id.text_0));
         sc4.addPageAnimation(new SCPositionAnimation(this, 0, -size.x, 0));
         mViewPager.addAnimation(sc4);
@@ -162,7 +162,7 @@ public class ShowActivity extends AppCompatActivity {
         PieChartView pie = (PieChartView)findViewById(R.id.pie);
         List<SliceValue> values = new ArrayList<SliceValue>();
         for (int i = 0; i < 5; ++i) {
-            SliceValue sliceValue = new SliceValue((float) Math.random() * 30 + 15, ContextCompat.getColor(CoCoinApplication.getAppContext(), R.color.white));
+            SliceValue sliceValue = new SliceValue((float) Math.random() * 30 + 15, ContextCompat.getColor(KKMoneyApplication.getAppContext(), R.color.white));
             values.add(sliceValue);
         }
         PieChartData pieData = new PieChartData(values);
@@ -194,7 +194,7 @@ public class ShowActivity extends AppCompatActivity {
             pointValues.add(new PointValue(8, 100));
 
             Line aLine = new Line(pointValues);
-            aLine.setColor(ContextCompat.getColor(CoCoinApplication.getAppContext(), R.color.white));
+            aLine.setColor(ContextCompat.getColor(KKMoneyApplication.getAppContext(), R.color.white));
             aLine.setShape(ValueShape.CIRCLE);
             aLine.setCubic(false);
             aLine.setFilled(false);
@@ -220,7 +220,7 @@ public class ShowActivity extends AppCompatActivity {
         for (int i = 0; i < 5; ++i) {
             subcolumnValues = new ArrayList<SubcolumnValue>();
             for (int j = 0; j < 1; ++j) {
-                subcolumnValues.add(new SubcolumnValue((float) Math.random() * 50f + 5, ContextCompat.getColor(CoCoinApplication.getAppContext(), R.color.white)));
+                subcolumnValues.add(new SubcolumnValue((float) Math.random() * 50f + 5, ContextCompat.getColor(KKMoneyApplication.getAppContext(), R.color.white)));
             }
             Column column = new Column(subcolumnValues);
             column.setHasLabels(false);
@@ -231,12 +231,12 @@ public class ShowActivity extends AppCompatActivity {
         histogram.setColumnChartData(histogramData);
         histogram.setContainerScrollEnabled(true, ContainerScrollType.HORIZONTAL);
         SCViewAnimation sc7 = new SCViewAnimation(histogram);
-        sc7.startToPosition(size.x / 2 - CoCoinUtil.getInstance().dpToPx(140), size.y * 8 / 9 - CoCoinUtil.getInstance().dpToPx(140) + size.y);
+        sc7.startToPosition(size.x / 2 - KKMoneyUtil.getInstance().dpToPx(140), size.y * 8 / 9 - KKMoneyUtil.getInstance().dpToPx(140) + size.y);
         sc7.addPageAnimation(new SCPositionAnimation(this, 0, 0, -size.y));
         sc7.addPageAnimation(new SCPositionAnimation(this, 1, 0, size.y));
         mViewPager.addAnimation(sc7);
 
-        ((TextView)findViewById(R.id.text_1)).setTypeface(CoCoinUtil.getInstance().typefaceLatoLight);
+        ((TextView)findViewById(R.id.text_1)).setTypeface(KKMoneyUtil.getInstance().typefaceLatoLight);
         SCViewAnimation sc8 = new SCViewAnimation(findViewById(R.id.text_1));
         sc8.startToPosition(size.x, null);
         sc8.addPageAnimation(new SCPositionAnimation(this, 0, -size.x, 0));
@@ -244,18 +244,18 @@ public class ShowActivity extends AppCompatActivity {
         mViewPager.addAnimation(sc8);
 
         SCViewAnimation sc9 = new SCViewAnimation(findViewById(R.id.cloud));
-        sc9.startToPosition(size.x / 2 - CoCoinUtil.getInstance().dpToPx(100) + size.x, size.y / 7);
+        sc9.startToPosition(size.x / 2 - KKMoneyUtil.getInstance().dpToPx(100) + size.x, size.y / 7);
         sc9.addPageAnimation(new SCPositionAnimation(this, 1, -size.x, 0));
         sc9.addPageAnimation(new SCPositionAnimation(this, 2, 0, size.y));
         mViewPager.addAnimation(sc9);
 
         SCViewAnimation sc10 = new SCViewAnimation(findViewById(R.id.mobile));
-        sc10.startToPosition(size.x / 2 - size.x, size.y * 6 / 7 - CoCoinUtil.getInstance().dpToPx(100));
+        sc10.startToPosition(size.x / 2 - size.x, size.y * 6 / 7 - KKMoneyUtil.getInstance().dpToPx(100));
         sc10.addPageAnimation(new SCPositionAnimation(this, 1, size.x, 0));
         sc10.addPageAnimation(new SCPositionAnimation(this, 2, 0, -size.y));
         mViewPager.addAnimation(sc10);
 
-        ((TextView)findViewById(R.id.text_2)).setTypeface(CoCoinUtil.getInstance().typefaceLatoLight);
+        ((TextView)findViewById(R.id.text_2)).setTypeface(KKMoneyUtil.getInstance().typefaceLatoLight);
         SCViewAnimation sc11 = new SCViewAnimation(findViewById(R.id.text_2));
         sc11.startToPosition(size.x, null);
         sc11.addPageAnimation(new SCPositionAnimation(this, 1, -size.x, 0));
@@ -280,7 +280,7 @@ public class ShowActivity extends AppCompatActivity {
         sc13.addPageAnimation(new SCPositionAnimation(this, 3, -size.x, 0));
         mViewPager.addAnimation(sc13);
 
-        ((TextView)findViewById(R.id.text_3)).setTypeface(CoCoinUtil.getInstance().typefaceLatoLight);
+        ((TextView)findViewById(R.id.text_3)).setTypeface(KKMoneyUtil.getInstance().typefaceLatoLight);
         SCViewAnimation sc14 = new SCViewAnimation(findViewById(R.id.text_3));
         sc14.startToPosition(size.x, null);
         sc14.addPageAnimation(new SCPositionAnimation(this, 2, -size.x, 0));
@@ -333,7 +333,7 @@ public class ShowActivity extends AppCompatActivity {
                                 = new RelativeLayout.LayoutParams(viewPager.getLayoutParams().width,
                                 800);
                         viewPagerLayoutParams.topMargin
-                                = getStatusBarHeight() + CoCoinUtil.getToolBarHeight(mContext) / 2;
+                                = getStatusBarHeight() + KKMoneyUtil.getToolBarHeight(mContext) / 2;
                         viewPager.setLayoutParams(viewPagerLayoutParams);
                     }
                 });
@@ -389,22 +389,22 @@ public class ShowActivity extends AppCompatActivity {
     private void buttonClickOperation(boolean longClick, int position) {
         switch (CURRENT_STATE) {
             case NEW_PASSWORD:
-                if (CoCoinUtil.ClickButtonDelete(position)) {
+                if (KKMoneyUtil.ClickButtonDelete(position)) {
                     if (longClick) {
-                        CoCoinFragmentManager.passwordChangeFragment[CURRENT_STATE].init();
+                        KKMoneyFragmentManager.passwordChangeFragment[CURRENT_STATE].init();
                         newPassword = "";
                     } else {
-                        CoCoinFragmentManager.passwordChangeFragment[CURRENT_STATE]
+                        KKMoneyFragmentManager.passwordChangeFragment[CURRENT_STATE]
                                 .clear(newPassword.length() - 1);
                         if (newPassword.length() != 0)
                             newPassword = newPassword.substring(0, newPassword.length() - 1);
                     }
-                } else if (CoCoinUtil.ClickButtonCommit(position)) {
+                } else if (KKMoneyUtil.ClickButtonCommit(position)) {
 
                 } else {
-                    CoCoinFragmentManager.passwordChangeFragment[CURRENT_STATE]
+                    KKMoneyFragmentManager.passwordChangeFragment[CURRENT_STATE]
                             .set(newPassword.length());
-                    newPassword += CoCoinUtil.BUTTONS[position];
+                    newPassword += KKMoneyUtil.BUTTONS[position];
                     if (newPassword.length() == 4) {
                         // finish the new password input
                         CURRENT_STATE = PASSWORD_AGAIN;
@@ -413,22 +413,22 @@ public class ShowActivity extends AppCompatActivity {
                 }
                 break;
             case PASSWORD_AGAIN:
-                if (CoCoinUtil.ClickButtonDelete(position)) {
+                if (KKMoneyUtil.ClickButtonDelete(position)) {
                     if (longClick) {
-                        CoCoinFragmentManager.passwordChangeFragment[CURRENT_STATE].init();
+                        KKMoneyFragmentManager.passwordChangeFragment[CURRENT_STATE].init();
                         againPassword = "";
                     } else {
-                        CoCoinFragmentManager.passwordChangeFragment[CURRENT_STATE]
+                        KKMoneyFragmentManager.passwordChangeFragment[CURRENT_STATE]
                                 .clear(againPassword.length() - 1);
                         if (againPassword.length() != 0)
                             againPassword = againPassword.substring(0, againPassword.length() - 1);
                     }
-                } else if (CoCoinUtil.ClickButtonCommit(position)) {
+                } else if (KKMoneyUtil.ClickButtonCommit(position)) {
 
                 } else {
-                    CoCoinFragmentManager.passwordChangeFragment[CURRENT_STATE]
+                    KKMoneyFragmentManager.passwordChangeFragment[CURRENT_STATE]
                             .set(againPassword.length());
-                    againPassword += CoCoinUtil.BUTTONS[position];
+                    againPassword += KKMoneyUtil.BUTTONS[position];
                     if (againPassword.length() == 4) {
                         // if the password again is equal to the new password
                         if (againPassword.equals(newPassword)) {
@@ -438,9 +438,9 @@ public class ShowActivity extends AppCompatActivity {
                             SettingManager.getInstance().setFirstTime(false);
                             if (SettingManager.getInstance().getLoggenOn()) {
                                 User currentUser = BmobUser.getCurrentUser(
-                                        CoCoinApplication.getAppContext(), User.class);
+                                        KKMoneyApplication.getAppContext(), User.class);
                                 currentUser.setAccountBookPassword(newPassword);
-                                currentUser.update(CoCoinApplication.getAppContext(),
+                                currentUser.update(KKMoneyApplication.getAppContext(),
                                         currentUser.getObjectId(), new UpdateListener() {
                                             @Override
                                             public void onSuccess() {
@@ -461,8 +461,8 @@ public class ShowActivity extends AppCompatActivity {
                                 }
                             }, 1000);
                         } else {
-                            CoCoinFragmentManager.passwordChangeFragment[CURRENT_STATE].clear(4);
-                            CoCoinFragmentManager.passwordChangeFragment[CURRENT_STATE - 1].init();
+                            KKMoneyFragmentManager.passwordChangeFragment[CURRENT_STATE].clear(4);
+                            KKMoneyFragmentManager.passwordChangeFragment[CURRENT_STATE - 1].init();
                             CURRENT_STATE = NEW_PASSWORD;
                             viewPager.setCurrentItem(NEW_PASSWORD, true);
                             newPassword = "";
@@ -480,7 +480,7 @@ public class ShowActivity extends AppCompatActivity {
     private void showToast(int toastType) {
         SuperToast.cancelAllSuperToasts();
 
-        superToast.setAnimations(CoCoinUtil.TOAST_ANIMATION);
+        superToast.setAnimations(KKMoneyUtil.TOAST_ANIMATION);
         superToast.setDuration(SuperToast.Duration.SHORT);
         superToast.setTextColor(Color.parseColor("#ffffff"));
         superToast.setTextSize(SuperToast.TextSize.SMALL);
@@ -492,7 +492,7 @@ public class ShowActivity extends AppCompatActivity {
                 superToast.setText(
                         mContext.getResources().getString(R.string.toast_password_wrong));
                 superToast.setBackground(SuperToast.Background.RED);
-                superToast.getTextView().setTypeface(CoCoinUtil.typefaceLatoLight);
+                superToast.getTextView().setTypeface(KKMoneyUtil.typefaceLatoLight);
 
                 break;
             // password is different
@@ -501,7 +501,7 @@ public class ShowActivity extends AppCompatActivity {
                 superToast.setText(
                         mContext.getResources().getString(R.string.different_password));
                 superToast.setBackground(SuperToast.Background.RED);
-                superToast.getTextView().setTypeface(CoCoinUtil.typefaceLatoLight);
+                superToast.getTextView().setTypeface(KKMoneyUtil.typefaceLatoLight);
 
                 break;
             // success
@@ -510,7 +510,7 @@ public class ShowActivity extends AppCompatActivity {
                 superToast.setText(
                         mContext.getResources().getString(R.string.set_password_successfully));
                 superToast.setBackground(SuperToast.Background.GREEN);
-                superToast.getTextView().setTypeface(CoCoinUtil.typefaceLatoLight);
+                superToast.getTextView().setTypeface(KKMoneyUtil.typefaceLatoLight);
 
                 break;
             default:
@@ -551,8 +551,8 @@ public class ShowActivity extends AppCompatActivity {
     @Override
     protected void onDestroy() {
         for (int i = 0; i < 3; i++) {
-            CoCoinFragmentManager.passwordChangeFragment[i].onDestroy();
-            CoCoinFragmentManager.passwordChangeFragment[i] = null;
+            KKMoneyFragmentManager.passwordChangeFragment[i].onDestroy();
+            KKMoneyFragmentManager.passwordChangeFragment[i] = null;
         }
         super.onDestroy();
     }

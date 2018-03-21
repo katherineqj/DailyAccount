@@ -55,7 +55,7 @@ import com.katherine_qj.saver.BuildConfig;
 import com.katherine_qj.saver.R;
 import com.katherine_qj.saver.adapter.DialogTagChooseGridViewAdapter;
 import com.katherine_qj.saver.adapter.MySwipeableItemAdapter;
-import com.katherine_qj.saver.model.CoCoinRecord;
+import com.katherine_qj.saver.model.KKMoneyRecord;
 import com.katherine_qj.saver.model.Logo;
 import com.katherine_qj.saver.model.RecordManager;
 import com.katherine_qj.saver.model.SettingManager;
@@ -63,7 +63,7 @@ import com.katherine_qj.saver.model.User;
 import com.katherine_qj.saver.ui.CustomSliderView;
 import com.katherine_qj.saver.ui.DoubleSliderClickListener;
 import com.katherine_qj.saver.ui.MyGridView;
-import com.katherine_qj.saver.util.CoCoinUtil;
+import com.katherine_qj.saver.util.KKMoneyUtil;
 import com.nispok.snackbar.Snackbar;
 import com.nispok.snackbar.SnackbarManager;
 import com.nispok.snackbar.enums.SnackbarType;
@@ -134,8 +134,8 @@ public class AccountBookListViewActivity extends AppCompatActivity
     private final double MIN_MONEY = 0;
     private final double MAX_MONEY = 99999;
 
-    private double LEFT_MONEY = CoCoinUtil.INPUT_MIN_EXPENSE;
-    private double RIGHT_MONEY = CoCoinUtil.INPUT_MAX_EXPENSE;
+    private double LEFT_MONEY = KKMoneyUtil.INPUT_MIN_EXPENSE;
+    private double RIGHT_MONEY = KKMoneyUtil.INPUT_MAX_EXPENSE;
     private int TAG_ID = -1;
     private Calendar LEFT_CALENDAR = null;
     private Calendar RIGHT_CALENDAR = null;
@@ -164,27 +164,27 @@ public class AccountBookListViewActivity extends AppCompatActivity
 
         userName = (TextView)findViewById(R.id.user_name);
         userEmail = (TextView)findViewById(R.id.user_email);
-        userName.setTypeface(CoCoinUtil.typefaceLatoRegular);
-        userEmail.setTypeface(CoCoinUtil.typefaceLatoLight);
+        userName.setTypeface(KKMoneyUtil.typefaceLatoRegular);
+        userEmail.setTypeface(KKMoneyUtil.typefaceLatoLight);
 
-        User user = BmobUser.getCurrentUser(CoCoinApplication.getAppContext(), User.class);
+        User user = BmobUser.getCurrentUser(KKMoneyApplication.getAppContext(), User.class);
         if (user != null) {
             userName.setText(user.getUsername());
             userEmail.setText(user.getEmail());
         }
 
-        int size = RecordManager.getInstance(CoCoinApplication.getAppContext()).RECORDS.size();
-        if (RecordManager.getInstance(CoCoinApplication.getAppContext()).SELECTED_RECORDS == null) {
-            RecordManager.getInstance(CoCoinApplication.getAppContext()).SELECTED_RECORDS = new LinkedList<>();
+        int size = RecordManager.getInstance(KKMoneyApplication.getAppContext()).RECORDS.size();
+        if (RecordManager.getInstance(KKMoneyApplication.getAppContext()).SELECTED_RECORDS == null) {
+            RecordManager.getInstance(KKMoneyApplication.getAppContext()).SELECTED_RECORDS = new LinkedList<>();
         }
-        RecordManager.getInstance(CoCoinApplication.getAppContext()).SELECTED_RECORDS.clear();
+        RecordManager.getInstance(KKMoneyApplication.getAppContext()).SELECTED_RECORDS.clear();
         for (int i = 0; i < size; i++) {
-            CoCoinRecord record = new CoCoinRecord();
+            KKMoneyRecord record = new KKMoneyRecord();
             record.set(RecordManager.RECORDS.get(i));
-            RecordManager.getInstance(CoCoinApplication.getAppContext()).SELECTED_RECORDS.add(record);
+            RecordManager.getInstance(KKMoneyApplication.getAppContext()).SELECTED_RECORDS.add(record);
         }
-        RecordManager.getInstance(CoCoinApplication.getAppContext()).SELECTED_SUM = Double.valueOf(RecordManager.getInstance(CoCoinApplication.getAppContext()).SUM);
-        originalSum = RecordManager.getInstance(CoCoinApplication.getAppContext()).SELECTED_SUM;
+        RecordManager.getInstance(KKMoneyApplication.getAppContext()).SELECTED_SUM = Double.valueOf(RecordManager.getInstance(KKMoneyApplication.getAppContext()).SUM);
+        originalSum = RecordManager.getInstance(KKMoneyApplication.getAppContext()).SELECTED_SUM;
 
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -204,7 +204,7 @@ public class AccountBookListViewActivity extends AppCompatActivity
         } else{
             // do something for phones running an SDK before lollipop
             View statusBarView = (View)findViewById(R.id.status_bar_view);
-            statusBarView.getLayoutParams().height = CoCoinUtil.getStatusBarHeight();
+            statusBarView.getLayoutParams().height = KKMoneyUtil.getStatusBarHeight();
         }
 
         if (toolbar != null) {
@@ -260,7 +260,7 @@ public class AccountBookListViewActivity extends AppCompatActivity
         });
 
         emptyTip = (TextView)findViewById(R.id.empty_tip);
-        emptyTip.setTypeface(CoCoinUtil.GetTypeface());
+        emptyTip.setTypeface(KKMoneyUtil.GetTypeface());
 
         recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
         layoutManager = new LinearLayoutManager(mContext, LinearLayoutManager.VERTICAL, false);
@@ -332,7 +332,7 @@ public class AccountBookListViewActivity extends AppCompatActivity
         recyclerView.setOnScrollListener(
                 verticalRecyclerViewFastScroller.getOnScrollListener());
 
-        CoCoinUtil.backupCoCoinRecord = null;
+        KKMoneyUtil.backupKKMoneyRecord = null;
 
         if (RecordManager.SELECTED_RECORDS.size() == 0) {
             emptyTip.setVisibility(View.VISIBLE);
@@ -344,7 +344,7 @@ public class AccountBookListViewActivity extends AppCompatActivity
 
         infoLayout = (FrameLayout)mDrawer.findViewById(R.id.info_layout);
         LinearLayout.LayoutParams infoLayoutParams = new LinearLayout.LayoutParams(infoLayout.getLayoutParams());
-        infoLayoutParams.setMargins(0, CoCoinUtil.getStatusBarHeight() - CoCoinUtil.dpToPx(30), 0, 0);
+        infoLayoutParams.setMargins(0, KKMoneyUtil.getStatusBarHeight() - KKMoneyUtil.dpToPx(30), 0, 0);
         infoLayout.setLayoutParams(infoLayoutParams);
 
         profileImage= (CircleImageView)mDrawer.findViewById(R.id.profile_image);
@@ -352,16 +352,16 @@ public class AccountBookListViewActivity extends AppCompatActivity
             @Override
             public void onClick(View v) {
                 if (SettingManager.getInstance().getLoggenOn()) {
-                    CoCoinUtil.showToast(mContext, R.string.change_logo_tip);
+                    KKMoneyUtil.showToast(mContext, R.string.change_logo_tip);
                 } else {
-                    CoCoinUtil.showToast(mContext, R.string.login_tip);
+                    KKMoneyUtil.showToast(mContext, R.string.login_tip);
                 }
             }
         });
 
         mDemoSlider = (SliderLayout)findViewById(R.id.slider);
 
-        HashMap<String, Integer> urls = CoCoinUtil.GetDrawerTopUrl();
+        HashMap<String, Integer> urls = KKMoneyUtil.GetDrawerTopUrl();
 
         for(String name : urls.keySet()){
             CustomSliderView customSliderView = new CustomSliderView(this);
@@ -377,26 +377,26 @@ public class AccountBookListViewActivity extends AppCompatActivity
         mDemoSlider.setCustomIndicator((PagerIndicator) findViewById(R.id.custom_indicator));
 
         titleExpense = (TextView)findViewById(R.id.title_expense);
-        titleExpense.setTypeface(CoCoinUtil.typefaceLatoLight);
-        titleExpense.setText(CoCoinUtil.GetInMoney((int)(double)RecordManager.getInstance(mContext).SELECTED_SUM));
+        titleExpense.setTypeface(KKMoneyUtil.typefaceLatoLight);
+        titleExpense.setText(KKMoneyUtil.GetInMoney((int)(double)RecordManager.getInstance(mContext).SELECTED_SUM));
 
         titleSum = (TextView)findViewById(R.id.title_sum);
-        titleSum.setTypeface(CoCoinUtil.typefaceLatoLight);
+        titleSum.setTypeface(KKMoneyUtil.typefaceLatoLight);
         titleSum.setText(RecordManager.getInstance(mContext).SELECTED_RECORDS.size() + "'s");
 
 //        titleSlider = (SliderLayout)findViewById(R.id.title_slider);
 //        titleSlider.getLayoutParams().height = 48;
-//        titleSlider.getLayoutParams().width = 400 - CoCoinUtil.dpToPx(60 * 2);
+//        titleSlider.getLayoutParams().width = 400 - KKMoneyUtil.dpToPx(60 * 2);
 //
-//        HashMap<String, Integer> urls2 = CoCoinUtil.getTransparentUrls();
+//        HashMap<String, Integer> urls2 = KKMoneyUtil.getTransparentUrls();
 //
-//        CustomTitleSliderView customTitleSliderView = new CustomTitleSliderView(0 + "'s", CoCoinFragmentManager.NUMBER_SLIDER);
+//        CustomTitleSliderView customTitleSliderView = new CustomTitleSliderView(0 + "'s", KKMoneyFragmentManager.NUMBER_SLIDER);
 //        customTitleSliderView
 //                .image(urls2.get("0"))
 //                .setScaleType(BaseSliderView.ScaleType.Fit);
 //        titleSlider.addSlider(customTitleSliderView);
 //
-//        customTitleSliderView = new CustomTitleSliderView(CoCoinUtil.GetInMoney(0), CoCoinFragmentManager.EXPENSE_SLIDER);
+//        customTitleSliderView = new CustomTitleSliderView(KKMoneyUtil.GetInMoney(0), KKMoneyFragmentManager.EXPENSE_SLIDER);
 //        customTitleSliderView
 //                .image(urls2.get("1"))
 //                .setScaleType(BaseSliderView.ScaleType.Fit);
@@ -407,44 +407,44 @@ public class AccountBookListViewActivity extends AppCompatActivity
 //        titleSlider.setDuration(3000);
 //        titleSlider.setCustomIndicator((PagerIndicator) findViewById(R.id.custom_indicator));
 
-        ((TextView)findViewById(R.id.tag_title)).setTypeface(CoCoinUtil.GetTypeface());
-        ((TextView)findViewById(R.id.tag_title_expense)).setTypeface(CoCoinUtil.GetTypeface());
-        ((TextView)findViewById(R.id.tag_title_time)).setTypeface(CoCoinUtil.GetTypeface());
-        ((TextView)findViewById(R.id.tag_title_tag)).setTypeface(CoCoinUtil.GetTypeface());
+        ((TextView)findViewById(R.id.tag_title)).setTypeface(KKMoneyUtil.GetTypeface());
+        ((TextView)findViewById(R.id.tag_title_expense)).setTypeface(KKMoneyUtil.GetTypeface());
+        ((TextView)findViewById(R.id.tag_title_time)).setTypeface(KKMoneyUtil.GetTypeface());
+        ((TextView)findViewById(R.id.tag_title_tag)).setTypeface(KKMoneyUtil.GetTypeface());
 
         setMoney = (TextView)findViewById(R.id.select_expense);
-        setMoney.setTypeface(CoCoinUtil.GetTypeface());
+        setMoney.setTypeface(KKMoneyUtil.GetTypeface());
         setMoney.setOnClickListener(this);
         noMoney = (TextView)findViewById(R.id.no_expense);
-        noMoney.setTypeface(CoCoinUtil.GetTypeface());
+        noMoney.setTypeface(KKMoneyUtil.GetTypeface());
         noMoney.setOnClickListener(this);
         setTime = (TextView)findViewById(R.id.select_time);
-        setTime.setTypeface(CoCoinUtil.GetTypeface());
+        setTime.setTypeface(KKMoneyUtil.GetTypeface());
         setTime.setOnClickListener(this);
         noTime = (TextView)findViewById(R.id.no_time);
-        noTime.setTypeface(CoCoinUtil.GetTypeface());
+        noTime.setTypeface(KKMoneyUtil.GetTypeface());
         noTime.setOnClickListener(this);
         setTag = (TextView)findViewById(R.id.select_tag);
-        setTag.setTypeface(CoCoinUtil.GetTypeface());
+        setTag.setTypeface(KKMoneyUtil.GetTypeface());
         setTag.setOnClickListener(this);
         noTag = (TextView)findViewById(R.id.no_tag);
-        noTag.setTypeface(CoCoinUtil.GetTypeface());
+        noTag.setTypeface(KKMoneyUtil.GetTypeface());
         noTag.setOnClickListener(this);
         select = (TextView)findViewById(R.id.select);
-        select.setTypeface(CoCoinUtil.GetTypeface());
+        select.setTypeface(KKMoneyUtil.GetTypeface());
         select.setOnClickListener(this);
 
         leftExpense = (TextView)findViewById(R.id.left_expense);
-        leftExpense.setTypeface(CoCoinUtil.GetTypeface());
+        leftExpense.setTypeface(KKMoneyUtil.GetTypeface());
         rightExpense = (TextView)findViewById(R.id.right_expense);
-        rightExpense.setTypeface(CoCoinUtil.GetTypeface());
+        rightExpense.setTypeface(KKMoneyUtil.GetTypeface());
         leftTime = (TextView)findViewById(R.id.left_time);
-        leftTime.setTypeface(CoCoinUtil.GetTypeface());
+        leftTime.setTypeface(KKMoneyUtil.GetTypeface());
         rightTime = (TextView)findViewById(R.id.right_time);
-        rightTime.setTypeface(CoCoinUtil.GetTypeface());
+        rightTime.setTypeface(KKMoneyUtil.GetTypeface());
         tagImage = (ImageView)findViewById(R.id.tag_image);
         tagName = (TextView)findViewById(R.id.tag_name);
-        tagName.setTypeface(CoCoinUtil.GetTypeface());
+        tagName.setTypeface(KKMoneyUtil.GetTypeface());
 
         setConditions();
 
@@ -453,13 +453,13 @@ public class AccountBookListViewActivity extends AppCompatActivity
 
     private void setConditions() {
         if (LEFT_MONEY == MIN_MONEY) leftExpense.setText(mContext.getResources().getString(R.string.any));
-        else leftExpense.setText(CoCoinUtil.GetInMoney((int)LEFT_MONEY));
+        else leftExpense.setText(KKMoneyUtil.GetInMoney((int)LEFT_MONEY));
         if (RIGHT_MONEY == MAX_MONEY) rightExpense.setText(mContext.getResources().getString(R.string.any));
-        else rightExpense.setText(CoCoinUtil.GetInMoney((int)RIGHT_MONEY));
+        else rightExpense.setText(KKMoneyUtil.GetInMoney((int)RIGHT_MONEY));
         if (LEFT_CALENDAR == null) leftTime.setText(mContext.getResources().getString(R.string.any));
         else {
             String dateString
-                    = CoCoinUtil.GetMonthShort(LEFT_CALENDAR.get(Calendar.MONTH) + 1)
+                    = KKMoneyUtil.GetMonthShort(LEFT_CALENDAR.get(Calendar.MONTH) + 1)
                     + " " + LEFT_CALENDAR.get(Calendar.DAY_OF_MONTH) + " " +
                     LEFT_CALENDAR.get(Calendar.YEAR);
             leftTime.setText(dateString);
@@ -467,7 +467,7 @@ public class AccountBookListViewActivity extends AppCompatActivity
         if (RIGHT_CALENDAR == null) rightTime.setText(mContext.getResources().getString(R.string.any));
         else {
             String dateString
-                    = CoCoinUtil.GetMonthShort(RIGHT_CALENDAR.get(Calendar.MONTH) + 1)
+                    = KKMoneyUtil.GetMonthShort(RIGHT_CALENDAR.get(Calendar.MONTH) + 1)
                     + " " + RIGHT_CALENDAR.get(Calendar.DAY_OF_MONTH) + " " +
                     RIGHT_CALENDAR.get(Calendar.YEAR);
             rightTime.setText(dateString);
@@ -476,24 +476,24 @@ public class AccountBookListViewActivity extends AppCompatActivity
             tagImage.setImageResource(R.drawable.tags_icon);
             tagName.setText(mContext.getResources().getString(R.string.any));
         } else {
-            tagImage.setImageDrawable(CoCoinUtil.GetTagIconDrawable(TAG_ID));
-            tagName.setText(CoCoinUtil.GetTagName(TAG_ID));
+            tagImage.setImageDrawable(KKMoneyUtil.GetTagIconDrawable(TAG_ID));
+            tagName.setText(KKMoneyUtil.GetTagName(TAG_ID));
         }
     }
 
     private void changeTitleSlider() {
         titleExpense = (TextView)findViewById(R.id.title_expense);
-        titleExpense.setText(CoCoinUtil.GetInMoney((int)(double)RecordManager.getInstance(mContext).SELECTED_SUM));
+        titleExpense.setText(KKMoneyUtil.GetInMoney((int)(double)RecordManager.getInstance(mContext).SELECTED_SUM));
 
         titleSum = (TextView)findViewById(R.id.title_sum);
         titleSum.setText(RecordManager.getInstance(mContext).SELECTED_RECORDS.size() + "'s");
 
 //        titleSlider.stopAutoCycle();
 //
-//        if (CoCoinFragmentManager.numberCustomTitleSliderView != null)
-//            CoCoinFragmentManager.numberCustomTitleSliderView.setTitle(RecordManager.getInstance(CoCoinApplication.getAppContext()).SELECTED_RECORDS.size() + "'s");
-//        if (CoCoinFragmentManager.expenseCustomTitleSliderView != null)
-//            CoCoinFragmentManager.expenseCustomTitleSliderView.setTitle(CoCoinUtil.GetInMoney((int)(double)RecordManager.getInstance(CoCoinApplication.getAppContext()).SELECTED_SUM));
+//        if (KKMoneyFragmentManager.numberCustomTitleSliderView != null)
+//            KKMoneyFragmentManager.numberCustomTitleSliderView.setTitle(RecordManager.getInstance(KKMoneyApplication.getAppContext()).SELECTED_RECORDS.size() + "'s");
+//        if (KKMoneyFragmentManager.expenseCustomTitleSliderView != null)
+//            KKMoneyFragmentManager.expenseCustomTitleSliderView.setTitle(KKMoneyUtil.GetInMoney((int)(double)RecordManager.getInstance(KKMoneyApplication.getAppContext()).SELECTED_SUM));
 //
 //        titleSlider.startAutoCycle();
     }
@@ -512,15 +512,15 @@ public class AccountBookListViewActivity extends AppCompatActivity
         String subTitle;
         double spend = RecordManager.SELECTED_RECORDS.get(position).getMoney();
         int tagId = RecordManager.SELECTED_RECORDS.get(position).getTag();
-        if ("zh".equals(CoCoinUtil.GetLanguage())) {
-            subTitle = CoCoinUtil.GetSpendString((int)spend) +
-                    "于" + CoCoinUtil.GetTagName(tagId);
+        if ("zh".equals(KKMoneyUtil.GetLanguage())) {
+            subTitle = KKMoneyUtil.GetSpendString((int)spend) +
+                    "于" + KKMoneyUtil.GetTagName(tagId);
         } else {
             subTitle = "Spend " + (int)spend +
-                    "in " + CoCoinUtil.GetTagName(tagId);
+                    "in " + KKMoneyUtil.GetTagName(tagId);
         }
         dialog = new MaterialDialog.Builder(mContext)
-                .icon(CoCoinUtil.GetTagIconDrawable(RecordManager.SELECTED_RECORDS.get(position).getTag()))
+                .icon(KKMoneyUtil.GetTagIconDrawable(RecordManager.SELECTED_RECORDS.get(position).getTag()))
                 .limitIconToDefaultSize()
                 .title(subTitle)
                 .customView(R.layout.dialog_a_record, true)
@@ -551,7 +551,7 @@ public class AccountBookListViewActivity extends AppCompatActivity
             }
             int size = RecordManager.getInstance(mContext).RECORDS.size();
             for (int i = 0; i < size; i++) {
-                CoCoinRecord record = new CoCoinRecord();
+                KKMoneyRecord record = new KKMoneyRecord();
                 record.set(RecordManager.getInstance(mContext).RECORDS.get(i));
                 if (inRemark(record, sub)) {
                     RecordManager.getInstance(mContext).SELECTED_SUM += record.getMoney();
@@ -592,7 +592,7 @@ public class AccountBookListViewActivity extends AppCompatActivity
             }
             int size = RecordManager.getInstance(mContext).RECORDS.size();
             for (int i = 0; i < size; i++) {
-                CoCoinRecord record = new CoCoinRecord();
+                KKMoneyRecord record = new KKMoneyRecord();
                 record.set(RecordManager.getInstance(mContext).RECORDS.get(i));
                 if (inMoney(record) && inTag(record) && inTime(record)) {
                     RecordManager.getInstance(mContext).SELECTED_SUM += record.getMoney();
@@ -632,21 +632,21 @@ public class AccountBookListViewActivity extends AppCompatActivity
         new SelectRecords().execute();
     }
 
-    private boolean inMoney(CoCoinRecord record) {
+    private boolean inMoney(KKMoneyRecord record) {
         return LEFT_MONEY <= record.getMoney() && record.getMoney() <= RIGHT_MONEY;
     }
 
-    private boolean inTag(CoCoinRecord record) {
+    private boolean inTag(KKMoneyRecord record) {
         if (TAG_ID == -1) return true;
         else return record.getTag() == TAG_ID;
     }
 
-    private boolean inTime(CoCoinRecord record) {
+    private boolean inTime(KKMoneyRecord record) {
         if (LEFT_CALENDAR == null || RIGHT_CALENDAR == null) return true;
         else return !record.getCalendar().before(LEFT_CALENDAR) && !record.getCalendar().after(RIGHT_CALENDAR);
     }
 
-    private boolean inRemark(CoCoinRecord record, String sub) {
+    private boolean inRemark(KKMoneyRecord record, String sub) {
         return record.getRemark().contains(sub);
     }
 
@@ -683,21 +683,21 @@ public class AccountBookListViewActivity extends AppCompatActivity
                         .duration(Snackbar.SnackbarDuration.LENGTH_SHORT)
                         .position(Snackbar.SnackbarPosition.BOTTOM)
                         .margin(15, 15)
-                        .backgroundDrawable(CoCoinUtil.GetSnackBarBackground(-3))
+                        .backgroundDrawable(KKMoneyUtil.GetSnackBarBackground(-3))
                         .text(mContext.getResources().getString(R.string.deleting))
-                        .textTypeface(CoCoinUtil.GetTypeface())
+                        .textTypeface(KKMoneyUtil.GetTypeface())
                         .textColor(Color.WHITE)
-                        .actionLabelTypeface(CoCoinUtil.GetTypeface())
+                        .actionLabelTypeface(KKMoneyUtil.GetTypeface())
                         .actionLabel(mContext.getResources()
                                 .getString(R.string.undo))
                         .actionColor(Color.WHITE)
                         .actionListener(new ActionClickListener() {
                             @Override
                             public void onActionClicked(Snackbar snackbar) {
-                                RecordManager.SELECTED_RECORDS.add(lastPosition, CoCoinUtil.backupCoCoinRecord);
-                                RecordManager.SELECTED_SUM += CoCoinUtil.backupCoCoinRecord.getMoney();
+                                RecordManager.SELECTED_RECORDS.add(lastPosition, KKMoneyUtil.backupKKMoneyRecord);
+                                RecordManager.SELECTED_SUM += KKMoneyUtil.backupKKMoneyRecord.getMoney();
                                 changeTitleSlider();
-                                CoCoinUtil.backupCoCoinRecord = null;
+                                KKMoneyUtil.backupKKMoneyRecord = null;
                                 LinearLayoutManager linearLayoutManager
                                         = (LinearLayoutManager) recyclerView.getLayoutManager();
                                 int firstVisiblePosition = linearLayoutManager
@@ -739,26 +739,26 @@ public class AccountBookListViewActivity extends AppCompatActivity
 
                             @Override
                             public void onDismiss(Snackbar snackbar) {
-                                if (CoCoinUtil.backupCoCoinRecord != null) {
-                                    RecordManager.deleteRecord(CoCoinUtil.backupCoCoinRecord, true);
+                                if (KKMoneyUtil.backupKKMoneyRecord != null) {
+                                    RecordManager.deleteRecord(KKMoneyUtil.backupKKMoneyRecord, true);
                                 }
-                                CoCoinUtil.backupCoCoinRecord = null;
+                                KKMoneyUtil.backupKKMoneyRecord = null;
                             }
 
                             @Override
                             public void onDismissByReplace(Snackbar snackbar) {
-                                if (CoCoinUtil.backupCoCoinRecord != null) {
-                                    RecordManager.deleteRecord(CoCoinUtil.backupCoCoinRecord, true);
+                                if (KKMoneyUtil.backupKKMoneyRecord != null) {
+                                    RecordManager.deleteRecord(KKMoneyUtil.backupKKMoneyRecord, true);
                                 }
-                                CoCoinUtil.backupCoCoinRecord = null;
+                                KKMoneyUtil.backupKKMoneyRecord = null;
                             }
 
                             @Override
                             public void onDismissed(Snackbar snackbar) {
-                                if (CoCoinUtil.backupCoCoinRecord != null) {
-                                    RecordManager.deleteRecord(CoCoinUtil.backupCoCoinRecord, true);
+                                if (KKMoneyUtil.backupKKMoneyRecord != null) {
+                                    RecordManager.deleteRecord(KKMoneyUtil.backupKKMoneyRecord, true);
                                 }
-                                CoCoinUtil.backupCoCoinRecord = null;
+                                KKMoneyUtil.backupKKMoneyRecord = null;
                             }
                         });
         SnackbarManager.show(snackbar);
@@ -841,10 +841,10 @@ public class AccountBookListViewActivity extends AppCompatActivity
             SettingManager.getInstance().setTodayViewMonthExpenseShouldChange(true);
         }
 
-        if (CoCoinUtil.backupCoCoinRecord != null) {
-            RecordManager.deleteRecord(CoCoinUtil.backupCoCoinRecord, true);
+        if (KKMoneyUtil.backupKKMoneyRecord != null) {
+            RecordManager.deleteRecord(KKMoneyUtil.backupKKMoneyRecord, true);
         }
-        CoCoinUtil.backupCoCoinRecord = null;
+        KKMoneyUtil.backupKKMoneyRecord = null;
 
         super.finish();
     }
@@ -881,8 +881,8 @@ public class AccountBookListViewActivity extends AppCompatActivity
 //        titleSlider.destroyDrawingCache();
 //        titleSlider = null;
 
-//        CoCoinFragmentManager.numberCustomTitleSliderView = null;
-//        CoCoinFragmentManager.expenseCustomTitleSliderView = null;
+//        KKMoneyFragmentManager.numberCustomTitleSliderView = null;
+//        KKMoneyFragmentManager.expenseCustomTitleSliderView = null;
 
         doubleSliderClickListener = null;
 
@@ -894,38 +894,38 @@ public class AccountBookListViewActivity extends AppCompatActivity
     }
 
     private void loadLogo() {
-        User user = BmobUser.getCurrentUser(CoCoinApplication.getAppContext(), User.class);
+        User user = BmobUser.getCurrentUser(KKMoneyApplication.getAppContext(), User.class);
         if (user != null) {
             try {
-                File logoFile = new File(CoCoinApplication.getAppContext().getFilesDir() + CoCoinUtil.LOGO_NAME);
+                File logoFile = new File(KKMoneyApplication.getAppContext().getFilesDir() + KKMoneyUtil.LOGO_NAME);
                 if (!logoFile.exists()) {
                     // the local logo file is missed
                     // try to get from the server
                     BmobQuery<Logo> bmobQuery = new BmobQuery();
                     bmobQuery.addWhereEqualTo("objectId", user.getLogoObjectId());
-                    bmobQuery.findObjects(CoCoinApplication.getAppContext()
+                    bmobQuery.findObjects(KKMoneyApplication.getAppContext()
                             , new FindListener<Logo>() {
                                 @Override
                                 public void onSuccess(List<Logo> object) {
                                     // there has been an old logo in the server/////////////////////////////////////////////////////////
-                                    String url = object.get(0).getFile().getFileUrl(CoCoinApplication.getAppContext());
-                                    if (BuildConfig.DEBUG) Log.d("CoCoin", "Logo in server: " + url);
-                                    Ion.with(CoCoinApplication.getAppContext()).load(url)
-                                            .write(new File(CoCoinApplication.getAppContext().getFilesDir()
-                                                    + CoCoinUtil.LOGO_NAME))
+                                    String url = object.get(0).getFile().getFileUrl(KKMoneyApplication.getAppContext());
+                                    if (BuildConfig.DEBUG) Log.d("KKMoney", "Logo in server: " + url);
+                                    Ion.with(KKMoneyApplication.getAppContext()).load(url)
+                                            .write(new File(KKMoneyApplication.getAppContext().getFilesDir()
+                                                    + KKMoneyUtil.LOGO_NAME))
                                             .setCallback(new FutureCallback<File>() {
                                                 @Override
                                                 public void onCompleted(Exception e, File file) {
                                                     profileImage.setImageBitmap(BitmapFactory.decodeFile(
-                                                            CoCoinApplication.getAppContext().getFilesDir()
-                                                                    + CoCoinUtil.LOGO_NAME));
+                                                            KKMoneyApplication.getAppContext().getFilesDir()
+                                                                    + KKMoneyUtil.LOGO_NAME));
                                                 }
                                             });
                                 }
                                 @Override
                                 public void onError(int code, String msg) {
                                     // the picture is lost
-                                    if (BuildConfig.DEBUG) Log.d("CoCoin", "Can't find the old logo in server.");
+                                    if (BuildConfig.DEBUG) Log.d("KKMoney", "Can't find the old logo in server.");
                                 }
                             });
                 } else {
@@ -949,8 +949,8 @@ public class AccountBookListViewActivity extends AppCompatActivity
                 setExpense();
                 break;
             case R.id.no_expense:
-                LEFT_MONEY = CoCoinUtil.INPUT_MIN_EXPENSE;
-                RIGHT_MONEY = CoCoinUtil.INPUT_MAX_EXPENSE;
+                LEFT_MONEY = KKMoneyUtil.INPUT_MIN_EXPENSE;
+                RIGHT_MONEY = KKMoneyUtil.INPUT_MAX_EXPENSE;
                 setConditions();
                 break;
             case R.id.select_time:
@@ -983,12 +983,12 @@ public class AccountBookListViewActivity extends AppCompatActivity
                 .positiveText(R.string.ok)
                 .negativeText(R.string.cancel)
                 .inputType(InputType.TYPE_CLASS_NUMBER)
-                .input("≥" + (int)(double)CoCoinUtil.INPUT_MIN_EXPENSE, "", new MaterialDialog.InputCallback() {
+                .input("≥" + (int)(double)KKMoneyUtil.INPUT_MIN_EXPENSE, "", new MaterialDialog.InputCallback() {
                     @Override
                     public void onInput(MaterialDialog dialog, CharSequence input) {
                         try {
                             inputNumber = Double.valueOf(String.valueOf(input));
-                            if (inputNumber < CoCoinUtil.INPUT_MIN_EXPENSE || inputNumber > CoCoinUtil.INPUT_MAX_EXPENSE)
+                            if (inputNumber < KKMoneyUtil.INPUT_MIN_EXPENSE || inputNumber > KKMoneyUtil.INPUT_MAX_EXPENSE)
                                 inputNumber = -1;
                         } catch (NumberFormatException n) {
                             inputNumber = -1;
@@ -1009,12 +1009,12 @@ public class AccountBookListViewActivity extends AppCompatActivity
                                     .positiveText(R.string.ok)
                                     .negativeText(R.string.cancel)
                                     .inputType(InputType.TYPE_CLASS_NUMBER)
-                                    .input("≤" + (int)(double)CoCoinUtil.INPUT_MAX_EXPENSE, "", new MaterialDialog.InputCallback() {
+                                    .input("≤" + (int)(double)KKMoneyUtil.INPUT_MAX_EXPENSE, "", new MaterialDialog.InputCallback() {
                                         @Override
                                         public void onInput(MaterialDialog dialog, CharSequence input) {
                                             try {
                                                 inputNumber = Double.valueOf(String.valueOf(input));
-                                                if (inputNumber < CoCoinUtil.INPUT_MIN_EXPENSE || inputNumber > CoCoinUtil.INPUT_MAX_EXPENSE)
+                                                if (inputNumber < KKMoneyUtil.INPUT_MIN_EXPENSE || inputNumber > KKMoneyUtil.INPUT_MAX_EXPENSE)
                                                     inputNumber = -1;
                                             } catch (NumberFormatException n) {
                                                 inputNumber = -1;
@@ -1082,7 +1082,7 @@ public class AccountBookListViewActivity extends AppCompatActivity
             to.add(Calendar.SECOND, 0);
 
             if (to.before(from)) {
-                CoCoinUtil.showToast(mContext, mContext.getResources().getString(R.string.from_invalid), SuperToast.Background.RED);
+                KKMoneyUtil.showToast(mContext, mContext.getResources().getString(R.string.from_invalid), SuperToast.Background.RED);
             } else {
                 LEFT_CALENDAR = (Calendar)from.clone();
                 RIGHT_CALENDAR = (Calendar)to.clone();
@@ -1111,8 +1111,8 @@ public class AccountBookListViewActivity extends AppCompatActivity
             public void onItemClick(AdapterView<?> parent, View view, final int position, long id) {
                 tagSelectDialog.dismiss();
                 TAG_ID = RecordManager.getInstance(mContext).TAGS.get(position + 2).getId();
-                tagImage.setImageDrawable(CoCoinUtil.GetTagIconDrawable(TAG_ID));
-                tagName.setText(CoCoinUtil.GetTagName(TAG_ID));
+                tagImage.setImageDrawable(KKMoneyUtil.GetTagIconDrawable(TAG_ID));
+                tagName.setText(KKMoneyUtil.GetTagName(TAG_ID));
             }
         });
     }

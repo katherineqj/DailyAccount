@@ -19,7 +19,7 @@ import com.katherine_qj.saver.R;
 import com.katherine_qj.saver.adapter.ReportViewFragmentAdapter;
 import com.katherine_qj.saver.fragment.ReportViewFragment;
 import com.katherine_qj.saver.model.SettingManager;
-import com.katherine_qj.saver.util.CoCoinUtil;
+import com.katherine_qj.saver.util.KKMoneyUtil;
 
 public class AccountBookReportViewActivity extends AppCompatActivity
         implements
@@ -44,10 +44,10 @@ public class AccountBookReportViewActivity extends AppCompatActivity
 
         View view = mViewPager.getRootView();
         TextView title = (TextView)view.findViewById(R.id.logo_white);
-        title.setTypeface(CoCoinUtil.typefaceLatoLight);
+        title.setTypeface(KKMoneyUtil.typefaceLatoLight);
         title.setText(SettingManager.getInstance().getAccountBookName());
 
-        mViewPager.getPagerTitleStrip().setTypeface(CoCoinUtil.getInstance().typefaceLatoLight, Typeface.NORMAL);
+        mViewPager.getPagerTitleStrip().setTypeface(KKMoneyUtil.getInstance().typefaceLatoLight, Typeface.NORMAL);
         mViewPager.getPagerTitleStrip().setTextSize(45);
         mViewPager.getPagerTitleStrip().setUnderlineColor(Color.parseColor("#00000000"));
         mViewPager.getPagerTitleStrip().setIndicatorColor(Color.parseColor("#00000000"));
@@ -57,8 +57,8 @@ public class AccountBookReportViewActivity extends AppCompatActivity
         mViewPager.getPagerTitleStrip().setOnTabReselectedListener(new PagerSlidingTabStrip.OnTabReselectedListener() {
             @Override
             public void onTabReselected(int position) {
-//                if (CoCoinFragmentManager.reportViewFragment != null)
-//                    CoCoinFragmentManager.reportViewFragment.showDataDialog();
+//                if (KKMoneyFragmentManager.reportViewFragment != null)
+//                    KKMoneyFragmentManager.reportViewFragment.showDataDialog();
             }
         });
 
@@ -100,8 +100,8 @@ public class AccountBookReportViewActivity extends AppCompatActivity
             @Override
             public HeaderDesign getHeaderDesign(int page) {
                 return HeaderDesign.fromColorAndDrawable(
-                        CoCoinUtil.GetTagColor(-3),
-                        CoCoinUtil.GetTagDrawable(-3)
+                        KKMoneyUtil.GetTagColor(-3),
+                        KKMoneyUtil.GetTagDrawable(-3)
                 );
             }
         });
@@ -117,9 +117,9 @@ public class AccountBookReportViewActivity extends AppCompatActivity
     protected void onDestroy() {
         super.onDestroy();
 
-//        if (CoCoinFragmentManager.reportViewFragment != null)
-//            CoCoinFragmentManager.reportViewFragment.onDestroy();
-//        CoCoinFragmentManager.reportViewFragment = null;
+//        if (KKMoneyFragmentManager.reportViewFragment != null)
+//            KKMoneyFragmentManager.reportViewFragment.onDestroy();
+//        KKMoneyFragmentManager.reportViewFragment = null;
         MaterialViewPagerHelper.unregister(this);
     }
 

@@ -6,7 +6,7 @@ import android.support.v4.app.FragmentStatePagerAdapter;
 import com.katherine_qj.saver.fragment.ReportViewFragment;
 
 /**
- * Created by 伟平 on 2015/10/20.
+ * Created by katherineqj on 2017/10/20.
  */
 
 // Todo optimize this

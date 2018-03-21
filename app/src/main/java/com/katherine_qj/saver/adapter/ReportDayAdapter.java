@@ -7,9 +7,9 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import com.katherine_qj.saver.R;
-import com.katherine_qj.saver.activity.CoCoinApplication;
+import com.katherine_qj.saver.activity.KKMoneyApplication;
 import com.katherine_qj.saver.fragment.ReportViewFragment;
-import com.katherine_qj.saver.util.CoCoinUtil;
+import com.katherine_qj.saver.util.KKMoneyUtil;
 
 import java.util.ArrayList;
 import java.util.Random;
@@ -53,16 +53,16 @@ public class ReportDayAdapter extends BaseAdapter {
         TextView expense = (TextView)convertView.findViewById(R.id.month_expense);
         TextView records = (TextView)convertView.findViewById(R.id.month_sum);
 
-        icon.setTypeface(CoCoinUtil.getInstance().typefaceLatoLight);
-        name.setTypeface(CoCoinUtil.getInstance().typefaceLatoLight);
-        expense.setTypeface(CoCoinUtil.getInstance().typefaceLatoLight);
-        records.setTypeface(CoCoinUtil.getInstance().typefaceLatoLight);
+        icon.setTypeface(KKMoneyUtil.getInstance().typefaceLatoLight);
+        name.setTypeface(KKMoneyUtil.getInstance().typefaceLatoLight);
+        expense.setTypeface(KKMoneyUtil.getInstance().typefaceLatoLight);
+        records.setTypeface(KKMoneyUtil.getInstance().typefaceLatoLight);
 
         icon.setBackgroundResource(getBackgroundResource());
         icon.setText("" + ((int)dayExpense.get(position + 1)[2]));
-        name.setText(CoCoinUtil.getInstance().GetCalendarStringDayExpenseSort(CoCoinApplication.getAppContext(), (int)dayExpense.get(position + 1)[0], (int)dayExpense.get(position + 1)[1] + 1, (int)dayExpense.get(position + 1)[2]) + CoCoinUtil.getInstance().GetPurePercentString(dayExpense.get(position + 1)[4] * 100));
-        expense.setText(CoCoinUtil.getInstance().GetInMoney((int) dayExpense.get(position + 1)[3]));
-        records.setText(CoCoinUtil.getInstance().GetInRecords((int) dayExpense.get(position + 1)[5]));
+        name.setText(KKMoneyUtil.getInstance().GetCalendarStringDayExpenseSort(KKMoneyApplication.getAppContext(), (int)dayExpense.get(position + 1)[0], (int)dayExpense.get(position + 1)[1] + 1, (int)dayExpense.get(position + 1)[2]) + KKMoneyUtil.getInstance().GetPurePercentString(dayExpense.get(position + 1)[4] * 100));
+        expense.setText(KKMoneyUtil.getInstance().GetInMoney((int) dayExpense.get(position + 1)[3]));
+        records.setText(KKMoneyUtil.getInstance().GetInRecords((int) dayExpense.get(position + 1)[5]));
 
         return convertView;
     }

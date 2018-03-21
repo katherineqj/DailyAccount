@@ -7,10 +7,10 @@ import android.util.Log;
 import com.github.johnpersano.supertoasts.SuperToast;
 import com.katherine_qj.saver.BuildConfig;
 import com.katherine_qj.saver.R;
-import com.katherine_qj.saver.activity.CoCoinApplication;
+import com.katherine_qj.saver.activity.KKMoneyApplication;
 import com.katherine_qj.saver.db.DB;
-import com.katherine_qj.saver.util.CoCoinToast;
-import com.katherine_qj.saver.util.CoCoinUtil;
+import com.katherine_qj.saver.util.KKMoneyToast;
+import com.katherine_qj.saver.util.KKMoneyUtil;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -30,7 +30,7 @@ import cn.bmob.v3.listener.SaveListener;
 import cn.bmob.v3.listener.UpdateListener;
 
 /**
- * Created by 伟平 on 2015/10/20.
+ * Created by katherineqj on 2017/10/20.
  */
 
 public class RecordManager {
@@ -41,10 +41,10 @@ public class RecordManager {
 
     // the selected values in list activity
     public static Double SELECTED_SUM;
-    public static List<CoCoinRecord> SELECTED_RECORDS;
+    public static List<KKMoneyRecord> SELECTED_RECORDS;
 
     public static Integer SUM;
-    public static List<CoCoinRecord> RECORDS;
+    public static List<KKMoneyRecord> RECORDS;
     public static List<Tag> TAGS;
     public static Map<Integer, String> TAG_NAMES;
 
@@ -64,7 +64,7 @@ public class RecordManager {
     private RecordManager(Context context) {
         try {
             db = db.getInstance(context);
-            if (BuildConfig.DEBUG) if (BuildConfig.DEBUG) Log.d("CoCoin", "db.getInstance(context) S");
+            if (BuildConfig.DEBUG) if (BuildConfig.DEBUG) Log.d("KKMoney", "db.getInstance(context) S");
         } catch(IOException e) {
             e.printStackTrace();
         }
@@ -110,8 +110,8 @@ public class RecordManager {
             db.getData();
 
             if (BuildConfig.DEBUG) {
-                if (BuildConfig.DEBUG) Log.d("CoCoin", "Load " + RECORDS.size() + " records S");
-                if (BuildConfig.DEBUG) Log.d("CoCoin", "Load " + TAGS.size() + " tags S");
+                if (BuildConfig.DEBUG) Log.d("KKMoney", "Load " + RECORDS.size() + " records S");
+                if (BuildConfig.DEBUG) Log.d("KKMoney", "Load " + TAGS.size() + " tags S");
             }
 
             TAGS.add(0, new Tag(-1, "Sum Histogram", -4));
@@ -125,54 +125,54 @@ public class RecordManager {
     }
 
 // saveRecord///////////////////////////////////////////////////////////////////////////////////////
-    public static long saveRecord(final CoCoinRecord coCoinRecord) {
+    public static long saveRecord(final KKMoneyRecord KKMoneyRecord) {
         long insertId = -1;
-        // this is a new coCoinRecord, which is not uploaded
-        coCoinRecord.setIsUploaded(false);
-//        User user = BmobUser.getCurrentUser(CoCoinApplication.getAppContext(), User.class);
-//        if (user != null) coCoinRecord.setUserId(user.getObjectId());
-//        else coCoinRecord.setUserId(null);
+        // this is a new KKMoneyRecord, which is not uploaded
+        KKMoneyRecord.setIsUploaded(false);
+//        User user = BmobUser.getCurrentUser(KKMoneyApplication.getAppContext(), User.class);
+//        if (user != null) KKMoneyRecord.setUserId(user.getObjectId());
+//        else KKMoneyRecord.setUserId(null);
         if (BuildConfig.DEBUG)
-            if (BuildConfig.DEBUG) Log.d("CoCoin", "recordManager.saveRecord: Save " + coCoinRecord.toString() + " S");
-        insertId = db.saveRecord(coCoinRecord);
+            if (BuildConfig.DEBUG) Log.d("KKMoney", "recordManager.saveRecord: Save " + KKMoneyRecord.toString() + " S");
+        insertId = db.saveRecord(KKMoneyRecord);
         if (insertId == -1) {
             if (BuildConfig.DEBUG)
-                if (BuildConfig.DEBUG) Log.d("CoCoin", "recordManager.saveRecord: Save the above coCoinRecord FAIL!");
-            CoCoinToast.getInstance()
+                if (BuildConfig.DEBUG) Log.d("KKMoney", "recordManager.saveRecord: Save the above KKMoneyRecord FAIL!");
+            KKMoneyToast.getInstance()
                     .showToast(R.string.save_failed_locale, SuperToast.Background.RED);
         } else {
             if (BuildConfig.DEBUG)
-                if (BuildConfig.DEBUG) Log.d("CoCoin", "recordManager.saveRecord: Save the above coCoinRecord SUCCESSFULLY!");
-            RECORDS.add(coCoinRecord);
-            SUM += (int) coCoinRecord.getMoney();
+                if (BuildConfig.DEBUG) Log.d("KKMoney", "recordManager.saveRecord: Save the above KKMoneyRecord SUCCESSFULLY!");
+            RECORDS.add(KKMoneyRecord);
+            SUM += (int) KKMoneyRecord.getMoney();
 //            if (user != null) {
 //                // already login
-//                coCoinRecord.save(CoCoinApplication.getAppContext(), new SaveListener() {
+//                KKMoneyRecord.save(KKMoneyApplication.getAppContext(), new SaveListener() {
 //                    @Override
 //                    public void onSuccess() {
 //                        if (BuildConfig.DEBUG)
-//                            if (BuildConfig.DEBUG) Log.d("CoCoin", "recordManager.saveRecord: Save online " + coCoinRecord.toString() + " S");
-//                        coCoinRecord.setIsUploaded(true);
-//                        coCoinRecord.setLocalObjectId(coCoinRecord.getObjectId());
-//                        db.updateRecord(coCoinRecord);
-//                        CoCoinToast.getInstance()
+//                            if (BuildConfig.DEBUG) Log.d("KKMoney", "recordManager.saveRecord: Save online " + KKMoneyRecord.toString() + " S");
+//                        KKMoneyRecord.setIsUploaded(true);
+//                        KKMoneyRecord.setLocalObjectId(KKMoneyRecord.getObjectId());
+//                        db.updateRecord(KKMoneyRecord);
+//                        KKMoneyToast.getInstance()
 //                                .showToast(R.string.save_successfully_online, SuperToast.Background.BLUE);
 //                    }
 //                    @Override
 //                    public void onFailure(int code, String msg) {
 //                        if (BuildConfig.DEBUG)
-//                            if (BuildConfig.DEBUG) Log.d("CoCoin", "recordManager.saveRecord: Save online " + coCoinRecord.toString() + " F");
+//                            if (BuildConfig.DEBUG) Log.d("KKMoney", "recordManager.saveRecord: Save online " + KKMoneyRecord.toString() + " F");
 //                        if (BuildConfig.DEBUG)
-//                            if (BuildConfig.DEBUG) Log.d("CoCoin", "recordManager.saveRecord: Save online msg: " + msg + " code " + code);
-//                        CoCoinToast.getInstance()
+//                            if (BuildConfig.DEBUG) Log.d("KKMoney", "recordManager.saveRecord: Save online msg: " + msg + " code " + code);
+//                        KKMoneyToast.getInstance()
 //                                .showToast(R.string.save_failed_online, SuperToast.Background.RED);
 //                    }
 //                });
 //            } else {
-//                CoCoinToast.getInstance()
+//                KKMoneyToast.getInstance()
 //                        .showToast(R.string.save_successfully_locale, SuperToast.Background.BLUE);
 //            }
-            CoCoinToast.getInstance()
+            KKMoneyToast.getInstance()
                     .showToast(R.string.save_successfully_locale, SuperToast.Background.BLUE);
         }
         return insertId;
@@ -182,7 +182,7 @@ public class RecordManager {
     public static int saveTag(Tag tag) {
         int insertId = -1;
         if (BuildConfig.DEBUG) {
-            if (BuildConfig.DEBUG) Log.d("CoCoin", "recordManager.saveTag: " + tag.toString());
+            if (BuildConfig.DEBUG) Log.d("KKMoney", "recordManager.saveTag: " + tag.toString());
         }
         boolean duplicatedName = false;
         for (Tag t : TAGS) {
@@ -197,12 +197,12 @@ public class RecordManager {
         insertId = db.saveTag(tag);
         if (insertId == -1) {
             if (BuildConfig.DEBUG) {
-                if (BuildConfig.DEBUG) Log.d("CoCoin", "Save the above tag FAIL!");
+                if (BuildConfig.DEBUG) Log.d("KKMoney", "Save the above tag FAIL!");
                 return SAVE_TAG_ERROR_DATABASE_ERROR;
             }
         } else {
             if (BuildConfig.DEBUG) {
-                if (BuildConfig.DEBUG) Log.d("CoCoin", "Save the above tag SUCCESSFULLY!");
+                if (BuildConfig.DEBUG) Log.d("KKMoney", "Save the above tag SUCCESSFULLY!");
             }
             TAGS.add(tag);
             TAG_NAMES.put(tag.getId(), tag.getName());
@@ -211,72 +211,72 @@ public class RecordManager {
         return insertId;
     }
 
-// delete a coCoinRecord//////////////////////////////////////////////////////////////////////////////////
-    public static long deleteRecord(final CoCoinRecord coCoinRecord, boolean deleteInList) {
-        long deletedNumber = db.deleteRecord(coCoinRecord.getId());
+// delete a KKMoneyRecord//////////////////////////////////////////////////////////////////////////////////
+    public static long deleteRecord(final KKMoneyRecord KKMoneyRecord, boolean deleteInList) {
+        long deletedNumber = db.deleteRecord(KKMoneyRecord.getId());
         if (deletedNumber > 0) {
-            if (BuildConfig.DEBUG) Log.d("CoCoin",
-                    "recordManager.deleteRecord: Delete " + coCoinRecord.toString() + " S");
-            User user = BmobUser.getCurrentUser(CoCoinApplication.getAppContext(), User.class);
-            // if we can delete the coCoinRecord from server
-//            if (user != null && coCoinRecord.getLocalObjectId() != null) {
-//                coCoinRecord.delete(CoCoinApplication.getAppContext(), new DeleteListener() {
+            if (BuildConfig.DEBUG) Log.d("KKMoney",
+                    "recordManager.deleteRecord: Delete " + KKMoneyRecord.toString() + " S");
+            User user = BmobUser.getCurrentUser(KKMoneyApplication.getAppContext(), User.class);
+            // if we can delete the KKMoneyRecord from server
+//            if (user != null && KKMoneyRecord.getLocalObjectId() != null) {
+//                KKMoneyRecord.delete(KKMoneyApplication.getAppContext(), new DeleteListener() {
 //                    @Override
 //                    public void onSuccess() {
 //                        if (BuildConfig.DEBUG) {
-//                            if (BuildConfig.DEBUG) Log.d("CoCoin",
-//                                    "recordManager.deleteRecord: Delete online " + coCoinRecord.toString() + " S");
+//                            if (BuildConfig.DEBUG) Log.d("KKMoney",
+//                                    "recordManager.deleteRecord: Delete online " + KKMoneyRecord.toString() + " S");
 //                        }
-//                        CoCoinToast.getInstance()
+//                        KKMoneyToast.getInstance()
 //                                .showToast(R.string.delete_successfully_online, SuperToast.Background.BLUE);
 //                    }
 //                    @Override
 //                    public void onFailure(int code, String msg) {
 //                        if (BuildConfig.DEBUG) {
-//                            if (BuildConfig.DEBUG) Log.d("CoCoin",
-//                                    "recordManager.deleteRecord: Delete online " + coCoinRecord.toString() + " F");
+//                            if (BuildConfig.DEBUG) Log.d("KKMoney",
+//                                    "recordManager.deleteRecord: Delete online " + KKMoneyRecord.toString() + " F");
 //                        }
-//                        CoCoinToast.getInstance()
+//                        KKMoneyToast.getInstance()
 //                                .showToast(R.string.delete_failed_online, SuperToast.Background.RED);
 //                    }
 //                });
 //            } else {
-//                CoCoinToast.getInstance()
+//                KKMoneyToast.getInstance()
 //                        .showToast(R.string.delete_successfully_locale, SuperToast.Background.BLUE);
 //            }
-            CoCoinToast.getInstance()
+            KKMoneyToast.getInstance()
                     .showToast(R.string.delete_successfully_locale, SuperToast.Background.BLUE);
             // update RECORDS list and SUM
-            SUM -= (int) coCoinRecord.getMoney();
+            SUM -= (int) KKMoneyRecord.getMoney();
             if (deleteInList) {
                 int size = RECORDS.size();
                 for (int i = 0; i < RECORDS.size(); i++) {
-                    if (RECORDS.get(i).getId() == coCoinRecord.getId()) {
+                    if (RECORDS.get(i).getId() == KKMoneyRecord.getId()) {
                         RECORDS.remove(i);
-                        if (BuildConfig.DEBUG) Log.d("CoCoin",
-                                "recordManager.deleteRecord: Delete in RECORD " + coCoinRecord.toString() + " S");
+                        if (BuildConfig.DEBUG) Log.d("KKMoney",
+                                "recordManager.deleteRecord: Delete in RECORD " + KKMoneyRecord.toString() + " S");
                         break;
                     }
                 }
             }
         } else {
-            if (BuildConfig.DEBUG) Log.d("CoCoin",
-                    "recordManager.deleteRecord: Delete " + coCoinRecord.toString() + " F");
-            CoCoinToast.getInstance()
+            if (BuildConfig.DEBUG) Log.d("KKMoney",
+                    "recordManager.deleteRecord: Delete " + KKMoneyRecord.toString() + " F");
+            KKMoneyToast.getInstance()
                     .showToast(R.string.delete_failed_locale, SuperToast.Background.RED);
         }
 
 
-        return coCoinRecord.getId();
+        return KKMoneyRecord.getId();
     }
 
     public static int deleteTag(int id) {
         int deletedId = -1;
-        if (BuildConfig.DEBUG) Log.d("CoCoin",
+        if (BuildConfig.DEBUG) Log.d("KKMoney",
                 "Manager: Delete tag: " + "Tag(id = " + id + ", deletedId = " + deletedId + ")");
         boolean tagReference = false;
-        for (CoCoinRecord coCoinRecord : RECORDS) {
-            if (coCoinRecord.getTag() == id) {
+        for (KKMoneyRecord KKMoneyRecord : RECORDS) {
+            if (KKMoneyRecord.getTag() == id) {
                 tagReference = true;
                 break;
             }
@@ -286,10 +286,10 @@ public class RecordManager {
         }
         deletedId = db.deleteTag(id);
         if (deletedId == -1) {
-            if (BuildConfig.DEBUG) Log.d("CoCoin", "Delete the above tag FAIL!");
+            if (BuildConfig.DEBUG) Log.d("KKMoney", "Delete the above tag FAIL!");
             return DELETE_TAG_ERROR_DATABASE_ERROR;
         } else {
-            if (BuildConfig.DEBUG) Log.d("CoCoin", "Delete the above tag SUCCESSFULLY!");
+            if (BuildConfig.DEBUG) Log.d("KKMoney", "Delete the above tag SUCCESSFULLY!");
             for (Tag tag : TAGS) {
                 if (tag.getId() == deletedId) {
                     TAGS.remove(tag);
@@ -303,93 +303,93 @@ public class RecordManager {
     }
 
     private static int p;
-    public static long updateRecord(final CoCoinRecord coCoinRecord) {
-        long updateNumber = db.updateRecord(coCoinRecord);
+    public static long updateRecord(final KKMoneyRecord KKMoneyRecord) {
+        long updateNumber = db.updateRecord(KKMoneyRecord);
         if (updateNumber <= 0) {
             if (BuildConfig.DEBUG) {
-                if (BuildConfig.DEBUG) Log.d("CoCoin", "recordManager.updateRecord " + coCoinRecord.toString() + " F");
+                if (BuildConfig.DEBUG) Log.d("KKMoney", "recordManager.updateRecord " + KKMoneyRecord.toString() + " F");
             }
-            CoCoinToast.getInstance().showToast(R.string.update_failed_locale, SuperToast.Background.RED);
+            KKMoneyToast.getInstance().showToast(R.string.update_failed_locale, SuperToast.Background.RED);
         } else {
             if (BuildConfig.DEBUG) {
-                if (BuildConfig.DEBUG) Log.d("CoCoin", "recordManager.updateRecord " + coCoinRecord.toString() + " S");
+                if (BuildConfig.DEBUG) Log.d("KKMoney", "recordManager.updateRecord " + KKMoneyRecord.toString() + " S");
             }
             p = RECORDS.size() - 1;
             for (; p >= 0; p--) {
-                if (RECORDS.get(p).getId() == coCoinRecord.getId()) {
+                if (RECORDS.get(p).getId() == KKMoneyRecord.getId()) {
                     SUM -= (int)RECORDS.get(p).getMoney();
-                    SUM += (int) coCoinRecord.getMoney();
-                    RECORDS.get(p).set(coCoinRecord);
+                    SUM += (int) KKMoneyRecord.getMoney();
+                    RECORDS.get(p).set(KKMoneyRecord);
                     break;
                 }
             }
-            coCoinRecord.setIsUploaded(false);
+            KKMoneyRecord.setIsUploaded(false);
 //            User user = BmobUser
-//                    .getCurrentUser(CoCoinApplication.getAppContext(), User.class);
+//                    .getCurrentUser(KKMoneyApplication.getAppContext(), User.class);
 //            if (user != null) {
 //                // already login
-//                if (coCoinRecord.getLocalObjectId() != null) {
-//                    // this coCoinRecord has been push to the server
-//                    coCoinRecord.setUserId(user.getObjectId());
-//                    coCoinRecord.update(CoCoinApplication.getAppContext(),
-//                            coCoinRecord.getLocalObjectId(), new UpdateListener() {
+//                if (KKMoneyRecord.getLocalObjectId() != null) {
+//                    // this KKMoneyRecord has been push to the server
+//                    KKMoneyRecord.setUserId(user.getObjectId());
+//                    KKMoneyRecord.update(KKMoneyApplication.getAppContext(),
+//                            KKMoneyRecord.getLocalObjectId(), new UpdateListener() {
 //                                @Override
 //                                public void onSuccess() {
 //                                    if (BuildConfig.DEBUG) {
-//                                        if (BuildConfig.DEBUG) Log.d("CoCoin", "recordManager.updateRecord update online " + coCoinRecord.toString() + " S");
+//                                        if (BuildConfig.DEBUG) Log.d("KKMoney", "recordManager.updateRecord update online " + KKMoneyRecord.toString() + " S");
 //                                    }
-//                                    coCoinRecord.setIsUploaded(true);
+//                                    KKMoneyRecord.setIsUploaded(true);
 //                                    RECORDS.get(p).setIsUploaded(true);
-//                                    db.updateRecord(coCoinRecord);
-//                                    CoCoinToast.getInstance().showToast(R.string.update_successfully_online, SuperToast.Background.BLUE);
+//                                    db.updateRecord(KKMoneyRecord);
+//                                    KKMoneyToast.getInstance().showToast(R.string.update_successfully_online, SuperToast.Background.BLUE);
 //                                }
 //
 //                                @Override
 //                                public void onFailure(int code, String msg) {
 //                                    if (BuildConfig.DEBUG) {
-//                                        if (BuildConfig.DEBUG) Log.d("CoCoin", "recordManager.updateRecord update online " + coCoinRecord.toString() + " F");
+//                                        if (BuildConfig.DEBUG) Log.d("KKMoney", "recordManager.updateRecord update online " + KKMoneyRecord.toString() + " F");
 //                                    }
 //                                    if (BuildConfig.DEBUG) {
-//                                        if (BuildConfig.DEBUG) Log.d("CoCoin", "recordManager.updateRecord update online code" + code + " msg " + msg );
+//                                        if (BuildConfig.DEBUG) Log.d("KKMoney", "recordManager.updateRecord update online code" + code + " msg " + msg );
 //                                    }
-//                                    CoCoinToast.getInstance().showToast(R.string.update_failed_online, SuperToast.Background.RED);
+//                                    KKMoneyToast.getInstance().showToast(R.string.update_failed_online, SuperToast.Background.RED);
 //                                }
 //                            });
 //                } else {
-//                    // this coCoinRecord has not been push to the server
-//                    coCoinRecord.setUserId(user.getObjectId());
-//                    coCoinRecord.save(CoCoinApplication.getAppContext(), new SaveListener() {
+//                    // this KKMoneyRecord has not been push to the server
+//                    KKMoneyRecord.setUserId(user.getObjectId());
+//                    KKMoneyRecord.save(KKMoneyApplication.getAppContext(), new SaveListener() {
 //                                @Override
 //                                public void onSuccess() {
 //                                    if (BuildConfig.DEBUG) {
-//                                        if (BuildConfig.DEBUG) Log.d("CoCoin", "recordManager.updateRecord save online " + coCoinRecord.toString() + " S");
+//                                        if (BuildConfig.DEBUG) Log.d("KKMoney", "recordManager.updateRecord save online " + KKMoneyRecord.toString() + " S");
 //                                    }
-//                                    coCoinRecord.setIsUploaded(true);
-//                                    coCoinRecord.setLocalObjectId(coCoinRecord.getObjectId());
+//                                    KKMoneyRecord.setIsUploaded(true);
+//                                    KKMoneyRecord.setLocalObjectId(KKMoneyRecord.getObjectId());
 //                                    RECORDS.get(p).setIsUploaded(true);
-//                                    RECORDS.get(p).setLocalObjectId(coCoinRecord.getObjectId());
-//                                    db.updateRecord(coCoinRecord);
-//                                    CoCoinToast.getInstance().showToast(R.string.update_successfully_online, SuperToast.Background.BLUE);
+//                                    RECORDS.get(p).setLocalObjectId(KKMoneyRecord.getObjectId());
+//                                    db.updateRecord(KKMoneyRecord);
+//                                    KKMoneyToast.getInstance().showToast(R.string.update_successfully_online, SuperToast.Background.BLUE);
 //                                }
 //                                @Override
 //                                public void onFailure(int code, String msg) {
 //                                    if (BuildConfig.DEBUG) {
-//                                        if (BuildConfig.DEBUG) Log.d("CoCoin", "recordManager.updateRecord save online " + coCoinRecord.toString() + " F");
+//                                        if (BuildConfig.DEBUG) Log.d("KKMoney", "recordManager.updateRecord save online " + KKMoneyRecord.toString() + " F");
 //                                    }
 //                                    if (BuildConfig.DEBUG) {
-//                                        if (BuildConfig.DEBUG) Log.d("CoCoin", "recordManager.updateRecord save online code" + code + " msg " + msg );
+//                                        if (BuildConfig.DEBUG) Log.d("KKMoney", "recordManager.updateRecord save online code" + code + " msg " + msg );
 //                                    }
-//                                    CoCoinToast.getInstance().showToast(R.string.update_failed_online, SuperToast.Background.RED);
+//                                    KKMoneyToast.getInstance().showToast(R.string.update_failed_online, SuperToast.Background.RED);
 //                                }
 //                            });
 //                }
 //            } else {
 //                // has not login
-//                db.updateRecord(coCoinRecord);
-//                CoCoinToast.getInstance().showToast(R.string.update_successfully_locale, SuperToast.Background.BLUE);
+//                db.updateRecord(KKMoneyRecord);
+//                KKMoneyToast.getInstance().showToast(R.string.update_successfully_locale, SuperToast.Background.BLUE);
 //            }
-            db.updateRecord(coCoinRecord);
-            CoCoinToast.getInstance().showToast(R.string.update_successfully_locale, SuperToast.Background.BLUE);
+            db.updateRecord(KKMoneyRecord);
+            KKMoneyToast.getInstance().showToast(R.string.update_successfully_locale, SuperToast.Background.BLUE);
         }
         return updateNumber;
     }
@@ -399,28 +399,28 @@ public class RecordManager {
     public static long updateOldRecordsToServer() {
         long counter = 0;
         User user = BmobUser
-                .getCurrentUser(CoCoinApplication.getAppContext(), User.class);
+                .getCurrentUser(KKMoneyApplication.getAppContext(), User.class);
         if (user != null) {
 // already login////////////////////////////////////////////////////////////////////////////////////
             isLastOne = false;
             for (int i = 0; i < RECORDS.size(); i++) {
                 if (i == RECORDS.size() - 1) isLastOne = true;
-                final CoCoinRecord coCoinRecord = RECORDS.get(i);
-                if (!coCoinRecord.getIsUploaded()) {
+                final KKMoneyRecord KKMoneyRecord = RECORDS.get(i);
+                if (!KKMoneyRecord.getIsUploaded()) {
 // has been changed/////////////////////////////////////////////////////////////////////////////////
-                    if (coCoinRecord.getLocalObjectId() != null) {
-// there is an old coCoinRecord in server, we should update this coCoinRecord///////////////////////////////////
-                        coCoinRecord.setUserId(user.getObjectId());
-                        coCoinRecord.update(CoCoinApplication.getAppContext(),
-                                coCoinRecord.getLocalObjectId(), new UpdateListener() {
+                    if (KKMoneyRecord.getLocalObjectId() != null) {
+// there is an old KKMoneyRecord in server, we should update this KKMoneyRecord///////////////////////////////////
+                        KKMoneyRecord.setUserId(user.getObjectId());
+                        KKMoneyRecord.update(KKMoneyApplication.getAppContext(),
+                                KKMoneyRecord.getLocalObjectId(), new UpdateListener() {
                                     @Override
                                     public void onSuccess() {
                                         if (BuildConfig.DEBUG) {
-                                            if (BuildConfig.DEBUG) Log.d("CoCoin", "recordManager.updateOldRecordsToServer update online " + coCoinRecord.toString() + " S");
+                                            if (BuildConfig.DEBUG) Log.d("KKMoney", "recordManager.updateOldRecordsToServer update online " + KKMoneyRecord.toString() + " S");
                                         }
-                                        coCoinRecord.setIsUploaded(true);
-                                        coCoinRecord.setLocalObjectId(coCoinRecord.getObjectId());
-                                        db.updateRecord(coCoinRecord);
+                                        KKMoneyRecord.setIsUploaded(true);
+                                        KKMoneyRecord.setLocalObjectId(KKMoneyRecord.getObjectId());
+                                        db.updateRecord(KKMoneyRecord);
 // after updating, get the old records from server//////////////////////////////////////////////////
                                         if (isLastOne) getRecordsFromServer();
                                     }
@@ -428,25 +428,25 @@ public class RecordManager {
                                     @Override
                                     public void onFailure(int code, String msg) {
                                         if (BuildConfig.DEBUG) {
-                                            if (BuildConfig.DEBUG) Log.d("CoCoin", "recordManager.updateOldRecordsToServer update online " + coCoinRecord.toString() + " F");
+                                            if (BuildConfig.DEBUG) Log.d("KKMoney", "recordManager.updateOldRecordsToServer update online " + KKMoneyRecord.toString() + " F");
                                         }
                                         if (BuildConfig.DEBUG) {
-                                            if (BuildConfig.DEBUG) Log.d("CoCoin", "recordManager.updateOldRecordsToServer update online code" + code + " msg " + msg );
+                                            if (BuildConfig.DEBUG) Log.d("KKMoney", "recordManager.updateOldRecordsToServer update online code" + code + " msg " + msg );
                                         }
                                     }
                                 });
                     } else {
                         counter++;
-                        coCoinRecord.setUserId(user.getObjectId());
-                        coCoinRecord.save(CoCoinApplication.getAppContext(), new SaveListener() {
+                        KKMoneyRecord.setUserId(user.getObjectId());
+                        KKMoneyRecord.save(KKMoneyApplication.getAppContext(), new SaveListener() {
                             @Override
                             public void onSuccess() {
                                 if (BuildConfig.DEBUG) {
-                                    if (BuildConfig.DEBUG) Log.d("CoCoin", "recordManager.updateOldRecordsToServer save online " + coCoinRecord.toString() + " S");
+                                    if (BuildConfig.DEBUG) Log.d("KKMoney", "recordManager.updateOldRecordsToServer save online " + KKMoneyRecord.toString() + " S");
                                 }
-                                coCoinRecord.setIsUploaded(true);
-                                coCoinRecord.setLocalObjectId(coCoinRecord.getObjectId());
-                                db.updateRecord(coCoinRecord);
+                                KKMoneyRecord.setIsUploaded(true);
+                                KKMoneyRecord.setLocalObjectId(KKMoneyRecord.getObjectId());
+                                db.updateRecord(KKMoneyRecord);
 // after updating, get the old records from server//////////////////////////////////////////////////
                                 if (isLastOne) getRecordsFromServer();
                             }
@@ -454,10 +454,10 @@ public class RecordManager {
                             @Override
                             public void onFailure(int code, String msg) {
                                 if (BuildConfig.DEBUG) {
-                                    if (BuildConfig.DEBUG) Log.d("CoCoin", "recordManager.updateOldRecordsToServer save online " + coCoinRecord.toString() + " F");
+                                    if (BuildConfig.DEBUG) Log.d("KKMoney", "recordManager.updateOldRecordsToServer save online " + KKMoneyRecord.toString() + " F");
                                 }
                                 if (BuildConfig.DEBUG) {
-                                    if (BuildConfig.DEBUG) Log.d("CoCoin", "recordManager.updateOldRecordsToServer save online code" + code + " msg " + msg );
+                                    if (BuildConfig.DEBUG) Log.d("KKMoney", "recordManager.updateOldRecordsToServer save online code" + code + " msg " + msg );
                                 }
                             }
                         });
@@ -469,7 +469,7 @@ public class RecordManager {
         }
 
         if (BuildConfig.DEBUG) {
-            if (BuildConfig.DEBUG) Log.d("CoCoin", "recordManager.updateOldRecordsToServer update " + counter + " records to server.");
+            if (BuildConfig.DEBUG) Log.d("KKMoney", "recordManager.updateOldRecordsToServer update " + counter + " records to server.");
         }
 
         if (RECORDS.size() == 0) getRecordsFromServer();
@@ -479,13 +479,13 @@ public class RecordManager {
 
     public static long updateTag(Tag tag) {
         int updateId = -1;
-        if (BuildConfig.DEBUG) Log.d("CoCoin",
+        if (BuildConfig.DEBUG) Log.d("KKMoney",
                 "Manager: Update tag: " + tag.toString());
         updateId = db.updateTag(tag);
         if (updateId == -1) {
-            if (BuildConfig.DEBUG) Log.d("CoCoin", "Update the above tag FAIL!");
+            if (BuildConfig.DEBUG) Log.d("KKMoney", "Update the above tag FAIL!");
         } else {
-            if (BuildConfig.DEBUG) Log.d("CoCoin", "Update the above tag SUCCESSFULLY!" + " - " + updateId);
+            if (BuildConfig.DEBUG) Log.d("KKMoney", "Update the above tag SUCCESSFULLY!" + " - " + updateId);
             for (Tag t : TAGS) {
                 if (t.getId() == tag.getId()) {
                     t.set(tag);
@@ -501,36 +501,36 @@ public class RecordManager {
     private static long updateNum;
     public static long getRecordsFromServer() {
         updateNum = 0;
-        BmobQuery<CoCoinRecord> query = new BmobQuery<CoCoinRecord>();
+        BmobQuery<KKMoneyRecord> query = new BmobQuery<KKMoneyRecord>();
         query.addWhereEqualTo("userId",
-                BmobUser.getCurrentUser(CoCoinApplication.getAppContext(), User.class).getObjectId());
+                BmobUser.getCurrentUser(KKMoneyApplication.getAppContext(), User.class).getObjectId());
         query.setLimit(Integer.MAX_VALUE);
-        query.findObjects(CoCoinApplication.getAppContext(), new FindListener<CoCoinRecord>() {
+        query.findObjects(KKMoneyApplication.getAppContext(), new FindListener<KKMoneyRecord>() {
             @Override
-            public void onSuccess(List<CoCoinRecord> object) {
+            public void onSuccess(List<KKMoneyRecord> object) {
                 if (BuildConfig.DEBUG) {
-                    if (BuildConfig.DEBUG) Log.d("CoCoin", "recordManager.getRecordsFromServer get " + object.size() + " records from server");
+                    if (BuildConfig.DEBUG) Log.d("KKMoney", "recordManager.getRecordsFromServer get " + object.size() + " records from server");
                 }
                 updateNum = object.size();
-                for (CoCoinRecord coCoinRecord : object) {
+                for (KKMoneyRecord KKMoneyRecord : object) {
                     boolean exist = false;
                     for (int i = RECORDS.size() - 1; i >= 0; i--) {
-                        if (coCoinRecord.getObjectId().equals(RECORDS.get(i).getLocalObjectId())) {
+                        if (KKMoneyRecord.getObjectId().equals(RECORDS.get(i).getLocalObjectId())) {
                             exist = true;
                             break;
                         }
                     }
                     if (!exist) {
-                        CoCoinRecord newCoCoinRecord = new CoCoinRecord();
-                        newCoCoinRecord.set(coCoinRecord);
-                        newCoCoinRecord.setId(-1);
-                        RECORDS.add(newCoCoinRecord);
+                        KKMoneyRecord newKKMoneyRecord = new KKMoneyRecord();
+                        newKKMoneyRecord.set(KKMoneyRecord);
+                        newKKMoneyRecord.setId(-1);
+                        RECORDS.add(newKKMoneyRecord);
                     }
                 }
 
-                Collections.sort(RECORDS, new Comparator<CoCoinRecord>() {
+                Collections.sort(RECORDS, new Comparator<KKMoneyRecord>() {
                     @Override
-                    public int compare(CoCoinRecord lhs, CoCoinRecord rhs) {
+                    public int compare(KKMoneyRecord lhs, KKMoneyRecord rhs) {
                         if (lhs.getCalendar().before(rhs.getCalendar())) {
                             return -1;
                         } else if (lhs.getCalendar().after(rhs.getCalendar())) {
@@ -552,13 +552,13 @@ public class RecordManager {
                 }
 
                 if (BuildConfig.DEBUG) {
-                    if (BuildConfig.DEBUG) Log.d("CoCoin", "recordManager.getRecordsFromServer save " + RECORDS.size() + " records");
+                    if (BuildConfig.DEBUG) Log.d("KKMoney", "recordManager.getRecordsFromServer save " + RECORDS.size() + " records");
                 }
             }
             @Override
             public void onError(int code, String msg) {
                 if (BuildConfig.DEBUG) {
-                    if (BuildConfig.DEBUG) Log.d("CoCoin", "recordManager.getRecordsFromServer error " + msg);
+                    if (BuildConfig.DEBUG) Log.d("KKMoney", "recordManager.getRecordsFromServer error " + msg);
                 }
             }
         });
@@ -568,7 +568,7 @@ public class RecordManager {
 
     public static int getCurrentMonthExpense() {
         Calendar calendar = Calendar.getInstance();
-        Calendar left = CoCoinUtil.GetThisMonthLeftRange(calendar);
+        Calendar left = KKMoneyUtil.GetThisMonthLeftRange(calendar);
         int monthSum = 0;
         for (int i = RECORDS.size() - 1; i >= 0; i--) {
             if (RECORDS.get(i).getCalendar().before(left)) break;
@@ -577,51 +577,51 @@ public class RecordManager {
         return monthSum;
     }
 
-    public static List<CoCoinRecord> queryRecordByTime(Calendar c1, Calendar c2) {
-        List<CoCoinRecord> list = new LinkedList<>();
-        for (CoCoinRecord coCoinRecord : RECORDS) {
-            if (coCoinRecord.isInTime(c1, c2)) {
-                list.add(coCoinRecord);
+    public static List<KKMoneyRecord> queryRecordByTime(Calendar c1, Calendar c2) {
+        List<KKMoneyRecord> list = new LinkedList<>();
+        for (KKMoneyRecord KKMoneyRecord : RECORDS) {
+            if (KKMoneyRecord.isInTime(c1, c2)) {
+                list.add(KKMoneyRecord);
             }
         }
         return list;
     }
 
-    public static List<CoCoinRecord> queryRecordByCurrency(String currency) {
-        List<CoCoinRecord> list = new LinkedList<>();
-        for (CoCoinRecord coCoinRecord : RECORDS) {
-            if (coCoinRecord.getCurrency().equals(currency)) {
-                list.add(coCoinRecord);
+    public static List<KKMoneyRecord> queryRecordByCurrency(String currency) {
+        List<KKMoneyRecord> list = new LinkedList<>();
+        for (KKMoneyRecord KKMoneyRecord : RECORDS) {
+            if (KKMoneyRecord.getCurrency().equals(currency)) {
+                list.add(KKMoneyRecord);
             }
         }
         return list;
     }
 
-    public static List<CoCoinRecord> queryRecordByTag(int tag) {
-        List<CoCoinRecord> list = new LinkedList<>();
-        for (CoCoinRecord coCoinRecord : RECORDS) {
-            if (coCoinRecord.getTag() == tag) {
-                list.add(coCoinRecord);
+    public static List<KKMoneyRecord> queryRecordByTag(int tag) {
+        List<KKMoneyRecord> list = new LinkedList<>();
+        for (KKMoneyRecord KKMoneyRecord : RECORDS) {
+            if (KKMoneyRecord.getTag() == tag) {
+                list.add(KKMoneyRecord);
             }
         }
         return list;
     }
 
-    public static List<CoCoinRecord> queryRecordByMoney(double money1, double money2, String currency) {
-        List<CoCoinRecord> list = new LinkedList<>();
-        for (CoCoinRecord coCoinRecord : RECORDS) {
-            if (coCoinRecord.isInMoney(money1, money2, currency)) {
-                list.add(coCoinRecord);
+    public static List<KKMoneyRecord> queryRecordByMoney(double money1, double money2, String currency) {
+        List<KKMoneyRecord> list = new LinkedList<>();
+        for (KKMoneyRecord KKMoneyRecord : RECORDS) {
+            if (KKMoneyRecord.isInMoney(money1, money2, currency)) {
+                list.add(KKMoneyRecord);
             }
         }
         return list;
     }
 
-    public static List<CoCoinRecord> queryRecordByRemark(String remark) {
-        List<CoCoinRecord> list = new LinkedList<>();
-        for (CoCoinRecord coCoinRecord : RECORDS) {
-            if (CoCoinUtil.IsStringRelation(coCoinRecord.getRemark(), remark)) {
-                list.add(coCoinRecord);
+    public static List<KKMoneyRecord> queryRecordByRemark(String remark) {
+        List<KKMoneyRecord> list = new LinkedList<>();
+        for (KKMoneyRecord KKMoneyRecord : RECORDS) {
+            if (KKMoneyUtil.IsStringRelation(KKMoneyRecord.getRemark(), remark)) {
+                list.add(KKMoneyRecord);
             }
         }
         return list;
@@ -665,7 +665,7 @@ public class RecordManager {
 
         Random random = new Random();
 
-        List<CoCoinRecord> createdCoCoinRecords = new ArrayList<>();
+        List<KKMoneyRecord> createdKKMoneyRecords = new ArrayList<>();
 
         Calendar now = Calendar.getInstance();
         Calendar c = Calendar.getInstance();
@@ -687,21 +687,21 @@ public class RecordManager {
                 int tag = random.nextInt(TAGS.size());
                 int expense = random.nextInt(RANDOM_DATA_EXPENSE_ON_EACH_DAY) + 1;
 
-                CoCoinRecord coCoinRecord = new CoCoinRecord();
-                coCoinRecord.setCalendar(r);
-                coCoinRecord.setMoney(expense);
-                coCoinRecord.setTag(tag);
-                coCoinRecord.setCurrency("RMB");
-                coCoinRecord.setRemark("备注：这里显示备注~");
+                KKMoneyRecord KKMoneyRecord = new KKMoneyRecord();
+                KKMoneyRecord.setCalendar(r);
+                KKMoneyRecord.setMoney(expense);
+                KKMoneyRecord.setTag(tag);
+                KKMoneyRecord.setCurrency("RMB");
+                KKMoneyRecord.setRemark("备注：这里显示备注~");
 
-                createdCoCoinRecords.add(coCoinRecord);
+                createdKKMoneyRecords.add(KKMoneyRecord);
             }
             c.add(Calendar.DATE, 1);
         }
 
-        Collections.sort(createdCoCoinRecords, new Comparator<CoCoinRecord>() {
+        Collections.sort(createdKKMoneyRecords, new Comparator<KKMoneyRecord>() {
             @Override
-            public int compare(CoCoinRecord lhs, CoCoinRecord rhs) {
+            public int compare(KKMoneyRecord lhs, KKMoneyRecord rhs) {
                 if (lhs.getCalendar().before(rhs.getCalendar())) {
                     return -1;
                 } else if (lhs.getCalendar().after(rhs.getCalendar())) {
@@ -712,8 +712,8 @@ public class RecordManager {
             }
         });
 
-        for (CoCoinRecord coCoinRecord : createdCoCoinRecords) {
-            saveRecord(coCoinRecord);
+        for (KKMoneyRecord KKMoneyRecord : createdKKMoneyRecords) {
+            saveRecord(KKMoneyRecord);
         }
     }
 

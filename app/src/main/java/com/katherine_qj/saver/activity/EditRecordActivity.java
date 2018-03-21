@@ -23,13 +23,13 @@ import com.katherine_qj.saver.R;
 import com.katherine_qj.saver.adapter.ButtonGridViewAdapter;
 import com.katherine_qj.saver.adapter.EditMoneyRemarkFragmentAdapter;
 import com.katherine_qj.saver.adapter.TagChooseFragmentAdapter;
-import com.katherine_qj.saver.fragment.CoCoinFragmentManager;
+import com.katherine_qj.saver.fragment.KKMoneyFragmentManager;
 import com.katherine_qj.saver.fragment.TagChooseFragment;
-import com.katherine_qj.saver.model.CoCoinRecord;
+import com.katherine_qj.saver.model.KKMoneyRecord;
 import com.katherine_qj.saver.model.RecordManager;
-import com.katherine_qj.saver.ui.CoCoinScrollableViewPager;
+import com.katherine_qj.saver.ui.KKMoneyScrollableViewPager;
 import com.katherine_qj.saver.ui.MyGridView;
-import com.katherine_qj.saver.util.CoCoinUtil;
+import com.katherine_qj.saver.util.KKMoneyUtil;
 
 import net.steamcrafted.materialiconlib.MaterialIconView;
 
@@ -44,7 +44,7 @@ public class EditRecordActivity extends AppCompatActivity
     private ViewPager tagViewPager;
     private TagChooseFragmentAdapter tagAdapter;
 
-    private CoCoinScrollableViewPager editViewPager;
+    private KKMoneyScrollableViewPager editViewPager;
     private EditMoneyRemarkFragmentAdapter editAdapter;
 
     private MyGridView myGridView;
@@ -72,9 +72,9 @@ public class EditRecordActivity extends AppCompatActivity
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
             position = extras.getInt("POSITION");
-            CoCoinUtil.editRecordPosition = RecordManager.SELECTED_RECORDS.size() - 1 - position;
+            KKMoneyUtil.editRecordPosition = RecordManager.SELECTED_RECORDS.size() - 1 - position;
         } else {
-            CoCoinUtil.editRecordPosition = -1;
+            KKMoneyUtil.editRecordPosition = -1;
         }
 
 
@@ -91,19 +91,19 @@ public class EditRecordActivity extends AppCompatActivity
         }
 
 // edit viewpager///////////////////////////////////////////////////////////////////////////////////
-        editViewPager = (CoCoinScrollableViewPager)findViewById(R.id.edit_pager);
+        editViewPager = (KKMoneyScrollableViewPager)findViewById(R.id.edit_pager);
         editViewPager.setOverScrollMode(View.OVER_SCROLL_NEVER);
 
         editAdapter = new EditMoneyRemarkFragmentAdapter(
-                getSupportFragmentManager(), CoCoinFragmentManager.EDIT_RECORD_ACTIVITY_FRAGMENT);
+                getSupportFragmentManager(), KKMoneyFragmentManager.EDIT_RECORD_ACTIVITY_FRAGMENT);
 
         editViewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
                 if (position == 1) {
-                    CoCoinFragmentManager.editRecordActivityEditRemarkFragment.editRequestFocus();
+                    KKMoneyFragmentManager.editRecordActivityEditRemarkFragment.editRequestFocus();
                 } else {
-                    CoCoinFragmentManager.editRecordActivityEditMoneyFragment.editRequestFocus();
+                    KKMoneyFragmentManager.editRecordActivityEditMoneyFragment.editRequestFocus();
                 }
             }
 
@@ -173,7 +173,7 @@ public class EditRecordActivity extends AppCompatActivity
         intent.putExtra("POSITION", position);
         setResult(RESULT_OK, intent);
 
-        CoCoinUtil.editRecordPosition = -1;
+        KKMoneyUtil.editRecordPosition = -1;
 
         super.finish();
     }
@@ -199,71 +199,71 @@ public class EditRecordActivity extends AppCompatActivity
         if (IS_CHANGED) {
             return;
         }
-        if (CoCoinFragmentManager.editRecordActivityEditMoneyFragment.getNumberText().toString().equals("0")
-                && !CoCoinUtil.ClickButtonCommit(position)) {
-            if (CoCoinUtil.ClickButtonDelete(position)
-                    || CoCoinUtil.ClickButtonIsZero(position)) {
+        if (KKMoneyFragmentManager.editRecordActivityEditMoneyFragment.getNumberText().toString().equals("0")
+                && !KKMoneyUtil.ClickButtonCommit(position)) {
+            if (KKMoneyUtil.ClickButtonDelete(position)
+                    || KKMoneyUtil.ClickButtonIsZero(position)) {
 
             } else {
-                CoCoinFragmentManager.editRecordActivityEditMoneyFragment.setNumberText(CoCoinUtil.BUTTONS[position]);
+                KKMoneyFragmentManager.editRecordActivityEditMoneyFragment.setNumberText(KKMoneyUtil.BUTTONS[position]);
             }
         } else {
-            if (CoCoinUtil.ClickButtonDelete(position)) {
+            if (KKMoneyUtil.ClickButtonDelete(position)) {
                 if (longClick) {
-                    CoCoinFragmentManager.editRecordActivityEditMoneyFragment.setNumberText("0");
-                    CoCoinFragmentManager.editRecordActivityEditMoneyFragment.setHelpText(" ");
-                    CoCoinFragmentManager.editRecordActivityEditMoneyFragment.setHelpText(
-                            CoCoinUtil.FLOATINGLABELS[CoCoinFragmentManager.editRecordActivityEditMoneyFragment
+                    KKMoneyFragmentManager.editRecordActivityEditMoneyFragment.setNumberText("0");
+                    KKMoneyFragmentManager.editRecordActivityEditMoneyFragment.setHelpText(" ");
+                    KKMoneyFragmentManager.editRecordActivityEditMoneyFragment.setHelpText(
+                            KKMoneyUtil.FLOATINGLABELS[KKMoneyFragmentManager.editRecordActivityEditMoneyFragment
                                     .getNumberText().toString().length()]);
                 } else {
-                    CoCoinFragmentManager.editRecordActivityEditMoneyFragment.setNumberText(
-                            CoCoinFragmentManager.editRecordActivityEditMoneyFragment.getNumberText().toString()
-                            .substring(0, CoCoinFragmentManager.editRecordActivityEditMoneyFragment
+                    KKMoneyFragmentManager.editRecordActivityEditMoneyFragment.setNumberText(
+                            KKMoneyFragmentManager.editRecordActivityEditMoneyFragment.getNumberText().toString()
+                            .substring(0, KKMoneyFragmentManager.editRecordActivityEditMoneyFragment
                                     .getNumberText().toString().length() - 1));
-                    if (CoCoinFragmentManager.editRecordActivityEditMoneyFragment.getNumberText().toString().length() == 0) {
-                        CoCoinFragmentManager.editRecordActivityEditMoneyFragment.setNumberText("0");
-                        CoCoinFragmentManager.editRecordActivityEditMoneyFragment.setHelpText(" ");
+                    if (KKMoneyFragmentManager.editRecordActivityEditMoneyFragment.getNumberText().toString().length() == 0) {
+                        KKMoneyFragmentManager.editRecordActivityEditMoneyFragment.setNumberText("0");
+                        KKMoneyFragmentManager.editRecordActivityEditMoneyFragment.setHelpText(" ");
                     }
                 }
-            } else if (CoCoinUtil.ClickButtonCommit(position)) {
+            } else if (KKMoneyUtil.ClickButtonCommit(position)) {
                 commit();
             } else {
                 if (FIRST_EDIT) {
-                    CoCoinFragmentManager.editRecordActivityEditMoneyFragment.setNumberText(CoCoinUtil.BUTTONS[position]);
+                    KKMoneyFragmentManager.editRecordActivityEditMoneyFragment.setNumberText(KKMoneyUtil.BUTTONS[position]);
                     FIRST_EDIT = false;
                 } else {
-                    CoCoinFragmentManager.editRecordActivityEditMoneyFragment
-                            .setNumberText(CoCoinFragmentManager.editRecordActivityEditMoneyFragment
-                                    .getNumberText().toString() + CoCoinUtil.BUTTONS[position]);
+                    KKMoneyFragmentManager.editRecordActivityEditMoneyFragment
+                            .setNumberText(KKMoneyFragmentManager.editRecordActivityEditMoneyFragment
+                                    .getNumberText().toString() + KKMoneyUtil.BUTTONS[position]);
                 }
             }
         }
-        CoCoinFragmentManager.editRecordActivityEditMoneyFragment.setHelpText(CoCoinUtil.FLOATINGLABELS[
-                CoCoinFragmentManager.editRecordActivityEditMoneyFragment.getNumberText().toString().length()]);
+        KKMoneyFragmentManager.editRecordActivityEditMoneyFragment.setHelpText(KKMoneyUtil.FLOATINGLABELS[
+                KKMoneyFragmentManager.editRecordActivityEditMoneyFragment.getNumberText().toString().length()]);
     }
 
     private void commit() {
-        if (CoCoinFragmentManager.editRecordActivityEditMoneyFragment.getTagId() == -1) {
+        if (KKMoneyFragmentManager.editRecordActivityEditMoneyFragment.getTagId() == -1) {
             showToast(NO_TAG_TOAST);
-        } else if (CoCoinFragmentManager.editRecordActivityEditMoneyFragment.getNumberText().toString().equals("0")) {
+        } else if (KKMoneyFragmentManager.editRecordActivityEditMoneyFragment.getNumberText().toString().equals("0")) {
             showToast(NO_MONEY_TOAST);
         } else  {
-            CoCoinRecord coCoinRecord = new CoCoinRecord();
-            coCoinRecord.set(RecordManager.SELECTED_RECORDS.get(RecordManager.getInstance(mContext).SELECTED_RECORDS.size() - 1 - position));
-            coCoinRecord.setMoney(Float.valueOf(CoCoinFragmentManager.editRecordActivityEditMoneyFragment.getNumberText().toString()));
-            coCoinRecord.setTag(CoCoinFragmentManager.editRecordActivityEditMoneyFragment.getTagId());
-            coCoinRecord.setRemark(CoCoinFragmentManager.editRecordActivityEditRemarkFragment.getRemark());
-            long updateId = RecordManager.updateRecord(coCoinRecord);
+            KKMoneyRecord KKMoneyRecord = new KKMoneyRecord();
+            KKMoneyRecord.set(RecordManager.SELECTED_RECORDS.get(RecordManager.getInstance(mContext).SELECTED_RECORDS.size() - 1 - position));
+            KKMoneyRecord.setMoney(Float.valueOf(KKMoneyFragmentManager.editRecordActivityEditMoneyFragment.getNumberText().toString()));
+            KKMoneyRecord.setTag(KKMoneyFragmentManager.editRecordActivityEditMoneyFragment.getTagId());
+            KKMoneyRecord.setRemark(KKMoneyFragmentManager.editRecordActivityEditRemarkFragment.getRemark());
+            long updateId = RecordManager.updateRecord(KKMoneyRecord);
             if (updateId == -1) {
                 if (!superToast.isShowing()) {
                     showToast(SAVE_FAILED_TOAST);
                 }
             } else {
                 IS_CHANGED = true;
-                RecordManager.SELECTED_RECORDS.set(RecordManager.getInstance(mContext).SELECTED_RECORDS.size() - 1 - position, coCoinRecord);
+                RecordManager.SELECTED_RECORDS.set(RecordManager.getInstance(mContext).SELECTED_RECORDS.size() - 1 - position, KKMoneyRecord);
                 for (int i = RecordManager.getInstance(mContext).RECORDS.size() - 1; i >= 0; i--) {
-                    if (coCoinRecord.getId() == RecordManager.RECORDS.get(i).getId()) {
-                        RecordManager.RECORDS.set(i, coCoinRecord);
+                    if (KKMoneyRecord.getId() == RecordManager.RECORDS.get(i).getId()) {
+                        RecordManager.RECORDS.set(i, KKMoneyRecord);
                         break;
                     }
                 }
@@ -276,7 +276,7 @@ public class EditRecordActivity extends AppCompatActivity
         SuperToast.cancelAllSuperToasts();
         SuperActivityToast.cancelAllSuperActivityToasts();
 
-        superToast.setAnimations(CoCoinUtil.TOAST_ANIMATION);
+        superToast.setAnimations(KKMoneyUtil.TOAST_ANIMATION);
         superToast.setDuration(SuperToast.Duration.SHORT);
         superToast.setTextColor(Color.parseColor("#ffffff"));
         superToast.setTextSize(SuperToast.TextSize.SMALL);
@@ -285,23 +285,23 @@ public class EditRecordActivity extends AppCompatActivity
             case NO_MONEY_TOAST:
 
                 superToast.setText(mContext.getResources().getString(R.string.toast_no_money));
-                superToast.setBackground(SuperToast.Background.BLUE);
-                superToast.getTextView().setTypeface(CoCoinUtil.typefaceLatoLight);
+                superToast.setBackground(SuperToast.Background.ORANGE);
+                superToast.getTextView().setTypeface(KKMoneyUtil.typefaceLatoLight);
 
                 break;
             case SAVE_SUCCESSFULLY_TOAST:
 
                 superToast.setText(
                         mContext.getResources().getString(R.string.toast_save_successfully));
-                superToast.setBackground(SuperToast.Background.GREEN);
-                superToast.getTextView().setTypeface(CoCoinUtil.typefaceLatoLight);
+                superToast.setBackground(SuperToast.Background.GRAY);
+                superToast.getTextView().setTypeface(KKMoneyUtil.typefaceLatoLight);
 
                 break;
             case SAVE_FAILED_TOAST:
 
                 superToast.setText(mContext.getResources().getString(R.string.toast_save_failed));
                 superToast.setBackground(SuperToast.Background.RED);
-                superToast.getTextView().setTypeface(CoCoinUtil.typefaceLatoLight);
+                superToast.getTextView().setTypeface(KKMoneyUtil.typefaceLatoLight);
 
                 break;
             default:
@@ -314,7 +314,7 @@ public class EditRecordActivity extends AppCompatActivity
 
     @Override
     public void onTagItemPicked(int position) {
-        CoCoinFragmentManager.editRecordActivityEditMoneyFragment.setTag(tagViewPager.getCurrentItem() * 8 + position + 2);
+        KKMoneyFragmentManager.editRecordActivityEditMoneyFragment.setTag(tagViewPager.getCurrentItem() * 8 + position + 2);
     }
 
     @Override
@@ -337,8 +337,8 @@ public class EditRecordActivity extends AppCompatActivity
                 x2 = ev.getX();
                 y2 = ev.getY();
                 if (editViewPager.getCurrentItem() == 0
-                        && CoCoinUtil.isPointInsideView(x2, y2, editViewPager)
-                        && CoCoinUtil.GetScreenWidth(mContext) - x2 <= 60) {
+                        && KKMoneyUtil.isPointInsideView(x2, y2, editViewPager)
+                        && KKMoneyUtil.GetScreenWidth(mContext) - x2 <= 60) {
                     return true;
                 }
                 break;
@@ -350,19 +350,19 @@ public class EditRecordActivity extends AppCompatActivity
 
     @Override
     public void onDestroy() {
-        for (int i = 0; i < CoCoinFragmentManager.tagChooseFragments.size(); i++) {
-            if (CoCoinFragmentManager.tagChooseFragments.get(i) != null) {
-                CoCoinFragmentManager.tagChooseFragments.get(i).onDestroy();
-                CoCoinFragmentManager.tagChooseFragments.set(i, null);
+        for (int i = 0; i < KKMoneyFragmentManager.tagChooseFragments.size(); i++) {
+            if (KKMoneyFragmentManager.tagChooseFragments.get(i) != null) {
+                KKMoneyFragmentManager.tagChooseFragments.get(i).onDestroy();
+                KKMoneyFragmentManager.tagChooseFragments.set(i, null);
             }
         }
-        if (CoCoinFragmentManager.editRecordActivityEditMoneyFragment != null) {
-            CoCoinFragmentManager.editRecordActivityEditMoneyFragment.onDestroy();
-            CoCoinFragmentManager.editRecordActivityEditMoneyFragment = null;
+        if (KKMoneyFragmentManager.editRecordActivityEditMoneyFragment != null) {
+            KKMoneyFragmentManager.editRecordActivityEditMoneyFragment.onDestroy();
+            KKMoneyFragmentManager.editRecordActivityEditMoneyFragment = null;
         }
-        if (CoCoinFragmentManager.editRecordActivityEditRemarkFragment != null) {
-            CoCoinFragmentManager.editRecordActivityEditRemarkFragment.onDestroy();
-            CoCoinFragmentManager.editRecordActivityEditRemarkFragment = null;
+        if (KKMoneyFragmentManager.editRecordActivityEditRemarkFragment != null) {
+            KKMoneyFragmentManager.editRecordActivityEditRemarkFragment.onDestroy();
+            KKMoneyFragmentManager.editRecordActivityEditRemarkFragment = null;
         }
         super.onDestroy();
     }

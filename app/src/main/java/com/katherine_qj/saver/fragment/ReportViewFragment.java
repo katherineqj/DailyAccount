@@ -24,17 +24,17 @@ import com.github.johnpersano.supertoasts.SuperToast;
 import com.github.ksoichiro.android.observablescrollview.ObservableScrollView;
 import com.melnykov.fab.FloatingActionButton;
 import com.katherine_qj.saver.R;
-import com.katherine_qj.saver.activity.CoCoinApplication;
+import com.katherine_qj.saver.activity.KKMoneyApplication;
 import com.katherine_qj.saver.adapter.DialogSelectListDataAdapter;
 import com.katherine_qj.saver.adapter.ReportDayAdapter;
 import com.katherine_qj.saver.adapter.ReportMonthAdapter;
 import com.katherine_qj.saver.adapter.ReportTagAdapter;
-import com.katherine_qj.saver.model.CoCoinRecord;
+import com.katherine_qj.saver.model.KKMoneyRecord;
 import com.katherine_qj.saver.model.RecordManager;
 import com.katherine_qj.saver.model.SettingManager;
 import com.katherine_qj.saver.ui.ExpandedListView;
 import com.katherine_qj.saver.ui.MyGridView;
-import com.katherine_qj.saver.util.CoCoinUtil;
+import com.katherine_qj.saver.util.KKMoneyUtil;
 import com.nispok.snackbar.Snackbar;
 import com.nispok.snackbar.SnackbarManager;
 import com.nispok.snackbar.enums.SnackbarType;
@@ -66,7 +66,7 @@ import lecho.lib.hellocharts.view.LineChartView;
 import lecho.lib.hellocharts.view.PieChartView;
 
 /**
- * Created by 伟平 on 2015/10/20.
+ * Created by katherineqj on 2017/10/20.
  *
  * report is to show the expense of some time for user
  *
@@ -133,7 +133,7 @@ public class ReportViewFragment extends Fragment
     // store the sum of expenses of each tag
     private Map<Integer, Double> TagExpanse;
     // store the records of each tag
-    private Map<Integer, List<CoCoinRecord>> Expanse;
+    private Map<Integer, List<KKMoneyRecord>> Expanse;
     // the original target value of the whole pie
     private float[] originalTargets;
 
@@ -279,7 +279,7 @@ public class ReportViewFragment extends Fragment
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-//        CoCoinFragmentManager.reportViewFragment = this;
+//        KKMoneyFragmentManager.reportViewFragment = this;
         mContext = getContext();
         superToast = new SuperToast(mContext);
         superToast.setAnimations(SuperToast.Animations.POPUP);
@@ -287,7 +287,7 @@ public class ReportViewFragment extends Fragment
         superToast.setTextColor(Color.parseColor("#ffffff"));
         superToast.setTextSize(SuperToast.TextSize.SMALL);
         superToast.setBackground(SuperToast.Background.RED);
-        superToast.getTextView().setTypeface(CoCoinUtil.typefaceLatoLight);
+        superToast.getTextView().setTypeface(KKMoneyUtil.typefaceLatoLight);
     }
 
     @Override
@@ -303,25 +303,25 @@ public class ReportViewFragment extends Fragment
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        IS_EMPTY = RecordManager.getInstance(CoCoinApplication.getAppContext()).RECORDS.isEmpty();
+        IS_EMPTY = RecordManager.getInstance(KKMoneyApplication.getAppContext()).RECORDS.isEmpty();
 
         mScrollView = (ObservableScrollView) view.findViewById(R.id.scrollView);
         MaterialViewPagerHelper.registerScrollView(getActivity(), mScrollView, null);
 
         expenseTV = (TextView)view.findViewById(R.id.expense);
-        expenseTV.setTypeface(CoCoinUtil.getInstance().typefaceLatoLight);
-        expenseTV.setText(CoCoinUtil.GetInMoney(0));
+        expenseTV.setTypeface(KKMoneyUtil.getInstance().typefaceLatoLight);
+        expenseTV.setText(KKMoneyUtil.GetInMoney(0));
         tagsTV = (TextView)view.findViewById(R.id.tags);
-        tagsTV.setTypeface(CoCoinUtil.getInstance().typefaceLatoLight);
+        tagsTV.setTypeface(KKMoneyUtil.getInstance().typefaceLatoLight);
         tagsTV.setText("");
 
         title = (TextView)view.findViewById(R.id.title);
-        title.setTypeface(CoCoinUtil.getInstance().typefaceLatoLight);
+        title.setTypeface(KKMoneyUtil.getInstance().typefaceLatoLight);
 
         pieLayout = (LinearLayout)view.findViewById(R.id.pie_layout);
         pieLayout.setVisibility(View.GONE);
         pieTitle = (TextView)view.findViewById(R.id.pie_title);
-        pieTitle.setTypeface(CoCoinUtil.getInstance().typefaceLatoLight);
+        pieTitle.setTypeface(KKMoneyUtil.getInstance().typefaceLatoLight);
         pie = (PieChartView)view.findViewById(R.id.chart_pie);
         pie.setChartRotationEnabled(false);
         pie.setOnValueTouchListener(new PieChartOnValueSelectListener() {
@@ -331,32 +331,32 @@ public class ReportViewFragment extends Fragment
                 String text;
                 tagId = Integer.valueOf(String.valueOf(sliceValue.getLabelAsChars()));
                 double percent = sliceValue.getValue() / expense * 100;
-                if ("zh".equals(CoCoinUtil.GetLanguage())) {
-                    text = CoCoinUtil.GetSpendString((int) sliceValue.getValue()) +
-                            CoCoinUtil.GetPercentString(percent) + "\n" +
-                            "于" + CoCoinUtil.GetTagName(tagId);
+                if ("zh".equals(KKMoneyUtil.GetLanguage())) {
+                    text = KKMoneyUtil.GetSpendString((int) sliceValue.getValue()) +
+                            KKMoneyUtil.GetPercentString(percent) + "\n" +
+                            "于" + KKMoneyUtil.GetTagName(tagId);
                 } else {
-                    text = CoCoinUtil.GetSpendString((int) sliceValue.getValue())
+                    text = KKMoneyUtil.GetSpendString((int) sliceValue.getValue())
                             + " (takes " + String.format("%.2f", percent) + "%)\n"
-                            + "in " + CoCoinUtil.GetTagName(tagId);
+                            + "in " + KKMoneyUtil.GetTagName(tagId);
                 }
-                if ("zh".equals(CoCoinUtil.GetLanguage())) {
+                if ("zh".equals(KKMoneyUtil.GetLanguage())) {
                     if (selectYear) {
                         dialogTitle = from.get(Calendar.YEAR) + "年" + "\n" +
-                                CoCoinUtil.GetSpendString((int) sliceValue.getValue()) +
-                                "于" + CoCoinUtil.GetTagName(tagId);
+                                KKMoneyUtil.GetSpendString((int) sliceValue.getValue()) +
+                                "于" + KKMoneyUtil.GetTagName(tagId);
                     } else {
                         dialogTitle = from.get(Calendar.YEAR) + "年" + (from.get(Calendar.MONTH) + 1) + "月" + "\n" +
-                                CoCoinUtil.GetSpendString((int) sliceValue.getValue()) +
-                                "于" + CoCoinUtil.GetTagName(tagId);
+                                KKMoneyUtil.GetSpendString((int) sliceValue.getValue()) +
+                                "于" + KKMoneyUtil.GetTagName(tagId);
                     }
                 } else {
                     if (selectYear) {
-                        dialogTitle = CoCoinUtil.GetSpendString((int) sliceValue.getValue()) + " in " + from.get(Calendar.YEAR) + "\n" +
-                                "on " + CoCoinUtil.GetTagName(tagId);
+                        dialogTitle = KKMoneyUtil.GetSpendString((int) sliceValue.getValue()) + " in " + from.get(Calendar.YEAR) + "\n" +
+                                "on " + KKMoneyUtil.GetTagName(tagId);
                     } else {
-                        dialogTitle = CoCoinUtil.GetSpendString((int) sliceValue.getValue()) + " in " + CoCoinUtil.GetMonthShort(from.get(Calendar.MONTH) + 1) + " " + from.get(Calendar.YEAR) + "\n" +
-                                "on " + CoCoinUtil.GetTagName(tagId);
+                        dialogTitle = KKMoneyUtil.GetSpendString((int) sliceValue.getValue()) + " in " + KKMoneyUtil.GetMonthShort(from.get(Calendar.MONTH) + 1) + " " + from.get(Calendar.YEAR) + "\n" +
+                                "on " + KKMoneyUtil.GetTagName(tagId);
                     }
                 }
                 Snackbar snackbar =
@@ -366,11 +366,11 @@ public class ReportViewFragment extends Fragment
                                 .duration(Snackbar.SnackbarDuration.LENGTH_SHORT)
                                 .position(Snackbar.SnackbarPosition.BOTTOM)
                                 .margin(15, 15)
-                                .backgroundDrawable(CoCoinUtil.GetSnackBarBackground(-3))
+                                .backgroundDrawable(KKMoneyUtil.GetSnackBarBackground(-3))
                                 .text(text)
-                                .textTypeface(CoCoinUtil.GetTypeface())
+                                .textTypeface(KKMoneyUtil.GetTypeface())
                                 .textColor(Color.WHITE)
-                                .actionLabelTypeface(CoCoinUtil.GetTypeface())
+                                .actionLabelTypeface(KKMoneyUtil.GetTypeface())
                                 .actionLabel(mContext.getResources()
                                         .getString(R.string.check))
                                 .actionColor(Color.WHITE)
@@ -400,8 +400,8 @@ public class ReportViewFragment extends Fragment
         iconLeft.setOnClickListener(this);
 
         emptyTip = (TextView)view.findViewById(R.id.empty_tip);
-        emptyTip.setTypeface(CoCoinUtil.GetTypeface());
-        if (RecordManager.getInstance(CoCoinApplication.getAppContext()).RECORDS.size() != 0) {
+        emptyTip.setTypeface(KKMoneyUtil.GetTypeface());
+        if (RecordManager.getInstance(KKMoneyApplication.getAppContext()).RECORDS.size() != 0) {
             emptyTip.setText(mContext.getResources().getString(R.string.report_view_please_select_data));
         } else {
             emptyTip.setText(mContext.getResources().getString(R.string.report_view_no_data));
@@ -411,49 +411,49 @@ public class ReportViewFragment extends Fragment
         highestTagLayout = (LinearLayout)view.findViewById(R.id.highest_tag_layout);
         highestTagLayout.setVisibility(View.GONE);
         highestTagTitle = (TextView)view.findViewById(R.id.highest_tag_title);
-        highestTagTitle.setTypeface(CoCoinUtil.getInstance().typefaceLatoLight);
+        highestTagTitle.setTypeface(KKMoneyUtil.getInstance().typefaceLatoLight);
         highestFirst = (LinearLayout)view.findViewById(R.id.highest_first);
         highestFirst.setOnClickListener(this);
         highestTagIcon = (ImageView)view.findViewById(R.id.highest_tag_icon);
         highestTagText = (TextView)view.findViewById(R.id.highest_tag_text);
-        highestTagText.setTypeface(CoCoinUtil.getInstance().typefaceLatoLight);
+        highestTagText.setTypeface(KKMoneyUtil.getInstance().typefaceLatoLight);
         highestTagExpenseTV = (TextView)view.findViewById(R.id.highest_tag_expense);
-        highestTagExpenseTV.setTypeface(CoCoinUtil.getInstance().typefaceLatoLight);
+        highestTagExpenseTV.setTypeface(KKMoneyUtil.getInstance().typefaceLatoLight);
         highestTagRecord = (TextView)view.findViewById(R.id.highest_tag_sum);
-        highestTagRecord.setTypeface(CoCoinUtil.getInstance().typefaceLatoLight);
+        highestTagRecord.setTypeface(KKMoneyUtil.getInstance().typefaceLatoLight);
         highestTags = (ExpandedListView)view.findViewById(R.id.highest_tags);
         highestTagsLayout = (ExpandableRelativeLayout) view.findViewById(R.id.expand_highest_tag);
         highestTagMore = (LinearLayout)view.findViewById(R.id.highest_tag_more);
         highestTagMore.setOnClickListener(this);
         highestTagMoreText = (TextView)view.findViewById(R.id.highest_tag_more_text);
-        highestTagMoreText.setTypeface(CoCoinUtil.getInstance().GetTypeface());
+        highestTagMoreText.setTypeface(KKMoneyUtil.getInstance().GetTypeface());
         highestTags.setOnItemClickListener(this);
 
         lowestTagLayout = (LinearLayout)view.findViewById(R.id.lowest_tag_layout);
         lowestTagLayout.setVisibility(View.GONE);
         lowestTagTitle = (TextView)view.findViewById(R.id.lowest_tag_title);
-        lowestTagTitle.setTypeface(CoCoinUtil.getInstance().typefaceLatoLight);
+        lowestTagTitle.setTypeface(KKMoneyUtil.getInstance().typefaceLatoLight);
         lowestFirst = (LinearLayout)view.findViewById(R.id.lowest_first);
         lowestFirst.setOnClickListener(this);
         lowestTagIcon = (ImageView)view.findViewById(R.id.lowest_tag_icon);
         lowestTagText = (TextView)view.findViewById(R.id.lowest_tag_text);
-        lowestTagText.setTypeface(CoCoinUtil.getInstance().typefaceLatoLight);
+        lowestTagText.setTypeface(KKMoneyUtil.getInstance().typefaceLatoLight);
         lowestTagExpenseTV = (TextView)view.findViewById(R.id.lowest_tag_expense);
-        lowestTagExpenseTV.setTypeface(CoCoinUtil.getInstance().typefaceLatoLight);
+        lowestTagExpenseTV.setTypeface(KKMoneyUtil.getInstance().typefaceLatoLight);
         lowestTagRecord = (TextView)view.findViewById(R.id.lowest_tag_sum);
-        lowestTagRecord.setTypeface(CoCoinUtil.getInstance().typefaceLatoLight);
+        lowestTagRecord.setTypeface(KKMoneyUtil.getInstance().typefaceLatoLight);
         lowestTags = (ExpandedListView)view.findViewById(R.id.lowest_tags);
         lowestTagsLayout = (ExpandableRelativeLayout) view.findViewById(R.id.expand_lowest_tag);
         lowestTagMore = (LinearLayout)view.findViewById(R.id.lowest_tag_more);
         lowestTagMore.setOnClickListener(this);
         lowestTagMoreText = (TextView)view.findViewById(R.id.lowest_tag_more_text);
-        lowestTagMoreText.setTypeface(CoCoinUtil.getInstance().GetTypeface());
+        lowestTagMoreText.setTypeface(KKMoneyUtil.getInstance().GetTypeface());
         lowestTags.setOnItemClickListener(this);
 
         lineLayout = (LinearLayout)view.findViewById(R.id.line_layout);
         lineLayout.setVisibility(View.GONE);
         lineTitle = (TextView)view.findViewById(R.id.line_title);
-        lineTitle.setTypeface(CoCoinUtil.getInstance().typefaceLatoLight);
+        lineTitle.setTypeface(KKMoneyUtil.getInstance().typefaceLatoLight);
         line = (LineChartView) view.findViewById(R.id.chart_line);
         line.setZoomEnabled(false);
         line.setOnValueTouchListener(new LineChartOnValueSelectListener() {
@@ -462,46 +462,46 @@ public class ReportViewFragment extends Fragment
                 // snack bar
                 String text;
                 double percent = value.getY() / expense * 100;
-                if ("zh".equals(CoCoinUtil.GetLanguage())) {
+                if ("zh".equals(KKMoneyUtil.GetLanguage())) {
                     if (selectYear) {
-                        text = "在" + reportYear + " " + CoCoinUtil.getInstance().GetMonthShort((int)value.getX() + 1) + "\n" +
-                                CoCoinUtil.GetSpendString((int) value.getY()) +
-                                CoCoinUtil.GetPercentString(percent);
+                        text = "在" + reportYear + " " + KKMoneyUtil.getInstance().GetMonthShort((int)value.getX() + 1) + "\n" +
+                                KKMoneyUtil.GetSpendString((int) value.getY()) +
+                                KKMoneyUtil.GetPercentString(percent);
                     } else {
-                        text = "在" + CoCoinUtil.getInstance().GetMonthShort(reportMonth) + " " + ((int)value.getX() + 1) + CoCoinUtil.getInstance().GetWhetherFuck() + "\n" +
-                                CoCoinUtil.GetSpendString((int) value.getY()) +
-                                CoCoinUtil.GetPercentString(percent);
+                        text = "在" + KKMoneyUtil.getInstance().GetMonthShort(reportMonth) + " " + ((int)value.getX() + 1) + KKMoneyUtil.getInstance().GetWhetherFuck() + "\n" +
+                                KKMoneyUtil.GetSpendString((int) value.getY()) +
+                                KKMoneyUtil.GetPercentString(percent);
                     }
                 } else {
                     if (selectYear) {
-                        text = CoCoinUtil.GetSpendString((int) value.getY()) +
-                                CoCoinUtil.GetPercentString(percent) + "\n" +
-                                "in " + reportYear + " " + CoCoinUtil.getInstance().GetMonthShort((int)value.getX() + 1);
+                        text = KKMoneyUtil.GetSpendString((int) value.getY()) +
+                                KKMoneyUtil.GetPercentString(percent) + "\n" +
+                                "in " + reportYear + " " + KKMoneyUtil.getInstance().GetMonthShort((int)value.getX() + 1);
                     } else {
-                        text = CoCoinUtil.GetSpendString((int) value.getY()) +
-                                CoCoinUtil.GetPercentString(percent) + "\n" +
-                                "on " + CoCoinUtil.getInstance().GetMonthShort(reportMonth) + " " + ((int)value.getX() + 1) + CoCoinUtil.getInstance().GetWhetherFuck();
+                        text = KKMoneyUtil.GetSpendString((int) value.getY()) +
+                                KKMoneyUtil.GetPercentString(percent) + "\n" +
+                                "on " + KKMoneyUtil.getInstance().GetMonthShort(reportMonth) + " " + ((int)value.getX() + 1) + KKMoneyUtil.getInstance().GetWhetherFuck();
                     }
                 }
-                if ("zh".equals(CoCoinUtil.GetLanguage())) {
+                if ("zh".equals(KKMoneyUtil.GetLanguage())) {
                     if (selectYear) {
-                        dialogTitle = "在" + reportYear + " " + CoCoinUtil.getInstance().GetMonthShort((int)value.getX() + 1) + "\n" +
-                                CoCoinUtil.GetSpendString((int) value.getY()) +
-                                CoCoinUtil.GetPercentString(percent);
+                        dialogTitle = "在" + reportYear + " " + KKMoneyUtil.getInstance().GetMonthShort((int)value.getX() + 1) + "\n" +
+                                KKMoneyUtil.GetSpendString((int) value.getY()) +
+                                KKMoneyUtil.GetPercentString(percent);
                     } else {
-                        dialogTitle = "在" + CoCoinUtil.getInstance().GetMonthShort(reportMonth) + " " + ((int)value.getX() + 1) + CoCoinUtil.getInstance().GetWhetherFuck() + "\n" +
-                                CoCoinUtil.GetSpendString((int) value.getY()) +
-                                CoCoinUtil.GetPercentString(percent);
+                        dialogTitle = "在" + KKMoneyUtil.getInstance().GetMonthShort(reportMonth) + " " + ((int)value.getX() + 1) + KKMoneyUtil.getInstance().GetWhetherFuck() + "\n" +
+                                KKMoneyUtil.GetSpendString((int) value.getY()) +
+                                KKMoneyUtil.GetPercentString(percent);
                     }
                 } else {
                     if (selectYear) {
-                        dialogTitle = CoCoinUtil.GetSpendString((int) value.getY()) +
-                                CoCoinUtil.GetPercentString(percent) + "\n" +
-                                "in " + reportYear + " " + CoCoinUtil.getInstance().GetMonthShort((int)value.getX() + 1);
+                        dialogTitle = KKMoneyUtil.GetSpendString((int) value.getY()) +
+                                KKMoneyUtil.GetPercentString(percent) + "\n" +
+                                "in " + reportYear + " " + KKMoneyUtil.getInstance().GetMonthShort((int)value.getX() + 1);
                     } else {
-                        dialogTitle = CoCoinUtil.GetSpendString((int) value.getY()) +
-                                CoCoinUtil.GetPercentString(percent) + "\n" +
-                                "on " + CoCoinUtil.getInstance().GetMonthShort(reportMonth) + " " + ((int)value.getX() + 1) + CoCoinUtil.getInstance().GetWhetherFuck();
+                        dialogTitle = KKMoneyUtil.GetSpendString((int) value.getY()) +
+                                KKMoneyUtil.GetPercentString(percent) + "\n" +
+                                "on " + KKMoneyUtil.getInstance().GetMonthShort(reportMonth) + " " + ((int)value.getX() + 1) + KKMoneyUtil.getInstance().GetWhetherFuck();
                     }
                 }
                 final Calendar tempFrom = Calendar.getInstance();
@@ -524,11 +524,11 @@ public class ReportViewFragment extends Fragment
                                 .duration(Snackbar.SnackbarDuration.LENGTH_SHORT)
                                 .position(Snackbar.SnackbarPosition.BOTTOM)
                                 .margin(15, 15)
-                                .backgroundDrawable(CoCoinUtil.GetSnackBarBackground(-3))
+                                .backgroundDrawable(KKMoneyUtil.GetSnackBarBackground(-3))
                                 .text(text)
-                                .textTypeface(CoCoinUtil.GetTypeface())
+                                .textTypeface(KKMoneyUtil.GetTypeface())
                                 .textColor(Color.WHITE)
-                                .actionLabelTypeface(CoCoinUtil.GetTypeface())
+                                .actionLabelTypeface(KKMoneyUtil.GetTypeface())
                                 .actionLabel(mContext.getResources()
                                         .getString(R.string.check))
                                 .actionColor(Color.WHITE)
@@ -560,95 +560,95 @@ public class ReportViewFragment extends Fragment
         highestMonthLayout = (LinearLayout) view.findViewById(R.id.highest_month_layout);
         highestMonthLayout.setVisibility(View.GONE);
         monthTitle = (TextView)view.findViewById(R.id.month_title);
-        monthTitle.setTypeface(CoCoinUtil.getInstance().typefaceLatoLight);
+        monthTitle.setTypeface(KKMoneyUtil.getInstance().typefaceLatoLight);
         highestFirstMonth = (LinearLayout)view.findViewById(R.id.highest_first_month);
         highestFirstMonth.setOnClickListener(this);
         highestFirstIcon = (TextView) view.findViewById(R.id.highest_month_icon);
-        highestFirstIcon.setTypeface(CoCoinUtil.getInstance().typefaceLatoLight);
+        highestFirstIcon.setTypeface(KKMoneyUtil.getInstance().typefaceLatoLight);
         highestFirstText = (TextView)view.findViewById(R.id.highest_month_text);
-        highestFirstText.setTypeface(CoCoinUtil.getInstance().typefaceLatoLight);
+        highestFirstText.setTypeface(KKMoneyUtil.getInstance().typefaceLatoLight);
         highestFirstExpenseTV = (TextView)view.findViewById(R.id.highest_month_expense);
-        highestFirstExpenseTV.setTypeface(CoCoinUtil.getInstance().typefaceLatoLight);
+        highestFirstExpenseTV.setTypeface(KKMoneyUtil.getInstance().typefaceLatoLight);
         highestFirstRecord = (TextView)view.findViewById(R.id.highest_month_sum);
-        highestFirstRecord.setTypeface(CoCoinUtil.getInstance().typefaceLatoLight);
+        highestFirstRecord.setTypeface(KKMoneyUtil.getInstance().typefaceLatoLight);
         highestMonths = (ExpandedListView)view.findViewById(R.id.highest_month);
         highestMonths.setOnItemClickListener(this);
         highestMonthsLayout = (ExpandableRelativeLayout)view.findViewById(R.id.expand_highest_month);
         highestLast = (LinearLayout)view.findViewById(R.id.highest_last_month);
         highestLast.setOnClickListener(this);
         highestLastIcon = (TextView) view.findViewById(R.id.lowest_month_icon);
-        highestLastIcon.setTypeface(CoCoinUtil.getInstance().typefaceLatoLight);
+        highestLastIcon.setTypeface(KKMoneyUtil.getInstance().typefaceLatoLight);
         highestLastText = (TextView)view.findViewById(R.id.lowest_month_text);
-        highestLastText.setTypeface(CoCoinUtil.getInstance().typefaceLatoLight);
+        highestLastText.setTypeface(KKMoneyUtil.getInstance().typefaceLatoLight);
         highestLastExpenseTV = (TextView)view.findViewById(R.id.lowest_month_expense);
-        highestLastExpenseTV.setTypeface(CoCoinUtil.getInstance().typefaceLatoLight);
+        highestLastExpenseTV.setTypeface(KKMoneyUtil.getInstance().typefaceLatoLight);
         highestLastRecord = (TextView)view.findViewById(R.id.lowest_month_sum);
-        highestLastRecord.setTypeface(CoCoinUtil.getInstance().typefaceLatoLight);
+        highestLastRecord.setTypeface(KKMoneyUtil.getInstance().typefaceLatoLight);
         highestMonthMore = (LinearLayout)view.findViewById(R.id.highest_month_more);
         highestMonthMore.setOnClickListener(this);
         highestMonthMoreText = (TextView)view.findViewById(R.id.highest_month_more_text);
-        highestMonthMoreText.setTypeface(CoCoinUtil.getInstance().typefaceLatoLight);
+        highestMonthMoreText.setTypeface(KKMoneyUtil.getInstance().typefaceLatoLight);
 
         averageMonthText = (TextView)view.findViewById(R.id.average_month_text);
-        averageMonthText.setTypeface(CoCoinUtil.getInstance().typefaceLatoLight);
+        averageMonthText.setTypeface(KKMoneyUtil.getInstance().typefaceLatoLight);
         averageMonthExpenseTV = (TextView)view.findViewById(R.id.average_month_expense);
-        averageMonthExpenseTV.setTypeface(CoCoinUtil.getInstance().typefaceLatoLight);
+        averageMonthExpenseTV.setTypeface(KKMoneyUtil.getInstance().typefaceLatoLight);
         averageMonthRecordTV = (TextView)view.findViewById(R.id.average_month_sum);
-        averageMonthRecordTV.setTypeface(CoCoinUtil.getInstance().typefaceLatoLight);
+        averageMonthRecordTV.setTypeface(KKMoneyUtil.getInstance().typefaceLatoLight);
         
         highestDayLayout = (LinearLayout)view.findViewById(R.id.highest_day_layout);
         highestDayLayout.setVisibility(View.GONE);
         highestDayTitle = (TextView)view.findViewById(R.id.highest_day_title);
-        highestDayTitle.setTypeface(CoCoinUtil.getInstance().typefaceLatoLight);
+        highestDayTitle.setTypeface(KKMoneyUtil.getInstance().typefaceLatoLight);
         highestFirstDay = (LinearLayout)view.findViewById(R.id.highest_first_day);
         highestFirstDay.setOnClickListener(this);
         highestDayIcon = (TextView) view.findViewById(R.id.highest_day_icon);
-        highestDayIcon.setTypeface(CoCoinUtil.getInstance().typefaceLatoLight);
+        highestDayIcon.setTypeface(KKMoneyUtil.getInstance().typefaceLatoLight);
         highestDayText = (TextView)view.findViewById(R.id.highest_day_text);
-        highestDayText.setTypeface(CoCoinUtil.getInstance().typefaceLatoLight);
+        highestDayText.setTypeface(KKMoneyUtil.getInstance().typefaceLatoLight);
         highestDayExpenseTV = (TextView)view.findViewById(R.id.highest_day_expense);
-        highestDayExpenseTV.setTypeface(CoCoinUtil.getInstance().typefaceLatoLight);
+        highestDayExpenseTV.setTypeface(KKMoneyUtil.getInstance().typefaceLatoLight);
         highestDayRecord = (TextView)view.findViewById(R.id.highest_day_sum);
-        highestDayRecord.setTypeface(CoCoinUtil.getInstance().typefaceLatoLight);
+        highestDayRecord.setTypeface(KKMoneyUtil.getInstance().typefaceLatoLight);
         highestDays = (ExpandedListView)view.findViewById(R.id.highest_days);
         highestDaysLayout = (ExpandableRelativeLayout) view.findViewById(R.id.expand_highest_day);
         highestDayMore = (LinearLayout)view.findViewById(R.id.highest_day_more);
         highestDayMore.setOnClickListener(this);
         highestDayMoreText = (TextView)view.findViewById(R.id.highest_day_more_text);
-        highestDayMoreText.setTypeface(CoCoinUtil.getInstance().GetTypeface());
+        highestDayMoreText.setTypeface(KKMoneyUtil.getInstance().GetTypeface());
         highestDays.setOnItemClickListener(this);
 
         lowestDayLayout = (LinearLayout)view.findViewById(R.id.lowest_day_layout);
         lowestDayLayout.setVisibility(View.GONE);
         lowestDayTitle = (TextView)view.findViewById(R.id.lowest_day_title);
-        lowestDayTitle.setTypeface(CoCoinUtil.getInstance().typefaceLatoLight);
+        lowestDayTitle.setTypeface(KKMoneyUtil.getInstance().typefaceLatoLight);
         lowestFirstDay = (LinearLayout)view.findViewById(R.id.lowest_first_day);
         lowestFirstDay.setOnClickListener(this);
         lowestDayIcon = (TextView) view.findViewById(R.id.lowest_day_icon);
-        lowestDayIcon.setTypeface(CoCoinUtil.getInstance().typefaceLatoLight);
+        lowestDayIcon.setTypeface(KKMoneyUtil.getInstance().typefaceLatoLight);
         lowestDayText = (TextView)view.findViewById(R.id.lowest_day_text);
-        lowestDayText.setTypeface(CoCoinUtil.getInstance().typefaceLatoLight);
+        lowestDayText.setTypeface(KKMoneyUtil.getInstance().typefaceLatoLight);
         lowestDayExpenseTV = (TextView)view.findViewById(R.id.lowest_day_expense);
-        lowestDayExpenseTV.setTypeface(CoCoinUtil.getInstance().typefaceLatoLight);
+        lowestDayExpenseTV.setTypeface(KKMoneyUtil.getInstance().typefaceLatoLight);
         lowestDayRecord = (TextView)view.findViewById(R.id.lowest_day_sum);
-        lowestDayRecord.setTypeface(CoCoinUtil.getInstance().typefaceLatoLight);
+        lowestDayRecord.setTypeface(KKMoneyUtil.getInstance().typefaceLatoLight);
         lowestDays = (ExpandedListView)view.findViewById(R.id.lowest_days);
         lowestDaysLayout = (ExpandableRelativeLayout) view.findViewById(R.id.expand_lowest_day);
         lowestDayMore = (LinearLayout)view.findViewById(R.id.lowest_day_more);
         lowestDayMore.setOnClickListener(this);
         lowestDayMoreText = (TextView)view.findViewById(R.id.lowest_day_more_text);
-        lowestDayMoreText.setTypeface(CoCoinUtil.getInstance().GetTypeface());
+        lowestDayMoreText.setTypeface(KKMoneyUtil.getInstance().GetTypeface());
         lowestDays.setOnItemClickListener(this);
 
         averageDayText = (TextView)view.findViewById(R.id.average_day_text);
-        averageDayText.setTypeface(CoCoinUtil.getInstance().typefaceLatoLight);
+        averageDayText.setTypeface(KKMoneyUtil.getInstance().typefaceLatoLight);
         averageDayExpenseTV = (TextView)view.findViewById(R.id.average_day_expense);
-        averageDayExpenseTV.setTypeface(CoCoinUtil.getInstance().typefaceLatoLight);
+        averageDayExpenseTV.setTypeface(KKMoneyUtil.getInstance().typefaceLatoLight);
         averageDayRecordTV = (TextView)view.findViewById(R.id.average_day_sum);
-        averageDayRecordTV.setTypeface(CoCoinUtil.getInstance().typefaceLatoLight);
+        averageDayRecordTV.setTypeface(KKMoneyUtil.getInstance().typefaceLatoLight);
 
         foot = (TextView)view.findViewById(R.id.foot);
-        foot.setTypeface(CoCoinUtil.getInstance().typefaceLatoLight);
+        foot.setTypeface(KKMoneyUtil.getInstance().typefaceLatoLight);
         foot.setVisibility(View.GONE);
 
         if (IS_EMPTY) {
@@ -672,7 +672,7 @@ public class ReportViewFragment extends Fragment
 
         super.onDestroy();
 
-        RefWatcher refWatcher = CoCoinApplication.getRefWatcher(getActivity());
+        RefWatcher refWatcher = KKMoneyApplication.getRefWatcher(getActivity());
         refWatcher.watch(this);
     }
 
@@ -715,10 +715,10 @@ public class ReportViewFragment extends Fragment
                 if (highestTagsLayout != null) {
                     if (highestTagsLayout.isExpanded()) {
                         highestTagsLayout.collapse();
-                        highestTagMoreText.setText(CoCoinApplication.getAppContext().getResources().getString(R.string.report_view_highest_tag_show_more));
+                        highestTagMoreText.setText(KKMoneyApplication.getAppContext().getResources().getString(R.string.report_view_highest_tag_show_more));
                     } else {
                         highestTagsLayout.expand();
-                        highestTagMoreText.setText(CoCoinApplication.getAppContext().getResources().getString(R.string.report_view_highest_tag_show_less));
+                        highestTagMoreText.setText(KKMoneyApplication.getAppContext().getResources().getString(R.string.report_view_highest_tag_show_less));
                     }
                 }
                 break;
@@ -729,10 +729,10 @@ public class ReportViewFragment extends Fragment
                 if (lowestTagsLayout != null) {
                     if (lowestTagsLayout.isExpanded()) {
                         lowestTagsLayout.collapse();
-                        lowestTagMoreText.setText(CoCoinApplication.getAppContext().getResources().getString(R.string.report_view_lowest_tag_show_more));
+                        lowestTagMoreText.setText(KKMoneyApplication.getAppContext().getResources().getString(R.string.report_view_lowest_tag_show_more));
                     } else {
                         lowestTagsLayout.expand();
-                        lowestTagMoreText.setText(CoCoinApplication.getAppContext().getResources().getString(R.string.report_view_lowest_tag_show_less));
+                        lowestTagMoreText.setText(KKMoneyApplication.getAppContext().getResources().getString(R.string.report_view_lowest_tag_show_less));
                     }
                 }
                 break;
@@ -774,10 +774,10 @@ public class ReportViewFragment extends Fragment
                 if (highestMonthsLayout != null) {
                     if (highestMonthsLayout.isExpanded()) {
                         highestMonthsLayout.collapse();
-                        highestMonthMoreText.setText(CoCoinApplication.getAppContext().getResources().getString(R.string.report_view_lowest_tag_show_more));
+                        highestMonthMoreText.setText(KKMoneyApplication.getAppContext().getResources().getString(R.string.report_view_lowest_tag_show_more));
                     } else {
                         highestMonthsLayout.expand();
-                        highestMonthMoreText.setText(CoCoinApplication.getAppContext().getResources().getString(R.string.report_view_lowest_tag_show_less));
+                        highestMonthMoreText.setText(KKMoneyApplication.getAppContext().getResources().getString(R.string.report_view_lowest_tag_show_less));
                     }
                 }
                 break;
@@ -788,10 +788,10 @@ public class ReportViewFragment extends Fragment
                 if (highestDaysLayout != null) {
                     if (highestDaysLayout.isExpanded()) {
                         highestDaysLayout.collapse();
-                        highestDayMoreText.setText(CoCoinApplication.getAppContext().getResources().getString(R.string.report_view_lowest_tag_show_more));
+                        highestDayMoreText.setText(KKMoneyApplication.getAppContext().getResources().getString(R.string.report_view_lowest_tag_show_more));
                     } else {
                         highestDaysLayout.expand();
-                        highestDayMoreText.setText(CoCoinApplication.getAppContext().getResources().getString(R.string.report_view_lowest_tag_show_less));
+                        highestDayMoreText.setText(KKMoneyApplication.getAppContext().getResources().getString(R.string.report_view_lowest_tag_show_less));
                     }
                 }
                 break;
@@ -802,10 +802,10 @@ public class ReportViewFragment extends Fragment
                 if (lowestDaysLayout != null) {
                     if (lowestDaysLayout.isExpanded()) {
                         lowestDaysLayout.collapse();
-                        lowestDayMoreText.setText(CoCoinApplication.getAppContext().getResources().getString(R.string.report_view_lowest_tag_show_more));
+                        lowestDayMoreText.setText(KKMoneyApplication.getAppContext().getResources().getString(R.string.report_view_lowest_tag_show_more));
                     } else {
                         lowestDaysLayout.expand();
-                        lowestDayMoreText.setText(CoCoinApplication.getAppContext().getResources().getString(R.string.report_view_lowest_tag_show_less));
+                        lowestDayMoreText.setText(KKMoneyApplication.getAppContext().getResources().getString(R.string.report_view_lowest_tag_show_less));
                     }
                 }
                 break;
@@ -829,23 +829,23 @@ public class ReportViewFragment extends Fragment
                 if (gettingData) return;
                 tagId = (int)highestTagExpense.get(position + 1)[2];
                 expense = (int)highestTagExpense.get(position + 1)[0];
-                if ("zh".equals(CoCoinUtil.GetLanguage())) {
+                if ("zh".equals(KKMoneyUtil.GetLanguage())) {
                     if (selectYear) {
                         dialogTitle = from.get(Calendar.YEAR) + "年" + "\n" +
-                                CoCoinUtil.GetSpendString(expense) +
-                                "于" + CoCoinUtil.GetTagName(tagId);
+                                KKMoneyUtil.GetSpendString(expense) +
+                                "于" + KKMoneyUtil.GetTagName(tagId);
                     } else {
                         dialogTitle = from.get(Calendar.YEAR) + "年" + (from.get(Calendar.MONTH) + 1) + "月" + "\n" +
-                                CoCoinUtil.GetSpendString(expense) +
-                                "于" + CoCoinUtil.GetTagName(tagId);
+                                KKMoneyUtil.GetSpendString(expense) +
+                                "于" + KKMoneyUtil.GetTagName(tagId);
                     }
                 } else {
                     if (selectYear) {
-                        dialogTitle = CoCoinUtil.GetSpendString(expense) + " in " + from.get(Calendar.YEAR) + "\n" +
-                                "on " + CoCoinUtil.GetTagName(tagId);
+                        dialogTitle = KKMoneyUtil.GetSpendString(expense) + " in " + from.get(Calendar.YEAR) + "\n" +
+                                "on " + KKMoneyUtil.GetTagName(tagId);
                     } else {
-                        dialogTitle = CoCoinUtil.GetSpendString(expense) + " in " + CoCoinUtil.GetMonthShort(from.get(Calendar.MONTH) + 1) + " " + from.get(Calendar.YEAR) + "\n" +
-                                "on " + CoCoinUtil.GetTagName(tagId);
+                        dialogTitle = KKMoneyUtil.GetSpendString(expense) + " in " + KKMoneyUtil.GetMonthShort(from.get(Calendar.MONTH) + 1) + " " + from.get(Calendar.YEAR) + "\n" +
+                                "on " + KKMoneyUtil.GetTagName(tagId);
                     }
                 }
                 new GetData(from, to, tagId, dialogTitle).execute();
@@ -854,23 +854,23 @@ public class ReportViewFragment extends Fragment
                 if (gettingData) return;
                 tagId = (int)lowestTagExpense.get(position + 1)[2];
                 expense = (int)lowestTagExpense.get(position + 1)[0];
-                if ("zh".equals(CoCoinUtil.GetLanguage())) {
+                if ("zh".equals(KKMoneyUtil.GetLanguage())) {
                     if (selectYear) {
                         dialogTitle = from.get(Calendar.YEAR) + "年" + "\n" +
-                                CoCoinUtil.GetSpendString(expense) +
-                                "于" + CoCoinUtil.GetTagName(tagId);
+                                KKMoneyUtil.GetSpendString(expense) +
+                                "于" + KKMoneyUtil.GetTagName(tagId);
                     } else {
                         dialogTitle = from.get(Calendar.YEAR) + "年" + (from.get(Calendar.MONTH) + 1) + "月" + "\n" +
-                                CoCoinUtil.GetSpendString(expense) +
-                                "于" + CoCoinUtil.GetTagName(tagId);
+                                KKMoneyUtil.GetSpendString(expense) +
+                                "于" + KKMoneyUtil.GetTagName(tagId);
                     }
                 } else {
                     if (selectYear) {
-                        dialogTitle = CoCoinUtil.GetSpendString(expense) + " in " + from.get(Calendar.YEAR) + "\n" +
-                                "on " + CoCoinUtil.GetTagName(tagId);
+                        dialogTitle = KKMoneyUtil.GetSpendString(expense) + " in " + from.get(Calendar.YEAR) + "\n" +
+                                "on " + KKMoneyUtil.GetTagName(tagId);
                     } else {
-                        dialogTitle = CoCoinUtil.GetSpendString(expense) + " in " + CoCoinUtil.GetMonthShort(from.get(Calendar.MONTH) + 1) + " " + from.get(Calendar.YEAR) + "\n" +
-                                "on " + CoCoinUtil.GetTagName(tagId);
+                        dialogTitle = KKMoneyUtil.GetSpendString(expense) + " in " + KKMoneyUtil.GetMonthShort(from.get(Calendar.MONTH) + 1) + " " + from.get(Calendar.YEAR) + "\n" +
+                                "on " + KKMoneyUtil.GetTagName(tagId);
                     }
                 }
                 new GetData(from, to, tagId, dialogTitle).execute();
@@ -879,10 +879,10 @@ public class ReportViewFragment extends Fragment
                 if (gettingData) return;
                 expense = (int)highestMonthExpense.get(position + 1)[3];
                 month = (int)highestMonthExpense.get(position + 1)[1];
-                if ("zh".equals(CoCoinUtil.GetLanguage())) {
-                    dialogTitle = from.get(Calendar.YEAR) + "年" + CoCoinUtil.getInstance().GetMonthShort(month + 1) + "\n" + CoCoinUtil.GetSpendString(expense);
+                if ("zh".equals(KKMoneyUtil.GetLanguage())) {
+                    dialogTitle = from.get(Calendar.YEAR) + "年" + KKMoneyUtil.getInstance().GetMonthShort(month + 1) + "\n" + KKMoneyUtil.GetSpendString(expense);
                 } else {
-                    dialogTitle = CoCoinUtil.GetSpendString(expense) + "\nin " + from.get(Calendar.YEAR) + " " + CoCoinUtil.getInstance().GetMonthShort(month + 1);
+                    dialogTitle = KKMoneyUtil.GetSpendString(expense) + "\nin " + from.get(Calendar.YEAR) + " " + KKMoneyUtil.getInstance().GetMonthShort(month + 1);
                 }
                 tempFrom.set(reportYear, month, 1, 0, 0, 0);
                 tempFrom.add(Calendar.SECOND, 0);
@@ -895,10 +895,10 @@ public class ReportViewFragment extends Fragment
                 expense = (int)highestDayExpense.get(position + 1)[3];
                 month = (int)highestDayExpense.get(position + 1)[1];
                 day = (int)highestDayExpense.get(position + 1)[2];
-                if ("zh".equals(CoCoinUtil.GetLanguage())) {
-                    dialogTitle = from.get(Calendar.YEAR) + "年" + CoCoinUtil.getInstance().GetMonthShort(month + 1) + day + CoCoinUtil.getInstance().GetWhetherFuck() + "\n" + CoCoinUtil.GetSpendString(expense);
+                if ("zh".equals(KKMoneyUtil.GetLanguage())) {
+                    dialogTitle = from.get(Calendar.YEAR) + "年" + KKMoneyUtil.getInstance().GetMonthShort(month + 1) + day + KKMoneyUtil.getInstance().GetWhetherFuck() + "\n" + KKMoneyUtil.GetSpendString(expense);
                 } else {
-                    dialogTitle = CoCoinUtil.GetSpendString(expense) + "\nin " + from.get(Calendar.YEAR) + " " + CoCoinUtil.getInstance().GetMonthShort(month + 1) + " " + day;
+                    dialogTitle = KKMoneyUtil.GetSpendString(expense) + "\nin " + from.get(Calendar.YEAR) + " " + KKMoneyUtil.getInstance().GetMonthShort(month + 1) + " " + day;
                 }
                 tempFrom.set(reportYear, month, day, 0, 0, 0);
                 tempFrom.add(Calendar.SECOND, 0);
@@ -911,10 +911,10 @@ public class ReportViewFragment extends Fragment
                 expense = (int)lowestDayExpense.get(position + 1)[3];
                 month = (int)lowestDayExpense.get(position + 1)[1];
                 day = (int)lowestDayExpense.get(position + 1)[2];
-                if ("zh".equals(CoCoinUtil.GetLanguage())) {
-                    dialogTitle = from.get(Calendar.YEAR) + "年" + CoCoinUtil.getInstance().GetMonthShort(month + 1) + day + CoCoinUtil.getInstance().GetWhetherFuck() + "\n" + CoCoinUtil.GetSpendString(expense);
+                if ("zh".equals(KKMoneyUtil.GetLanguage())) {
+                    dialogTitle = from.get(Calendar.YEAR) + "年" + KKMoneyUtil.getInstance().GetMonthShort(month + 1) + day + KKMoneyUtil.getInstance().GetWhetherFuck() + "\n" + KKMoneyUtil.GetSpendString(expense);
                 } else {
-                    dialogTitle = CoCoinUtil.GetSpendString(expense) + "\nin " + from.get(Calendar.YEAR) + " " + CoCoinUtil.getInstance().GetMonthShort(month + 1) + " " + day;
+                    dialogTitle = KKMoneyUtil.GetSpendString(expense) + "\nin " + from.get(Calendar.YEAR) + " " + KKMoneyUtil.getInstance().GetMonthShort(month + 1) + " " + day;
                 }
                 tempFrom.set(reportYear, month, day, 0, 0, 0);
                 tempFrom.add(Calendar.SECOND, 0);
@@ -943,13 +943,13 @@ public class ReportViewFragment extends Fragment
         @Override
         protected String doInBackground(String... params) {
             selectListData = new ArrayList<>();
-            int size = RecordManager.getInstance(CoCoinApplication.getAppContext()).RECORDS.size();
+            int size = RecordManager.getInstance(KKMoneyApplication.getAppContext()).RECORDS.size();
             int currentYearSelectListPosition = -1;
             int currentMonthSelectListPosition = -1;
             int currentYear = -1;
             int currentMonth = -1;
             for (int i = size - 1; i >= 0; i--) {
-                CoCoinRecord record = RecordManager.getInstance(CoCoinApplication.getAppContext()).RECORDS.get(i);
+                KKMoneyRecord record = RecordManager.getInstance(KKMoneyApplication.getAppContext()).RECORDS.get(i);
                 if (record.getCalendar().get(Calendar.YEAR) != currentYear) {
                     double[] newYearSelectList = {record.getCalendar().get(Calendar.YEAR), -1, 1, record.getMoney()};
                     selectListData.add(newYearSelectList);
@@ -978,7 +978,7 @@ public class ReportViewFragment extends Fragment
             }
 //            if (BuildConfig.DEBUG) {
 //                for (int i = 0; i < selectListData.size(); i++) {
-//                    Log.d("CoCoin", "Select List Data: " + selectListData.get(i)[0] + " " + selectListData.get(i)[1] + " " + selectListData.get(i)[2] + " " + selectListData.get(i)[3]);
+//                    Log.d("KKMoney", "Select List Data: " + selectListData.get(i)[0] + " " + selectListData.get(i)[1] + " " + selectListData.get(i)[2] + " " + selectListData.get(i)[3]);
 //                }
 //            }
             return null;
@@ -1091,9 +1091,9 @@ public class ReportViewFragment extends Fragment
             highestDayExpense = new ArrayList<>();
             lowestDayExpense = new ArrayList<>();
 
-            double[] tagExpense = new double[RecordManager.getInstance(CoCoinApplication.getAppContext()).TAGS.size() + 1];
+            double[] tagExpense = new double[RecordManager.getInstance(KKMoneyApplication.getAppContext()).TAGS.size() + 1];
             for (int i = tagExpense.length - 1; i >= 0; i--) tagExpense[i] = 0;
-            double[] tagRecords = new double[RecordManager.getInstance(CoCoinApplication.getAppContext()).TAGS.size() + 1];
+            double[] tagRecords = new double[RecordManager.getInstance(KKMoneyApplication.getAppContext()).TAGS.size() + 1];
             for (int i = tagRecords.length - 1; i >= 0; i--) tagRecords[i] = 0;
 
             // month and expense
@@ -1121,13 +1121,13 @@ public class ReportViewFragment extends Fragment
                 }
             }
 
-            int size = RecordManager.getInstance(CoCoinApplication.getAppContext()).RECORDS.size();
+            int size = RecordManager.getInstance(KKMoneyApplication.getAppContext()).RECORDS.size();
             for (int i = size - 1; i >= 0; i--) {
-                CoCoinRecord record = RecordManager.getInstance(CoCoinApplication.getAppContext()).RECORDS.get(i);
+                KKMoneyRecord record = RecordManager.getInstance(KKMoneyApplication.getAppContext()).RECORDS.get(i);
                 if (record.getCalendar().before(from)) break;
                 if (!record.getCalendar().after(to)) {
                     for (int j = i; j >= 0; j--) {
-                        CoCoinRecord r = RecordManager.getInstance(CoCoinApplication.getAppContext()).RECORDS.get(j);
+                        KKMoneyRecord r = RecordManager.getInstance(KKMoneyApplication.getAppContext()).RECORDS.get(j);
                         if (r.getCalendar().before(from)) {
                             break;
                         }
@@ -1152,7 +1152,7 @@ public class ReportViewFragment extends Fragment
 
             for (int i = 0; i < tagExpense.length; i++) {
                 if (tagExpense[i] != 0) {
-                    int cfht = CoCoinUtil.IsCFHT(i);
+                    int cfht = KKMoneyUtil.IsCFHT(i);
                     if (cfht != -1) {
                         needExpense.get(cfht)[0] += tagExpense[i];
                     }
@@ -1179,7 +1179,7 @@ public class ReportViewFragment extends Fragment
             ArrayList<SliceValue> sliceValues = new ArrayList<>();
             for (int i = 0; i < lowestTagExpense.size(); i++) {
                 SliceValue sliceValue = new SliceValue(
-                        (float)(double)lowestTagExpense.get(i)[0], CoCoinUtil.GetTagColor((int)lowestTagExpense.get(i)[2]));
+                        (float)(double)lowestTagExpense.get(i)[0], KKMoneyUtil.GetTagColor((int)lowestTagExpense.get(i)[2]));
                 sliceValue.setLabel(String.valueOf((int)lowestTagExpense.get(i)[2]));
                 sliceValues.add(sliceValue);
             }
@@ -1301,7 +1301,7 @@ public class ReportViewFragment extends Fragment
                     }
 
                     Line line = new Line(values);
-                    line.setColor(ContextCompat.getColor(CoCoinApplication.getAppContext(), R.color.red));
+                    line.setColor(ContextCompat.getColor(KKMoneyApplication.getAppContext(), R.color.red));
                     line.setShape(ValueShape.CIRCLE);
                     line.setCubic(false);
                     line.setFilled(false);
@@ -1341,7 +1341,7 @@ public class ReportViewFragment extends Fragment
                     }
 
                     Line line = new Line(values);
-                    line.setColor(ContextCompat.getColor(CoCoinApplication.getAppContext(), R.color.red));
+                    line.setColor(ContextCompat.getColor(KKMoneyApplication.getAppContext(), R.color.red));
                     line.setShape(ValueShape.CIRCLE);
                     line.setCubic(false);
                     line.setFilled(false);
@@ -1356,7 +1356,7 @@ public class ReportViewFragment extends Fragment
 
                 Axis axisX = new Axis();
                 Axis axisY = new Axis().setHasLines(true);
-                axisX.setName(reportYear + " " + CoCoinUtil.GetMonthShort(reportMonth));
+                axisX.setName(reportYear + " " + KKMoneyUtil.GetMonthShort(reportMonth));
                 lineChartData.setAxisXBottom(axisX);
                 lineChartData.setAxisYLeft(axisY);
 
@@ -1387,25 +1387,25 @@ public class ReportViewFragment extends Fragment
 
             // for title
             if (selectYear) {
-                if ("zh".equals(CoCoinUtil.GetLanguage())) {
-                    title.setText(" ● " + reportYear + "年" + CoCoinApplication.getAppContext().getResources().getString(R.string.report_view_foot));
+                if ("zh".equals(KKMoneyUtil.GetLanguage())) {
+                    title.setText(" ● " + reportYear + "年" + KKMoneyApplication.getAppContext().getResources().getString(R.string.report_view_foot));
                 } else {
-                    title.setText(" ● " + reportYear + " " + CoCoinApplication.getAppContext().getResources().getString(R.string.report_view_foot));
+                    title.setText(" ● " + reportYear + " " + KKMoneyApplication.getAppContext().getResources().getString(R.string.report_view_foot));
                 }
             } else {
-                if ("zh".equals(CoCoinUtil.GetLanguage())) {
-                    title.setText(" ● " + reportYear + "年" + CoCoinUtil.getInstance().GetMonthShort(reportMonth) + CoCoinApplication.getAppContext().getResources().getString(R.string.report_view_foot));
+                if ("zh".equals(KKMoneyUtil.GetLanguage())) {
+                    title.setText(" ● " + reportYear + "年" + KKMoneyUtil.getInstance().GetMonthShort(reportMonth) + KKMoneyApplication.getAppContext().getResources().getString(R.string.report_view_foot));
                 } else {
-                    title.setText(" ● " + reportYear + " " + CoCoinUtil.getInstance().GetMonthShort(reportMonth) + CoCoinApplication.getAppContext().getResources().getString(R.string.report_view_foot));
+                    title.setText(" ● " + reportYear + " " + KKMoneyUtil.getInstance().GetMonthShort(reportMonth) + KKMoneyApplication.getAppContext().getResources().getString(R.string.report_view_foot));
                 }
             }
 
             // for basic information
-            expenseTV.setText(CoCoinUtil.getInstance().GetInMoney((int)expense));
-            if ("zh".equals(CoCoinUtil.GetLanguage())) {
-                tagsTV.setText(records + CoCoinApplication.getAppContext().getResources().getString(R.string.report_view_records) + tags + CoCoinApplication.getAppContext().getResources().getString(R.string.report_view_tags));
+            expenseTV.setText(KKMoneyUtil.getInstance().GetInMoney((int)expense));
+            if ("zh".equals(KKMoneyUtil.GetLanguage())) {
+                tagsTV.setText(records + KKMoneyApplication.getAppContext().getResources().getString(R.string.report_view_records) + tags + KKMoneyApplication.getAppContext().getResources().getString(R.string.report_view_tags));
             } else {
-                tagsTV.setText(records + " " + CoCoinApplication.getAppContext().getResources().getString(R.string.report_view_records) + " " + tags + " " + CoCoinApplication.getAppContext().getResources().getString(R.string.report_view_tags));
+                tagsTV.setText(records + " " + KKMoneyApplication.getAppContext().getResources().getString(R.string.report_view_records) + " " + tags + " " + KKMoneyApplication.getAppContext().getResources().getString(R.string.report_view_tags));
             }
             emptyTip.setVisibility(View.GONE);
 
@@ -1416,19 +1416,19 @@ public class ReportViewFragment extends Fragment
 
             // for highest tag expense
             highestTagLayout.setVisibility(View.VISIBLE);
-            highestTagIcon.setImageDrawable(CoCoinUtil.GetTagIconDrawable((int)highestTagExpense.get(0)[2]));
-            highestTagText.setText(CoCoinUtil.GetTagName((int)highestTagExpense.get(0)[2]) + CoCoinUtil.getInstance().GetPurePercentString(highestTagExpense.get(0)[1] * 100));
-            highestTagExpenseTV.setText(CoCoinUtil.GetInMoney((int)highestTagExpense.get(0)[0]));
-            highestTagRecord.setText(CoCoinUtil.GetInRecords((int)highestTagExpense.get(0)[3]));
+            highestTagIcon.setImageDrawable(KKMoneyUtil.GetTagIconDrawable((int)highestTagExpense.get(0)[2]));
+            highestTagText.setText(KKMoneyUtil.GetTagName((int)highestTagExpense.get(0)[2]) + KKMoneyUtil.getInstance().GetPurePercentString(highestTagExpense.get(0)[1] * 100));
+            highestTagExpenseTV.setText(KKMoneyUtil.GetInMoney((int)highestTagExpense.get(0)[0]));
+            highestTagRecord.setText(KKMoneyUtil.GetInRecords((int)highestTagExpense.get(0)[3]));
             highestTagsAdapter = new ReportTagAdapter(highestTagExpense);
             highestTags.setAdapter(highestTagsAdapter);
 
             // for lowest tag expense
             lowestTagLayout.setVisibility(View.VISIBLE);
-            lowestTagIcon.setImageDrawable(CoCoinUtil.GetTagIconDrawable((int)lowestTagExpense.get(0)[2]));
-            lowestTagText.setText(CoCoinUtil.GetTagName((int)lowestTagExpense.get(0)[2]) + CoCoinUtil.getInstance().GetPurePercentString(lowestTagExpense.get(0)[1] * 100));
-            lowestTagExpenseTV.setText(CoCoinUtil.GetInMoney((int)lowestTagExpense.get(0)[0]));
-            lowestTagRecord.setText(CoCoinUtil.GetInRecords((int)lowestTagExpense.get(0)[3]));
+            lowestTagIcon.setImageDrawable(KKMoneyUtil.GetTagIconDrawable((int)lowestTagExpense.get(0)[2]));
+            lowestTagText.setText(KKMoneyUtil.GetTagName((int)lowestTagExpense.get(0)[2]) + KKMoneyUtil.getInstance().GetPurePercentString(lowestTagExpense.get(0)[1] * 100));
+            lowestTagExpenseTV.setText(KKMoneyUtil.GetInMoney((int)lowestTagExpense.get(0)[0]));
+            lowestTagRecord.setText(KKMoneyUtil.GetInRecords((int)lowestTagExpense.get(0)[3]));
             lowestTagsAdapter = new ReportTagAdapter(lowestTagExpense);
             lowestTags.setAdapter(lowestTagsAdapter);
 
@@ -1442,20 +1442,20 @@ public class ReportViewFragment extends Fragment
                 highestMonthLayout.setVisibility(View.VISIBLE);
                 highestFirstIcon.setBackgroundResource(getBackgroundResource());
                 highestFirstIcon.setText(((int)highestMonthExpense.get(0)[1] + 1) + "");
-                highestFirstText.setText(CoCoinUtil.GetMonthShort((int)highestMonthExpense.get(0)[1] + 1) + " " + reportYear + CoCoinUtil.getInstance().GetPurePercentString(highestMonthExpense.get(0)[4] * 100));
-                highestFirstExpenseTV.setText(CoCoinUtil.GetInMoney((int)highestMonthExpense.get(0)[3]));
-                highestFirstRecord.setText(CoCoinUtil.GetInRecords((int)highestMonthExpense.get(0)[5]));
+                highestFirstText.setText(KKMoneyUtil.GetMonthShort((int)highestMonthExpense.get(0)[1] + 1) + " " + reportYear + KKMoneyUtil.getInstance().GetPurePercentString(highestMonthExpense.get(0)[4] * 100));
+                highestFirstExpenseTV.setText(KKMoneyUtil.GetInMoney((int)highestMonthExpense.get(0)[3]));
+                highestFirstRecord.setText(KKMoneyUtil.GetInRecords((int)highestMonthExpense.get(0)[5]));
                 highestLastIcon.setBackgroundResource(getBackgroundResource());
                 highestLastIcon.setText(((int)highestMonthExpense.get(11)[1] + 1) + "");
-                highestLastText.setText(CoCoinUtil.GetMonthShort((int)highestMonthExpense.get(11)[1] + 1) + " " + reportYear + CoCoinUtil.getInstance().GetPurePercentString(highestMonthExpense.get(11)[4] * 100));
-                highestLastExpenseTV.setText(CoCoinUtil.GetInMoney((int)highestMonthExpense.get(11)[3]));
-                highestLastRecord.setText(CoCoinUtil.GetInRecords((int)highestMonthExpense.get(11)[5]));
+                highestLastText.setText(KKMoneyUtil.GetMonthShort((int)highestMonthExpense.get(11)[1] + 1) + " " + reportYear + KKMoneyUtil.getInstance().GetPurePercentString(highestMonthExpense.get(11)[4] * 100));
+                highestLastExpenseTV.setText(KKMoneyUtil.GetInMoney((int)highestMonthExpense.get(11)[3]));
+                highestLastRecord.setText(KKMoneyUtil.GetInRecords((int)highestMonthExpense.get(11)[5]));
                 highestMonthsAdapter = new ReportMonthAdapter(highestMonthExpense, reportYear);
                 highestMonths.setAdapter(highestMonthsAdapter);
 
                 // for average day expense
-                averageMonthExpenseTV.setText(CoCoinUtil.getInstance().GetInMoney((int)averageMonthExpense));
-                averageMonthRecordTV.setText(CoCoinUtil.getInstance().GetInRecords(averageMonthRecord));
+                averageMonthExpenseTV.setText(KKMoneyUtil.getInstance().GetInMoney((int)averageMonthExpense));
+                averageMonthRecordTV.setText(KKMoneyUtil.getInstance().GetInRecords(averageMonthRecord));
             } else {
                 highestMonthLayout.setVisibility(View.GONE);
             }
@@ -1464,9 +1464,9 @@ public class ReportViewFragment extends Fragment
             highestDayLayout.setVisibility(View.VISIBLE);
             highestDayIcon.setBackgroundResource(getBackgroundResource());
             highestDayIcon.setText((int)highestDayExpense.get(0)[2] + "");
-            highestDayText.setText(CoCoinUtil.getInstance().GetCalendarStringDayExpenseSort(CoCoinApplication.getAppContext(), (int)highestDayExpense.get(0)[0], (int)highestDayExpense.get(0)[1] + 1, (int)highestDayExpense.get(0)[2]) + CoCoinUtil.getInstance().GetPurePercentString(highestDayExpense.get(0)[4] * 100));
-            highestDayExpenseTV.setText(CoCoinUtil.GetInMoney((int)highestDayExpense.get(0)[3]));
-            highestDayRecord.setText(CoCoinUtil.GetInRecords((int)highestDayExpense.get(0)[5]));
+            highestDayText.setText(KKMoneyUtil.getInstance().GetCalendarStringDayExpenseSort(KKMoneyApplication.getAppContext(), (int)highestDayExpense.get(0)[0], (int)highestDayExpense.get(0)[1] + 1, (int)highestDayExpense.get(0)[2]) + KKMoneyUtil.getInstance().GetPurePercentString(highestDayExpense.get(0)[4] * 100));
+            highestDayExpenseTV.setText(KKMoneyUtil.GetInMoney((int)highestDayExpense.get(0)[3]));
+            highestDayRecord.setText(KKMoneyUtil.GetInRecords((int)highestDayExpense.get(0)[5]));
             highestDaysAdapter = new ReportDayAdapter(highestDayExpense, reportMonth);
             highestDays.setAdapter(highestDaysAdapter);
 
@@ -1474,29 +1474,29 @@ public class ReportViewFragment extends Fragment
             lowestDayLayout.setVisibility(View.VISIBLE);
             lowestDayIcon.setBackgroundResource(getBackgroundResource());
             lowestDayIcon.setText((int)lowestDayExpense.get(0)[2] + "");
-            lowestDayText.setText(CoCoinUtil.getInstance().GetCalendarStringDayExpenseSort(CoCoinApplication.getAppContext(), (int)lowestDayExpense.get(0)[0], (int)lowestDayExpense.get(0)[1] + 1, (int)lowestDayExpense.get(0)[2]) + CoCoinUtil.getInstance().GetPurePercentString(lowestDayExpense.get(0)[4] * 100));
-            lowestDayExpenseTV.setText(CoCoinUtil.GetInMoney((int)lowestDayExpense.get(0)[3]));
-            lowestDayRecord.setText(CoCoinUtil.GetInRecords((int)lowestDayExpense.get(0)[5]));
+            lowestDayText.setText(KKMoneyUtil.getInstance().GetCalendarStringDayExpenseSort(KKMoneyApplication.getAppContext(), (int)lowestDayExpense.get(0)[0], (int)lowestDayExpense.get(0)[1] + 1, (int)lowestDayExpense.get(0)[2]) + KKMoneyUtil.getInstance().GetPurePercentString(lowestDayExpense.get(0)[4] * 100));
+            lowestDayExpenseTV.setText(KKMoneyUtil.GetInMoney((int)lowestDayExpense.get(0)[3]));
+            lowestDayRecord.setText(KKMoneyUtil.GetInRecords((int)lowestDayExpense.get(0)[5]));
             lowestDaysAdapter = new ReportDayAdapter(lowestDayExpense, reportMonth);
             lowestDays.setAdapter(lowestDaysAdapter);
 
             // for average day expense
-            averageDayExpenseTV.setText(CoCoinUtil.getInstance().GetInMoney((int)averageDayExpense));
-            averageDayRecordTV.setText(CoCoinUtil.getInstance().GetInRecords(averageDayRecord));
+            averageDayExpenseTV.setText(KKMoneyUtil.getInstance().GetInMoney((int)averageDayExpense));
+            averageDayRecordTV.setText(KKMoneyUtil.getInstance().GetInRecords(averageDayRecord));
 
             // for foot
             foot.setVisibility(View.VISIBLE);
             if (selectYear) {
-                if ("zh".equals(CoCoinUtil.GetLanguage())) {
-                    foot.setText(" ● " + reportYear + "年" + CoCoinApplication.getAppContext().getResources().getString(R.string.report_view_foot));
+                if ("zh".equals(KKMoneyUtil.GetLanguage())) {
+                    foot.setText(" ● " + reportYear + "年" + KKMoneyApplication.getAppContext().getResources().getString(R.string.report_view_foot));
                 } else {
-                    foot.setText(" ● " + reportYear + " " + CoCoinApplication.getAppContext().getResources().getString(R.string.report_view_foot));
+                    foot.setText(" ● " + reportYear + " " + KKMoneyApplication.getAppContext().getResources().getString(R.string.report_view_foot));
                 }
             } else {
-                if ("zh".equals(CoCoinUtil.GetLanguage())) {
-                    foot.setText(" ● " + reportYear + "年" + CoCoinUtil.getInstance().GetMonthShort(reportMonth) + CoCoinApplication.getAppContext().getResources().getString(R.string.report_view_foot));
+                if ("zh".equals(KKMoneyUtil.GetLanguage())) {
+                    foot.setText(" ● " + reportYear + "年" + KKMoneyUtil.getInstance().GetMonthShort(reportMonth) + KKMoneyApplication.getAppContext().getResources().getString(R.string.report_view_foot));
                 } else {
-                    foot.setText(" ● " + reportYear + " " + CoCoinUtil.getInstance().GetMonthShort(reportMonth) + CoCoinApplication.getAppContext().getResources().getString(R.string.report_view_foot));
+                    foot.setText(" ● " + reportYear + " " + KKMoneyUtil.getInstance().GetMonthShort(reportMonth) + KKMoneyApplication.getAppContext().getResources().getString(R.string.report_view_foot));
                 }
             }
 
@@ -1504,7 +1504,7 @@ public class ReportViewFragment extends Fragment
         }
     }
 
-    private ArrayList<CoCoinRecord> selectedRecord;
+    private ArrayList<KKMoneyRecord> selectedRecord;
     private boolean gettingData = false;
     public class GetData extends AsyncTask<String, Void, String> {
 
@@ -1530,13 +1530,13 @@ public class ReportViewFragment extends Fragment
         @Override
         protected String doInBackground(String... params) {
             selectedRecord = new ArrayList<>();
-            int size = RecordManager.getInstance(CoCoinApplication.getAppContext()).RECORDS.size();
+            int size = RecordManager.getInstance(KKMoneyApplication.getAppContext()).RECORDS.size();
             for (int i = size - 1; i >= 0; i--) {
-                CoCoinRecord record = RecordManager.getInstance(CoCoinApplication.getAppContext()).RECORDS.get(i);
+                KKMoneyRecord record = RecordManager.getInstance(KKMoneyApplication.getAppContext()).RECORDS.get(i);
                 if (record.getCalendar().before(fromDate)) break;
                 if (!record.getCalendar().after(toDate)) {
                     for (int j = i; j >= 0; j--) {
-                        CoCoinRecord r = RecordManager.getInstance(CoCoinApplication.getAppContext()).RECORDS.get(j);
+                        KKMoneyRecord r = RecordManager.getInstance(KKMoneyApplication.getAppContext()).RECORDS.get(j);
                         if (r.getCalendar().before(fromDate)) {
                             break;
                         }

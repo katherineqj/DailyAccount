@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">CoCoin</string>
+    <string name="app_name">KKMoney</string>
 
     <string name="custom_view">可选范围视图</string>
     <string name="tags_view">标签视图</string>
@@ -157,8 +157,8 @@
     <string name="user_name_hint">用户名</string>
     <string name="user_email_hint">邮箱</string>
 
-    <string name="test_user_name">Nightonke</string>
-    <string name="test_user_email">Nightonke@gmail.com</string>
+    <string name="test_user_name">katherine</string>
+    <string name="test_user_email">kathqin@gmail.com</string>
 
     <string name="expense_text">支出</string>
     <string name="records_text">记录</string>
@@ -207,7 +207,7 @@
     <string name="this_month">本月:</string>
 
     <string name="welcome">欢迎！</string>
-    <string name="login_or_register">请问你有CoCoin账号吗？</string>
+    <string name="login_or_register">请问你有KKMoney账号吗？</string>
     <string name="login">有的</string>
     <string name="register">没有</string>
 
@@ -235,14 +235,14 @@
         已修改账本名字但是上传失败
     </string>
 
-    <string name="register_successfully">欢迎来到CoCoin！\n</string>
+    <string name="register_successfully">欢迎来到KKMoney！\n</string>
     <string name="register_fail">注册失败！\n</string>
     <string name="login_successfully">欢迎回来！\n</string>
     <string name="login_fail">登录失败！\n</string>
     <string name="user_name_exist">用户名已存在</string>
     <string name="user_email_exist">邮箱已存在</string>
     <string name="user_mobile_exist">
-        这台手机已经注册过CoCoin账号啦！\n
+        这台手机已经注册过KKMoney账号啦！\n
         请用原来的账号登录吧~
     </string>
     <string name="network_disconnection">网络连接断开</string>
@@ -255,7 +255,7 @@
 
     <string name="sync_dialog_title">同步设置?</string>
     <string name="sync_dialog_content">
-        您之前已经在CoCoin服务器上同步了设置，您是否想要把之前的设置同步到本地呢？
+        您之前已经在KKMoney服务器上同步了设置，您是否想要把之前的设置同步到本地呢？
     </string>
     <string name="sync_dialog_sync_to_local">同步以前的设置到本地</string>
     <string name="sync_dialog_sync_to_server">同步现在的设置到服务器</string>
@@ -278,7 +278,7 @@
 
     <string name="first_time_set_password">
         &#160;Hi！\n
-        欢迎使用CoCoin！\n
+        欢迎使用KKMoney！\n
         为了您的账本安全，\n
         我想你需要一个密码
     </string>
@@ -309,9 +309,9 @@
     <string name="guide">引导</string>
 
     <string name="hey">嗨！</string>
-    <string name="thank">感谢您使用CoCoin。</string>
+    <string name="thank">感谢您使用KKMoney。</string>
     <string name="me">我是一名安卓开发者。</string>
-    <string name="github">项目已开源：github.com/Nightonke/CoCoin</string>
+    <string name="github">项目已开源：github.com/Nightonke/KKMoney</string>
     <string name="blog">博客：blog.csdn.net/u012925008</string>
     <string name="email">邮箱：nightonke@outlook.com</string>
     <string name="thank_again">如果有任何吐槽，就发邮件给我吧！</string>
@@ -370,13 +370,13 @@
     <string name="loaded">加载完成</string>
 
     <string name="update_title">更新</string>
-    <string name="update_content_too_old">您的CoCoin版本过旧，可能无法使用。</string>
+    <string name="update_content_too_old">您的KKMoney版本过旧，可能无法使用。</string>
     <string name="update_content">我们将为您带来更多的功能，您也可以在设置界面中手动更新。</string>
     <string name="update_never">此版本不提醒</string>
     <string name="update_cancel">取消</string>
     <string name="update_ok">更新</string>
     <string name="downloading_title">下载安装包……</string>
-    <string name="downloading_content">正在下载最新CoCoin安装包，请稍候。</string>
+    <string name="downloading_content">正在下载最新KKMoney安装包，请稍候。</string>
 
     <string name="current_version">当前版本：</string>
     <string name="can_update">可更新</string>
@@ -453,60 +453,60 @@
     <string name="report_view_average_month"> ● 平均每月</string>
     <string name="report_view_foot">支出报表</string>
 
-    <string name="help_cocoin_title">CoCoin</string>
+    <string name="help_KKMoney_title">KKMoney</string>
     <string name="help_feedback_title">反馈</string>
     <string name="help_open_library_title">开源库</string>
     <string name="help_me_title">我</string>
 
-    <string name="help_cocoin_content_1"> ● CoCoin，一款多视图记账APP</string>
-    <string name="help_cocoin_content_2">
-        ● 您可以使用CoCoin轻松记账，并使用密码来保护您的账本。
-        账本密码会在您第一次使用CoCoin的时候被设置。
+    <string name="help_KKMoney_content_1"> ● KKMoney，一款多视图记账APP</string>
+    <string name="help_KKMoney_content_2">
+        ● 您可以使用KKMoney轻松记账，并使用密码来保护您的账本。
+        账本密码会在您第一次使用KKMoney的时候被设置。
         在记账的时候，您可以通过左滑显示数字框来为您的记录增加备注。
         如果您需要查阅账本，可以通过下滑或点击标题栏来进入账本页面。
     </string>
-    <string name="help_cocoin_content_3">
+    <string name="help_KKMoney_content_3">
         ● 在账本中，有对今天、昨天、这周、上周、这个月、上个月、今年和去年的记录。
         您可以通过点击饼状图的饼块或者柱状图的柱形来查看详细支出信息。
-        CoCoin的所有图表都可以通过点击来获取详细信息，您也可以通过点击图表旁的选择按钮来对某些不易点击得到的地方进行查阅。
+        KKMoney的所有图表都可以通过点击来获取详细信息，您也可以通过点击图表旁的选择按钮来对某些不易点击得到的地方进行查阅。
         点击或选择图表中的某一部分会有弹窗提示相关信息，点击查看可以在弹出的对话框中看到列表，列表中即为每条记录的信息。
         通过点击列表中的某一条记录，您可以看到更为详细的情况。
         如果您希望通过更多的视图来查阅自己的支出情况，右滑打开菜单即可。
     </string>
-    <string name="help_cocoin_content_4">
+    <string name="help_KKMoney_content_4">
         ● 在自定义时间范围视图中，您可以查阅到某一时间段内的所有支出情况。
         点击右下角的按钮即可设定时间范围。
     </string>
-    <string name="help_cocoin_content_5">
+    <string name="help_KKMoney_content_5">
         ● 在标签视图中，您可以查阅到自己在不同标签上的支出情况。
-        右滑打开菜单，您可以看到CoCoin的所有标签，点击标签可以跳到该标签的支出情况。
+        右滑打开菜单，您可以看到KKMoney的所有标签，点击标签可以跳到该标签的支出情况。
     </string>
-    <string name="help_cocoin_content_6">
+    <string name="help_KKMoney_content_6">
         ● 在月视图中，您可以查阅到自己在不同月份的支出情况。
         您可以直观看到自己在某一月份的总支出、总记录数、在不同标签上的支出和占比、具体支出的详细信息。
         右滑打开菜单，您可以看到自己每月的支出概况，同样的，点击某一月份将会跳到该月份的详细信息。
     </string>
-    <string name="help_cocoin_content_7">
+    <string name="help_KKMoney_content_7">
         ● 在列表视图中，您可以进行筛选、查询、更改、删除记录的操作。
         左滑某一记录进行编辑，右滑进行删除。
         右滑打开菜单，您可以设置支出范围、时间范围、标签来筛选特定的支出记录。
         点击右上角的搜索按钮，可以通过备注来搜索特定的记录。
     </string>
-    <string name="help_cocoin_content_8">
+    <string name="help_KKMoney_content_8">
         ● 在报表视图中，您可以生成自己的年度支出报表或月支出报告。
         通过点击右下角按钮即可以选择报表的时间范围。
     </string>
-    <string name="help_cocoin_content_9">
-        ● 当您登录了CoCoin之后，您可以通过同步功能进行记录的备份。
+    <string name="help_KKMoney_content_9">
+        ● 当您登录了KKMoney之后，您可以通过同步功能进行记录的备份。
     </string>
-    <string name="help_cocoin_content_10">
+    <string name="help_KKMoney_content_10">
         ● 您可以对自己的账本进行个性化设置。
         比如，您可以更改账本的名字、对标签进行排序、设置是否提醒每月支出的限额，如果您选择颜色提醒，当每月支出总和达到警告值时，记录的界面将会变色以示提醒。
     </string>
-    <string name="help_cocoin_content_11"> ● 感谢您使用CoCoin</string>
+    <string name="help_KKMoney_content_11"> ● 感谢您使用KKMoney</string>
 
     <string name="help_feedback_content_1"> ● 很高兴能收到您的反馈，如果您有非文本内容，可以发到我的电子邮箱：Nightonke@outlook.com.</string>
-    <string name="help_feedback_content_2">让CoCoin变得更好</string>
+    <string name="help_feedback_content_2">让KKMoney变得更好</string>
     <string name="help_feedback_hint">您可以在此处编辑反馈</string>
     <string name="help_feedback_edit">编辑</string>
     <string name="help_feedback_send">发送</string>
@@ -522,7 +522,7 @@
 
     <string name="help_about_content_0"> ● 关于我</string>
     <string name="help_about_content_1">Nightonke</string>
-    <string name="help_about_content_2">github.com/Nightonke/CoCoin</string>
+    <string name="help_about_content_2">github.com/Nightonke/KKMoney</string>
     <string name="help_about_content_3">blog.csdn.net/u012925008</string>
     <string name="help_about_content_4">Nightonke@outlook.com</string>
     <string name="help_about_content_5"> ● 所用到的开源库</string>

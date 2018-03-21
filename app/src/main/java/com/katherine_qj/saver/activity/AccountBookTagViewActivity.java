@@ -41,7 +41,7 @@ import com.katherine_qj.saver.model.SettingManager;
 import com.katherine_qj.saver.model.User;
 import com.katherine_qj.saver.ui.CustomSliderView;
 import com.katherine_qj.saver.ui.MyGridView;
-import com.katherine_qj.saver.util.CoCoinUtil;
+import com.katherine_qj.saver.util.KKMoneyUtil;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -87,10 +87,10 @@ public class AccountBookTagViewActivity extends AppCompatActivity {
 
         View view = mViewPager.getRootView();
         TextView title = (TextView)view.findViewById(R.id.logo_white);
-        title.setTypeface(CoCoinUtil.typefaceLatoLight);
+        title.setTypeface(KKMoneyUtil.typefaceLatoLight);
         title.setText(SettingManager.getInstance().getAccountBookName());
 
-        mViewPager.getPagerTitleStrip().setTypeface(CoCoinUtil.typefaceLatoLight, Typeface.NORMAL);
+        mViewPager.getPagerTitleStrip().setTypeface(KKMoneyUtil.typefaceLatoLight, Typeface.NORMAL);
 
         setTitle("");
 
@@ -99,10 +99,10 @@ public class AccountBookTagViewActivity extends AppCompatActivity {
 
         userName = (TextView)findViewById(R.id.user_name);
         userEmail = (TextView)findViewById(R.id.user_email);
-        userName.setTypeface(CoCoinUtil.typefaceLatoRegular);
-        userEmail.setTypeface(CoCoinUtil.typefaceLatoLight);
+        userName.setTypeface(KKMoneyUtil.typefaceLatoRegular);
+        userEmail.setTypeface(KKMoneyUtil.typefaceLatoLight);
 
-        User user = BmobUser.getCurrentUser(CoCoinApplication.getAppContext(), User.class);
+        User user = BmobUser.getCurrentUser(KKMoneyApplication.getAppContext(), User.class);
         if (user != null) {
             userName.setText(user.getUsername());
             userEmail.setText(user.getEmail());
@@ -145,8 +145,8 @@ public class AccountBookTagViewActivity extends AppCompatActivity {
                 @Override
                 public HeaderDesign getHeaderDesign(int page) {
                     return HeaderDesign.fromColorAndUrl(
-                            CoCoinUtil.GetTagColor(RecordManager.TAGS.get(page).getId()),
-                            CoCoinUtil.GetTagUrl(RecordManager.TAGS.get(page).getId()));
+                            KKMoneyUtil.GetTagColor(RecordManager.TAGS.get(page).getId()),
+                            KKMoneyUtil.GetTagUrl(RecordManager.TAGS.get(page).getId()));
                 }
             });
         } else {
@@ -154,8 +154,8 @@ public class AccountBookTagViewActivity extends AppCompatActivity {
                 @Override
                 public HeaderDesign getHeaderDesign(int page) {
                     return HeaderDesign.fromColorAndDrawable(
-                            CoCoinUtil.GetTagColor(RecordManager.TAGS.get(page).getId()),
-                            CoCoinUtil.GetTagDrawable(-3));
+                            KKMoneyUtil.GetTagColor(RecordManager.TAGS.get(page).getId()),
+                            KKMoneyUtil.GetTagDrawable(-3));
                 }
             });
         }
@@ -184,16 +184,16 @@ public class AccountBookTagViewActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if (SettingManager.getInstance().getLoggenOn()) {
-                    CoCoinUtil.showToast(mContext, R.string.change_logo_tip);
+                    KKMoneyUtil.showToast(mContext, R.string.change_logo_tip);
                 } else {
-                    CoCoinUtil.showToast(mContext, R.string.login_tip);
+                    KKMoneyUtil.showToast(mContext, R.string.login_tip);
                 }
             }
         });
 
         mDemoSlider = (SliderLayout)findViewById(R.id.slider);
 
-        HashMap<String, Integer> urls = CoCoinUtil.GetDrawerTopUrl();
+        HashMap<String, Integer> urls = KKMoneyUtil.GetDrawerTopUrl();
 
         for(String name : urls.keySet()){
             CustomSliderView customSliderView = new CustomSliderView(this);
@@ -272,38 +272,38 @@ public class AccountBookTagViewActivity extends AppCompatActivity {
     }
 
     private void loadLogo() {
-        User user = BmobUser.getCurrentUser(CoCoinApplication.getAppContext(), User.class);
+        User user = BmobUser.getCurrentUser(KKMoneyApplication.getAppContext(), User.class);
         if (user != null) {
             try {
-                File logoFile = new File(CoCoinApplication.getAppContext().getFilesDir() + CoCoinUtil.LOGO_NAME);
+                File logoFile = new File(KKMoneyApplication.getAppContext().getFilesDir() + KKMoneyUtil.LOGO_NAME);
                 if (!logoFile.exists()) {
                     // the local logo file is missed
                     // try to get from the server
                     BmobQuery<Logo> bmobQuery = new BmobQuery();
                     bmobQuery.addWhereEqualTo("objectId", user.getLogoObjectId());
-                    bmobQuery.findObjects(CoCoinApplication.getAppContext()
+                    bmobQuery.findObjects(KKMoneyApplication.getAppContext()
                             , new FindListener<Logo>() {
                                 @Override
                                 public void onSuccess(List<Logo> object) {
                                     // there has been an old logo in the server/////////////////////////////////////////////////////////
-                                    String url = object.get(0).getFile().getFileUrl(CoCoinApplication.getAppContext());
-                                    if (BuildConfig.DEBUG) Log.d("CoCoin", "Logo in server: " + url);
-                                    Ion.with(CoCoinApplication.getAppContext()).load(url)
-                                            .write(new File(CoCoinApplication.getAppContext().getFilesDir()
-                                                    + CoCoinUtil.LOGO_NAME))
+                                    String url = object.get(0).getFile().getFileUrl(KKMoneyApplication.getAppContext());
+                                    if (BuildConfig.DEBUG) Log.d("KKMoney", "Logo in server: " + url);
+                                    Ion.with(KKMoneyApplication.getAppContext()).load(url)
+                                            .write(new File(KKMoneyApplication.getAppContext().getFilesDir()
+                                                    + KKMoneyUtil.LOGO_NAME))
                                             .setCallback(new FutureCallback<File>() {
                                                 @Override
                                                 public void onCompleted(Exception e, File file) {
                                                     profileImage.setImageBitmap(BitmapFactory.decodeFile(
-                                                            CoCoinApplication.getAppContext().getFilesDir()
-                                                                    + CoCoinUtil.LOGO_NAME));
+                                                            KKMoneyApplication.getAppContext().getFilesDir()
+                                                                    + KKMoneyUtil.LOGO_NAME));
                                                 }
                                             });
                                 }
                                 @Override
                                 public void onError(int code, String msg) {
                                     // the picture is lost
-                                    if (BuildConfig.DEBUG) Log.d("CoCoin", "Can't find the old logo in server.");
+                                    if (BuildConfig.DEBUG) Log.d("KKMoney", "Can't find the old logo in server.");
                                 }
                             });
                 } else {

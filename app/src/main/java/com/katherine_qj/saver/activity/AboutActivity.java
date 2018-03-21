@@ -17,7 +17,7 @@ import com.github.florent37.materialviewpager.header.HeaderDesign;
 import com.katherine_qj.saver.R;
 import com.katherine_qj.saver.adapter.HelpFragmentAdapter;
 import com.katherine_qj.saver.fragment.HelpFeedbackFragment;
-import com.katherine_qj.saver.util.CoCoinUtil;
+import com.katherine_qj.saver.util.KKMoneyUtil;
 
 public class AboutActivity extends AppCompatActivity implements HelpFeedbackFragment.OnTextChangeListener {
 
@@ -37,7 +37,7 @@ public class AboutActivity extends AppCompatActivity implements HelpFeedbackFrag
 
         mViewPager = (MaterialViewPager) findViewById(R.id.materialViewPager);
 
-        mViewPager.getPagerTitleStrip().setTypeface(CoCoinUtil.getInstance().typefaceLatoLight, Typeface.NORMAL);
+        mViewPager.getPagerTitleStrip().setTypeface(KKMoneyUtil.getInstance().typefaceLatoLight, Typeface.NORMAL);
         mViewPager.getPagerTitleStrip().setAllCaps(false);
         mViewPager.getPagerTitleStrip().setUnderlineColor(Color.parseColor("#00000000"));
         mViewPager.getPagerTitleStrip().setIndicatorColor(Color.parseColor("#00000000"));
@@ -82,9 +82,9 @@ public class AboutActivity extends AppCompatActivity implements HelpFeedbackFrag
             @Override
             public HeaderDesign getHeaderDesign(int page) {
                 return HeaderDesign.fromColorAndDrawable(
-                        ContextCompat.getColor(CoCoinApplication.getAppContext(), R.color.my_blue),
+                        ContextCompat.getColor(KKMoneyApplication.getAppContext(), R.color.my_blue),
                         ContextCompat.getDrawable(
-                                CoCoinApplication.getAppContext(), R.drawable.cocoin_blue_bg));
+                                KKMoneyApplication.getAppContext(), R.drawable.kkmoney_blue_bg));
             }
         });
 

@@ -10,9 +10,9 @@ import android.widget.TextView;
 
 import com.balysv.materialripple.MaterialRippleLayout;
 import com.katherine_qj.saver.R;
-import com.katherine_qj.saver.model.CoCoinRecord;
+import com.katherine_qj.saver.model.KKMoneyRecord;
 import com.katherine_qj.saver.model.RecordManager;
-import com.katherine_qj.saver.util.CoCoinUtil;
+import com.katherine_qj.saver.util.KKMoneyUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,7 +21,7 @@ import butterknife.ButterKnife;
 import butterknife.InjectView;
 
 /**
- * Created by 伟平 on 2015/11/1.
+ * Created by katherineqj on 2017/11/1.
  */
 public class RecordCheckDialogRecyclerViewAdapter extends RecyclerView.Adapter<RecordCheckDialogRecyclerViewAdapter.viewHolder> {
 
@@ -29,18 +29,18 @@ public class RecordCheckDialogRecyclerViewAdapter extends RecyclerView.Adapter<R
 
     private final LayoutInflater mLayoutInflater;
     private final Context mContext;
-    private List<CoCoinRecord> coCoinRecords;
+    private List<KKMoneyRecord> KKMoneyRecords;
 
-    public RecordCheckDialogRecyclerViewAdapter(Context context, List<CoCoinRecord> list) {
-        coCoinRecords = new ArrayList<>();
-        coCoinRecords = list;
+    public RecordCheckDialogRecyclerViewAdapter(Context context, List<KKMoneyRecord> list) {
+        KKMoneyRecords = new ArrayList<>();
+        KKMoneyRecords = list;
         mContext = context;
         mLayoutInflater = LayoutInflater.from(context);
     }
 
-    public RecordCheckDialogRecyclerViewAdapter(Context context, List<CoCoinRecord> list, OnItemClickListener onItemClickListener) {
-        coCoinRecords = new ArrayList<>();
-        coCoinRecords = list;
+    public RecordCheckDialogRecyclerViewAdapter(Context context, List<KKMoneyRecord> list, OnItemClickListener onItemClickListener) {
+        KKMoneyRecords = new ArrayList<>();
+        KKMoneyRecords = list;
         mContext = context;
         mLayoutInflater = LayoutInflater.from(context);
         this.onItemClickListener = onItemClickListener;
@@ -54,17 +54,17 @@ public class RecordCheckDialogRecyclerViewAdapter extends RecyclerView.Adapter<R
     @Override
     public void onBindViewHolder(viewHolder holder, final int position) {
         holder.imageView.setImageResource(
-                CoCoinUtil.GetTagIcon(coCoinRecords.get(position).getTag()));
-        holder.date.setText(coCoinRecords.get(position).getCalendarString());
-        holder.date.setTypeface(CoCoinUtil.typefaceLatoLight);
-        holder.money.setTypeface(CoCoinUtil.typefaceLatoLight);
-        holder.money.setText(String.valueOf((int) coCoinRecords.get(position).getMoney()));
+                KKMoneyUtil.GetTagIcon(KKMoneyRecords.get(position).getTag()));
+        holder.date.setText(KKMoneyRecords.get(position).getCalendarString());
+        holder.date.setTypeface(KKMoneyUtil.typefaceLatoLight);
+        holder.money.setTypeface(KKMoneyUtil.typefaceLatoLight);
+        holder.money.setText(String.valueOf((int) KKMoneyRecords.get(position).getMoney()));
         holder.money.setTextColor(
-                CoCoinUtil.GetTagColorResource(RecordManager.TAGS.get(coCoinRecords.get(position).getTag()).getId()));
+                KKMoneyUtil.GetTagColorResource(RecordManager.TAGS.get(KKMoneyRecords.get(position).getTag()).getId()));
         holder.index.setText((position + 1) + "");
-        holder.index.setTypeface(CoCoinUtil.typefaceLatoLight);
-        holder.remark.setText(coCoinRecords.get(position).getRemark());
-        holder.remark.setTypeface(CoCoinUtil.typefaceLatoLight);
+        holder.index.setTypeface(KKMoneyUtil.typefaceLatoLight);
+        holder.remark.setText(KKMoneyRecords.get(position).getRemark());
+        holder.remark.setTypeface(KKMoneyUtil.typefaceLatoLight);
 
         holder.layout.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -76,10 +76,10 @@ public class RecordCheckDialogRecyclerViewAdapter extends RecyclerView.Adapter<R
 
     @Override
     public int getItemCount() {
-        if (coCoinRecords == null) {
+        if (KKMoneyRecords == null) {
             return 0;
         }
-        return coCoinRecords.size();
+        return KKMoneyRecords.size();
     }
 
     public class viewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {

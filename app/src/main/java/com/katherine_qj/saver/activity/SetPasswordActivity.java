@@ -25,13 +25,13 @@ import com.github.johnpersano.supertoasts.SuperToast;
 import com.katherine_qj.saver.R;
 import com.katherine_qj.saver.adapter.PasswordChangeButtonGridViewAdapter;
 import com.katherine_qj.saver.adapter.PasswordChangeFragmentAdapter;
-import com.katherine_qj.saver.fragment.CoCoinFragmentManager;
+import com.katherine_qj.saver.fragment.KKMoneyFragmentManager;
 import com.katherine_qj.saver.fragment.PasswordChangeFragment;
 import com.katherine_qj.saver.model.SettingManager;
 import com.katherine_qj.saver.model.User;
 import com.katherine_qj.saver.ui.FixedSpeedScroller;
 import com.katherine_qj.saver.ui.MyGridView;
-import com.katherine_qj.saver.util.CoCoinUtil;
+import com.katherine_qj.saver.util.KKMoneyUtil;
 
 import net.steamcrafted.materialiconlib.MaterialIconView;
 
@@ -135,7 +135,7 @@ public class SetPasswordActivity extends AppCompatActivity {
         superToast = new SuperToast(this);
 
         title = (TextView)findViewById(R.id.title);
-        title.setTypeface(CoCoinUtil.typefaceLatoLight);
+        title.setTypeface(KKMoneyUtil.typefaceLatoLight);
         if (SettingManager.getInstance().getFirstTime()) {
             title.setText(mContext.getResources().getString(R.string.app_name));
         } else {
@@ -175,22 +175,22 @@ public class SetPasswordActivity extends AppCompatActivity {
     private void buttonClickOperation(boolean longClick, int position) {
         switch (CURRENT_STATE) {
             case NEW_PASSWORD:
-                if (CoCoinUtil.ClickButtonDelete(position)) {
+                if (KKMoneyUtil.ClickButtonDelete(position)) {
                     if (longClick) {
-                        CoCoinFragmentManager.passwordChangeFragment[CURRENT_STATE].init();
+                        KKMoneyFragmentManager.passwordChangeFragment[CURRENT_STATE].init();
                         newPassword = "";
                     } else {
-                        CoCoinFragmentManager.passwordChangeFragment[CURRENT_STATE]
+                        KKMoneyFragmentManager.passwordChangeFragment[CURRENT_STATE]
                                 .clear(newPassword.length() - 1);
                         if (newPassword.length() != 0)
                             newPassword = newPassword.substring(0, newPassword.length() - 1);
                     }
-                } else if (CoCoinUtil.ClickButtonCommit(position)) {
+                } else if (KKMoneyUtil.ClickButtonCommit(position)) {
 
                 } else {
-                    CoCoinFragmentManager.passwordChangeFragment[CURRENT_STATE]
+                    KKMoneyFragmentManager.passwordChangeFragment[CURRENT_STATE]
                             .set(newPassword.length());
-                    newPassword += CoCoinUtil.BUTTONS[position];
+                    newPassword += KKMoneyUtil.BUTTONS[position];
                     if (newPassword.length() == 4) {
                         // finish the new password input
                         CURRENT_STATE = PASSWORD_AGAIN;
@@ -199,22 +199,22 @@ public class SetPasswordActivity extends AppCompatActivity {
                 }
                 break;
             case PASSWORD_AGAIN:
-                if (CoCoinUtil.ClickButtonDelete(position)) {
+                if (KKMoneyUtil.ClickButtonDelete(position)) {
                     if (longClick) {
-                        CoCoinFragmentManager.passwordChangeFragment[CURRENT_STATE].init();
+                        KKMoneyFragmentManager.passwordChangeFragment[CURRENT_STATE].init();
                         againPassword = "";
                     } else {
-                        CoCoinFragmentManager.passwordChangeFragment[CURRENT_STATE]
+                        KKMoneyFragmentManager.passwordChangeFragment[CURRENT_STATE]
                                 .clear(againPassword.length() - 1);
                         if (againPassword.length() != 0)
                             againPassword = againPassword.substring(0, againPassword.length() - 1);
                     }
-                } else if (CoCoinUtil.ClickButtonCommit(position)) {
+                } else if (KKMoneyUtil.ClickButtonCommit(position)) {
 
                 } else {
-                    CoCoinFragmentManager.passwordChangeFragment[CURRENT_STATE]
+                    KKMoneyFragmentManager.passwordChangeFragment[CURRENT_STATE]
                             .set(againPassword.length());
-                    againPassword += CoCoinUtil.BUTTONS[position];
+                    againPassword += KKMoneyUtil.BUTTONS[position];
                     if (againPassword.length() == 4) {
                         // if the password again is equal to the new password
                         if (againPassword.equals(newPassword)) {
@@ -224,9 +224,9 @@ public class SetPasswordActivity extends AppCompatActivity {
                             SettingManager.getInstance().setFirstTime(false);
                             if (SettingManager.getInstance().getLoggenOn()) {
                                 User currentUser = BmobUser.getCurrentUser(
-                                        CoCoinApplication.getAppContext(), User.class);
+                                        KKMoneyApplication.getAppContext(), User.class);
                                 currentUser.setAccountBookPassword(newPassword);
-                                currentUser.update(CoCoinApplication.getAppContext(),
+                                currentUser.update(KKMoneyApplication.getAppContext(),
                                         currentUser.getObjectId(), new UpdateListener() {
                                             @Override
                                             public void onSuccess() {
@@ -247,7 +247,7 @@ public class SetPasswordActivity extends AppCompatActivity {
                                 }
                             }, 1000);
                         } else {
-                            CoCoinFragmentManager.passwordChangeFragment[CURRENT_STATE].clear(4);
+                            KKMoneyFragmentManager.passwordChangeFragment[CURRENT_STATE].clear(4);
                             ((PasswordChangeFragment)passwordAdapter.getItem(CURRENT_STATE - 1)).init();
                             CURRENT_STATE = NEW_PASSWORD;
                             viewPager.setCurrentItem(NEW_PASSWORD, true);
@@ -266,7 +266,7 @@ public class SetPasswordActivity extends AppCompatActivity {
     private void showToast(int toastType) {
         SuperToast.cancelAllSuperToasts();
 
-        superToast.setAnimations(CoCoinUtil.TOAST_ANIMATION);
+        superToast.setAnimations(KKMoneyUtil.TOAST_ANIMATION);
         superToast.setDuration(SuperToast.Duration.SHORT);
         superToast.setTextColor(Color.parseColor("#ffffff"));
         superToast.setTextSize(SuperToast.TextSize.SMALL);
@@ -278,7 +278,7 @@ public class SetPasswordActivity extends AppCompatActivity {
                 superToast.setText(
                         mContext.getResources().getString(R.string.toast_password_wrong));
                 superToast.setBackground(SuperToast.Background.RED);
-                superToast.getTextView().setTypeface(CoCoinUtil.typefaceLatoLight);
+                superToast.getTextView().setTypeface(KKMoneyUtil.typefaceLatoLight);
 
                 break;
             // password is different
@@ -287,7 +287,7 @@ public class SetPasswordActivity extends AppCompatActivity {
                 superToast.setText(
                         mContext.getResources().getString(R.string.different_password));
                 superToast.setBackground(SuperToast.Background.RED);
-                superToast.getTextView().setTypeface(CoCoinUtil.typefaceLatoLight);
+                superToast.getTextView().setTypeface(KKMoneyUtil.typefaceLatoLight);
 
                 break;
             // success
@@ -296,7 +296,7 @@ public class SetPasswordActivity extends AppCompatActivity {
                 superToast.setText(
                         mContext.getResources().getString(R.string.set_password_successfully));
                 superToast.setBackground(SuperToast.Background.GREEN);
-                superToast.getTextView().setTypeface(CoCoinUtil.typefaceLatoLight);
+                superToast.getTextView().setTypeface(KKMoneyUtil.typefaceLatoLight);
 
                 break;
             default:
@@ -337,8 +337,8 @@ public class SetPasswordActivity extends AppCompatActivity {
     @Override
     protected void onDestroy() {
         for (int i = 0; i < 3; i++) {
-            CoCoinFragmentManager.passwordChangeFragment[i].onDestroy();
-            CoCoinFragmentManager.passwordChangeFragment[i] = null;
+            KKMoneyFragmentManager.passwordChangeFragment[i].onDestroy();
+            KKMoneyFragmentManager.passwordChangeFragment[i] = null;
         }
         super.onDestroy();
     }

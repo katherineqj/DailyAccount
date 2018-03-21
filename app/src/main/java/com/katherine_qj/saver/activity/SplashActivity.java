@@ -14,9 +14,9 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.katherine_qj.saver.R;
-import com.katherine_qj.saver.model.CoCoin;
+import com.katherine_qj.saver.model.KKMoney;
 import com.katherine_qj.saver.model.RecordManager;
-import com.katherine_qj.saver.util.CoCoinUtil;
+import com.katherine_qj.saver.util.KKMoneyUtil;
 import com.tencent.bugly.crashreport.CrashReport;
 
 import java.util.ArrayList;
@@ -88,9 +88,9 @@ public class SplashActivity extends Activity {
 
         image = (ImageView)findViewById(R.id.image);
         appName = (TextView)findViewById(R.id.app_name);
-        appName.setTypeface(CoCoinUtil.getInstance().typefaceLatoLight);
+        appName.setTypeface(KKMoneyUtil.getInstance().typefaceLatoLight);
         loadingText = (TextView)findViewById(R.id.loading_text);
-        loadingText.setTypeface(CoCoinUtil.getInstance().typefaceLatoLight);
+        loadingText.setTypeface(KKMoneyUtil.getInstance().typefaceLatoLight);
 
         reveal = (RevealFrameLayout)findViewById(R.id.reveal);
         ly = (LinearLayout)findViewById(R.id.ly);
@@ -102,8 +102,8 @@ public class SplashActivity extends Activity {
         // get the center for the clipping circle
         int[] location = new int[2];
         image.getLocationOnScreen(location);
-        int cx = location[0] + CoCoinUtil.dpToPx(24);
-        int cy = location[1] + CoCoinUtil.dpToPx(24);
+        int cx = location[0] + KKMoneyUtil.dpToPx(24);
+        int cy = location[1] + KKMoneyUtil.dpToPx(24);
 
         // get the final radius for the clipping circle
         int dx = Math.max(cx, ly.getWidth() - cx);
@@ -123,7 +123,7 @@ public class SplashActivity extends Activity {
 
             @Override
             public void onAnimationEnd() {
-                Log.d("CoCoin", "Showing animation completed");
+                Log.d("KKMoney", "Showing animation completed");
                 showAnimationCompleted = true;
                 if (loadDataCompleted && showAnimationCompleted && !activityStarted) {
                     activityStarted = true;
@@ -159,15 +159,15 @@ public class SplashActivity extends Activity {
         @Override
         protected String doInBackground(String... params) {
             Looper.prepare();
-            Bmob.initialize(CoCoinApplication.getAppContext(), CoCoin.Bomb_APPLICATION_ID);
-            CrashReport.initCrashReport(CoCoinApplication.getAppContext(), CoCoin.Bugly_APP_ID, false);
-            RecordManager.getInstance(CoCoinApplication.getAppContext());
-            CoCoinUtil.init(CoCoinApplication.getAppContext());
+            Bmob.initialize(KKMoneyApplication.getAppContext(), KKMoney.Bomb_APPLICATION_ID);
+            CrashReport.initCrashReport(KKMoneyApplication.getAppContext(), KKMoney.Bugly_APP_ID, false);
+            RecordManager.getInstance(KKMoneyApplication.getAppContext());
+            KKMoneyUtil.init(KKMoneyApplication.getAppContext());
             return null;
         }
         @Override
         protected void onPostExecute(String result) {
-            Log.d("CoCoin", "Loading Data completed");
+            Log.d("KKMoney", "Loading Data completed");
             loadingText.setText(mContext.getResources().getString(R.string.loaded));
             loadDataCompleted = true;
             if (loadDataCompleted && showAnimationCompleted && !activityStarted) {

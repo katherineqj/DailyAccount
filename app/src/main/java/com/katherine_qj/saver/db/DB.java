@@ -7,7 +7,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
 import com.katherine_qj.saver.BuildConfig;
-import com.katherine_qj.saver.model.CoCoinRecord;
+import com.katherine_qj.saver.model.KKMoneyRecord;
 import com.katherine_qj.saver.model.RecordManager;
 import com.katherine_qj.saver.model.Tag;
 
@@ -16,12 +16,12 @@ import java.text.SimpleDateFormat;
 import java.util.LinkedList;
 
 /**
- * Created by 伟平 on 2015/10/20.
+ * Created by katherineqj on 2017/10/20.
  */
 
 public class DB {
 
-    public static final String DB_NAME_STRING = "CoCoin Database.db";
+    public static final String DB_NAME_STRING = "KKMoney Database.db";
     public static final String RECORD_DB_NAME_STRING = "Record";
     public static final String TAG_DB_NAME_STRING = "Tag";
 
@@ -63,43 +63,43 @@ public class DB {
                 .query(RECORD_DB_NAME_STRING, null, null, null, null, null, null);
         if (cursor.moveToFirst()) {
             do {
-                CoCoinRecord coCoinRecord = new CoCoinRecord();
-                coCoinRecord.setId(cursor.getLong(cursor.getColumnIndex("ID")));
-                coCoinRecord.setMoney(cursor.getFloat(cursor.getColumnIndex("MONEY")));
-                coCoinRecord.setCurrency(cursor.getString(cursor.getColumnIndex("CURRENCY")));
-                coCoinRecord.setTag(cursor.getInt(cursor.getColumnIndex("TAG")));
-                coCoinRecord.setCalendar(cursor.getString(cursor.getColumnIndex("TIME")));
-                coCoinRecord.setRemark(cursor.getString(cursor.getColumnIndex("REMARK")));
-                coCoinRecord.setUserId(cursor.getString(cursor.getColumnIndex("USER_ID")));
-                coCoinRecord.setLocalObjectId(cursor.getString(cursor.getColumnIndex("OBJECT_ID")));
-                coCoinRecord.setIsUploaded(
+                KKMoneyRecord KKMoneyRecord = new KKMoneyRecord();
+                KKMoneyRecord.setId(cursor.getLong(cursor.getColumnIndex("ID")));
+                KKMoneyRecord.setMoney(cursor.getFloat(cursor.getColumnIndex("MONEY")));
+                KKMoneyRecord.setCurrency(cursor.getString(cursor.getColumnIndex("CURRENCY")));
+                KKMoneyRecord.setTag(cursor.getInt(cursor.getColumnIndex("TAG")));
+                KKMoneyRecord.setCalendar(cursor.getString(cursor.getColumnIndex("TIME")));
+                KKMoneyRecord.setRemark(cursor.getString(cursor.getColumnIndex("REMARK")));
+                KKMoneyRecord.setUserId(cursor.getString(cursor.getColumnIndex("USER_ID")));
+                KKMoneyRecord.setLocalObjectId(cursor.getString(cursor.getColumnIndex("OBJECT_ID")));
+                KKMoneyRecord.setIsUploaded(
                         cursor.getInt(cursor.getColumnIndex("IS_UPLOADED")) == 0 ? false : true);
 
-                if (BuildConfig.DEBUG) Log.d("CoCoin Debugger", "Load " + coCoinRecord.toString() + " S");
+                if (BuildConfig.DEBUG) Log.d("KKMoney Debugger", "Load " + KKMoneyRecord.toString() + " S");
 
-                RecordManager.RECORDS.add(coCoinRecord);
-                RecordManager.SUM += (int) coCoinRecord.getMoney();
+                RecordManager.RECORDS.add(KKMoneyRecord);
+                RecordManager.SUM += (int) KKMoneyRecord.getMoney();
             } while (cursor.moveToNext());
             if (cursor != null) cursor.close();
         }
     }
 
     // return the row ID of the newly inserted row, or -1 if an error occurred
-    public long saveRecord(CoCoinRecord coCoinRecord) {
+    public long saveRecord(KKMoneyRecord KKMoneyRecord) {
         ContentValues values = new ContentValues();
-        values.put("MONEY", coCoinRecord.getMoney());
-        values.put("CURRENCY", coCoinRecord.getCurrency());
-        values.put("TAG", coCoinRecord.getTag());
+        values.put("MONEY", KKMoneyRecord.getMoney());
+        values.put("CURRENCY", KKMoneyRecord.getCurrency());
+        values.put("TAG", KKMoneyRecord.getTag());
         values.put("TIME", new SimpleDateFormat("yyyy-MM-dd HH:mm")
-                .format(coCoinRecord.getCalendar().getTime()));
-        values.put("REMARK", coCoinRecord.getRemark());
-        values.put("USER_ID", coCoinRecord.getUserId());
-        values.put("OBJECT_ID", coCoinRecord.getLocalObjectId());
-        values.put("IS_UPLOADED", coCoinRecord.getIsUploaded().equals(Boolean.FALSE) ? 0 : 1);
+                .format(KKMoneyRecord.getCalendar().getTime()));
+        values.put("REMARK", KKMoneyRecord.getRemark());
+        values.put("USER_ID", KKMoneyRecord.getUserId());
+        values.put("OBJECT_ID", KKMoneyRecord.getLocalObjectId());
+        values.put("IS_UPLOADED", KKMoneyRecord.getIsUploaded().equals(Boolean.FALSE) ? 0 : 1);
         long insertId = sqliteDatabase.insert(RECORD_DB_NAME_STRING, null, values);
-        coCoinRecord.setId(insertId);
+        KKMoneyRecord.setId(insertId);
         if (BuildConfig.DEBUG)
-            Log.d("CoCoin Debugger", "db.saveRecord " + coCoinRecord.toString() + " S");
+            Log.d("KKMoney Debugger", "db.saveRecord " + KKMoneyRecord.toString() + " S");
         return insertId;
     }
 
@@ -110,7 +110,7 @@ public class DB {
         values.put("WEIGHT", tag.getWeight());
         int insertId = (int)sqliteDatabase.insert(TAG_DB_NAME_STRING, null, values);
         tag.setId(insertId);
-        if (BuildConfig.DEBUG) Log.d("CoCoin Debugger", "db.saveTag " + tag.toString() + " S");
+        if (BuildConfig.DEBUG) Log.d("KKMoney Debugger", "db.saveTag " + tag.toString() + " S");
         return insertId - 1;
     }
 
@@ -120,9 +120,9 @@ public class DB {
                 "ID = ?",
                 new String[]{id + ""});
         if (BuildConfig.DEBUG)
-            Log.d("CoCoin Debugger", "db.deleteRecord id = " + id + " S");
+            Log.d("KKMoney Debugger", "db.deleteRecord id = " + id + " S");
         if (BuildConfig.DEBUG)
-            Log.d("CoCoin Debugger", "db.deleteRecord number = " + deletedNumber + " S");
+            Log.d("KKMoney Debugger", "db.deleteRecord number = " + deletedNumber + " S");
         return id;
     }
 
@@ -132,31 +132,31 @@ public class DB {
                 "ID = ?",
                 new String[]{(id + 1) + ""});
         if (BuildConfig.DEBUG)
-            Log.d("CoCoin Debugger", "db.deleteTag id = " + id + " S");
+            Log.d("KKMoney Debugger", "db.deleteTag id = " + id + " S");
         if (BuildConfig.DEBUG)
-            Log.d("CoCoin Debugger", "db.deleteTag number = " + deletedNumber + " S");
+            Log.d("KKMoney Debugger", "db.deleteTag number = " + deletedNumber + " S");
         return id;
     }
 
-    // return the id of the coCoinRecord update
-    public long updateRecord(CoCoinRecord coCoinRecord) {
+    // return the id of the KKMoneyRecord update
+    public long updateRecord(KKMoneyRecord KKMoneyRecord) {
         ContentValues values = new ContentValues();
-        values.put("ID", coCoinRecord.getId());
-        values.put("MONEY", coCoinRecord.getMoney());
-        values.put("CURRENCY", coCoinRecord.getCurrency());
-        values.put("TAG", coCoinRecord.getTag());
+        values.put("ID", KKMoneyRecord.getId());
+        values.put("MONEY", KKMoneyRecord.getMoney());
+        values.put("CURRENCY", KKMoneyRecord.getCurrency());
+        values.put("TAG", KKMoneyRecord.getTag());
         values.put("TIME", new SimpleDateFormat("yyyy-MM-dd HH:mm")
-                .format(coCoinRecord.getCalendar().getTime()));
-        values.put("REMARK", coCoinRecord.getRemark());
-        values.put("USER_ID", coCoinRecord.getUserId());
-        values.put("OBJECT_ID", coCoinRecord.getLocalObjectId());
-        values.put("IS_UPLOADED", coCoinRecord.getIsUploaded().equals(Boolean.FALSE) ? 0 : 1);
+                .format(KKMoneyRecord.getCalendar().getTime()));
+        values.put("REMARK", KKMoneyRecord.getRemark());
+        values.put("USER_ID", KKMoneyRecord.getUserId());
+        values.put("OBJECT_ID", KKMoneyRecord.getLocalObjectId());
+        values.put("IS_UPLOADED", KKMoneyRecord.getIsUploaded().equals(Boolean.FALSE) ? 0 : 1);
         sqliteDatabase.update(RECORD_DB_NAME_STRING, values,
                 "ID = ?",
-                new String[]{coCoinRecord.getId() + ""});
+                new String[]{KKMoneyRecord.getId() + ""});
         if (BuildConfig.DEBUG)
-            Log.d("CoCoin Debugger", "db.updateRecord " + coCoinRecord.toString() + " S");
-        return coCoinRecord.getId();
+            Log.d("KKMoney Debugger", "db.updateRecord " + KKMoneyRecord.toString() + " S");
+        return KKMoneyRecord.getId();
     }
 
     // return the id of the tag update
@@ -168,14 +168,14 @@ public class DB {
                 "ID = ?",
                 new String[]{(tag.getId() + 1) + ""});
         if (BuildConfig.DEBUG)
-            Log.d("CoCoin Debugger", "db.updateTag " + tag.toString() + " S");
+            Log.d("KKMoney Debugger", "db.updateTag " + tag.toString() + " S");
         return tag.getId();
     }
 
     // delete all the records
     public int deleteAllRecords() {
         int deleteNum = sqliteDatabase.delete(RECORD_DB_NAME_STRING, null, null);
-        Log.d("CoCoin Debugger", "db.deleteAllRecords " + deleteNum + " S");
+        Log.d("KKMoney Debugger", "db.deleteAllRecords " + deleteNum + " S");
         return deleteNum;
     }
 }

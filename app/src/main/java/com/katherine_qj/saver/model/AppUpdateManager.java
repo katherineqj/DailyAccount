@@ -14,8 +14,8 @@ import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.github.johnpersano.supertoasts.SuperToast;
 import com.katherine_qj.saver.R;
-import com.katherine_qj.saver.activity.CoCoinApplication;
-import com.katherine_qj.saver.util.CoCoinUtil;
+import com.katherine_qj.saver.activity.KKMoneyApplication;
+import com.katherine_qj.saver.util.KKMoneyUtil;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -48,8 +48,8 @@ import cn.bmob.v3.listener.FindListener;
 
 public class AppUpdateManager {
     private static final String FILE_SEPARATOR = "/";
-    private static final String FILE_PATH = Environment.getExternalStorageDirectory() + FILE_SEPARATOR +"CoCoin" + FILE_SEPARATOR;
-    private static final String FILE_NAME = FILE_PATH + "CoCoin.apk";
+    private static final String FILE_PATH = Environment.getExternalStorageDirectory() + FILE_SEPARATOR +"KKMoney" + FILE_SEPARATOR;
+    private static final String FILE_NAME = FILE_PATH + "KKMoney.apk";
     private static final int UPDARE_TOKEN = 0x29;
     private static final int INSTALL_TOKEN = 0x31;
 
@@ -89,18 +89,18 @@ public class AppUpdateManager {
      */
     public void checkUpdateInfo(final Boolean showInfo) {
         BmobQuery<APK> query = new BmobQuery<>();
-        query.addWhereGreaterThan("version", CoCoinApplication.VERSION);
+        query.addWhereGreaterThan("version", KKMoneyApplication.VERSION);
         query.setLimit(Integer.MAX_VALUE);
-        query.findObjects(CoCoinApplication.getAppContext(), new FindListener<APK>() {
+        query.findObjects(KKMoneyApplication.getAppContext(), new FindListener<APK>() {
             @Override
             public void onSuccess(final List<APK> object) {
                 if (object.size() == 0 && showInfo) {
-                    CoCoinUtil.showToast(context, context.getResources().getString(R.string.is_newest_version), SuperToast.Background.BLUE);
+                    KKMoneyUtil.showToast(context, context.getResources().getString(R.string.is_newest_version), SuperToast.Background.BLUE);
                 }
                 BmobQuery<APK> tooOldQuery = new BmobQuery<>();
-                tooOldQuery.addWhereEqualTo("version", CoCoinApplication.VERSION);
+                tooOldQuery.addWhereEqualTo("version", KKMoneyApplication.VERSION);
                 tooOldQuery.setLimit(1);
-                tooOldQuery.findObjects(CoCoinApplication.getAppContext(), new FindListener<APK>() {
+                tooOldQuery.findObjects(KKMoneyApplication.getAppContext(), new FindListener<APK>() {
                     @Override
                     public void onSuccess(List<APK> objectTooOld) {
                         if (objectTooOld.size()==0){

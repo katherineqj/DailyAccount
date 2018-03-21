@@ -1,9 +1,9 @@
 <resources>
-    <string name="app_name">CoCoin</string>
-    <string name="app_splash_name">CoCoin V1.2.0</string>
+    <string name="app_name">KKMoney</string>
+    <string name="app_splash_name">KKMoney V1.2.0</string>
     <string name="app_info">
-        CoCoin&#13;&#10;
-        Copyright © Nightonke
+        KKMoney&#13;&#10;
+        Copyright © katherineqj
     </string>
 
     <string name="hello_world">Hello world!</string>
@@ -161,7 +161,7 @@
 
     <string name="undo">Undo</string>
 
-    <string name="deleting">Delete this coCoinRecord</string>
+    <string name="deleting">Delete this KKMoneyRecord</string>
     <string name="title_activity_edit_record">EditRecordActivity</string>
 
     <string name="from_invalid">The starting time is invalid!</string>
@@ -182,7 +182,7 @@
     <string name="month_color_remind">Color remind</string>
     <string name="month_warning">Color remind when expense over</string>
     <string name="month_color_remind_type">Remind color</string>
-    <string name="month_forbidden">Forbidden coCoinRecord money when out of limit</string>
+    <string name="month_forbidden">Forbidden KKMoneyRecord money when out of limit</string>
 
     <string name="auto_back_up">Auto backup records</string>
 
@@ -221,7 +221,7 @@
     <string name="this_month">This month:</string>
 
     <string name="welcome">Welcome!</string>
-    <string name="login_or_register">Do you have a CoCoin account?</string>
+    <string name="login_or_register">Do you have a KKMoney account?</string>
     <string name="login">Sure</string>
     <string name="register">Not yet</string>
 
@@ -249,7 +249,7 @@
         Change name but update to server fail
     </string>
 
-    <string name="register_successfully">Welcome to CoCoin!\n</string>
+    <string name="register_successfully">Welcome to KKMoney!\n</string>
     <string name="register_fail">Register fail!\n</string>
     <string name="login_successfully">Welcome back!\n</string>
     <string name="login_fail">Login fail!\n</string>
@@ -269,7 +269,7 @@
 
     <string name="sync_dialog_title">Sync?</string>
     <string name="sync_dialog_content">
-        You have already synchronized your settings to CoCoin server.
+        You have already synchronized your settings to KKMoney server.
         Would you want to synchronize your old settings to local?
     </string>
     <string name="sync_dialog_sync_to_local">Sync old settings to local</string>
@@ -292,7 +292,7 @@
     <string name="ok">OK!</string>
 
     <string name="first_time_set_password">
-        Hey!\nWelcome to use CoCoin!\nTo protect your account book,\n
+        Hey!\nWelcome to use KKMoney!\nTo protect your account book,\n
         you need a password to do so.
     </string>
     <string name="first_time_set_password_again">
@@ -322,12 +322,12 @@
     <string name="guide">Guide</string>
 
     <string name="hey">Hello!</string>
-    <string name="thank">Thanks for using CoCoin.</string>
+    <string name="thank">Thanks for using KKMoney.</string>
     <string name="me">I\'m an android developer.</string>
-    <string name="github">All codes here: github.com/Nightonke/CoCoin</string>
+    <string name="github">All codes here: github.com/Nightonke/KKMoney</string>
     <string name="blog">Blog: blog.csdn.net/u012925008</string>
     <string name="email">Email: nightonke@outlook.com</string>
-    <string name="thank_again">If you get any questions about CoCoin or me, just mail me!</string>
+    <string name="thank_again">If you get any questions about KKMoney or me, just mail me!</string>
 
     <string name="login_button">Sign in/Sign up</string>
     <string name="logout_button">Sign out</string>
@@ -383,13 +383,13 @@
     <string name="loaded">Loading completed</string>
 
     <string name="update_title">Update</string>
-    <string name="update_content_too_old">Your CoCoin version is too old to use.</string>
-    <string name="update_content">CoCoin, keep moving.</string>
+    <string name="update_content_too_old">Your KKMoney version is too old to use.</string>
+    <string name="update_content">KKMoney, keep moving.</string>
     <string name="update_never">don\'t remind</string>
     <string name="update_cancel">cancel</string>
     <string name="update_ok">Update</string>
     <string name="downloading_title">Downloading apk…</string>
-    <string name="downloading_content">Downloading newest CoCoin, please wait.</string>
+    <string name="downloading_content">Downloading newest KKMoney, please wait.</string>
 
     <string name="current_version">Current version: </string>
     <string name="can_update">NEW</string>
@@ -466,59 +466,59 @@
     <string name="report_view_average_month"> ● Month average</string>
     <string name="report_view_foot">&#160;Expense Report</string>
 
-    <string name="help_cocoin_title">CoCoin</string>
+    <string name="help_KKMoney_title">KKMoney</string>
     <string name="help_feedback_title">Feedback</string>
     <string name="help_open_library_title">Open Library</string>
     <string name="help_me_title">Me</string>
 
-    <string name="help_cocoin_content_1"> ● CoCoin, Multi-view Accounting Application</string>
-    <string name="help_cocoin_content_2">
+    <string name="help_KKMoney_content_1"> ● KKMoney, Multi-view Accounting Application</string>
+    <string name="help_KKMoney_content_2">
         ● You can do the accounting job easily and use a password to protect your account book.
-        Your account book\'s password will be set the first time you use CoCoin.
+        Your account book\'s password will be set the first time you use KKMoney.
         Swipe the numerical part to left to add some remarks for your records.
         To check your account book, you can swipe down or click the menu icon in the top left corner.
     </string>
-    <string name="help_cocoin_content_3">
+    <string name="help_KKMoney_content_3">
         ● In the account book, you can find out a pie chart for your expenses today, yesterday, this week, last week, this month, last month, this year and last year.
         Try to click the blocks of the pie chart or the bars of histogram for details.
-        All the charts in CoCoin can be clicked for details and there are some buttons near the charts to select a certain part(that\'s to small for click) in charts.
+        All the charts in KKMoney can be clicked for details and there are some buttons near the charts to select a certain part(that\'s to small for click) in charts.
         If you wanna get more views, just open the left drawer menu.
     </string>
-    <string name="help_cocoin_content_4">
+    <string name="help_KKMoney_content_4">
         ● In custom time view, you can check all the expenses in a special time span.
         Click the button in the bottom right corner to set the time span.
     </string>
-    <string name="help_cocoin_content_5">
+    <string name="help_KKMoney_content_5">
         ● In the tag view, you can check all the expenses for different tags.
         Open the left drawer menu and you can see all the tags in your account book.
         Click a tag to jump to the expenses analyse for that tag.
     </string>
-    <string name="help_cocoin_content_6">
+    <string name="help_KKMoney_content_6">
         ● In the month view, you can check all the expenses in every month.
         Let\'s check how much you spent and how many records you accounted.
         Open the left drawer menu, there is a simple list for every month\'s expenses.
         And just as in the tag view, you can click to jump to a certain month.
     </string>
-    <string name="help_cocoin_content_7">
+    <string name="help_KKMoney_content_7">
         ● In the list view, you can do some update and query job here.
         Swipe a record left to edit and right to delete.
         Open the left drawer to set some query conditions or click the search button in the top right corner to query according to remarks.
     </string>
-    <string name="help_cocoin_content_8">
+    <string name="help_KKMoney_content_8">
         ● In the report view, you can generate your month or year report here.
     </string>
-    <string name="help_cocoin_content_9">
-        ● After signing in, you can sync your records to CoCoin\'s server.
+    <string name="help_KKMoney_content_9">
+        ● After signing in, you can sync your records to KKMoney\'s server.
     </string>
-    <string name="help_cocoin_content_10">
+    <string name="help_KKMoney_content_10">
         ● You can change some default settings.
         For instance, the name of your account book, the order of tags, whether remind you the limit of the month expense.
         If you enable the color remind function, after you account a record which made the expenses of this month is large that warning value, the color of interface will change.
     </string>
-    <string name="help_cocoin_content_11"> ● Thanks for using CoCoin</string>
+    <string name="help_KKMoney_content_11"> ● Thanks for using KKMoney</string>
 
     <string name="help_feedback_content_1"> ● It\'s so nice to hear from you. If you wanna send me some images or other non-text feedback, my e-mail is Nightonke@outlook.com.</string>
-    <string name="help_feedback_content_2">Let\'s improve CoCoin</string>
+    <string name="help_feedback_content_2">Let\'s improve KKMoney</string>
     <string name="help_feedback_hint">Write feedback here</string>
     <string name="help_feedback_edit">Edit</string>
     <string name="help_feedback_send">Send</string>
@@ -534,7 +534,7 @@
 
     <string name="help_about_content_0"> ● About Me</string>
     <string name="help_about_content_1">Nightonke</string>
-    <string name="help_about_content_2">github.com/Nightonke/CoCoin</string>
+    <string name="help_about_content_2">github.com/Nightonke/KKMoney</string>
     <string name="help_about_content_3">blog.csdn.net/u012925008</string>
     <string name="help_about_content_4">Nightonke@outlook.com</string>
     <string name="help_about_content_5"> ● Open Source Lib</string>

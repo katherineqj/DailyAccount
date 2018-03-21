@@ -1,6 +1,6 @@
 package com.katherine_qj.saver.model;
 
-import com.katherine_qj.saver.util.CoCoinUtil;
+import com.katherine_qj.saver.util.KKMoneyUtil;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -10,10 +10,10 @@ import java.util.Date;
 import cn.bmob.v3.BmobObject;
 
 /**
- * Created by 伟平 on 2015/10/20.
+ * Created by katherineqj on 2017/10/20.
  */
 
-public class CoCoinRecord extends BmobObject {
+public class KKMoneyRecord extends BmobObject {
 
     private Long id;
     private Float money;
@@ -26,7 +26,7 @@ public class CoCoinRecord extends BmobObject {
     private Boolean isUploaded = false;
 
     public String toString() {
-        return "CoCoinRecord(" +
+        return "KKMoneyRecord(" +
                 "id = " + id + ", " +
                 "money = " + money + ", " +
                 "currency = " + currency + ", " +
@@ -47,11 +47,11 @@ public class CoCoinRecord extends BmobObject {
         this.userId = userId;
     }
 
-    public CoCoinRecord() {
+    public KKMoneyRecord() {
         this.id = Long.valueOf(-1);
     }
 
-    public CoCoinRecord(long id, float money, String currency, int tag, Calendar calendar) {
+    public KKMoneyRecord(long id, float money, String currency, int tag, Calendar calendar) {
         this.id = id;
         this.money = money;
         this.currency = currency;
@@ -59,7 +59,7 @@ public class CoCoinRecord extends BmobObject {
         this.calendar = calendar;
     }
 
-    public CoCoinRecord(long id, float money, String currency, int tag, Calendar calendar, String remark) {
+    public KKMoneyRecord(long id, float money, String currency, int tag, Calendar calendar, String remark) {
         this.id = id;
         this.money = money;
         this.currency = currency;
@@ -68,16 +68,16 @@ public class CoCoinRecord extends BmobObject {
         this.remark = remark;
     }
 
-    public void set(CoCoinRecord coCoinRecord) {
-        this.id = coCoinRecord.id;
-        this.money = coCoinRecord.money;
-        this.currency = coCoinRecord.currency;
-        this.tag = coCoinRecord.tag;
-        this.calendar = coCoinRecord.calendar;
-        this.remark = coCoinRecord.remark;
-        this.userId = coCoinRecord.userId;
-        this.localObjectId = coCoinRecord.localObjectId;
-        this.isUploaded = coCoinRecord.isUploaded;
+    public void set(KKMoneyRecord KKMoneyRecord) {
+        this.id = KKMoneyRecord.id;
+        this.money = KKMoneyRecord.money;
+        this.currency = KKMoneyRecord.currency;
+        this.tag = KKMoneyRecord.tag;
+        this.calendar = KKMoneyRecord.calendar;
+        this.remark = KKMoneyRecord.remark;
+        this.userId = KKMoneyRecord.userId;
+        this.localObjectId = KKMoneyRecord.localObjectId;
+        this.isUploaded = KKMoneyRecord.isUploaded;
     }
 
     public boolean isInTime(Calendar c1, Calendar c2) {
@@ -85,14 +85,14 @@ public class CoCoinRecord extends BmobObject {
     }
 
     public boolean isInMoney(double money1, double money2, String currency) {
-        return CoCoinUtil.ToDollas(money1, currency) <= CoCoinUtil.ToDollas(this.money, this.currency)
-                && CoCoinUtil.ToDollas(money2, currency) > CoCoinUtil.ToDollas(this.money, this.currency);
+        return KKMoneyUtil.ToDollas(money1, currency) <= KKMoneyUtil.ToDollas(this.money, this.currency)
+                && KKMoneyUtil.ToDollas(money2, currency) > KKMoneyUtil.ToDollas(this.money, this.currency);
     }
 
     public String getCalendarString() {
         return String.format("%02d", calendar.get(Calendar.HOUR_OF_DAY)) + ":"
                 + String.format("%02d", calendar.get(Calendar.MINUTE)) + " "
-                + CoCoinUtil.GetMonthShort(calendar.get(Calendar.MONTH) + 1) + " "
+                + KKMoneyUtil.GetMonthShort(calendar.get(Calendar.MONTH) + 1) + " "
                 + calendar.get(Calendar.DAY_OF_MONTH) + " "
                 + calendar.get(Calendar.YEAR);
     }

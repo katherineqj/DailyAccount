@@ -4,10 +4,10 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentStatePagerAdapter;
 
 import com.katherine_qj.saver.fragment.TodayViewFragment;
-import com.katherine_qj.saver.util.CoCoinUtil;
+import com.katherine_qj.saver.util.KKMoneyUtil;
 
 /**
- * Created by 伟平 on 2015/10/20.
+ * Created by katherineqj on 2017/10/20.
  */
 
 public class TodayViewFragmentAdapter extends FragmentStatePagerAdapter {
@@ -30,7 +30,7 @@ public class TodayViewFragmentAdapter extends FragmentStatePagerAdapter {
 
     @Override
     public CharSequence getPageTitle(int position) {
-        return CoCoinUtil.GetTodayViewTitle(position % TODAY_VIEW_FRAGMENT_NUMBER);
+        return KKMoneyUtil.GetTodayViewTitle(position % TODAY_VIEW_FRAGMENT_NUMBER);
     }
 
     @Override

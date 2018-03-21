@@ -9,9 +9,9 @@ import android.widget.TextView;
 
 import com.daimajia.slider.library.SliderTypes.BaseSliderView;
 import com.katherine_qj.saver.R;
-import com.katherine_qj.saver.activity.CoCoinApplication;
-import com.katherine_qj.saver.fragment.CoCoinFragmentManager;
-import com.katherine_qj.saver.util.CoCoinUtil;
+import com.katherine_qj.saver.activity.KKMoneyApplication;
+import com.katherine_qj.saver.fragment.KKMoneyFragmentManager;
+import com.katherine_qj.saver.util.KKMoneyUtil;
 
 /**
  * Created by Weiping on 2016/1/23.
@@ -23,13 +23,13 @@ public class CustomTitleSliderView extends BaseSliderView {
     private TextView title;
 
     public CustomTitleSliderView(String content, int type) {
-        super(CoCoinApplication.getAppContext());
+        super(KKMoneyApplication.getAppContext());
         this.content = content;
         this.type = type;
-        if (type == CoCoinFragmentManager.NUMBER_SLIDER) {
-            CoCoinFragmentManager.numberCustomTitleSliderView = this;
-        } else if (type == CoCoinFragmentManager.EXPENSE_SLIDER) {
-            CoCoinFragmentManager.expenseCustomTitleSliderView = this;
+        if (type == KKMoneyFragmentManager.NUMBER_SLIDER) {
+            KKMoneyFragmentManager.numberCustomTitleSliderView = this;
+        } else if (type == KKMoneyFragmentManager.EXPENSE_SLIDER) {
+            KKMoneyFragmentManager.expenseCustomTitleSliderView = this;
         }
     }
 
@@ -42,7 +42,7 @@ public class CustomTitleSliderView extends BaseSliderView {
 
         title = (TextView)v.findViewById(R.id.title);
         title.setText(content);
-        title.setTypeface(CoCoinUtil.typefaceLatoLight);
+        title.setTypeface(KKMoneyUtil.typefaceLatoLight);
 
         ImageView target = (ImageView)v.findViewById(R.id.daimajia_slider_image);
         bindEventAndShow(v, target);

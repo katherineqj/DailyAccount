@@ -18,22 +18,22 @@ import android.widget.TextView;
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.katherine_qj.saver.R;
 import com.katherine_qj.saver.adapter.RecordCheckDialogRecyclerViewAdapter;
-import com.katherine_qj.saver.model.CoCoinRecord;
-import com.katherine_qj.saver.util.CoCoinUtil;
+import com.katherine_qj.saver.model.KKMoneyRecord;
+import com.katherine_qj.saver.util.KKMoneyUtil;
 
 import java.util.List;
 
 /**
- * Created by 伟平 on 2015/10/31.
+ * Created by katherineqj on 2017/10/31.
  */
 public class RecordCheckDialogFragment extends DialogFragment implements RecordCheckDialogRecyclerViewAdapter.OnItemClickListener {
 
     private RecyclerView recyclerView;
-    private List<CoCoinRecord> list;
+    private List<KKMoneyRecord> list;
     private Context mContext;
     private String title;
 
-    public RecordCheckDialogFragment(Context context, List<CoCoinRecord> list, String title) {
+    public RecordCheckDialogFragment(Context context, List<KKMoneyRecord> list, String title) {
         this.list = list;
         this.title = title;
         mContext = context;
@@ -72,7 +72,7 @@ public class RecordCheckDialogFragment extends DialogFragment implements RecordC
         TextView title = new TextView(mContext);
         title.setHeight(120);
         title.setGravity(Gravity.CENTER_VERTICAL | Gravity.CENTER_HORIZONTAL);
-        title.setTypeface(CoCoinUtil.typefaceLatoLight);
+        title.setTypeface(KKMoneyUtil.typefaceLatoLight);
         title.setText(this.title);
         alert.setCustomTitle(title);
 
@@ -80,7 +80,7 @@ public class RecordCheckDialogFragment extends DialogFragment implements RecordC
             @Override
             public void onShow(DialogInterface dialog) {
                 Button btnPositive = alert.getButton(Dialog.BUTTON_POSITIVE);
-                btnPositive.setTypeface(CoCoinUtil.typefaceLatoLight);
+                btnPositive.setTypeface(KKMoneyUtil.typefaceLatoLight);
             }
         });
 
@@ -104,15 +104,15 @@ public class RecordCheckDialogFragment extends DialogFragment implements RecordC
         String subTitle;
         double spend = list.get(position).getMoney();
         int tagId = list.get(position).getTag();
-        if ("zh".equals(CoCoinUtil.GetLanguage())) {
-            subTitle = CoCoinUtil.GetSpendString((int)spend) +
-                    "于" + CoCoinUtil.GetTagName(tagId);
+        if ("zh".equals(KKMoneyUtil.GetLanguage())) {
+            subTitle = KKMoneyUtil.GetSpendString((int)spend) +
+                    "于" + KKMoneyUtil.GetTagName(tagId);
         } else {
             subTitle = "Spend " + (int)spend +
-                    "in " + CoCoinUtil.GetTagName(tagId);
+                    "in " + KKMoneyUtil.GetTagName(tagId);
         }
         dialog = new MaterialDialog.Builder(mContext)
-                .icon(CoCoinUtil.GetTagIconDrawable(list.get(position).getTag()))
+                .icon(KKMoneyUtil.GetTagIconDrawable(list.get(position).getTag()))
                 .limitIconToDefaultSize()
                 .title(subTitle)
                 .customView(R.layout.dialog_a_record, true)
@@ -122,6 +122,6 @@ public class RecordCheckDialogFragment extends DialogFragment implements RecordC
         TextView remark = (TextView)dialogView.findViewById(R.id.remark);
         TextView date = (TextView)dialogView.findViewById(R.id.date);
         remark.setText(list.get(position).getRemark());
-        date.setText(CoCoinUtil.GetCalendarStringRecordCheckDialog(mContext, list.get(position).getCalendar()));
+        date.setText(KKMoneyUtil.GetCalendarStringRecordCheckDialog(mContext, list.get(position).getCalendar()));
     }
 }

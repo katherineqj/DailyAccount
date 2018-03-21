@@ -42,7 +42,7 @@ import com.katherine_qj.saver.model.RecordManager;
 import com.katherine_qj.saver.model.SettingManager;
 import com.katherine_qj.saver.model.User;
 import com.katherine_qj.saver.ui.RiseNumberTextView;
-import com.katherine_qj.saver.util.CoCoinUtil;
+import com.katherine_qj.saver.util.KKMoneyUtil;
 import com.katherine_qj.saver.util.EmailValidator;
 import com.rengwuxian.materialedittext.MaterialEditText;
 import com.rey.material.widget.Switch;
@@ -173,7 +173,7 @@ public class AccountBookSettingActivity extends AppCompatActivity
         } else{
             // do something for phones running an SDK before lollipop
             View statusBarView = findViewById(R.id.status_bar_view);
-            statusBarView.getLayoutParams().height = CoCoinUtil.getStatusBarHeight();
+            statusBarView.getLayoutParams().height = KKMoneyUtil.getStatusBarHeight();
         }
 
         init();
@@ -281,33 +281,33 @@ public class AccountBookSettingActivity extends AppCompatActivity
 
 // Load logo from local/////////////////////////////////////////////////////////////////////////////
     private void loadLogo() {
-        User user = BmobUser.getCurrentUser(CoCoinApplication.getAppContext(), User.class);
+        User user = BmobUser.getCurrentUser(KKMoneyApplication.getAppContext(), User.class);
         if (user != null) {
             try {
-                File logoFile = new File(CoCoinApplication.getAppContext().getFilesDir() + CoCoinUtil.LOGO_NAME);
+                File logoFile = new File(KKMoneyApplication.getAppContext().getFilesDir() + KKMoneyUtil.LOGO_NAME);
                 if (!logoFile.exists()) {
                     // the local logo file is missed
                     // try to get from the server
                     BmobQuery<Logo> bmobQuery = new BmobQuery();
                     bmobQuery.addWhereEqualTo("objectId", user.getLogoObjectId());
-                    bmobQuery.findObjects(CoCoinApplication.getAppContext()
+                    bmobQuery.findObjects(KKMoneyApplication.getAppContext()
                             , new FindListener<Logo>() {
                                 @Override
                                 public void onSuccess(List<Logo> object) {
                                     if (object.size()!=0) {
                                         // there has been an old logo in the server/////////////////////////////////////////////////////////)
-                                        String url = object.get(0).getFile().getFileUrl(CoCoinApplication.getAppContext());
+                                        String url = object.get(0).getFile().getFileUrl(KKMoneyApplication.getAppContext());
                                         if (BuildConfig.DEBUG)
-                                            Log.d("CoCoin", "Logo in server: " + url);
-                                        Ion.with(CoCoinApplication.getAppContext()).load(url)
-                                                .write(new File(CoCoinApplication.getAppContext().getFilesDir()
-                                                        + CoCoinUtil.LOGO_NAME))
+                                            Log.d("KKMoney", "Logo in server: " + url);
+                                        Ion.with(KKMoneyApplication.getAppContext()).load(url)
+                                                .write(new File(KKMoneyApplication.getAppContext().getFilesDir()
+                                                        + KKMoneyUtil.LOGO_NAME))
                                                 .setCallback(new FutureCallback<File>() {
                                                     @Override
                                                     public void onCompleted(Exception e, File file) {
                                                         logo.setImageBitmap(BitmapFactory.decodeFile(
-                                                                CoCoinApplication.getAppContext().getFilesDir()
-                                                                        + CoCoinUtil.LOGO_NAME));
+                                                                KKMoneyApplication.getAppContext().getFilesDir()
+                                                                        + KKMoneyUtil.LOGO_NAME));
                                                     }
                                                 });
                                     }
@@ -315,7 +315,7 @@ public class AccountBookSettingActivity extends AppCompatActivity
                                 @Override
                                 public void onError(int code, String msg) {
                                     // the picture is lost
-                                    if (BuildConfig.DEBUG) Log.d("CoCoin", "Can't find the old logo in server.");
+                                    if (BuildConfig.DEBUG) Log.d("KKMoney", "Can't find the old logo in server.");
                                 }
                             });
                 } else {
@@ -334,11 +334,11 @@ public class AccountBookSettingActivity extends AppCompatActivity
 
 // change the user logo/////////////////////////////////////////////////////////////////////////////
     private void changeLogo() {
-        User user = BmobUser.getCurrentUser(CoCoinApplication.getAppContext(), User.class);
+        User user = BmobUser.getCurrentUser(KKMoneyApplication.getAppContext(), User.class);
         if (user == null) {
             new MaterialDialog.Builder(this)
-                    .iconRes(R.drawable.cocoin_logo)
-                    .typeface(CoCoinUtil.GetTypeface(), CoCoinUtil.GetTypeface())
+                    .iconRes(R.drawable.kkmoney_logo)
+                    .typeface(KKMoneyUtil.GetTypeface(), KKMoneyUtil.GetTypeface())
                     .limitIconToDefaultSize() // limits the displayed icon size to 48dp
                     .title(R.string.login_first_title)
                     .content(R.string.login_first_content)
@@ -357,8 +357,8 @@ public class AccountBookSettingActivity extends AppCompatActivity
             return;
         }
         new MaterialDialog.Builder(this)
-                .iconRes(R.drawable.cocoin_logo)
-                .typeface(CoCoinUtil.GetTypeface(), CoCoinUtil.GetTypeface())
+                .iconRes(R.drawable.kkmoney_logo)
+                .typeface(KKMoneyUtil.GetTypeface(), KKMoneyUtil.GetTypeface())
                 .limitIconToDefaultSize() // limits the displayed icon size to 48dp
                 .title(R.string.change_logo_title)
                 .content(R.string.change_logo_content)
@@ -376,8 +376,8 @@ public class AccountBookSettingActivity extends AppCompatActivity
                         } else if (which == DialogAction.NEGATIVE) {
                             Intent intent2 = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
                             intent2.putExtra(MediaStore.EXTRA_OUTPUT,
-                                    Uri.fromFile(new File(CoCoinApplication.getAppContext().getFilesDir()
-                                            + CoCoinUtil.LOGO_NAME)));
+                                    Uri.fromFile(new File(KKMoneyApplication.getAppContext().getFilesDir()
+                                            + KKMoneyUtil.LOGO_NAME)));
                             startActivityForResult(intent2, 2);
                         }
                     }
@@ -412,7 +412,7 @@ public class AccountBookSettingActivity extends AppCompatActivity
             case 2:
                 // after taking a photo
                 if (resultCode == RESULT_OK) {
-                    File temp = new File(CoCoinApplication.getAppContext().getFilesDir() + CoCoinUtil.LOGO_NAME);
+                    File temp = new File(KKMoneyApplication.getAppContext().getFilesDir() + KKMoneyUtil.LOGO_NAME);
                     cropPhoto(Uri.fromFile(temp));
                 }
                 break;
@@ -439,7 +439,7 @@ public class AccountBookSettingActivity extends AppCompatActivity
 // Storage a picture////////////////////////////////////////////////////////////////////////////////
     private void setPicToView(Bitmap mBitmap) {
         FileOutputStream b = null;
-        File file = new File(CoCoinApplication.getAppContext().getFilesDir() + CoCoinUtil.LOGO_NAME);
+        File file = new File(KKMoneyApplication.getAppContext().getFilesDir() + KKMoneyUtil.LOGO_NAME);
         String fileName = file.getAbsolutePath();  // get logo position
         try {
             b = new FileOutputStream(fileName);
@@ -467,22 +467,22 @@ public class AccountBookSettingActivity extends AppCompatActivity
         }
         BmobQuery<Logo> bmobQuery = new BmobQuery();
         bmobQuery.addWhereEqualTo("objectId", user.getLogoObjectId());
-       /* bmobQuery.findObjects(CoCoinApplication.getAppContext()
+       /* bmobQuery.findObjects(KKMoneyApplication.getAppContext()
                 , new FindListener<Logo>() {
             @Override
             public void onSuccess(List<Logo> object) {
 // there has been an old logo in the server/////////////////////////////////////////////////////////
                 Log.d("Saver", "There is an old logo");
                 String url = object.get(0).getFile().getUrl();
-                Ion.with(CoCoinApplication.getAppContext()).load(url)
-                        .write(new File(CoCoinApplication.getAppContext().getFilesDir()
-                                + CoCoinUtil.LOGO_NAME))
+                Ion.with(KKMoneyApplication.getAppContext()).load(url)
+                        .write(new File(KKMoneyApplication.getAppContext().getFilesDir()
+                                + KKMoneyUtil.LOGO_NAME))
                                 .setCallback(new FutureCallback<File>() {
                                     @Override
                                     public void onCompleted(Exception e, File file) {
                                         Bitmap bitmap = BitmapFactory.
-                                                decodeFile(CoCoinApplication.getAppContext().getFilesDir()
-                                                        + CoCoinUtil.LOGO_NAME);
+                                                decodeFile(KKMoneyApplication.getAppContext().getFilesDir()
+                                                        + KKMoneyUtil.LOGO_NAME);
                                         if (bitmap == null) {
                                             Log.d("Saver", "Logo misses");
                                         } else {
@@ -507,7 +507,7 @@ public class AccountBookSettingActivity extends AppCompatActivity
             // the user haven't set the logo
             return;
         }
-        final File file = new File(CoCoinApplication.getAppContext().getFilesDir() + CoCoinUtil.LOGO_NAME);
+        final File file = new File(KKMoneyApplication.getAppContext().getFilesDir() + KKMoneyUtil.LOGO_NAME);
         final User user = getCurrentUser();
 // if login/////////////////////////////////////////////////////////////////////////////////////////
         if (user != null) {
@@ -516,7 +516,7 @@ public class AccountBookSettingActivity extends AppCompatActivity
 // judge whether there is an old logo of the same user//////////////////////////////////////////////
                 BmobQuery<Logo> bmobQuery = new BmobQuery();
                 bmobQuery.addWhereEqualTo("objectId", user.getLogoObjectId());
-                bmobQuery.findObjects(CoCoinApplication.getAppContext()
+                bmobQuery.findObjects(KKMoneyApplication.getAppContext()
                         , new FindListener<Logo>() {
                     @Override
                     public void onSuccess(List<Logo> object) {
@@ -527,19 +527,19 @@ public class AccountBookSettingActivity extends AppCompatActivity
                         String url = object.get(0).getFile().getUrl();
                         BmobFile oldLogoFile = new BmobFile();
                         oldLogoFile.setUrl(url);
-                        oldLogoFile.delete(CoCoinApplication.getAppContext(), new DeleteListener() {
+                        oldLogoFile.delete(KKMoneyApplication.getAppContext(), new DeleteListener() {
                             @Override
                             public void onSuccess() {
                                 Log.d("Saver", "Successfully delete the old logo.");
 // after delete, we should upload a new logo file///////////////////////////////////////////////////
                                 final BmobFile newLogoFile = new BmobFile(file);
-                                newLogoFile.uploadblock(CoCoinApplication.getAppContext(),
+                                newLogoFile.uploadblock(KKMoneyApplication.getAppContext(),
                                         new UploadFileListener() {
                                     @Override
                                     public void onSuccess() {
 // after upload the new logo file, we should put the new logo the Logo table////////////////////////
                                         Logo newLogo = new Logo(newLogoFile);
-                                        newLogo.update(CoCoinApplication.getAppContext(),
+                                        newLogo.update(KKMoneyApplication.getAppContext(),
                                                 user.getLogoObjectId(), new UpdateListener() {
                                                     @Override
                                                     public void onSuccess() {
@@ -576,13 +576,13 @@ public class AccountBookSettingActivity extends AppCompatActivity
             } else {
 // the user has no logo before//////////////////////////////////////////////////////////////////////
                 final BmobFile newLogoFile = new BmobFile(file);
-                newLogoFile.uploadblock(CoCoinApplication.getAppContext(), new UploadFileListener() {
+                newLogoFile.uploadblock(KKMoneyApplication.getAppContext(), new UploadFileListener() {
                     @Override
                     public void onSuccess() {
-                        String url = newLogoFile.getFileUrl(CoCoinApplication.getAppContext());
+                        String url = newLogoFile.getFileUrl(KKMoneyApplication.getAppContext());
                         Log.d("Saver", "Upload successfully " + url);
                         final Logo newLogo = new Logo(newLogoFile);
-                        newLogo.save(CoCoinApplication.getAppContext(), new SaveListener() {
+                        newLogo.save(KKMoneyApplication.getAppContext(), new SaveListener() {
                             @Override
                             public void onSuccess() {
                                 Log.d("Saver", "Save the new logo successfully.");
@@ -609,8 +609,8 @@ public class AccountBookSettingActivity extends AppCompatActivity
         if (!SettingManager.getInstance().getLoggenOn()) {
             // register or log on
             new MaterialDialog.Builder(this)
-                    .iconRes(R.drawable.cocoin_logo)
-                    .typeface(CoCoinUtil.GetTypeface(), CoCoinUtil.GetTypeface())
+                    .iconRes(R.drawable.kkmoney_logo)
+                    .typeface(KKMoneyUtil.GetTypeface(), KKMoneyUtil.GetTypeface())
                     .limitIconToDefaultSize() // limits the displayed icon size to 48dp
                     .title(R.string.welcome)
                     .content(R.string.login_or_register)
@@ -634,8 +634,8 @@ public class AccountBookSettingActivity extends AppCompatActivity
         } else {
             // log out or user operate
             new MaterialDialog.Builder(this)
-                    .iconRes(R.drawable.cocoin_logo)
-                    .typeface(CoCoinUtil.GetTypeface(), CoCoinUtil.GetTypeface())
+                    .iconRes(R.drawable.kkmoney_logo)
+                    .typeface(KKMoneyUtil.GetTypeface(), KKMoneyUtil.GetTypeface())
                     .limitIconToDefaultSize() // limits the displayed icon size to 48dp
                     .title(mContext.getResources().getString(R.string.hi)
                             + SettingManager.getInstance().getUserName())
@@ -659,7 +659,7 @@ public class AccountBookSettingActivity extends AppCompatActivity
 
 // User log out/////////////////////////////////////////////////////////////////////////////////////
     private void userLogout() {
-        BmobUser.logOut(CoCoinApplication.getAppContext());
+        BmobUser.logOut(KKMoneyApplication.getAppContext());
         SettingManager.getInstance().setTodayViewInfoShouldChange(true);
         SettingManager.getInstance().setLoggenOn(false);
         SettingManager.getInstance().setUserName(null);
@@ -676,7 +676,7 @@ public class AccountBookSettingActivity extends AppCompatActivity
     private void userLogin() {
         loginDialog = new MaterialDialog.Builder(this)
                 .title(R.string.go_login)
-                .typeface(CoCoinUtil.GetTypeface(), CoCoinUtil.GetTypeface())
+                .typeface(KKMoneyUtil.GetTypeface(), KKMoneyUtil.GetTypeface())
                 .customView(R.layout.dialog_user_login, true)
                 .build();
         InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
@@ -686,7 +686,7 @@ public class AccountBookSettingActivity extends AppCompatActivity
         loginDialogButton = (CircularProgressButton) loginDialogView.findViewById(R.id.button);
         loginDialogButton.isIndeterminateProgressMode();
         loginDialogButton.setProgress(0);
-        loginDialogButton.setTypeface(CoCoinUtil.GetTypeface());
+        loginDialogButton.setTypeface(KKMoneyUtil.GetTypeface());
         loginDialogButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -696,7 +696,7 @@ public class AccountBookSettingActivity extends AppCompatActivity
                 final User user = new User();
                 user.setUsername(loginUserName.getText().toString());
                 user.setPassword(loginPassword.getText().toString());
-                user.login(CoCoinApplication.getAppContext(), new SaveListener() {
+                user.login(KKMoneyApplication.getAppContext(), new SaveListener() {
 // try with user name///////////////////////////////////////////////////////////////////////////////
                     @Override
                     public void onSuccess() {
@@ -706,8 +706,8 @@ public class AccountBookSettingActivity extends AppCompatActivity
 // login successfully through user name/////////////////////////////////////////////////////////////
                         SettingManager.getInstance().setTodayViewInfoShouldChange(true);
                         User loginUser =
-                                BmobUser.getCurrentUser(CoCoinApplication.getAppContext(), User.class);
-                        if (!CoCoinApplication.getAndroidId().equals(loginUser.getAndroidId())) {
+                                BmobUser.getCurrentUser(KKMoneyApplication.getAppContext(), User.class);
+                        if (!KKMoneyApplication.getAndroidId().equals(loginUser.getAndroidId())) {
 // 2 users on one mobile////////////////////////////////////////////////////////////////////////////
                             showToast(7, "unique...");
                             return;
@@ -736,7 +736,7 @@ public class AccountBookSettingActivity extends AppCompatActivity
                     public void onFailure(int code, String msg) {
 // try with user email//////////////////////////////////////////////////////////////////////////////
                         user.setEmail(loginUserName.getText().toString());
-                        user.login(CoCoinApplication.getAppContext(), new SaveListener() {
+                        user.login(KKMoneyApplication.getAppContext(), new SaveListener() {
                             @Override
                             public void onSuccess() {
                                 loginDialog.setCancelable(true);
@@ -745,8 +745,8 @@ public class AccountBookSettingActivity extends AppCompatActivity
 // login successfully through user email////////////////////////////////////////////////////////////
                                 SettingManager.getInstance().setTodayViewInfoShouldChange(true);
                                 User loginUser =
-                                        BmobUser.getCurrentUser(CoCoinApplication.getAppContext(), User.class);
-                                if (!CoCoinApplication.getAndroidId().equals(loginUser.getAndroidId())) {
+                                        BmobUser.getCurrentUser(KKMoneyApplication.getAppContext(), User.class);
+                                if (!KKMoneyApplication.getAndroidId().equals(loginUser.getAndroidId())) {
 // 2 users on one mobile////////////////////////////////////////////////////////////////////////////
                                     showToast(7, "unique...");
                                     return;
@@ -794,15 +794,15 @@ public class AccountBookSettingActivity extends AppCompatActivity
                 = (TextView)loginDialog.getCustomView().findViewById(R.id.login_user_name_text);
         TextView userPasswordTV
                 = (TextView)loginDialog.getCustomView().findViewById(R.id.login_password_text);
-        userNameTV.setTypeface(CoCoinUtil.GetTypeface());
-        userPasswordTV.setTypeface(CoCoinUtil.GetTypeface());
+        userNameTV.setTypeface(KKMoneyUtil.GetTypeface());
+        userPasswordTV.setTypeface(KKMoneyUtil.GetTypeface());
 
         loginUserName
                 = (MaterialEditText)loginDialog.getCustomView().findViewById(R.id.login_user_name);
         loginPassword
                 = (MaterialEditText)loginDialog.getCustomView().findViewById(R.id.login_password);
 
-        loginUserName.setTypeface(CoCoinUtil.GetTypeface());
+        loginUserName.setTypeface(KKMoneyUtil.GetTypeface());
         loginUserName.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
@@ -816,7 +816,7 @@ public class AccountBookSettingActivity extends AppCompatActivity
             public void afterTextChanged(Editable s) {}
         });
 
-        loginPassword.setTypeface(CoCoinUtil.GetTypeface());
+        loginPassword.setTypeface(KKMoneyUtil.GetTypeface());
         loginPassword.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
@@ -840,7 +840,7 @@ public class AccountBookSettingActivity extends AppCompatActivity
     private void userRegister() {
         registerDialog = new MaterialDialog.Builder(this)
                 .title(R.string.go_register)
-                .typeface(CoCoinUtil.GetTypeface(), CoCoinUtil.GetTypeface())
+                .typeface(KKMoneyUtil.GetTypeface(), KKMoneyUtil.GetTypeface())
                 .customView(R.layout.dialog_user_register, true)
                 .build();
         InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
@@ -848,7 +848,7 @@ public class AccountBookSettingActivity extends AppCompatActivity
 
         registerDialogView = registerDialog.getCustomView();
         registerDialogButton = (CircularProgressButton)registerDialogView.findViewById(R.id.button);
-        registerDialogButton.setTypeface(CoCoinUtil.GetTypeface());
+        registerDialogButton.setTypeface(KKMoneyUtil.GetTypeface());
         registerDialogButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -860,8 +860,8 @@ public class AccountBookSettingActivity extends AppCompatActivity
                 user.setUsername(registerUserName.getText().toString());
                 user.setPassword(registerPassword.getText().toString());
                 user.setEmail(registerUserEmail.getText().toString());
-                user.setAndroidId(CoCoinApplication.getAndroidId());
-                if (BuildConfig.DEBUG) Log.d("CoCoin", "Android Id: " + user.getAndroidId());
+                user.setAndroidId(KKMoneyApplication.getAndroidId());
+                if (BuildConfig.DEBUG) Log.d("KKMoney", "Android Id: " + user.getAndroidId());
                 // settings info
                 // user.setLogo();
                 user.setIsMonthLimit(SettingManager.getInstance().getIsMonthLimit());
@@ -876,7 +876,7 @@ public class AccountBookSettingActivity extends AppCompatActivity
                 user.setShowPicture(SettingManager.getInstance().getShowPicture());
                 user.setIsHollow(SettingManager.getInstance().getIsHollow());
                 user.setLogoObjectId("");
-                user.signUp(CoCoinApplication.getAppContext(), new SaveListener() {
+                user.signUp(KKMoneyApplication.getAppContext(), new SaveListener() {
                     @Override
                     public void onSuccess() {
                         registerDialogButton.setProgress(0);
@@ -889,7 +889,7 @@ public class AccountBookSettingActivity extends AppCompatActivity
                         SettingManager.getInstance().setUserPassword(registerPassword.getText().toString());
                         showToast(4, registerUserName.getText().toString());
 // if login successfully////////////////////////////////////////////////////////////////////////////
-                        user.login(CoCoinApplication.getAppContext(), new SaveListener() {
+                        user.login(KKMoneyApplication.getAppContext(), new SaveListener() {
                             @Override
                             public void onSuccess() {
                                 SettingManager.getInstance().setTodayViewInfoShouldChange(true);
@@ -915,7 +915,7 @@ public class AccountBookSettingActivity extends AppCompatActivity
                     // if register failed///////////////////////////////////////////////////////////////////////////////
                     @Override
                     public void onFailure(int code, String msg) {
-                        if (BuildConfig.DEBUG) Log.d("CoCoin", "Register failed: " + msg);
+                        if (BuildConfig.DEBUG) Log.d("KKMoney", "Register failed: " + msg);
                         String tip = getResourceString(R.string.network_disconnection);
                         if (msg.charAt(1) == 's') tip = getResourceString(R.string.user_name_exist);
                         if (msg.charAt(0) == 'e') tip = getResourceString(R.string.user_email_exist);
@@ -938,9 +938,9 @@ public class AccountBookSettingActivity extends AppCompatActivity
                 = (TextView)registerDialog.getCustomView().findViewById(R.id.register_user_email_text);
         TextView userPasswordTV
                 = (TextView)registerDialog.getCustomView().findViewById(R.id.register_password_text);
-        userNameTV.setTypeface(CoCoinUtil.GetTypeface());
-        userEmailTV.setTypeface(CoCoinUtil.GetTypeface());
-        userPasswordTV.setTypeface(CoCoinUtil.GetTypeface());
+        userNameTV.setTypeface(KKMoneyUtil.GetTypeface());
+        userEmailTV.setTypeface(KKMoneyUtil.GetTypeface());
+        userPasswordTV.setTypeface(KKMoneyUtil.GetTypeface());
 
         registerUserName
                 = (MaterialEditText)registerDialog.getCustomView().findViewById(R.id.register_user_name);
@@ -949,7 +949,7 @@ public class AccountBookSettingActivity extends AppCompatActivity
         registerPassword
                 = (MaterialEditText)registerDialog.getCustomView().findViewById(R.id.register_password);
 
-        registerUserName.setTypeface(CoCoinUtil.GetTypeface());
+        registerUserName.setTypeface(KKMoneyUtil.GetTypeface());
         registerUserName.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -977,7 +977,7 @@ public class AccountBookSettingActivity extends AppCompatActivity
             }
         });
 
-        registerUserEmail.setTypeface(CoCoinUtil.GetTypeface());
+        registerUserEmail.setTypeface(KKMoneyUtil.GetTypeface());
         registerUserEmail.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -1005,7 +1005,7 @@ public class AccountBookSettingActivity extends AppCompatActivity
             }
         });
 
-        registerPassword.setTypeface(CoCoinUtil.GetTypeface());
+        registerPassword.setTypeface(KKMoneyUtil.GetTypeface());
         registerPassword.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -1040,7 +1040,7 @@ public class AccountBookSettingActivity extends AppCompatActivity
     private void changeAccountBookName() {
         new MaterialDialog.Builder(this)
                 .theme(Theme.LIGHT)
-                .typeface(CoCoinUtil.GetTypeface(), CoCoinUtil.GetTypeface())
+                .typeface(KKMoneyUtil.GetTypeface(), KKMoneyUtil.GetTypeface())
                 .title(R.string.set_account_book_dialog_title)
                 .inputType(InputType.TYPE_TEXT_FLAG_CAP_WORDS)
                 .inputRange(1, 16)
@@ -1113,11 +1113,11 @@ public class AccountBookSettingActivity extends AppCompatActivity
         userNameIcon = (MaterialIconView)findViewById(R.id.user_name_icon);
         userEmailIcon = (MaterialIconView)findViewById(R.id.user_email_icon);
         userName = (TextView)findViewById(R.id.user_name);
-        userName.setTypeface(CoCoinUtil.typefaceLatoLight);
+        userName.setTypeface(KKMoneyUtil.typefaceLatoLight);
         userEmail = (TextView)findViewById(R.id.user_email);
-        userEmail.setTypeface(CoCoinUtil.typefaceLatoLight);
+        userEmail.setTypeface(KKMoneyUtil.typefaceLatoLight);
         loginButton = (TextView)findViewById(R.id.login_button);
-        loginButton.setTypeface(CoCoinUtil.typefaceLatoLight);
+        loginButton.setTypeface(KKMoneyUtil.typefaceLatoLight);
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -1125,13 +1125,13 @@ public class AccountBookSettingActivity extends AppCompatActivity
             }
         });
         expense = (RiseNumberTextView)findViewById(R.id.expense);
-        expense.setTypeface(CoCoinUtil.typefaceLatoLight);
+        expense.setTypeface(KKMoneyUtil.typefaceLatoLight);
         records = (RiseNumberTextView)findViewById(R.id.records);
-        records.setTypeface(CoCoinUtil.typefaceLatoLight);
+        records.setTypeface(KKMoneyUtil.typefaceLatoLight);
         expenseTV = (TextView)findViewById(R.id.expense_text);
-        expenseTV.setTypeface(CoCoinUtil.GetTypeface());
+        expenseTV.setTypeface(KKMoneyUtil.GetTypeface());
         recordsTV = (TextView)findViewById(R.id.records_text);
-        recordsTV.setTypeface(CoCoinUtil.GetTypeface());
+        recordsTV.setTypeface(KKMoneyUtil.GetTypeface());
 
         expense.withNumber(RecordManager.SUM).setDuration(1500).start();
         records.withNumber(RecordManager.RECORDS.size()).setDuration(1500).start();
@@ -1162,7 +1162,7 @@ public class AccountBookSettingActivity extends AppCompatActivity
                 if (SettingManager.getInstance().getIsMonthLimit()) {
                     new MaterialDialog.Builder(mContext)
                             .theme(Theme.LIGHT)
-                            .typeface(CoCoinUtil.GetTypeface(), CoCoinUtil.GetTypeface())
+                            .typeface(KKMoneyUtil.GetTypeface(), KKMoneyUtil.GetTypeface())
                             .title(R.string.set_month_expense_dialog_title)
                             .inputType(InputType.TYPE_CLASS_NUMBER)
                             .positiveText(R.string.submit)
@@ -1215,7 +1215,7 @@ public class AccountBookSettingActivity extends AppCompatActivity
                         && SettingManager.getInstance().getIsColorRemind()) {
                     new MaterialDialog.Builder(mContext)
                             .theme(Theme.LIGHT)
-                            .typeface(CoCoinUtil.GetTypeface(), CoCoinUtil.GetTypeface())
+                            .typeface(KKMoneyUtil.GetTypeface(), KKMoneyUtil.GetTypeface())
                             .title(R.string.set_month_expense_dialog_title)
                             .inputType(InputType.TYPE_CLASS_NUMBER)
                             .positiveText(R.string.submit)
@@ -1272,20 +1272,20 @@ public class AccountBookSettingActivity extends AppCompatActivity
                 remindColorSelectDialog.show((AppCompatActivity) mContext);
             }
         });
-        monthMaxExpense.setTypeface(CoCoinUtil.typefaceLatoLight);
-        monthWarning.setTypeface(CoCoinUtil.typefaceLatoLight);
+        monthMaxExpense.setTypeface(KKMoneyUtil.typefaceLatoLight);
+        monthWarning.setTypeface(KKMoneyUtil.typefaceLatoLight);
         monthLimitTV = (TextView)findViewById(R.id.month_limit_text);
-        monthLimitTV.setTypeface(CoCoinUtil.GetTypeface());
+        monthLimitTV.setTypeface(KKMoneyUtil.GetTypeface());
         monthWarningTV = (TextView)findViewById(R.id.warning_expense_text);
-        monthWarningTV.setTypeface(CoCoinUtil.GetTypeface());
+        monthWarningTV.setTypeface(KKMoneyUtil.GetTypeface());
         monthMaxExpenseTV = (TextView)findViewById(R.id.month_expense_text);
-        monthMaxExpenseTV.setTypeface(CoCoinUtil.GetTypeface());
+        monthMaxExpenseTV.setTypeface(KKMoneyUtil.GetTypeface());
         monthColorRemindTV = (TextView)findViewById(R.id.month_color_remind_text);
-        monthColorRemindTV.setTypeface(CoCoinUtil.GetTypeface());
+        monthColorRemindTV.setTypeface(KKMoneyUtil.GetTypeface());
         monthColorRemindTypeTV = (TextView)findViewById(R.id.month_color_type_text);
-        monthColorRemindTypeTV.setTypeface(CoCoinUtil.GetTypeface());
+        monthColorRemindTypeTV.setTypeface(KKMoneyUtil.GetTypeface());
         monthForbiddenTV = (TextView)findViewById(R.id.month_forbidden_text);
-        monthForbiddenTV.setTypeface(CoCoinUtil.GetTypeface());
+        monthForbiddenTV.setTypeface(KKMoneyUtil.GetTypeface());
 
         accountBookNameLayout = (MaterialRippleLayout)findViewById(R.id.account_book_name_layout);
         accountBookNameLayout.setOnClickListener(new View.OnClickListener() {
@@ -1295,10 +1295,10 @@ public class AccountBookSettingActivity extends AppCompatActivity
             }
         });
         accountBookName = (TextView)findViewById(R.id.account_book_name);
-        accountBookName.setTypeface(CoCoinUtil.GetTypeface());
+        accountBookName.setTypeface(KKMoneyUtil.GetTypeface());
         accountBookName.setText(SettingManager.getInstance().getAccountBookName());
         accountBookNameTV = (TextView)findViewById(R.id.account_book_name_text);
-        accountBookNameTV.setTypeface(CoCoinUtil.GetTypeface());
+        accountBookNameTV.setTypeface(KKMoneyUtil.GetTypeface());
 
         changePasswordLayout = (MaterialRippleLayout)findViewById(R.id.change_password_layout);
         changePasswordLayout.setOnClickListener(new View.OnClickListener() {
@@ -1308,7 +1308,7 @@ public class AccountBookSettingActivity extends AppCompatActivity
             }
         });
         changePasswordTV = (TextView)findViewById(R.id.change_password_text);
-        changePasswordTV.setTypeface(CoCoinUtil.GetTypeface());
+        changePasswordTV.setTypeface(KKMoneyUtil.GetTypeface());
 
         sortTagsLayout = (MaterialRippleLayout)findViewById(R.id.sort_tags_layout);
         sortTagsLayout.setOnClickListener(new View.OnClickListener() {
@@ -1318,36 +1318,36 @@ public class AccountBookSettingActivity extends AppCompatActivity
             }
         });
         sortTagsTV = (TextView)findViewById(R.id.sort_tags_text);
-        sortTagsTV.setTypeface(CoCoinUtil.GetTypeface());
+        sortTagsTV.setTypeface(KKMoneyUtil.GetTypeface());
 
         showPictureLayout = (MaterialRippleLayout)findViewById(R.id.whether_show_picture_layout);
         showPictureIcon = (MaterialIconView)findViewById(R.id.whether_show_picture_icon);
         showPictureSB = (Switch)findViewById(R.id.whether_show_picture_button);
         showPictureSB.setOnCheckedChangeListener(this);
         showPictureTV = (TextView)findViewById(R.id.whether_show_picture_text);
-        showPictureTV.setTypeface(CoCoinUtil.GetTypeface());
+        showPictureTV.setTypeface(KKMoneyUtil.GetTypeface());
 
         hollowLayout = (MaterialRippleLayout)findViewById(R.id.whether_show_circle_layout);
         hollowIcon = (MaterialIconView)findViewById(R.id.whether_show_circle_icon);
         hollowSB = (Switch)findViewById(R.id.whether_show_circle_button);
         hollowSB.setOnCheckedChangeListener(this);
         hollowTV = (TextView)findViewById(R.id.whether_show_circle_text);
-        hollowTV.setTypeface(CoCoinUtil.GetTypeface());
+        hollowTV.setTypeface(KKMoneyUtil.GetTypeface());
 
         updateLayout = (MaterialRippleLayout)findViewById(R.id.update_layout);
         updateLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                CoCoinUtil.showToast(mContext, mContext.getResources().getString(R.string.checking_update), SuperToast.Background.BLUE);
+                KKMoneyUtil.showToast(mContext, mContext.getResources().getString(R.string.checking_update), SuperToast.Background.BLUE);
                 AppUpdateManager appUpdateManager = new AppUpdateManager(mContext);
                 appUpdateManager.checkUpdateInfo(true);
             }
         });
         currentVersionTV = (TextView)findViewById(R.id.update_text);
-        currentVersionTV.setTypeface(CoCoinUtil.GetTypeface());
-        currentVersionTV.setText(mContext.getResources().getString(R.string.current_version) + CoCoinUtil.GetCurrentVersion());
+        currentVersionTV.setTypeface(KKMoneyUtil.GetTypeface());
+        currentVersionTV.setText(mContext.getResources().getString(R.string.current_version) + KKMoneyUtil.GetCurrentVersion());
         canBeUpdatedTV = (TextView)findViewById(R.id.update_tag);
-        canBeUpdatedTV.setTypeface(CoCoinUtil.GetTypeface());
+        canBeUpdatedTV.setTypeface(KKMoneyUtil.GetTypeface());
         if (SettingManager.getInstance().getCanBeUpdated()) {
             canBeUpdatedTV.setVisibility(View.VISIBLE);
         } else {
@@ -1467,8 +1467,8 @@ public class AccountBookSettingActivity extends AppCompatActivity
 // whether sync the settings from server////////////////////////////////////////////////////////////
     private void whetherSyncSettingsFromServer() {
         new MaterialDialog.Builder(this)
-                .iconRes(R.drawable.cocoin_logo)
-                .typeface(CoCoinUtil.GetTypeface(), CoCoinUtil.GetTypeface())
+                .iconRes(R.drawable.kkmoney_logo)
+                .typeface(KKMoneyUtil.GetTypeface(), KKMoneyUtil.GetTypeface())
                 .limitIconToDefaultSize() // limits the displayed icon size to 48dp
                 .title(R.string.sync_dialog_title)
                 .forceStacking(true)
@@ -1525,7 +1525,7 @@ public class AccountBookSettingActivity extends AppCompatActivity
                                 tip = "\n" + getString(R.string.your_current_account_book_password_is)
                                         + SettingManager.getInstance().getPassword();
                             new MaterialDialog.Builder(mContext)
-                                    .typeface(CoCoinUtil.GetTypeface(), CoCoinUtil.GetTypeface())
+                                    .typeface(KKMoneyUtil.GetTypeface(), KKMoneyUtil.GetTypeface())
                                     .limitIconToDefaultSize() // limits the displayed icon size to 48dp
                                     .title(R.string.sync_to_local_successfully_dialog_title)
                                     .content(getString(R.string.sync_to_local_successfully_dialog_content) + tip)
@@ -1546,7 +1546,7 @@ public class AccountBookSettingActivity extends AppCompatActivity
                             // Todo tag sort
                             user.setShowPicture(SettingManager.getInstance().getShowPicture());
                             user.setIsHollow(SettingManager.getInstance().getIsHollow());
-                            user.update(CoCoinApplication.getAppContext(),
+                            user.update(KKMoneyApplication.getAppContext(),
                                     user.getObjectId(), new UpdateListener() {
                                 @Override
                                 public void onSuccess() {
@@ -1626,7 +1626,7 @@ public class AccountBookSettingActivity extends AppCompatActivity
                 currentUser.setLogoObjectId(SettingManager.getInstance().getLogoObjectId());
                 break;
         }
-        currentUser.update(CoCoinApplication.getAppContext(),
+        currentUser.update(KKMoneyApplication.getAppContext(),
                 currentUser.getObjectId(), new UpdateListener() {
                     @Override
                     public void onSuccess() {
@@ -1645,18 +1645,18 @@ public class AccountBookSettingActivity extends AppCompatActivity
     }
 
     private void syncUserInfo() {
-        User user = BmobUser.getCurrentUser(CoCoinApplication.getAppContext(), User.class);
+        User user = BmobUser.getCurrentUser(KKMoneyApplication.getAppContext(), User.class);
 
     }
 
 // Get the current user/////////////////////////////////////////////////////////////////////////////
     private User getCurrentUser() {
-        return BmobUser.getCurrentUser(CoCoinApplication.getAppContext(), User.class);
+        return BmobUser.getCurrentUser(KKMoneyApplication.getAppContext(), User.class);
     }
 
 // Get string///////////////////////////////////////////////////////////////////////////////////////
     private String getResourceString(int resourceId) {
-        return CoCoinApplication.getAppContext().getResources().getString(resourceId);
+        return KKMoneyApplication.getAppContext().getResources().getString(resourceId);
     }
 
 // activity finish//////////////////////////////////////////////////////////////////////////////////
@@ -1670,11 +1670,11 @@ public class AccountBookSettingActivity extends AppCompatActivity
 
 // Show toast///////////////////////////////////////////////////////////////////////////////////////
     private void showToast(int toastType, String msg) {
-        Log.d("CoCoin", msg);
+        Log.d("KKMoney", msg);
         SuperToast.cancelAllSuperToasts();
         SuperToast superToast = new SuperToast(mContext);
 
-        superToast.setAnimations(CoCoinUtil.TOAST_ANIMATION);
+        superToast.setAnimations(KKMoneyUtil.TOAST_ANIMATION);
         superToast.setDuration(SuperToast.Duration.LONG);
         superToast.setTextColor(Color.parseColor("#ffffff"));
         superToast.setTextSize(SuperToast.TextSize.SMALL);
@@ -1684,25 +1684,25 @@ public class AccountBookSettingActivity extends AppCompatActivity
         switch (toastType) {
             case 0:
                 // the new account book name is updated to server successfully
-                superToast.setText(CoCoinApplication.getAppContext().getResources().getString(
+                superToast.setText(KKMoneyApplication.getAppContext().getResources().getString(
                         R.string.change_and_update_account_book_name_successfully));
                 superToast.setBackground(SuperToast.Background.BLUE);
                 break;
             case 1:
                 // the new account book name is failed to updated to server
-                superToast.setText(CoCoinApplication.getAppContext().getResources().getString(
+                superToast.setText(KKMoneyApplication.getAppContext().getResources().getString(
                         R.string.change_and_update_account_book_name_fail));
                 superToast.setBackground(SuperToast.Background.RED);
                 break;
             case 2:
                 // the new account book name is changed successfully
-                superToast.setText(CoCoinApplication.getAppContext().getResources().getString(
+                superToast.setText(KKMoneyApplication.getAppContext().getResources().getString(
                         R.string.change_account_book_name_successfully));
                 superToast.setBackground(SuperToast.Background.BLUE);
                 break;
             case 3:
                 // the new account book name is failed to change
-                superToast.setText(CoCoinApplication.getAppContext().getResources().getString(
+                superToast.setText(KKMoneyApplication.getAppContext().getResources().getString(
                         R.string.change_account_book_name_fail));
                 superToast.setBackground(SuperToast.Background.RED);
                 break;
@@ -1753,7 +1753,7 @@ public class AccountBookSettingActivity extends AppCompatActivity
                 break;
 
         }
-        superToast.getTextView().setTypeface(CoCoinUtil.GetTypeface());
+        superToast.getTextView().setTypeface(KKMoneyUtil.GetTypeface());
         superToast.show();
     }
 

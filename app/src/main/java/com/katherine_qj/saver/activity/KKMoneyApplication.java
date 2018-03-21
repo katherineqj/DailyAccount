@@ -8,17 +8,17 @@ import com.squareup.leakcanary.LeakCanary;
 import com.squareup.leakcanary.RefWatcher;
 
 /**
- * Created by 伟平 on 2015/11/2.
+ * Created by katherineqj on 2017/11/2.
  */
 
-public class CoCoinApplication extends Application {
+public class KKMoneyApplication extends Application {
 
     public static final int VERSION = 120;
 
     private static Context mContext;
 
     public static RefWatcher getRefWatcher(Context context) {
-        CoCoinApplication application = (CoCoinApplication) context.getApplicationContext();
+        KKMoneyApplication application = (KKMoneyApplication) context.getApplicationContext();
         return application.refWatcher;
     }
 
@@ -28,11 +28,11 @@ public class CoCoinApplication extends Application {
         super.onCreate();
 
         refWatcher = LeakCanary.install(this);
-        CoCoinApplication.mContext = getApplicationContext();
+        KKMoneyApplication.mContext = getApplicationContext();
     }
 
     public static Context getAppContext() {
-        return CoCoinApplication.mContext;
+        return KKMoneyApplication.mContext;
     }
 
     public static String getAndroidId() {

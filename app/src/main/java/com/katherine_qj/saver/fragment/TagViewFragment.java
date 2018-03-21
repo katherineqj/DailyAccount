@@ -13,9 +13,9 @@ import android.view.ViewGroup;
 import com.github.florent37.materialviewpager.MaterialViewPagerHelper;
 import com.github.florent37.materialviewpager.adapter.RecyclerViewMaterialAdapter;
 import com.katherine_qj.saver.R;
-import com.katherine_qj.saver.activity.CoCoinApplication;
+import com.katherine_qj.saver.activity.KKMoneyApplication;
 import com.katherine_qj.saver.adapter.TagViewRecyclerViewAdapter;
-import com.katherine_qj.saver.model.CoCoinRecord;
+import com.katherine_qj.saver.model.KKMoneyRecord;
 import com.katherine_qj.saver.model.RecordManager;
 import com.squareup.leakcanary.RefWatcher;
 
@@ -23,14 +23,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by 伟平 on 2015/10/20.
+ * Created by katherineqj on 2017/10/20.
  */
 
 public class TagViewFragment extends Fragment {
 
     private int position;
 
-    private List<CoCoinRecord> list = new ArrayList<>();
+    private List<KKMoneyRecord> list = new ArrayList<>();
 
     private RecyclerView mRecyclerView;
     private RecyclerView.Adapter mAdapter;
@@ -67,17 +67,17 @@ public class TagViewFragment extends Fragment {
         mRecyclerView.setHasFixedSize(true);
 
         if (position == 0) {
-            for (CoCoinRecord coCoinRecord : RecordManager.RECORDS) {
-                list.add(coCoinRecord);
+            for (KKMoneyRecord KKMoneyRecord : RecordManager.RECORDS) {
+                list.add(KKMoneyRecord);
             }
         } if (position == 1) {
-            for (CoCoinRecord coCoinRecord : RecordManager.RECORDS) {
-                list.add(coCoinRecord);
+            for (KKMoneyRecord KKMoneyRecord : RecordManager.RECORDS) {
+                list.add(KKMoneyRecord);
             }
         } else {
-            for (CoCoinRecord coCoinRecord : RecordManager.RECORDS) {
-                if (coCoinRecord.getTag() == RecordManager.TAGS.get(position).getId()) {
-                    list.add(coCoinRecord);
+            for (KKMoneyRecord KKMoneyRecord : RecordManager.RECORDS) {
+                if (KKMoneyRecord.getTag() == RecordManager.TAGS.get(position).getId()) {
+                    list.add(KKMoneyRecord);
                 }
             }
         }
@@ -91,7 +91,7 @@ public class TagViewFragment extends Fragment {
     @Override
     public void onDestroy() {
         super.onDestroy();
-        RefWatcher refWatcher = CoCoinApplication.getRefWatcher(getActivity());
+        RefWatcher refWatcher = KKMoneyApplication.getRefWatcher(getActivity());
         refWatcher.watch(this);
     }
 

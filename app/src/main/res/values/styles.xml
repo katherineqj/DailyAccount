@@ -41,7 +41,7 @@
 
     </style>
 
-    <style name="CoCoinSettingActivityStyle" parent="AppTheme">
+    <style name="KKMoneySettingActivityStyle" parent="AppTheme">
         <item name="android:textColorPrimary">@color/drawer_text</item>
     </style>
 
@@ -139,7 +139,7 @@
         <item name="android:scrollbars">vertical</item>
     </style>
 
-    <style name="CoCoinMaterialSearchViewStyle">
+    <style name="KKMoneyMaterialSearchViewStyle">
         <!-- Background for the search bar -->
         <item name="searchBackground">@color/white</item>
 

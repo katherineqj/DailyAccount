@@ -9,7 +9,7 @@ import android.widget.TextView;
 
 import com.katherine_qj.saver.R;
 import com.katherine_qj.saver.fragment.ReportViewFragment;
-import com.katherine_qj.saver.util.CoCoinUtil;
+import com.katherine_qj.saver.util.KKMoneyUtil;
 
 import java.util.ArrayList;
 
@@ -49,14 +49,14 @@ public class ReportTagAdapter extends BaseAdapter {
         TextView expense = (TextView)convertView.findViewById(R.id.tag_expense);
         TextView records = (TextView)convertView.findViewById(R.id.tag_sum);
 
-        name.setTypeface(CoCoinUtil.getInstance().typefaceLatoLight);
-        expense.setTypeface(CoCoinUtil.getInstance().typefaceLatoLight);
-        records.setTypeface(CoCoinUtil.getInstance().typefaceLatoLight);
+        name.setTypeface(KKMoneyUtil.getInstance().typefaceLatoLight);
+        expense.setTypeface(KKMoneyUtil.getInstance().typefaceLatoLight);
+        records.setTypeface(KKMoneyUtil.getInstance().typefaceLatoLight);
 
-        icon.setImageDrawable(CoCoinUtil.getInstance().GetTagIconDrawable((int)tagExpense.get(position + 1)[2]));
-        name.setText(CoCoinUtil.getInstance().GetTagName((int)tagExpense.get(position + 1)[2]) + CoCoinUtil.getInstance().GetPurePercentString(tagExpense.get(position + 1)[1] * 100));
-        expense.setText(CoCoinUtil.getInstance().GetInMoney((int)tagExpense.get(position + 1)[0]));
-        records.setText(CoCoinUtil.getInstance().GetInRecords((int)tagExpense.get(position + 1)[3]));
+        icon.setImageDrawable(KKMoneyUtil.getInstance().GetTagIconDrawable((int)tagExpense.get(position + 1)[2]));
+        name.setText(KKMoneyUtil.getInstance().GetTagName((int)tagExpense.get(position + 1)[2]) + KKMoneyUtil.getInstance().GetPurePercentString(tagExpense.get(position + 1)[1] * 100));
+        expense.setText(KKMoneyUtil.getInstance().GetInMoney((int)tagExpense.get(position + 1)[0]));
+        records.setText(KKMoneyUtil.getInstance().GetInRecords((int)tagExpense.get(position + 1)[3]));
 
         return convertView;
     }

@@ -10,10 +10,10 @@ import android.widget.TextView;
 
 import com.katherine_qj.saver.R;
 import com.katherine_qj.saver.model.RecordManager;
-import com.katherine_qj.saver.util.CoCoinUtil;
+import com.katherine_qj.saver.util.KKMoneyUtil;
 
 /**
- * Created by 伟平 on 2015/11/10.
+ * Created by katherineqj on 2017/11/10.
  */
 
 public class DialogTagChooseGridViewAdapter extends BaseAdapter {
@@ -55,9 +55,9 @@ public class DialogTagChooseGridViewAdapter extends BaseAdapter {
         }
 
         holder.tagImage.setImageResource(
-                CoCoinUtil.GetTagIcon(RecordManager.TAGS.get(position + 2).getId()));
-        holder.tagName.setText(CoCoinUtil.GetTagName(RecordManager.getInstance(mContext).TAGS.get(position + 2).getId()));
-        holder.tagName.setTypeface(CoCoinUtil.GetTypeface());
+                KKMoneyUtil.GetTagIcon(RecordManager.TAGS.get(position + 2).getId()));
+        holder.tagName.setText(KKMoneyUtil.GetTagName(RecordManager.getInstance(mContext).TAGS.get(position + 2).getId()));
+        holder.tagName.setTypeface(KKMoneyUtil.GetTypeface());
 
         return convertView;
     }

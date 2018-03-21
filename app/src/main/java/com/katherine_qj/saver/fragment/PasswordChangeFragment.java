@@ -12,14 +12,14 @@ import android.widget.TextView;
 import com.daimajia.androidanimations.library.Techniques;
 import com.daimajia.androidanimations.library.YoYo;
 import com.katherine_qj.saver.R;
-import com.katherine_qj.saver.activity.CoCoinApplication;
+import com.katherine_qj.saver.activity.KKMoneyApplication;
 import com.katherine_qj.saver.model.SettingManager;
-import com.katherine_qj.saver.util.CoCoinUtil;
+import com.katherine_qj.saver.util.KKMoneyUtil;
 import com.rey.material.widget.RadioButton;
 
 
 /**
- * Created by 伟平 on 2015/10/27.
+ * Created by katherineqj on 2017/10/27.
  */
 
 public class PasswordChangeFragment extends Fragment {
@@ -48,7 +48,7 @@ public class PasswordChangeFragment extends Fragment {
         View view = inflater.inflate(R.layout.password_state_fragment, container, false);
 
         fragmentPosition = getArguments().getInt("position");
-        CoCoinFragmentManager.passwordChangeFragment[fragmentPosition] = this ;
+        KKMoneyFragmentManager.passwordChangeFragment[fragmentPosition] = this ;
 
         button0 = (RadioButton)view.findViewById(R.id.button0);
         button1 = (RadioButton)view.findViewById(R.id.button1);
@@ -56,28 +56,28 @@ public class PasswordChangeFragment extends Fragment {
         button3 = (RadioButton)view.findViewById(R.id.button3);
         ly = (LinearLayout)view.findViewById(R.id.buttonLy);
         passwordTip = (TextView)view.findViewById(R.id.password_tip);
-        passwordTip.setTypeface(CoCoinUtil.GetTypeface());
+        passwordTip.setTypeface(KKMoneyUtil.GetTypeface());
         switch (fragmentPosition) {
             case 0:
                 if (SettingManager.getInstance().getFirstTime()) {
-                    passwordTip.setText(CoCoinApplication.getAppContext().getResources()
+                    passwordTip.setText(KKMoneyApplication.getAppContext().getResources()
                             .getString(R.string.first_time_set_password));
                 } else {
-                    passwordTip.setText(CoCoinApplication.getAppContext().getResources()
+                    passwordTip.setText(KKMoneyApplication.getAppContext().getResources()
                             .getString(R.string.password_tip_0));
                 }
                 break;
             case 1:
                 if (SettingManager.getInstance().getFirstTime()) {
-                    passwordTip.setText(CoCoinApplication.getAppContext().getResources()
+                    passwordTip.setText(KKMoneyApplication.getAppContext().getResources()
                             .getString(R.string.first_time_set_password_again));
                 } else {
-                    passwordTip.setText(CoCoinApplication.getAppContext().getResources()
+                    passwordTip.setText(KKMoneyApplication.getAppContext().getResources()
                             .getString(R.string.password_tip_1));
                 }
                 break;
             case 2:
-                passwordTip.setText(CoCoinApplication.getAppContext().getResources()
+                passwordTip.setText(KKMoneyApplication.getAppContext().getResources()
                         .getString(R.string.password_tip_2));
                 break;
             default:

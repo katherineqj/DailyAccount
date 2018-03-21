@@ -13,11 +13,11 @@ import android.view.ViewGroup;
 import com.github.florent37.materialviewpager.MaterialViewPagerHelper;
 import com.github.florent37.materialviewpager.adapter.RecyclerViewMaterialAdapter;
 import com.katherine_qj.saver.R;
-import com.katherine_qj.saver.activity.CoCoinApplication;
+import com.katherine_qj.saver.activity.KKMoneyApplication;
 import com.katherine_qj.saver.adapter.MonthViewRecyclerViewAdapter;
-import com.katherine_qj.saver.model.CoCoinRecord;
+import com.katherine_qj.saver.model.KKMoneyRecord;
 import com.katherine_qj.saver.model.RecordManager;
-import com.katherine_qj.saver.util.CoCoinUtil;
+import com.katherine_qj.saver.util.KKMoneyUtil;
 import com.squareup.leakcanary.RefWatcher;
 
 import java.util.ArrayList;
@@ -25,7 +25,7 @@ import java.util.Calendar;
 import java.util.List;
 
 /**
- * Created by 伟平 on 2015/10/20.
+ * Created by katherineqj on 2017/10/20.
  */
 
 public class MonthViewFragment extends Fragment {
@@ -33,7 +33,7 @@ public class MonthViewFragment extends Fragment {
     public int position;
     public int monthNumber;
 
-    private List<CoCoinRecord> list = new ArrayList<>();
+    private List<KKMoneyRecord> list = new ArrayList<>();
 
     private Context mContext;
 
@@ -96,8 +96,8 @@ public class MonthViewFragment extends Fragment {
                     nowYear, nowMonth, monthStart.getActualMaximum(Calendar.DAY_OF_MONTH), 23, 59, 59);
             monthEnd.add(Calendar.MILLISECOND, 0);
 
-            Calendar leftRange = CoCoinUtil.GetThisWeekLeftRange(monthStart);
-            Calendar rightRange = CoCoinUtil.GetThisWeekRightRange(monthEnd);
+            Calendar leftRange = KKMoneyUtil.GetThisWeekLeftRange(monthStart);
+            Calendar rightRange = KKMoneyUtil.GetThisWeekRightRange(monthEnd);
 
             int start = -1;
             int end = 0;
@@ -130,7 +130,7 @@ public class MonthViewFragment extends Fragment {
 
         super.onDestroy();
 
-        RefWatcher refWatcher = CoCoinApplication.getRefWatcher(getActivity());
+        RefWatcher refWatcher = KKMoneyApplication.getRefWatcher(getActivity());
         refWatcher.watch(this);
     }
 

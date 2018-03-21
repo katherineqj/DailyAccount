@@ -4,7 +4,7 @@ import cn.bmob.v3.BmobObject;
 import cn.bmob.v3.datatype.BmobFile;
 
 /**
- * Created by 伟平 on 2015/11/22.
+ * Created by katherineqj on 2017/11/22.
  */
 
 public class Logo extends BmobObject {

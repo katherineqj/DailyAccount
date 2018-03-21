@@ -12,13 +12,13 @@ import com.balysv.materialripple.MaterialRippleLayout;
 import com.katherine_qj.saver.R;
 import com.katherine_qj.saver.model.RecordManager;
 import com.katherine_qj.saver.model.SettingManager;
-import com.katherine_qj.saver.util.CoCoinUtil;
+import com.katherine_qj.saver.util.KKMoneyUtil;
 
 import net.steamcrafted.materialiconlib.MaterialDrawableBuilder;
 import net.steamcrafted.materialiconlib.MaterialIconView;
 
 /**
- * Created by 伟平 on 2015/10/16.
+ * Created by katherineqj on 2017/10/16.
  */
 
 public class ButtonGridViewAdapter extends BaseAdapter {
@@ -33,7 +33,7 @@ public class ButtonGridViewAdapter extends BaseAdapter {
 
     @Override
     public int getCount() {
-        return CoCoinUtil.BUTTONS.length;
+        return KKMoneyUtil.BUTTONS.length;
     }
 
     @Override
@@ -62,19 +62,19 @@ public class ButtonGridViewAdapter extends BaseAdapter {
         }
 
         if (position == 11) {
-            holder.tv.setTypeface(CoCoinUtil.typefaceLatoHairline);
+            holder.tv.setTypeface(KKMoneyUtil.typefaceLatoHairline);
             holder.tv.setVisibility(View.INVISIBLE);
             holder.iv.setIcon(MaterialDrawableBuilder.IconValue.CHECK);
             holder.ml.setRippleAlpha(50);
         } else if (position == 9) {
             holder.iv.setIcon(MaterialDrawableBuilder.IconValue.ERASER);
-            holder.tv.setTypeface(CoCoinUtil.typefaceLatoHairline);
+            holder.tv.setTypeface(KKMoneyUtil.typefaceLatoHairline);
             holder.tv.setVisibility(View.INVISIBLE);
             holder.ml.setRippleAlpha(50);
         } else {
             holder.iv.setVisibility(View.INVISIBLE);
-            holder.tv.setTypeface(CoCoinUtil.typefaceLatoHairline);
-            holder.tv.setText(CoCoinUtil.BUTTONS[position]);
+            holder.tv.setTypeface(KKMoneyUtil.typefaceLatoHairline);
+            holder.tv.setText(KKMoneyUtil.BUTTONS[position]);
             holder.ml.setRippleDelayClick(false);
         }
 
@@ -86,15 +86,15 @@ public class ButtonGridViewAdapter extends BaseAdapter {
                 >= SettingManager.getInstance().getMonthWarning();
         if (shouldChange) {
             holder.fl.setBackgroundColor(
-                    CoCoinUtil.getAlphaColor(SettingManager.getInstance().getRemindColor()));
+                    KKMoneyUtil.getAlphaColor(SettingManager.getInstance().getRemindColor()));
             holder.ml.setRippleColor(SettingManager.getInstance().getRemindColor());
             holder.iv.setColor(SettingManager.getInstance().getRemindColor());
             holder.tv.setTextColor(SettingManager.getInstance().getRemindColor());
         } else {
-            holder.fl.setBackgroundColor(CoCoinUtil.getAlphaColor(CoCoinUtil.MY_Normally));
-            holder.ml.setRippleColor(CoCoinUtil.MY_Normally);
-            holder.iv.setColor(CoCoinUtil.MY_Normally);
-            holder.tv.setTextColor(CoCoinUtil.MY_Normally);
+            holder.fl.setBackgroundColor(KKMoneyUtil.getAlphaColor(KKMoneyUtil.MY_Normally));
+            holder.ml.setRippleColor(KKMoneyUtil.MY_Normally);
+            holder.iv.setColor(KKMoneyUtil.MY_Normally);
+            holder.tv.setTextColor(KKMoneyUtil.MY_Normally);
         }
 
 
