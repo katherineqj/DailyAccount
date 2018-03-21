@@ -215,7 +215,7 @@
         android:id="@+id/status_bar"
         android:layout_height="25dp"
         android:layout_width="match_parent"
-        android:background="@color/blue"
+        android:background="@color/normaly"
         />
 
     <com.katherine_qj.saver.ui.MyGridView
