@@ -4,10 +4,14 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
+import android.graphics.Typeface;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Looper;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.view.View;
 import android.view.animation.AccelerateDecelerateInterpolator;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -28,15 +32,20 @@ import io.codetail.animation.ViewAnimationUtils;
 import io.codetail.widget.RevealFrameLayout;
 import lecho.lib.hellocharts.model.Line;
 import lecho.lib.hellocharts.model.LineChartData;
+import lecho.lib.hellocharts.model.PieChartData;
 import lecho.lib.hellocharts.model.PointValue;
+import lecho.lib.hellocharts.model.SliceValue;
 import lecho.lib.hellocharts.model.ValueShape;
+import lecho.lib.hellocharts.util.ChartUtils;
 import lecho.lib.hellocharts.view.LineChartView;
+import lecho.lib.hellocharts.view.PieChartView;
 
 public class SplashActivity extends Activity {
 
     private Context mContext;
 
     private LineChartView chart;
+    private PieChartView mPieChartView;
     private LineChartData data;
 
     private RevealFrameLayout reveal;
@@ -52,6 +61,20 @@ public class SplashActivity extends Activity {
 
     private final int NUMBER_OF_LINES = 1;
 
+
+    /*========= 状态相关 =========*/
+    private boolean isExploded = false;                 //每块之间是否分离
+    private boolean isHasLabelsInside = false;          //标签在内部
+    private boolean isHasLabelsOutside = false;         //标签在外部
+    private boolean isHasCenterCircle = false;          //空心圆环
+    private boolean isPiesHasSelected = false;          //块选中标签样式
+    private boolean isHasCenterSingleText = false;      //圆环中心单行文字
+    private boolean isHasCenterDoubleText = false;      //圆环中心双行文字
+
+    /*========= 数据相关 =========*/
+    private PieChartData mPieChartData;                 //饼状图数据
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -60,6 +83,7 @@ public class SplashActivity extends Activity {
         mContext = this;
 
         chart = (LineChartView) findViewById(R.id.chart);
+        mPieChartView = (PieChartView)findViewById(R.id.pie);
         List<Line> lines = new ArrayList<Line>();
         for (int i = 0; i < NUMBER_OF_LINES; ++i) {
 
@@ -85,6 +109,7 @@ public class SplashActivity extends Activity {
         data = new LineChartData(lines);
         data.setBaseValue(Float.NEGATIVE_INFINITY);
         chart.setLineChartData(data);
+        initData();
 
         image = (ImageView)findViewById(R.id.image);
         appName = (TextView)findViewById(R.id.app_name);
@@ -96,7 +121,44 @@ public class SplashActivity extends Activity {
         ly = (LinearLayout)findViewById(R.id.ly);
 
         new InitData().execute();
+        initData();
     }
+    public void initData()
+    {
+        setPieDatas();
+    }
+    private void setPieDatas() {
+        int numValues = 6;                //把一张饼切成6块
+
+        /*===== 随机设置每块的颜色和数据 =====*/
+        List<SliceValue> values = new ArrayList<>();
+        for (int i = 0; i < numValues; ++i) {
+            SliceValue sliceValue = new SliceValue((float) Math.random() * 30 + 15, ChartUtils.pickColor());
+            values.add(sliceValue);
+        }
+
+        /*===== 设置相关属性 类似Line Chart =====*/
+        mPieChartData = new PieChartData(values);
+        mPieChartData.setHasLabels(isHasLabelsInside);
+        mPieChartData.setHasLabelsOnlyForSelected(isPiesHasSelected);
+        mPieChartData.setHasLabelsOutside(isHasLabelsOutside);
+        mPieChartData.setHasCenterCircle(isHasCenterCircle);
+
+        //是否分离
+        if (isExploded) {
+            mPieChartData.setSlicesSpacing(18);                 //分离间距为18
+        }
+
+        //是否显示单行文本
+        if (isHasCenterSingleText) {
+            mPieChartData.setCenterText1("Hello");             //文本内容
+        }
+
+        //是否显示双行文本
+
+        mPieChartView.setPieChartData(mPieChartData);         //设置控件
+    }
+
 
     private void startCircularReveal() {
         // get the center for the clipping circle
@@ -113,7 +175,7 @@ public class SplashActivity extends Activity {
         SupportAnimator animator =
                 ViewAnimationUtils.createCircularReveal(ly, cx, cy, 0, finalRadius);
         animator.setInterpolator(new AccelerateDecelerateInterpolator());
-        animator.setDuration(3000);
+        animator.setDuration(4000);
         animator.start();
         animator.addListener(new SupportAnimator.AnimatorListener() {
             @Override
