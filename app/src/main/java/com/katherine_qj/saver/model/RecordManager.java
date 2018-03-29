@@ -127,11 +127,7 @@ public class RecordManager {
 // saveRecord///////////////////////////////////////////////////////////////////////////////////////
     public static long saveRecord(final KKMoneyRecord KKMoneyRecord) {
         long insertId = -1;
-        // this is a new KKMoneyRecord, which is not uploaded
         KKMoneyRecord.setIsUploaded(false);
-//        User user = BmobUser.getCurrentUser(KKMoneyApplication.getAppContext(), User.class);
-//        if (user != null) KKMoneyRecord.setUserId(user.getObjectId());
-//        else KKMoneyRecord.setUserId(null);
         if (BuildConfig.DEBUG)
             if (BuildConfig.DEBUG) Log.d("KKMoney", "recordManager.saveRecord: Save " + KKMoneyRecord.toString() + " S");
         insertId = db.saveRecord(KKMoneyRecord);
@@ -145,33 +141,6 @@ public class RecordManager {
                 if (BuildConfig.DEBUG) Log.d("KKMoney", "recordManager.saveRecord: Save the above KKMoneyRecord SUCCESSFULLY!");
             RECORDS.add(KKMoneyRecord);
             SUM += (int) KKMoneyRecord.getMoney();
-//            if (user != null) {
-//                // already login
-//                KKMoneyRecord.save(KKMoneyApplication.getAppContext(), new SaveListener() {
-//                    @Override
-//                    public void onSuccess() {
-//                        if (BuildConfig.DEBUG)
-//                            if (BuildConfig.DEBUG) Log.d("KKMoney", "recordManager.saveRecord: Save online " + KKMoneyRecord.toString() + " S");
-//                        KKMoneyRecord.setIsUploaded(true);
-//                        KKMoneyRecord.setLocalObjectId(KKMoneyRecord.getObjectId());
-//                        db.updateRecord(KKMoneyRecord);
-//                        KKMoneyToast.getInstance()
-//                                .showToast(R.string.save_successfully_online, SuperToast.Background.BLUE);
-//                    }
-//                    @Override
-//                    public void onFailure(int code, String msg) {
-//                        if (BuildConfig.DEBUG)
-//                            if (BuildConfig.DEBUG) Log.d("KKMoney", "recordManager.saveRecord: Save online " + KKMoneyRecord.toString() + " F");
-//                        if (BuildConfig.DEBUG)
-//                            if (BuildConfig.DEBUG) Log.d("KKMoney", "recordManager.saveRecord: Save online msg: " + msg + " code " + code);
-//                        KKMoneyToast.getInstance()
-//                                .showToast(R.string.save_failed_online, SuperToast.Background.RED);
-//                    }
-//                });
-//            } else {
-//                KKMoneyToast.getInstance()
-//                        .showToast(R.string.save_successfully_locale, SuperToast.Background.BLUE);
-//            }
             KKMoneyToast.getInstance()
                     .showToast(R.string.save_successfully_locale, SuperToast.Background.BLUE);
         }

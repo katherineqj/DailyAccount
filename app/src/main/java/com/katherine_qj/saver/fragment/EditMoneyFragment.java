@@ -21,6 +21,7 @@ import com.rengwuxian.materialedittext.MaterialEditText;
 
 /**
  * Created by katherineqj on 2017/10/27.
+ * 编辑花费的viewpager0页面
  */
 
 public class EditMoneyFragment extends Fragment {
@@ -72,7 +73,7 @@ public class EditMoneyFragment extends Fragment {
         editView.setKeyListener(null);
         editView.setOnClickListener(null);
         editView.setOnTouchListener(null);
-
+//这个shoudlechange的意思就是改变颜色的辣个，判断开关都开并且本月花费大于警告预值
         boolean shouldChange
                 = SettingManager.getInstance().getIsMonthLimit()
                 && SettingManager.getInstance().getIsColorRemind()
@@ -102,9 +103,6 @@ public class EditMoneyFragment extends Fragment {
         void onTagItemPicked(int position);
     }
 
-    public void updateTags() {
-
-    }
 
     public int getTagId() {
         return tagId;
@@ -142,7 +140,7 @@ public class EditMoneyFragment extends Fragment {
                 KKMoneyApplication.getAppContext().getSystemService(Context.INPUT_METHOD_SERVICE);
         imm.hideSoftInputFromWindow(mView.getWindowToken(), 0);
     }
-
+    //改变的是记录钱界面的edittext 的所有颜色
     public void setEditColor(boolean shouldChange) {
         if (shouldChange) {
             editView.setTextColor(SettingManager.getInstance().getRemindColor());

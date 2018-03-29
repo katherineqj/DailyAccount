@@ -108,7 +108,7 @@ public class KKMoneyUtil {
             R.string.friday,
             R.string.saturday
     };
-
+//根据输入的位置显示单位
     public static String[] FLOATINGLABELS = {
             "",
             "",
@@ -121,7 +121,7 @@ public class KKMoneyUtil {
             "千万",
             "亿",
             "十亿"};
-
+//点击位置 0号位置对应1 1号位置对应2，以此类推，
     public static String[] BUTTONS = {
             "1",
             "2",

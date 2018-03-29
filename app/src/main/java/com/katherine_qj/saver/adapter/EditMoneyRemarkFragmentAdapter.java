@@ -8,7 +8,7 @@ import com.katherine_qj.saver.fragment.EditMoneyFragment;
 import com.katherine_qj.saver.fragment.EditRemarkFragment;
 
 /**
- * Created by Weiping on 2016/1/19.
+ * Created by katherineqj on 2018/1/19.
  */
 public class EditMoneyRemarkFragmentAdapter extends FragmentPagerAdapter {
 
@@ -18,6 +18,7 @@ public class EditMoneyRemarkFragmentAdapter extends FragmentPagerAdapter {
         super(fm);
         this.type = type;
     }
+    //item0  是记录花费的页面，item1是详情备注页面
 
     @Override
     public Fragment getItem(int position) {

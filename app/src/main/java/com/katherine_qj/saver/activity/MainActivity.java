@@ -60,7 +60,7 @@ import butterknife.ButterKnife;
 import butterknife.InjectView;
 import cn.bmob.v3.BmobUser;
 
-public class MainActivity extends AppCompatActivity implements TagChooseFragment.OnTagItemSelectedListener {
+public class MainActivity extends AppCompatActivity implements TagChooseFragment. OnTagItemSelectedListener {
 
     private final int SETTING_TAG = 0;
 
@@ -143,19 +143,13 @@ public class MainActivity extends AppCompatActivity implements TagChooseFragment
         setContentView(R.layout.activity_main);
 
         mContext = this;
-
-//        Bmob.initialize(KKMoneyApplication.getAppContext(), KKMoney.APPLICATION_ID);
-//        CrashReport.initCrashReport(KKMoneyApplication.getAppContext(), "900016815", false);
-//        RecordManager.getInstance(KKMoneyApplication.getAppContext());
-//        KKMoneyUtil.init(KKMoneyApplication.getAppContext());
-
         appUpdateManager = new AppUpdateManager(mContext);
         appUpdateManager.checkUpdateInfo(false);
 
         sensorManager = (SensorManager)getSystemService(Context.SENSOR_SERVICE);
 
-        Sensor magneticSensor = sensorManager.getDefaultSensor(Sensor.TYPE_MAGNETIC_FIELD);
-        Sensor accelerometerSensor = sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
+        Sensor magneticSensor = sensorManager.getDefaultSensor(Sensor.TYPE_MAGNETIC_FIELD);//磁力传感器
+        Sensor accelerometerSensor = sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);//加速度传感器
 
         sensorManager.registerListener(listener, magneticSensor, SensorManager.SENSOR_DELAY_GAME);
         sensorManager.registerListener(listener, accelerometerSensor, SensorManager.SENSOR_DELAY_GAME);
@@ -193,19 +187,21 @@ public class MainActivity extends AppCompatActivity implements TagChooseFragment
 
         toolBarTitle = (TextView)findViewById(R.id.guillotine_title);
         toolBarTitle.setTypeface(KKMoneyUtil.typefaceLatoLight);
-        toolBarTitle.setText(SettingManager.getInstance().getAccountBookName());
-
-// edit viewpager///////////////////////////////////////////////////////////////////////////////////
+        toolBarTitle.setText(SettingManager.getInstance().getAccountBookName());//在进入activity的时候对他的账本名称进行更改
+        // 对Editviewpager进行操作，editviewpager01区别是一个是备注，一个是记录页面
         editViewPager = (KKMoneyScrollableViewPager) findViewById(R.id.edit_pager);
-        editAdapter = new EditMoneyRemarkFragmentAdapter(getSupportFragmentManager(), KKMoneyFragmentManager.MAIN_ACTIVITY_FRAGMENT);
+        //进入这个adapter
+        editAdapter = new EditMoneyRemarkFragmentAdapter(getSupportFragmentManager(),
+                KKMoneyFragmentManager.MAIN_ACTIVITY_FRAGMENT);
         
         editViewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
-            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+            public void onPageScrolled (int position, float positionOffset, int positionOffsetPixels) {
                 if (position == 1) {
                     if (KKMoneyFragmentManager.mainActivityEditRemarkFragment != null)
                         KKMoneyFragmentManager.mainActivityEditRemarkFragment.editRequestFocus();
                 } else {
+                    //将系统的键盘隐藏
                     if (KKMoneyFragmentManager.mainActivityEditMoneyFragment != null)
                         KKMoneyFragmentManager.mainActivityEditMoneyFragment.editRequestFocus();
                 }
@@ -224,7 +220,7 @@ public class MainActivity extends AppCompatActivity implements TagChooseFragment
 
         editViewPager.setAdapter(editAdapter);
 
-// tag viewpager////////////////////////////////////////////////////////////////////////////////////
+         // 对标签viewpager进行操作
         tagViewPager = (ViewPager)findViewById(R.id.viewpager);
 
         if (RecordManager.getInstance(mContext).TAGS.size() % 8 == 0)
@@ -240,7 +236,7 @@ public class MainActivity extends AppCompatActivity implements TagChooseFragment
 
         myGridView.setOnItemClickListener(gridViewClickListener);
         myGridView.setOnItemLongClickListener(gridViewLongClickListener);
-
+//为断头菜单的高度做准备
         myGridView.getViewTreeObserver().addOnGlobalLayoutListener(
                 new ViewTreeObserver.OnGlobalLayoutListener() {
                     @Override
@@ -267,7 +263,7 @@ public class MainActivity extends AppCompatActivity implements TagChooseFragment
 
         guillotineMenu = LayoutInflater.from(this).inflate(R.layout.guillotine, null);
         root.addView(guillotineMenu);
-
+        //这里控制他的高度
         transparentLy = (LinearLayout)guillotineMenu.findViewById(R.id.transparent_ly);
         guillotineColorLy = (LinearLayout)guillotineMenu.findViewById(R.id.guillotine_color_ly);
         guillotineToolBar = (Toolbar)guillotineMenu.findViewById(R.id.toolbar);
@@ -300,7 +296,7 @@ public class MainActivity extends AppCompatActivity implements TagChooseFragment
                 .setGuillotineListener(new GuillotineListener() {
                     @Override
                     public void onGuillotineOpened() {
-                        isPassword = true;
+                        isPassword = true;//改变这个标志位的值，就可以在键盘点击的时候对不同的应用场景做区别
                     }
 
                     @Override
@@ -316,7 +312,7 @@ public class MainActivity extends AppCompatActivity implements TagChooseFragment
                     }
                 })
                 .build();
-
+//开启断头台菜单的入口 toolbar
         toolbar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -346,6 +342,7 @@ public class MainActivity extends AppCompatActivity implements TagChooseFragment
         @Override
         public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
             if (!isLoading) {
+                //点击键盘部分
                 buttonClickOperation(true, position);
             }
             return true;
@@ -356,8 +353,8 @@ public class MainActivity extends AppCompatActivity implements TagChooseFragment
     private void checkPassword() {
         if (inputPassword.length() != 4) {
             return;
-        }
-        if (SettingManager.getInstance().getPassword().equals(inputPassword)) {
+        }//只有在输入密码够四位之后才会进行验证
+        if (SettingManager.getInstance().getPassword().equals(inputPassword)) {//判断是否相等
             isLoading = true;
             YoYo.with(Techniques.Bounce).delay(0).duration(1000).playOn(radioButton3);
             statusButton.animateState(MaterialMenuDrawable.IconState.CHECK);
@@ -379,7 +376,7 @@ public class MainActivity extends AppCompatActivity implements TagChooseFragment
                     animation.close();
                 }
             }, 3000);
-        } else {
+        } else {//密码不正确就初始化密码信息和界面
             showToast(PASSWORD_WRONG_TOAST);
             YoYo.with(Techniques.Shake).duration(700).playOn(radioButtonLy);
             radioButton0.setChecked(false);
@@ -425,59 +422,61 @@ public class MainActivity extends AppCompatActivity implements TagChooseFragment
             }
         }
     };
-
+// 虚拟键盘的点击
     private void buttonClickOperation(boolean longClick, int position) {
         if (editViewPager.getCurrentItem() == 1) return;
-        if (!isPassword) {
+        if (!isPassword) {//对钱的处理
             if (KKMoneyFragmentManager.mainActivityEditMoneyFragment.getNumberText().toString().equals("0")
                     && !KKMoneyUtil.ClickButtonCommit(position)) {
                 if (KKMoneyUtil.ClickButtonDelete(position)
                         || KKMoneyUtil.ClickButtonIsZero(position)) {
-
+                    //点0或者删除不处理（输入第一个数字的时候）
                 } else {
+                    //如果现在显示是0 并且点击的按钮不是删除键，那就显示（也就是输入钱数的第一个数字）
                     KKMoneyFragmentManager.mainActivityEditMoneyFragment.setNumberText(KKMoneyUtil.BUTTONS[position]);
                 }
-            } else {
-                if (KKMoneyUtil.ClickButtonDelete(position)) {
-                    if (longClick) {
+            } else {//已经不是第一次输入
+                if (KKMoneyUtil.ClickButtonDelete(position)) {//点击删除键
+                    if (longClick) {//长按删除键
                         KKMoneyFragmentManager.mainActivityEditMoneyFragment.setNumberText("0");
                         KKMoneyFragmentManager.mainActivityEditMoneyFragment.setHelpText(
                                 KKMoneyUtil.FLOATINGLABELS[KKMoneyFragmentManager.mainActivityEditMoneyFragment
                                         .getNumberText().toString().length()]);
-                    } else {
+                    } else {//点击一下删除键
                         KKMoneyFragmentManager.mainActivityEditMoneyFragment.setNumberText(
                                 KKMoneyFragmentManager.mainActivityEditMoneyFragment.getNumberText().toString()
                                 .substring(0, KKMoneyFragmentManager.mainActivityEditMoneyFragment
                                         .getNumberText().toString().length() - 1));
-                        if (KKMoneyFragmentManager.mainActivityEditMoneyFragment
+                        if (KKMoneyFragmentManager.mainActivityEditMoneyFragment//如果删到最后一个了，就设置0
                                 .getNumberText().toString().length() == 0) {
                             KKMoneyFragmentManager.mainActivityEditMoneyFragment.setNumberText("0");
                             KKMoneyFragmentManager.mainActivityEditMoneyFragment.setHelpText(" ");
                         }
                     }
                 } else if (KKMoneyUtil.ClickButtonCommit(position)) {
-                    commit();
+                    commit();//如果点击的是提交按钮
                 } else {
+                    //把现在有的数字后面加一位数字
                     KKMoneyFragmentManager.mainActivityEditMoneyFragment.setNumberText(
                             KKMoneyFragmentManager.mainActivityEditMoneyFragment.getNumberText().toString()
                                     + KKMoneyUtil.BUTTONS[position]);
                 }
             }
             KKMoneyFragmentManager.mainActivityEditMoneyFragment
-                    .setHelpText(KKMoneyUtil.FLOATINGLABELS[
+                    .setHelpText(KKMoneyUtil.FLOATINGLABELS[//根据输入的位置显示单位
                             KKMoneyFragmentManager.mainActivityEditMoneyFragment.getNumberText().toString().length()]);
-        } else {
-            if (KKMoneyUtil.ClickButtonDelete(position)) {
-                if (longClick) {
+        } else {//对密码的处理
+            if (KKMoneyUtil.ClickButtonDelete(position)) {//点击橡皮擦图标
+                if (longClick) {//长按全部删除
                     radioButton0.setChecked(false);
                     radioButton1.setChecked(false);
                     radioButton2.setChecked(false);
                     radioButton3.setChecked(false);
                     inputPassword = "";
-                } else {
+                } else {//不是长按就一个一个删除
                     if (inputPassword.length() == 0) {
                         inputPassword = "";
-                    } else {
+                    } else {//改变radiobutton的显示状态
                         if (inputPassword.length() == 1) {
                             radioButton0.setChecked(false);
                         } else if (inputPassword.length() == 2) {
@@ -490,8 +489,8 @@ public class MainActivity extends AppCompatActivity implements TagChooseFragment
                         inputPassword = inputPassword.substring(0, inputPassword.length() - 1);
                     }
                 }
-            } else if (KKMoneyUtil.ClickButtonCommit(position)) {
-            } else {
+            } else if (KKMoneyUtil.ClickButtonCommit(position)) {//点击提交图标不做处理
+            } else {//如果是其他的数字就去做处理
                 if (statusButton.getState() == MaterialMenuDrawable.IconState.X) {
                     statusButton.animateState(MaterialMenuDrawable.IconState.ARROW);
                 }
@@ -508,7 +507,7 @@ public class MainActivity extends AppCompatActivity implements TagChooseFragment
                     radioButton3.setChecked(true);
                 }
                 if (inputPassword.length() < 4) {
-                    inputPassword += KKMoneyUtil.BUTTONS[position];
+                    inputPassword += KKMoneyUtil.BUTTONS[position];//改变密码
                 }
             }
             checkPassword();
@@ -522,15 +521,17 @@ public class MainActivity extends AppCompatActivity implements TagChooseFragment
             showToast(NO_MONEY_TOAST);
         } else  {
             Calendar calendar = Calendar.getInstance();
+            //创建当次账单实例（-1，钱数，货币类型，消费tag，日期）
             KKMoneyRecord KKMoneyRecord = new KKMoneyRecord(
                     -1,
                     Float.valueOf(KKMoneyFragmentManager.mainActivityEditMoneyFragment.getNumberText().toString()),
                     "RMB",
-                    KKMoneyFragmentManager.mainActivityEditMoneyFragment.getTagId(),
-                    calendar);
+                    KKMoneyFragmentManager.mainActivityEditMoneyFragment.getTagId(), calendar);
+            //记录账单备注
             KKMoneyRecord.setRemark(KKMoneyFragmentManager.mainActivityEditRemarkFragment.getRemark());
-            long saveId = RecordManager.saveRecord(KKMoneyRecord);
+            long saveId = RecordManager.saveRecord(KKMoneyRecord);//存入数据库 并得到操作结果
             if (saveId == -1) {
+                //这里加上操作失败的提示
 
             } else {
                 if (!superToast.isShowing()) {
@@ -625,6 +626,9 @@ public class MainActivity extends AppCompatActivity implements TagChooseFragment
         myGridViewAdapter.notifyDataSetInvalidated();
     }
 
+
+    //手势控制的输入密码页面的出现和消失
+
     @Override
     public boolean dispatchTouchEvent(MotionEvent ev) {
 
@@ -710,7 +714,7 @@ public class MainActivity extends AppCompatActivity implements TagChooseFragment
             SettingManager.getInstance().setMainViewTitleShouldChange(false);
         }
 
-        changeColor();
+        changeColor();//检查颜色是否需要改变
 
         radioButton0.setChecked(false);
         radioButton1.setChecked(false);
@@ -729,7 +733,7 @@ public class MainActivity extends AppCompatActivity implements TagChooseFragment
         }
         super.onDestroy();
     }
-
+    //点击Tagview的点击事件
     @Override
     public void onTagItemPicked(int position) {
         if (KKMoneyFragmentManager.mainActivityEditMoneyFragment != null)

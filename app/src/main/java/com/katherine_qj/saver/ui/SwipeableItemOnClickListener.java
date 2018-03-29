@@ -3,7 +3,7 @@ package com.katherine_qj.saver.ui;
 import android.view.View;
 
 /**
- * Created by Weiping on 2016/1/26.
+ * Created by katherineqj on 2018/1/26.
  */
 public class SwipeableItemOnClickListener implements View.OnClickListener {
 

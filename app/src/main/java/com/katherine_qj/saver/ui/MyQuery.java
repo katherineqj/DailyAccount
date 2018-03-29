@@ -5,7 +5,7 @@ import com.katherine_qj.saver.model.UploadInfo;
 import cn.bmob.v3.BmobQuery;
 
 /**
- * Created by Weiping on 2016/1/27.
+ * Created by katherineqj on 2018/1/27.
  */
 
 public class MyQuery {

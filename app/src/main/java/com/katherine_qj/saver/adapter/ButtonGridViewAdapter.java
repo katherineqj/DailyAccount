@@ -19,6 +19,7 @@ import net.steamcrafted.materialiconlib.MaterialIconView;
 
 /**
  * Created by katherineqj on 2017/10/16.
+ * grid 输入钱和密码的自制键盘adapter
  */
 
 public class ButtonGridViewAdapter extends BaseAdapter {
@@ -60,7 +61,7 @@ public class ButtonGridViewAdapter extends BaseAdapter {
         } else {
             holder = (ViewHolder) convertView.getTag();
         }
-
+//gridview是从0开始的，这样往下算
         if (position == 11) {
             holder.tv.setTypeface(KKMoneyUtil.typefaceLatoHairline);
             holder.tv.setVisibility(View.INVISIBLE);

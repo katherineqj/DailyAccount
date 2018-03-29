@@ -10,7 +10,7 @@ import com.katherine_qj.saver.fragment.HelpKKMoneyFragment;
 import com.katherine_qj.saver.fragment.HelpFeedbackFragment;
 
 /**
- * Created by Weiping on 2016/2/2.
+ * Created by katherineqj on 2018/2/2.
  */
 
 public class HelpFragmentAdapter extends FragmentStatePagerAdapter {

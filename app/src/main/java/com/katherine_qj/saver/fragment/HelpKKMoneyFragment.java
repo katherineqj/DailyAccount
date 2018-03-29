@@ -18,7 +18,7 @@ import com.katherine_qj.saver.util.KKMoneyUtil;
 import com.squareup.picasso.Picasso;
 
 /**
- * Created by Weiping on 2016/2/2.
+ * Created by katherineqj on 2018/2/2.
  */
 public class HelpKKMoneyFragment extends Fragment {
 

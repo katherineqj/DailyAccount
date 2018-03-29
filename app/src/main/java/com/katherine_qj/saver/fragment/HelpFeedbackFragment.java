@@ -25,7 +25,7 @@ import com.katherine_qj.saver.util.KKMoneyUtil;
 import cn.bmob.v3.listener.SaveListener;
 
 /**
- * Created by Weiping on 2016/2/2.
+ * Created by katherineqj on 2018/2/2.
  */
 public class HelpFeedbackFragment extends Fragment {
 

@@ -14,7 +14,7 @@ import com.katherine_qj.saver.util.KKMoneyUtil;
 import java.util.ArrayList;
 
 /**
- * Created by Weiping on 2016/1/30.
+ * Created by katherineqj on 2018/1/30.
  */
 public class ReportTagAdapter extends BaseAdapter {
 

@@ -29,7 +29,7 @@ import cn.bmob.v3.BmobQuery;
 import cn.bmob.v3.listener.FindListener;
 
 /**
- * Created by Weiping on 2016/1/27.
+ * Created by katherineqj on 2018/1/27.
  *
  * notice that the version must be written in the form "X.X.X"
  * but not "X.X.XX"

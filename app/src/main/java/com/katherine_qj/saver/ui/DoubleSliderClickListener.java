@@ -3,7 +3,7 @@ package com.katherine_qj.saver.ui;
 import com.daimajia.slider.library.SliderTypes.BaseSliderView;
 
 /**
- * Created by Weiping on 2016/1/25.
+ * Created by katherineqj on 2018/1/25.
  */
 public abstract class DoubleSliderClickListener implements BaseSliderView.OnSliderClickListener {
 

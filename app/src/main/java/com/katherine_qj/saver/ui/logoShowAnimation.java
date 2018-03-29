@@ -6,7 +6,7 @@ import com.daimajia.androidanimations.library.BaseViewAnimator;
 import com.nineoldandroids.animation.ObjectAnimator;
 
 /**
- * Created by Weiping on 2016/1/21.
+ * Created by katherineqj on 2018/1/21.
  */
 public class logoShowAnimation extends BaseViewAnimator {
     @Override

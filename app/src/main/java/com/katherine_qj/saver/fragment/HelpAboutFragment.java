@@ -19,7 +19,7 @@ import com.katherine_qj.saver.R;
 import com.katherine_qj.saver.util.KKMoneyUtil;
 
 /**
- * Created by Weiping on 2016/2/2.
+ * Created by katherineqj on 2018/2/2.
  */
 public class HelpAboutFragment extends Fragment {
 

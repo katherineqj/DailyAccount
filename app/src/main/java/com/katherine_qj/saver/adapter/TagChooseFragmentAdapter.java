@@ -7,7 +7,7 @@ import android.support.v4.app.FragmentPagerAdapter;
 import com.katherine_qj.saver.fragment.TagChooseFragment;
 
 /**
- * Created by Weiping on 2016/1/19.
+ * Created by katherineqj on 2018/1/19.
  */
 
 public class TagChooseFragmentAdapter extends FragmentPagerAdapter {

@@ -1,7 +1,7 @@
 package com.katherine_qj.saver.model;
 
 /**
- * Created by Weiping on 2016/1/27.
+ * Created by katherineqj on 2018/1/27.
  */
 public class TaskManager {
 

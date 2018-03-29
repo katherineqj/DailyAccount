@@ -84,7 +84,7 @@ public class DB {
         }
     }
 
-    // return the row ID of the newly inserted row, or -1 if an error occurred
+    // return the row ID of the newly inserted row, or -1 if an error occurred，将本条账单插入数据库
     public long saveRecord(KKMoneyRecord KKMoneyRecord) {
         ContentValues values = new ContentValues();
         values.put("MONEY", KKMoneyRecord.getMoney());

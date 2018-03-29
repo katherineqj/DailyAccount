@@ -13,7 +13,7 @@ import java.util.ArrayList;
 import java.util.Random;
 
 /**
- * Created by Weiping on 2016/2/2.
+ * Created by katherineqj on 2018/2/2.
  */
 public class ReportMonthAdapter extends BaseAdapter {
 

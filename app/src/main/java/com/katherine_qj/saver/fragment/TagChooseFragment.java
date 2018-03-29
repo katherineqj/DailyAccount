@@ -18,11 +18,14 @@ import com.katherine_qj.saver.ui.MyGridView;
 
 /**
  * Created by katherineqj on 2017/10/27.
+ * 标签viewpager fragment
  */
+
 
 public class TagChooseFragment extends Fragment {
 
     public TagChooseGridViewAdapter getTagAdapter() {
+
         return tagAdapter;
     }
 
@@ -40,6 +43,7 @@ public class TagChooseFragment extends Fragment {
         TagChooseFragment fragment = new TagChooseFragment();
 
         Bundle args = new Bundle();
+        //position指的是fragment的position
         args.putInt("position", position);
         fragment.setArguments(args);
 
@@ -62,13 +66,14 @@ public class TagChooseFragment extends Fragment {
         myGridView = (MyGridView)view.findViewById(R.id.gridview);
 
         fragmentPosition = getArguments().getInt("position");
-
+        //新new一个的fragment 并且放到正确的位置
         if (fragmentPosition >= KKMoneyFragmentManager.tagChooseFragments.size()) {
             while (fragmentPosition >= KKMoneyFragmentManager.tagChooseFragments.size()) {
                 KKMoneyFragmentManager.tagChooseFragments.add(new TagChooseFragment());
             }
         }
         KKMoneyFragmentManager.tagChooseFragments.set(fragmentPosition, this);
+        //给每一个fragment的gridview绑定adapter
 
         tagAdapter = new TagChooseGridViewAdapter(getActivity(), fragmentPosition);
 
@@ -78,7 +83,7 @@ public class TagChooseFragment extends Fragment {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 try {
-                    ((OnTagItemSelectedListener)activity).onTagItemPicked(position);
+                    ((OnTagItemSelectedListener)activity).onTagItemPicked(position);//点击
                     ((OnTagItemSelectedListener)activity).onAnimationStart(RecordManager.TAGS.get(fragmentPosition * 8 + position + 2).getId());
                 } catch (ClassCastException cce){
                     cce.printStackTrace();

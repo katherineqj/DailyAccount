@@ -11,7 +11,7 @@ import com.daimajia.slider.library.SliderTypes.BaseSliderView;
 import com.katherine_qj.saver.R;
 
 /**
- * Created by Weiping on 2016/1/23.
+ * Created by katherineqj on 2018/1/23.
  */
 public class CustomSliderView extends BaseSliderView {
     private static Typeface font = null;
