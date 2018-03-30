@@ -448,7 +448,7 @@ public class AccountBookListViewActivity extends AppCompatActivity
 
         setConditions();
 
-        loadLogo();
+        //loadLogo();
     }
 
     private void setConditions() {

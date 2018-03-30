@@ -156,8 +156,8 @@ public class AccountBookTodayViewActivity extends AppCompatActivity {
         report = (MaterialRippleLayout)mDrawer.findViewById(R.id.report_layout);
         sync = (MaterialRippleLayout)mDrawer.findViewById(R.id.sync_layout);
         settings = (MaterialRippleLayout)mDrawer.findViewById(R.id.settings_layout);
-        help = (MaterialRippleLayout)mDrawer.findViewById(R.id.help_layout);
-        feedback = (MaterialRippleLayout)mDrawer.findViewById(R.id.feedback_layout);
+        //help = (MaterialRippleLayout)mDrawer.findViewById(R.id.help_layout);
+        //feedback = (MaterialRippleLayout)mDrawer.findViewById(R.id.feedback_layout);
         about = (MaterialRippleLayout)mDrawer.findViewById(R.id.about_layout);
         syncIcon = (MaterialIconView)mDrawer.findViewById(R.id.sync_icon);
         setIconEnable(syncIcon, SettingManager.getInstance().getLoggenOn());
@@ -1052,7 +1052,7 @@ public class AccountBookTodayViewActivity extends AppCompatActivity {
                 sync();
             }
         });
-        help.setOnClickListener(new View.OnClickListener() {
+        /*help.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(mContext, HelpActivity.class));
@@ -1063,7 +1063,7 @@ public class AccountBookTodayViewActivity extends AppCompatActivity {
             public void onClick(View v) {
                 startActivity(new Intent(mContext, FeedbackActivity.class));
             }
-        });
+        });*/
         about.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

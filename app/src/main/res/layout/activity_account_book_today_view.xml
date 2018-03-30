@@ -28,5 +28,6 @@
         />
 
     <include layout="@layout/drawer_today_view" />
+    <include layout="@layout/drawer_today_newview"/>
 
 </android.support.v4.widget.DrawerLayout>

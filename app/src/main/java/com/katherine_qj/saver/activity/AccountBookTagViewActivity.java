@@ -208,7 +208,7 @@ public class AccountBookTagViewActivity extends AppCompatActivity {
         mDemoSlider.setDuration(4000);
         mDemoSlider.setCustomIndicator((PagerIndicator) findViewById(R.id.custom_indicator));
 
-        loadLogo();
+        //loadLogo();
 
     }
 
