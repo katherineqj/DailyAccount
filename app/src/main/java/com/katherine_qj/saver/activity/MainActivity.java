@@ -364,6 +364,7 @@ public class MainActivity extends AppCompatActivity implements TagChooseFragment
             handler.postDelayed(new Runnable() {
                 @Override
                 public void run() {
+                    //密码验证成功跳到下一个界面，（指原型图中的输入密码完界面）
                     Intent intent = new Intent(mContext, AccountBookTodayViewActivity.class);
                     startActivityForResult(intent, SETTING_TAG);
                     isLoading = false;
@@ -513,7 +514,7 @@ public class MainActivity extends AppCompatActivity implements TagChooseFragment
             checkPassword();
         }
     }
-
+//提交账单
     private void commit() {
         if (KKMoneyFragmentManager.mainActivityEditMoneyFragment.getTagId() == -1) {
             showToast(NO_TAG_TOAST);

@@ -130,18 +130,17 @@ public class AccountBookTodayViewActivity extends AppCompatActivity {
         userEmail = (TextView)findViewById(R.id.user_email);
         userName.setTypeface(KKMoneyUtil.typefaceLatoRegular);
         userEmail.setTypeface(KKMoneyUtil.typefaceLatoLight);
+        //获取用户信息
         User user = BmobUser.getCurrentUser(KKMoneyApplication.getAppContext(), User.class);
         if (user != null) {
             userName.setText(user.getUsername());
             userEmail.setText(user.getEmail());
         }
-
         setFonts();
-
         View view = mViewPager.getRootView();
         title = (TextView)view.findViewById(R.id.logo_white);
         title.setTypeface(KKMoneyUtil.typefaceLatoLight);
-        title.setText(SettingManager.getInstance().getAccountBookName());
+        title.setText(SettingManager.getInstance().getAccountBookName());//设置自定义账本名称
 
         mViewPager.getPagerTitleStrip().setTypeface(KKMoneyUtil.GetTypeface(), Typeface.NORMAL);
 
@@ -851,18 +850,6 @@ public class AccountBookTodayViewActivity extends AppCompatActivity {
                 if (BuildConfig.DEBUG) Log.d("KKMoney", "Delete old cloud database failed " + cloudOldDatabaseUrl);
             }
         });
-/*
-        BmobProFile.getInstance(KKMoneyApplication.getAppContext()).deleteFile(fileName, new DeleteFileListener() {
-            @Override
-            public void onError(int errorcode, String errormsg) {
-                if (BuildConfig.DEBUG) Log.d("KKMoney", "Delete old cloud database failed " + cloudOldDatabaseUrl);
-            }
-            @Override
-            public void onSuccess() {
-                if (BuildConfig.DEBUG) Log.d("KKMoney", "Delete old cloud database successfully " + cloudOldDatabaseUrl);
-            }
-        });
-*/
     }
 
     private void uploadFailed(int code, String msg) {
