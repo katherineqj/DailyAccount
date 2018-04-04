@@ -39,11 +39,9 @@ public class AccountBookReportViewActivity extends AppCompatActivity
 
         mContext = this;
         setContentView(R.layout.activity_account_book_report_view);
-
         mViewPager = (MaterialViewPager) findViewById(R.id.materialViewPager);
-
         View view = mViewPager.getRootView();
-        TextView title = (TextView)view.findViewById(R.id.logo_white);
+        TextView title = (TextView) view.findViewById(R.id.logo_white);
         title.setTypeface(KKMoneyUtil.typefaceLatoLight);
         title.setText(SettingManager.getInstance().getAccountBookName());
 

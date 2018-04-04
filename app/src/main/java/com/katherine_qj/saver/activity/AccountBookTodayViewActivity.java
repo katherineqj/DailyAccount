@@ -93,8 +93,8 @@ public class AccountBookTodayViewActivity extends AppCompatActivity {
 
     private Context mContext;
 
-    private MaterialRippleLayout custom;
-    private MaterialRippleLayout tags;
+   // private MaterialRippleLayout custom;
+   // private MaterialRippleLayout tags;
     private MaterialRippleLayout months;
     private MaterialRippleLayout list;
     private MaterialRippleLayout report;
@@ -149,8 +149,8 @@ public class AccountBookTodayViewActivity extends AppCompatActivity {
         toolbar = mViewPager.getToolbar();
         mDrawer = (DrawerLayout) findViewById(R.id.drawer_layout);
 
-        custom = (MaterialRippleLayout)mDrawer.findViewById(R.id.custom_layout);
-        tags = (MaterialRippleLayout)mDrawer.findViewById(R.id.tag_layout);
+       // custom = (MaterialRippleLayout)mDrawer.findViewById(R.id.custom_layout);
+       // tags = (MaterialRippleLayout)mDrawer.findViewById(R.id.tag_layout);
         months = (MaterialRippleLayout)mDrawer.findViewById(R.id.month_layout);
         list = (MaterialRippleLayout)mDrawer.findViewById(R.id.list_layout);
         report = (MaterialRippleLayout)mDrawer.findViewById(R.id.report_layout);
@@ -1010,7 +1010,7 @@ public class AccountBookTodayViewActivity extends AppCompatActivity {
     }
 
     private void setListeners() {
-        custom.setOnClickListener(new View.OnClickListener() {
+        /*custom.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 loadRangeMode();
@@ -1021,7 +1021,7 @@ public class AccountBookTodayViewActivity extends AppCompatActivity {
             public void onClick(View v) {
                 loadTagMode();
             }
-        });
+        });*/
         months.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
