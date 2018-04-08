@@ -19,7 +19,7 @@
             android:layout_gravity="top"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="#2196F3"
+            android:background="@color/normalyy"
             />
 
         <FrameLayout
@@ -31,20 +31,20 @@
                 android:layout_height="200dp"
                 android:layout_width="match_parent"
                 android:orientation="vertical"
-                android:background="@color/cyan"
+                android:background="@color/mo_0"
                 android:layout_gravity="top"
                 >
 
                 <de.hdodenhof.circleimageview.CircleImageView
                     android:id="@+id/profile_image"
-                    android:layout_width="100dp"
-                    android:layout_height="100dp"
-                    android:src="@drawable/default_user_logo"
-                    android:layout_marginTop="30dp"
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
                     android:layout_gravity="center"
+                    android:layout_marginTop="50dp"
                     android:padding="5dp"
-                    app:civ_border_width="1dp"
-                    app:civ_border_color="#ffffff"/>
+                    android:src="@drawable/photo"
+                    app:civ_border_color="#ffffff"
+                    app:civ_border_width="1dp" />
 
             </LinearLayout>
 
@@ -310,6 +310,7 @@
                     >
 
                     <LinearLayout
+                        android:id="@id/month_limit_layout"
                         android:layout_height="0dp"
                         android:layout_width="match_parent"
                         android:layout_weight="1"
@@ -355,6 +356,7 @@
                     </LinearLayout>
 
                     <LinearLayout
+                        android:id="@+id/month_expense_layout"
                         android:layout_height="0dp"
                         android:layout_width="match_parent"
                         android:layout_weight="1"
@@ -403,6 +405,7 @@
                     </LinearLayout>
 
                     <LinearLayout
+                        android:id="@+id/month_color_remind_button_layout"
                         android:layout_height="0dp"
                         android:layout_width="match_parent"
                         android:layout_weight="1"
@@ -448,6 +451,7 @@
                     </LinearLayout>
 
                     <LinearLayout
+                        android:id="@+id/warning_expense_layout"
                         android:layout_height="0dp"
                         android:layout_width="match_parent"
                         android:layout_weight="1"

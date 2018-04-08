@@ -260,6 +260,31 @@ public class KKMoneyUtil {
             R.color.breakfast_header,
             R.color.midnight_snack_header
     };
+    public static int[] TAG_COLORS={
+            R.color.mo_1,
+            R.color.mo_0,
+
+            R.color.mo_2,
+
+            R.color.mo_3,
+
+            R.color.mo_4,
+            R.color.mo_5,
+
+            R.color.mo_6,
+
+            R.color.mo_7,
+
+            R.color.mo_8,
+
+            R.color.mo_9,
+            R.color.mo_10,
+
+
+
+
+
+    };
 
     public static int[] TAG_SNACK = {
             R.drawable.snackbar_shape_undo,
@@ -811,7 +836,8 @@ public class KKMoneyUtil {
 
     private static Random random;
 
-    private static String[] Colors = {"#F44336",
+    private static String[] Colors = {
+            "#F44336",
             "#E91E63",
             "#9C27B0",
             "#673AB7",
@@ -851,6 +877,9 @@ public class KKMoneyUtil {
 
     public static int GetTagColor(int tag) {
         return ContextCompat.getColor(KKMoneyApplication.getAppContext(), TAG_COLOR[tag + 3]);
+    }
+    public static int GetTagColors(int tag) {
+        return ContextCompat.getColor(KKMoneyApplication.getAppContext(), TAG_COLORS[tag+3]);
     }
 
     public static Drawable GetTagDrawable(int tagId) {
