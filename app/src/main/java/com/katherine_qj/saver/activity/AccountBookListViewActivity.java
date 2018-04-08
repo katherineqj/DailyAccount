@@ -359,7 +359,7 @@ public class AccountBookListViewActivity extends AppCompatActivity
             }
         });
 
-        mDemoSlider = (SliderLayout)findViewById(R.id.slider);
+      /*  mDemoSlider = (SliderLayout)findViewById(R.id.slider);
 
         HashMap<String, Integer> urls = KKMoneyUtil.GetDrawerTopUrl();
 
@@ -374,7 +374,7 @@ public class AccountBookListViewActivity extends AppCompatActivity
         mDemoSlider.setPresetTransformer(SliderLayout.Transformer.ZoomOut);
         mDemoSlider.setCustomAnimation(new DescriptionAnimation());
         mDemoSlider.setDuration(4000);
-        mDemoSlider.setCustomIndicator((PagerIndicator) findViewById(R.id.custom_indicator));
+        mDemoSlider.setCustomIndicator((PagerIndicator) findViewById(R.id.custom_indicator));*/
 
         titleExpense = (TextView)findViewById(R.id.title_expense);
         titleExpense.setTypeface(KKMoneyUtil.typefaceLatoLight);
@@ -652,14 +652,14 @@ public class AccountBookListViewActivity extends AppCompatActivity
 
     @Override
     protected void onStop() {
-        mDemoSlider.stopAutoCycle();
+       // mDemoSlider.stopAutoCycle();
 //        titleSlider.stopAutoCycle();
         super.onStop();
     }
 
     @Override
     public void onResume() {
-        if (mDemoSlider != null) mDemoSlider.startAutoCycle();
+       // if (mDemoSlider != null) mDemoSlider.startAutoCycle();
         if (RecordManager.SELECTED_RECORDS == null) selectRecords();
         else {
 //            if (titleSlider != null) titleSlider.startAutoCycle();

@@ -8,6 +8,7 @@
     <string name="list_view">详细支出</string>
     <string name="expense_report">支出报表</string>
     <string name="sync">同步</string>
+    <string name="icloud">云端同步</string>
     <string name="settings">设置</string>
     <string name="help">帮助</string>
     <string name="feedback">反馈</string>

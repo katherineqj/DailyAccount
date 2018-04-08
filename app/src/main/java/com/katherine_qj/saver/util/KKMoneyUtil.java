@@ -403,11 +403,16 @@ public class KKMoneyUtil {
     };
 
     public static int[] DRAWER_TOP_URL = {
-            R.drawable.material_design_0,
+           /* R.drawable.material_design_0,
             R.drawable.material_design_1,
             R.drawable.material_design_2,
             R.drawable.material_design_3,
-            R.drawable.material_design_4
+            R.drawable.material_design_4*/
+            R.drawable.slide1,
+            R.drawable.slide2,
+            R.drawable.slide3
+
+
     };
 
     public static Typeface typefaceLatoRegular = null;
@@ -983,8 +988,6 @@ public class KKMoneyUtil {
         drawerTopUrls.put("0", DRAWER_TOP_URL[0]);
         drawerTopUrls.put("1", DRAWER_TOP_URL[1]);
         drawerTopUrls.put("2", DRAWER_TOP_URL[2]);
-        drawerTopUrls.put("3", DRAWER_TOP_URL[3]);
-        drawerTopUrls.put("4", DRAWER_TOP_URL[4]);
         return drawerTopUrls;
     }
 
