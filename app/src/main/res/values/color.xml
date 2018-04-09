@@ -5,7 +5,7 @@
 
     <color name="guillotine_background">#444153</color>
     <color name="guillotine_background_dark">#383547</color>
-    <color name="selected_item_color">#30d1d5</color>
+    <color name="selected_item_color">#367779</color>
 
     <color name="white">#ffffff</color>
 
@@ -17,8 +17,8 @@
 
     <color name="status_bar">#3e9488</color>
 
-    <color name="my_blue">#679c97</color>
-    <color name="my_normally">#009688</color>
+    <color name="my_blue">#2c8078</color>
+    <color name="my_normally">#26837a</color>
     <color name="my_gray">#616161</color>
     <color name="drawer_text">#212121</color>
     <color name="view_pager_background">#EEEEEE</color>

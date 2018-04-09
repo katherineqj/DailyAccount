@@ -12,6 +12,7 @@
     >
 
     <FrameLayout
+        android:background="@drawable/banner"
         android:id="@+id/info_layout"
         android:layout_height="160dp"
         android:layout_width="match_parent"
@@ -42,7 +43,7 @@
                 android:id="@+id/profile_image"
                 android:layout_width="80dp"
                 android:layout_height="80dp"
-                android:src="@drawable/default_user_logo"
+                android:src="@drawable/photo"
                 android:layout_marginLeft="20dp"
                 android:layout_marginTop="30dp"
                 app:civ_border_width="0dp"

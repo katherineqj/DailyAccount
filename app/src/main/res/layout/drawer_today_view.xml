@@ -15,16 +15,16 @@
     >
 
     <FrameLayout
-        android:background="#C0c0c0"
+        android:background="@drawable/live"
         android:layout_height="160dp"
         android:layout_width="match_parent"
         >
 
-   <!-- <com.daimajia.slider.library.SliderLayout
+    <com.daimajia.slider.library.SliderLayout
         android:id="@+id/slider"
         android:layout_width="match_parent"
         android:layout_height="160dp"
-        />-->
+        />
 
     <com.daimajia.slider.library.Indicators.PagerIndicator
         android:id="@+id/custom_indicator"
@@ -102,7 +102,7 @@
                 android:layout_marginTop="5dp"
                 android:text=""
                 android:textSize="16sp"
-                android:textColor="#ffffff"
+                android:textColor="#504f4f"
                 android:textStyle="bold"
                 />
 
@@ -115,7 +115,7 @@
                 android:layout_marginBottom="10dp"
                 android:text=""
                 android:textSize="12sp"
-                android:textColor="#ffffff"
+                android:textColor="#504f4f"
                 />
 
         </LinearLayout>

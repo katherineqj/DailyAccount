@@ -198,7 +198,7 @@ public class AccountBookMonthViewActivity extends AppCompatActivity {
         mDemoSlider.setDuration(4000);
         mDemoSlider.setCustomIndicator((PagerIndicator) findViewById(R.id.custom_indicator));
 
-        //loadLogo();
+        loadLogo();
 
     }
 
@@ -258,25 +258,30 @@ public class AccountBookMonthViewActivity extends AppCompatActivity {
                     // the local logo file is missed
                     // try to get from the server
                     BmobQuery<Logo> bmobQuery = new BmobQuery();
+                    Log.d("KKMoney", user.getLogoObjectId());
                     bmobQuery.addWhereEqualTo("objectId", user.getLogoObjectId());
                     bmobQuery.findObjects(KKMoneyApplication.getAppContext()
                             , new FindListener<Logo>() {
                                 @Override
                                 public void onSuccess(List<Logo> object) {
                                     // there has been an old logo in the server/////////////////////////////////////////////////////////
-                                    String url = object.get(0).getFile().getFileUrl(KKMoneyApplication.getAppContext());
-                                    if (BuildConfig.DEBUG) Log.d("KKMoney", "Logo in server: " + url);
-                                    Ion.with(KKMoneyApplication.getAppContext()).load(url)
-                                            .write(new File(KKMoneyApplication.getAppContext().getFilesDir()
-                                                    + KKMoneyUtil.LOGO_NAME))
-                                            .setCallback(new FutureCallback<File>() {
-                                                @Override
-                                                public void onCompleted(Exception e, File file) {
-                                                    profileImage.setImageBitmap(BitmapFactory.decodeFile(
-                                                            KKMoneyApplication.getAppContext().getFilesDir()
-                                                                    + KKMoneyUtil.LOGO_NAME));
-                                                }
-                                            });
+                                    if (object.size() == 0) {
+
+                                    } else {
+                                        String url = object.get(0).getFile().getFileUrl(KKMoneyApplication.getAppContext());
+                                        if (BuildConfig.DEBUG) Log.d("KKMoney", "Logo in server: " + url);
+                                        Ion.with(KKMoneyApplication.getAppContext()).load(url)
+                                                .write(new File(KKMoneyApplication.getAppContext().getFilesDir()
+                                                        + KKMoneyUtil.LOGO_NAME))
+                                                .setCallback(new FutureCallback<File>() {
+                                                    @Override
+                                                    public void onCompleted(Exception e, File file) {
+                                                        profileImage.setImageBitmap(BitmapFactory.decodeFile(
+                                                                KKMoneyApplication.getAppContext().getFilesDir()
+                                                                        + KKMoneyUtil.LOGO_NAME));
+                                                    }
+                                                });
+                                    }
                                 }
                                 @Override
                                 public void onError(int code, String msg) {

@@ -433,9 +433,10 @@ public class KKMoneyUtil {
             R.drawable.material_design_2,
             R.drawable.material_design_3,
             R.drawable.material_design_4*/
-            R.drawable.slide1,
-            R.drawable.slide2,
-            R.drawable.slide3
+            R.drawable.s0,
+            R.drawable.s1,
+            R.drawable.s2,
+
 
 
     };
@@ -1017,6 +1018,8 @@ public class KKMoneyUtil {
         drawerTopUrls.put("0", DRAWER_TOP_URL[0]);
         drawerTopUrls.put("1", DRAWER_TOP_URL[1]);
         drawerTopUrls.put("2", DRAWER_TOP_URL[2]);
+
+
         return drawerTopUrls;
     }
 
