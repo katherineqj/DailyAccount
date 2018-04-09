@@ -22,6 +22,7 @@ import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.afollestad.materialdialogs.DialogAction;
@@ -118,6 +119,10 @@ public class AccountBookSettingActivity extends AppCompatActivity
     private MaterialIconView monthWarningIcon;
     private MaterialIconView monthColorRemindTypeIcon;
     private MaterialIconView monthForbiddenIcon;
+    private LinearLayout month_limit_layout;
+    private LinearLayout month_expense_layout;
+    private LinearLayout month_color_remind_button_layout;
+    private LinearLayout warning_expense_layout;
     private Switch monthSB;
     private Switch monthColorRemindSB;
     private Switch monthForbiddenSB;

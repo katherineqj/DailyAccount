@@ -98,19 +98,19 @@ public class HelpAboutFragment extends Fragment {
         ((MaterialRippleLayout)view.findViewById(R.id.layout_2)).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://github.com/Nightonke/KKMoney")));
+                startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://github.com/katherineqj")));
             }
         });
         ((MaterialRippleLayout)view.findViewById(R.id.layout_3)).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("http://blog.csdn.net/u012925008")));
+                startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://blog.csdn.net/katherine_qj")));
             }
         });
         ((MaterialRippleLayout)view.findViewById(R.id.layout_4)).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                KKMoneyUtil.getInstance().copyToClipboard("Nightonke@outlook.com", mContext);
+                KKMoneyUtil.getInstance().copyToClipboard("kathqin@gmail.com", mContext);
                 KKMoneyUtil.getInstance().showToast(mContext, mContext.getResources().getString(R.string.copy_to_clipboard));
             }
         });

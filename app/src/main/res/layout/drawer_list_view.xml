@@ -42,7 +42,7 @@
                 android:id="@+id/profile_image"
                 android:layout_width="80dp"
                 android:layout_height="80dp"
-                android:src="@drawable/default_user_logo"
+                android:src="@drawable/photo"
                 android:layout_marginLeft="20dp"
                 android:layout_marginTop="30dp"
                 app:civ_border_width="0dp"
@@ -57,7 +57,7 @@
                 android:layout_marginTop="5dp"
                 android:text=""
                 android:textSize="16sp"
-                android:textColor="#ffffff"
+                android:textColor="#504f4f"
                 android:textStyle="bold"
                 />
 
@@ -69,7 +69,7 @@
                 android:layout_marginLeft="20dp"
                 android:text=""
                 android:textSize="12sp"
-                android:textColor="#ffffff"
+                android:textColor="#504f4f"
                 />
 
         </LinearLayout>

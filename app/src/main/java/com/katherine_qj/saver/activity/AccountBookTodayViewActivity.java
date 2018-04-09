@@ -221,7 +221,7 @@ public class AccountBookTodayViewActivity extends AppCompatActivity {
             @Override
             public HeaderDesign getHeaderDesign(int page) {
                 return HeaderDesign.fromColorAndDrawable(
-                        KKMoneyUtil.GetTagColor(page - 2),
+                        KKMoneyUtil.GetTagColors(page - 2),
                         KKMoneyUtil.GetTagDrawable(-3)
                 );
             }

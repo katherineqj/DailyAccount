@@ -4,10 +4,11 @@
 
     <string name="custom_view">可选范围视图</string>
     <string name="tags_view">标签视图</string>
-    <string name="months_view">月视图</string>
-    <string name="list_view">列表视图</string>
+    <string name="months_view">月支出视图</string>
+    <string name="list_view">详细支出</string>
     <string name="expense_report">支出报表</string>
     <string name="sync">同步</string>
+    <string name="icloud">云端同步</string>
     <string name="settings">设置</string>
     <string name="help">帮助</string>
     <string name="feedback">反馈</string>
@@ -311,9 +312,9 @@
     <string name="hey">嗨！</string>
     <string name="thank">感谢您使用KKMoney。</string>
     <string name="me">我是一名安卓开发者。</string>
-    <string name="github">项目已开源：github.com/Nightonke/KKMoney</string>
-    <string name="blog">博客：blog.csdn.net/u012925008</string>
-    <string name="email">邮箱：nightonke@outlook.com</string>
+    <string name="github">项目已开源：https://github.com/katherineqj/DailyAccount</string>
+    <string name="blog">博客：https://blog.csdn.net/katherine_qj</string>
+    <string name="email">邮箱：kathqin@gmail.com</string>
     <string name="thank_again">如果有任何吐槽，就发邮件给我吧！</string>
 
     <string name="login_button">登录/注册</string>
@@ -505,7 +506,7 @@
     </string>
     <string name="help_KKMoney_content_11"> ● 感谢您使用KKMoney</string>
 
-    <string name="help_feedback_content_1"> ● 很高兴能收到您的反馈，如果您有非文本内容，可以发到我的电子邮箱：Nightonke@outlook.com.</string>
+    <string name="help_feedback_content_1"> ● 很高兴能收到您的反馈，如果您有非文本内容，可以发到我的电子邮箱：kathqin@gmail.com.</string>
     <string name="help_feedback_content_2">让KKMoney变得更好</string>
     <string name="help_feedback_hint">您可以在此处编辑反馈</string>
     <string name="help_feedback_edit">编辑</string>
@@ -521,10 +522,10 @@
     <string name="help_feedback_dialog_dont_send">不发送</string>
 
     <string name="help_about_content_0"> ● 关于我</string>
-    <string name="help_about_content_1">Nightonke</string>
-    <string name="help_about_content_2">github.com/Nightonke/KKMoney</string>
-    <string name="help_about_content_3">blog.csdn.net/u012925008</string>
-    <string name="help_about_content_4">Nightonke@outlook.com</string>
+    <string name="help_about_content_1">Katherine</string>
+    <string name="help_about_content_2">https://github.com/katherineqj/DailyAccount</string>
+    <string name="help_about_content_3">https://blog.csdn.net/katherine_qj</string>
+    <string name="help_about_content_4">kathqin@gmail.com</string>
     <string name="help_about_content_5"> ● 所用到的开源库</string>
     <string name="help_about_content_6">daimajia.androidanimations</string>
     <string name="help_about_content_7">balysv:material-ripple</string>

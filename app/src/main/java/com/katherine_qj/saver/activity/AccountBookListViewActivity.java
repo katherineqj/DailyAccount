@@ -448,7 +448,7 @@ public class AccountBookListViewActivity extends AppCompatActivity
 
         setConditions();
 
-        //loadLogo();
+        loadLogo();
     }
 
     private void setConditions() {
@@ -652,14 +652,14 @@ public class AccountBookListViewActivity extends AppCompatActivity
 
     @Override
     protected void onStop() {
-        mDemoSlider.stopAutoCycle();
+       // mDemoSlider.stopAutoCycle();
 //        titleSlider.stopAutoCycle();
         super.onStop();
     }
 
     @Override
     public void onResume() {
-        if (mDemoSlider != null) mDemoSlider.startAutoCycle();
+       // if (mDemoSlider != null) mDemoSlider.startAutoCycle();
         if (RecordManager.SELECTED_RECORDS == null) selectRecords();
         else {
 //            if (titleSlider != null) titleSlider.startAutoCycle();
@@ -902,25 +902,30 @@ public class AccountBookListViewActivity extends AppCompatActivity
                     // the local logo file is missed
                     // try to get from the server
                     BmobQuery<Logo> bmobQuery = new BmobQuery();
+                    Log.d("KKMoney", user.getLogoObjectId());
                     bmobQuery.addWhereEqualTo("objectId", user.getLogoObjectId());
                     bmobQuery.findObjects(KKMoneyApplication.getAppContext()
                             , new FindListener<Logo>() {
                                 @Override
                                 public void onSuccess(List<Logo> object) {
                                     // there has been an old logo in the server/////////////////////////////////////////////////////////
-                                    String url = object.get(0).getFile().getFileUrl(KKMoneyApplication.getAppContext());
-                                    if (BuildConfig.DEBUG) Log.d("KKMoney", "Logo in server: " + url);
-                                    Ion.with(KKMoneyApplication.getAppContext()).load(url)
-                                            .write(new File(KKMoneyApplication.getAppContext().getFilesDir()
-                                                    + KKMoneyUtil.LOGO_NAME))
-                                            .setCallback(new FutureCallback<File>() {
-                                                @Override
-                                                public void onCompleted(Exception e, File file) {
-                                                    profileImage.setImageBitmap(BitmapFactory.decodeFile(
-                                                            KKMoneyApplication.getAppContext().getFilesDir()
-                                                                    + KKMoneyUtil.LOGO_NAME));
-                                                }
-                                            });
+                                    if (object.size() == 0) {
+
+                                    } else {
+                                        String url = object.get(0).getFile().getFileUrl(KKMoneyApplication.getAppContext());
+                                        if (BuildConfig.DEBUG) Log.d("KKMoney", "Logo in server: " + url);
+                                        Ion.with(KKMoneyApplication.getAppContext()).load(url)
+                                                .write(new File(KKMoneyApplication.getAppContext().getFilesDir()
+                                                        + KKMoneyUtil.LOGO_NAME))
+                                                .setCallback(new FutureCallback<File>() {
+                                                    @Override
+                                                    public void onCompleted(Exception e, File file) {
+                                                        profileImage.setImageBitmap(BitmapFactory.decodeFile(
+                                                                KKMoneyApplication.getAppContext().getFilesDir()
+                                                                        + KKMoneyUtil.LOGO_NAME));
+                                                    }
+                                                });
+                                    }
                                 }
                                 @Override
                                 public void onError(int code, String msg) {
@@ -1090,6 +1095,7 @@ public class AccountBookListViewActivity extends AppCompatActivity
             }
         }
     }
+
 
     private MyGridView myGridView;
     private DialogTagChooseGridViewAdapter dialogTagChooseGridViewAdapter;

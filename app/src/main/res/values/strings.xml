@@ -25,6 +25,7 @@
     <string name="help">Help</string>
     <string name="feedback">Feedback</string>
     <string name="about">About</string>
+    <string name="icloud">ICloud</string>
 
     <string name="today_empty">New day!</string>
     <string name="yesterday_empty">No records.</string>
@@ -171,8 +172,8 @@
     <string name="user_name_hint">User name</string>
     <string name="user_email_hint">User email</string>
 
-    <string name="test_user_name">Nightonke</string>
-    <string name="test_user_email">Nightonke@gmail.com</string>
+    <string name="test_user_name">Katherineqj</string>
+    <string name="test_user_email">kathqin@gmail.com</string>
 
     <string name="expense_text">Expense</string>
     <string name="records_text">Records</string>
@@ -324,9 +325,9 @@
     <string name="hey">Hello!</string>
     <string name="thank">Thanks for using KKMoney.</string>
     <string name="me">I\'m an android developer.</string>
-    <string name="github">All codes here: github.com/Nightonke/KKMoney</string>
-    <string name="blog">Blog: blog.csdn.net/u012925008</string>
-    <string name="email">Email: nightonke@outlook.com</string>
+    <string name="github">All codes here: https://github.com/katherineqj/DailyAccount</string>
+    <string name="blog">Blog: https://blog.csdn.net/katherine_qj</string>
+    <string name="email">Email: kathqin@gmail.com</string>
     <string name="thank_again">If you get any questions about KKMoney or me, just mail me!</string>
 
     <string name="login_button">Sign in/Sign up</string>
@@ -517,7 +518,7 @@
     </string>
     <string name="help_KKMoney_content_11"> ● Thanks for using KKMoney</string>
 
-    <string name="help_feedback_content_1"> ● It\'s so nice to hear from you. If you wanna send me some images or other non-text feedback, my e-mail is Nightonke@outlook.com.</string>
+    <string name="help_feedback_content_1"> ● It\'s so nice to hear from you. If you wanna send me some images or other non-text feedback, my e-mail is kathqin@gmail.com</string>
     <string name="help_feedback_content_2">Let\'s improve KKMoney</string>
     <string name="help_feedback_hint">Write feedback here</string>
     <string name="help_feedback_edit">Edit</string>
@@ -533,10 +534,10 @@
     <string name="help_feedback_dialog_dont_send">don\'t send</string>
 
     <string name="help_about_content_0"> ● About Me</string>
-    <string name="help_about_content_1">Nightonke</string>
-    <string name="help_about_content_2">github.com/Nightonke/KKMoney</string>
-    <string name="help_about_content_3">blog.csdn.net/u012925008</string>
-    <string name="help_about_content_4">Nightonke@outlook.com</string>
+    <string name="help_about_content_1">Katherineqj</string>
+    <string name="help_about_content_2">https://github.com/katherineqj/DailyAccount</string>
+    <string name="help_about_content_3">https://blog.csdn.net/katherine_qj</string>
+    <string name="help_about_content_4">kathqin@gmail.com</string>
     <string name="help_about_content_5"> ● Open Source Lib</string>
     <string name="help_about_content_6">daimajia.androidanimations</string>
     <string name="help_about_content_7">balysv:material-ripple</string>
