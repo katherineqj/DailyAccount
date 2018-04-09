@@ -285,7 +285,7 @@
 
         <android.support.v7.widget.CardView
             android:layout_width="match_parent"
-            android:layout_height="360dp"
+            android:layout_height="180dp"
             app:cardCornerRadius="2dp"
             app:cardElevation="2dp"
             android:layout_marginBottom="@dimen/cardMarginVertical"
@@ -310,10 +310,11 @@
                     >
 
                     <LinearLayout
+                        android:visibility="gone"
                         android:id="@id/month_limit_layout"
                         android:layout_height="0dp"
                         android:layout_width="match_parent"
-                        android:layout_weight="1"
+                        android:layout_weight="0"
                         android:orientation="horizontal"
                         >
 
@@ -356,10 +357,11 @@
                     </LinearLayout>
 
                     <LinearLayout
+                        android:visibility="gone"
                         android:id="@+id/month_expense_layout"
                         android:layout_height="0dp"
                         android:layout_width="match_parent"
-                        android:layout_weight="1"
+                        android:layout_weight="0"
                         android:orientation="horizontal"
                         >
 
@@ -549,9 +551,10 @@
                     </LinearLayout>
 
                     <LinearLayout
+                        android:visibility="gone"
                         android:layout_height="0dp"
                         android:layout_width="match_parent"
-                        android:layout_weight="1"
+                        android:layout_weight="0"
                         android:orientation="horizontal"
                         >
 
@@ -784,8 +787,9 @@
             </com.balysv.materialripple.MaterialRippleLayout>
 
         </android.support.v7.widget.CardView>
-
+         <!--当前版本不需要-->
         <android.support.v7.widget.CardView
+            android:visibility="gone"
             android:layout_width="match_parent"
             android:layout_height="60dp"
             app:cardCornerRadius="2dp"
