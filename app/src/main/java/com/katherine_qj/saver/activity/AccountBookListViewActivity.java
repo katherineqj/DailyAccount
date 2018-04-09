@@ -359,7 +359,7 @@ public class AccountBookListViewActivity extends AppCompatActivity
             }
         });
 
-      /*  mDemoSlider = (SliderLayout)findViewById(R.id.slider);
+        mDemoSlider = (SliderLayout)findViewById(R.id.slider);
 
         HashMap<String, Integer> urls = KKMoneyUtil.GetDrawerTopUrl();
 
@@ -374,7 +374,7 @@ public class AccountBookListViewActivity extends AppCompatActivity
         mDemoSlider.setPresetTransformer(SliderLayout.Transformer.ZoomOut);
         mDemoSlider.setCustomAnimation(new DescriptionAnimation());
         mDemoSlider.setDuration(4000);
-        mDemoSlider.setCustomIndicator((PagerIndicator) findViewById(R.id.custom_indicator));*/
+        mDemoSlider.setCustomIndicator((PagerIndicator) findViewById(R.id.custom_indicator));
 
         titleExpense = (TextView)findViewById(R.id.title_expense);
         titleExpense.setTypeface(KKMoneyUtil.typefaceLatoLight);
@@ -448,7 +448,7 @@ public class AccountBookListViewActivity extends AppCompatActivity
 
         setConditions();
 
-        //loadLogo();
+        loadLogo();
     }
 
     private void setConditions() {
@@ -902,25 +902,30 @@ public class AccountBookListViewActivity extends AppCompatActivity
                     // the local logo file is missed
                     // try to get from the server
                     BmobQuery<Logo> bmobQuery = new BmobQuery();
+                    Log.d("KKMoney", user.getLogoObjectId());
                     bmobQuery.addWhereEqualTo("objectId", user.getLogoObjectId());
                     bmobQuery.findObjects(KKMoneyApplication.getAppContext()
                             , new FindListener<Logo>() {
                                 @Override
                                 public void onSuccess(List<Logo> object) {
                                     // there has been an old logo in the server/////////////////////////////////////////////////////////
-                                    String url = object.get(0).getFile().getFileUrl(KKMoneyApplication.getAppContext());
-                                    if (BuildConfig.DEBUG) Log.d("KKMoney", "Logo in server: " + url);
-                                    Ion.with(KKMoneyApplication.getAppContext()).load(url)
-                                            .write(new File(KKMoneyApplication.getAppContext().getFilesDir()
-                                                    + KKMoneyUtil.LOGO_NAME))
-                                            .setCallback(new FutureCallback<File>() {
-                                                @Override
-                                                public void onCompleted(Exception e, File file) {
-                                                    profileImage.setImageBitmap(BitmapFactory.decodeFile(
-                                                            KKMoneyApplication.getAppContext().getFilesDir()
-                                                                    + KKMoneyUtil.LOGO_NAME));
-                                                }
-                                            });
+                                    if (object.size() == 0) {
+
+                                    } else {
+                                        String url = object.get(0).getFile().getFileUrl(KKMoneyApplication.getAppContext());
+                                        if (BuildConfig.DEBUG) Log.d("KKMoney", "Logo in server: " + url);
+                                        Ion.with(KKMoneyApplication.getAppContext()).load(url)
+                                                .write(new File(KKMoneyApplication.getAppContext().getFilesDir()
+                                                        + KKMoneyUtil.LOGO_NAME))
+                                                .setCallback(new FutureCallback<File>() {
+                                                    @Override
+                                                    public void onCompleted(Exception e, File file) {
+                                                        profileImage.setImageBitmap(BitmapFactory.decodeFile(
+                                                                KKMoneyApplication.getAppContext().getFilesDir()
+                                                                        + KKMoneyUtil.LOGO_NAME));
+                                                    }
+                                                });
+                                    }
                                 }
                                 @Override
                                 public void onError(int code, String msg) {
@@ -1090,6 +1095,7 @@ public class AccountBookListViewActivity extends AppCompatActivity
             }
         }
     }
+
 
     private MyGridView myGridView;
     private DialogTagChooseGridViewAdapter dialogTagChooseGridViewAdapter;

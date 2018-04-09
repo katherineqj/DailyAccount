@@ -12,7 +12,6 @@
     >
 
     <FrameLayout
-        android:background="@drawable/banner"
         android:id="@+id/info_layout"
         android:layout_height="160dp"
         android:layout_width="match_parent"
@@ -58,7 +57,7 @@
                 android:layout_marginTop="5dp"
                 android:text=""
                 android:textSize="16sp"
-                android:textColor="#ffffff"
+                android:textColor="#504f4f"
                 android:textStyle="bold"
                 />
 
@@ -70,7 +69,7 @@
                 android:layout_marginLeft="20dp"
                 android:text=""
                 android:textSize="12sp"
-                android:textColor="#ffffff"
+                android:textColor="#504f4f"
                 />
 
         </LinearLayout>
