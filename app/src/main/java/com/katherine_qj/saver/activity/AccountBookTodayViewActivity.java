@@ -93,8 +93,6 @@ public class AccountBookTodayViewActivity extends AppCompatActivity {
 
     private Context mContext;
 
-   // private MaterialRippleLayout custom;
-   // private MaterialRippleLayout tags;
     private MaterialRippleLayout months;
     private MaterialRippleLayout list;
     private MaterialRippleLayout report;
@@ -149,8 +147,7 @@ public class AccountBookTodayViewActivity extends AppCompatActivity {
         toolbar = mViewPager.getToolbar();
         mDrawer = (DrawerLayout) findViewById(R.id.drawer_layout);
 
-       // custom = (MaterialRippleLayout)mDrawer.findViewById(R.id.custom_layout);
-       // tags = (MaterialRippleLayout)mDrawer.findViewById(R.id.tag_layout);
+
         months = (MaterialRippleLayout)mDrawer.findViewById(R.id.month_layout);
         list = (MaterialRippleLayout)mDrawer.findViewById(R.id.list_layout);
         report = (MaterialRippleLayout)mDrawer.findViewById(R.id.report_layout);
@@ -283,24 +280,6 @@ public class AccountBookTodayViewActivity extends AppCompatActivity {
         super.onDestroy();
 
         MaterialViewPagerHelper.unregister(this);
-    }
-
-    private void loadRangeMode() {
-
-        Log.d("Saver", "RANGE_MODE");
-
-        Intent intent = new Intent(mContext, AccountBookCustomViewActivity.class);
-        startActivity(intent);
-
-    }
-
-    private void loadTagMode() {
-
-        Log.d("Saver", "TAG_MODE");
-
-        Intent intent = new Intent(mContext, AccountBookTagViewActivity.class);
-        startActivity(intent);
-
     }
 
     private void loadMonthMode() {
@@ -1010,18 +989,6 @@ public class AccountBookTodayViewActivity extends AppCompatActivity {
     }
 
     private void setListeners() {
-        /*custom.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                loadRangeMode();
-            }
-        });
-        tags.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                loadTagMode();
-            }
-        });*/
         months.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -1052,18 +1019,6 @@ public class AccountBookTodayViewActivity extends AppCompatActivity {
                 sync();
             }
         });
-        /*help.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(mContext, HelpActivity.class));
-            }
-        });
-        feedback.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(mContext, FeedbackActivity.class));
-            }
-        });*/
         about.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

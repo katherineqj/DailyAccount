@@ -39,13 +39,7 @@
             android:launchMode="singleTop"
             android:theme="@style/AppTheme" />
         <activity
-            android:name="com.katherine_qj.saver.activity.AccountBookCustomViewActivity"
-            android:launchMode="singleTop" />
-        <activity
             android:name="com.katherine_qj.saver.activity.AccountBookReportViewActivity"
-            android:launchMode="singleTop" />
-        <activity
-            android:name="com.katherine_qj.saver.activity.AccountBookTagViewActivity"
             android:launchMode="singleTop" />
         <activity
             android:name="com.katherine_qj.saver.activity.AccountBookMonthViewActivity"
@@ -73,7 +67,7 @@
             android:theme="@style/KKMoneySettingActivityStyle" />
         <!--<activity android:name="com.github.mmin18.layoutcast.ResetActivity" />-->
         <activity android:name="com.katherine_qj.saver.activity.HelpActivity" />
-        <activity android:name="com.katherine_qj.saver.activity.FeedbackActivity" />
+
         <activity android:name="com.katherine_qj.saver.activity.AboutActivity" />
         <activity android:name="com.katherine_qj.saver.activity.ShowActivity" />
     </application>
