@@ -71,29 +71,6 @@ public class HelpAboutFragment extends Fragment {
         ((TextView)view.findViewById(R.id.content_8)).setTypeface(KKMoneyUtil.getInstance().typefaceLatoLight);
         ((TextView)view.findViewById(R.id.content_9)).setTypeface(KKMoneyUtil.getInstance().typefaceLatoLight);
         ((TextView)view.findViewById(R.id.content_10)).setTypeface(KKMoneyUtil.getInstance().typefaceLatoLight);
-        ((TextView)view.findViewById(R.id.content_11)).setTypeface(KKMoneyUtil.getInstance().typefaceLatoLight);
-        ((TextView)view.findViewById(R.id.content_12)).setTypeface(KKMoneyUtil.getInstance().typefaceLatoLight);
-        ((TextView)view.findViewById(R.id.content_13)).setTypeface(KKMoneyUtil.getInstance().typefaceLatoLight);
-        ((TextView)view.findViewById(R.id.content_14)).setTypeface(KKMoneyUtil.getInstance().typefaceLatoLight);
-        ((TextView)view.findViewById(R.id.content_15)).setTypeface(KKMoneyUtil.getInstance().typefaceLatoLight);
-        ((TextView)view.findViewById(R.id.content_16)).setTypeface(KKMoneyUtil.getInstance().typefaceLatoLight);
-        ((TextView)view.findViewById(R.id.content_17)).setTypeface(KKMoneyUtil.getInstance().typefaceLatoLight);
-        ((TextView)view.findViewById(R.id.content_18)).setTypeface(KKMoneyUtil.getInstance().typefaceLatoLight);
-        ((TextView)view.findViewById(R.id.content_19)).setTypeface(KKMoneyUtil.getInstance().typefaceLatoLight);
-        ((TextView)view.findViewById(R.id.content_20)).setTypeface(KKMoneyUtil.getInstance().typefaceLatoLight);
-        ((TextView)view.findViewById(R.id.content_21)).setTypeface(KKMoneyUtil.getInstance().typefaceLatoLight);
-        ((TextView)view.findViewById(R.id.content_22)).setTypeface(KKMoneyUtil.getInstance().typefaceLatoLight);
-        ((TextView)view.findViewById(R.id.content_23)).setTypeface(KKMoneyUtil.getInstance().typefaceLatoLight);
-        ((TextView)view.findViewById(R.id.content_24)).setTypeface(KKMoneyUtil.getInstance().typefaceLatoLight);
-        ((TextView)view.findViewById(R.id.content_25)).setTypeface(KKMoneyUtil.getInstance().typefaceLatoLight);
-        ((TextView)view.findViewById(R.id.content_26)).setTypeface(KKMoneyUtil.getInstance().typefaceLatoLight);
-        ((TextView)view.findViewById(R.id.content_27)).setTypeface(KKMoneyUtil.getInstance().typefaceLatoLight);
-        ((TextView)view.findViewById(R.id.content_28)).setTypeface(KKMoneyUtil.getInstance().typefaceLatoLight);
-        ((TextView)view.findViewById(R.id.content_29)).setTypeface(KKMoneyUtil.getInstance().typefaceLatoLight);
-        ((TextView)view.findViewById(R.id.content_30)).setTypeface(KKMoneyUtil.getInstance().typefaceLatoLight);
-        ((TextView)view.findViewById(R.id.content_31)).setTypeface(KKMoneyUtil.getInstance().typefaceLatoLight);
-        ((TextView)view.findViewById(R.id.content_32)).setTypeface(KKMoneyUtil.getInstance().typefaceLatoLight);
-        ((TextView)view.findViewById(R.id.content_33)).setTypeface(KKMoneyUtil.getInstance().typefaceLatoLight);
 
         ((MaterialRippleLayout)view.findViewById(R.id.layout_2)).setOnClickListener(new View.OnClickListener() {
             @Override
