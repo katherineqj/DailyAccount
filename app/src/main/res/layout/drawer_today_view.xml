@@ -261,51 +261,6 @@
 
             </com.balysv.materialripple.MaterialRippleLayout>
 
-            <!--数据同步-->
-<!--
-            <com.balysv.materialripple.MaterialRippleLayout
-                android:id="@+id/sync_layout"
-                android:layout_width="match_parent"
-                android:layout_height="40dp"
-                app:mrl_rippleAlpha="0.2"
-                app:mrl_rippleColor="#0000ff"
-                app:mrl_rippleHover="true"
-                app:mrl_rippleOverlay="false">
-
-                <LinearLayout
-                    android:layout_height="match_parent"
-                    android:layout_width="match_parent"
-                    android:orientation="horizontal"
-                    >
-
-                    <net.steamcrafted.materialiconlib.MaterialIconView
-                        android:layout_width="40dp"
-                        android:layout_height="40dp"
-                        app:materialIcon="sync"
-                        app:materialIconColor="@color/my_gray"
-                        app:materialIconSize="24dp"
-                        android:scaleType="center"
-                        android:id="@+id/sync_icon"
-                        android:layout_gravity="center_vertical"
-                        android:layout_marginLeft="10dp"
-                        />
-
-                    <TextView
-                        android:id="@+id/sync_text"
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:layout_gravity="center_vertical"
-                        android:gravity="left|center_vertical"
-                        android:layout_marginLeft="10dp"
-                        android:text="@string/sync"
-                        android:textColor="@color/drawer_text"
-                        />
-
-                </LinearLayout>
-
-            </com.balysv.materialripple.MaterialRippleLayout>
--->
-
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="40dp" />
@@ -393,9 +348,8 @@
             </com.balysv.materialripple.MaterialRippleLayout>
 
         </LinearLayout>
-
     </ScrollView>
-
+    <!--数据同步-->
     <com.balysv.materialripple.MaterialRippleLayout
         android:id="@+id/sync_layout"
         android:layout_marginTop="20dp"

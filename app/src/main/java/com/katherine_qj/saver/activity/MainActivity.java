@@ -193,7 +193,7 @@ public class MainActivity extends AppCompatActivity implements TagChooseFragment
         //进入这个adapter
         editAdapter = new EditMoneyRemarkFragmentAdapter(getSupportFragmentManager(),
                 KKMoneyFragmentManager.MAIN_ACTIVITY_FRAGMENT);
-        
+
         editViewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled (int position, float positionOffset, int positionOffsetPixels) {
@@ -319,7 +319,7 @@ public class MainActivity extends AppCompatActivity implements TagChooseFragment
                 animation.open();
             }
         });
-
+//如果是初次安装会有介绍页面
         if (SettingManager.getInstance().getFirstTime()) {
             Intent intent = new Intent(mContext, ShowActivity.class);
             startActivity(intent);
