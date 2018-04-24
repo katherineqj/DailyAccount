@@ -384,28 +384,7 @@ public class AccountBookListViewActivity extends AppCompatActivity
         titleSum.setTypeface(KKMoneyUtil.typefaceLatoLight);
         titleSum.setText(RecordManager.getInstance(mContext).SELECTED_RECORDS.size() + "'s");
 
-//        titleSlider = (SliderLayout)findViewById(R.id.title_slider);
-//        titleSlider.getLayoutParams().height = 48;
-//        titleSlider.getLayoutParams().width = 400 - KKMoneyUtil.dpToPx(60 * 2);
-//
-//        HashMap<String, Integer> urls2 = KKMoneyUtil.getTransparentUrls();
-//
-//        CustomTitleSliderView customTitleSliderView = new CustomTitleSliderView(0 + "'s", KKMoneyFragmentManager.NUMBER_SLIDER);
-//        customTitleSliderView
-//                .image(urls2.get("0"))
-//                .setScaleType(BaseSliderView.ScaleType.Fit);
-//        titleSlider.addSlider(customTitleSliderView);
-//
-//        customTitleSliderView = new CustomTitleSliderView(KKMoneyUtil.GetInMoney(0), KKMoneyFragmentManager.EXPENSE_SLIDER);
-//        customTitleSliderView
-//                .image(urls2.get("1"))
-//                .setScaleType(BaseSliderView.ScaleType.Fit);
-//        titleSlider.addSlider(customTitleSliderView);
-//
-//        titleSlider.setPresetTransformer(SliderLayout.Transformer.ZoomOut);
-//        titleSlider.setCustomAnimation(new DescriptionAnimation());
-//        titleSlider.setDuration(3000);
-//        titleSlider.setCustomIndicator((PagerIndicator) findViewById(R.id.custom_indicator));
+
 
         ((TextView)findViewById(R.id.tag_title)).setTypeface(KKMoneyUtil.GetTypeface());
         ((TextView)findViewById(R.id.tag_title_expense)).setTypeface(KKMoneyUtil.GetTypeface());
@@ -488,14 +467,6 @@ public class AccountBookListViewActivity extends AppCompatActivity
         titleSum = (TextView)findViewById(R.id.title_sum);
         titleSum.setText(RecordManager.getInstance(mContext).SELECTED_RECORDS.size() + "'s");
 
-//        titleSlider.stopAutoCycle();
-//
-//        if (KKMoneyFragmentManager.numberCustomTitleSliderView != null)
-//            KKMoneyFragmentManager.numberCustomTitleSliderView.setTitle(RecordManager.getInstance(KKMoneyApplication.getAppContext()).SELECTED_RECORDS.size() + "'s");
-//        if (KKMoneyFragmentManager.expenseCustomTitleSliderView != null)
-//            KKMoneyFragmentManager.expenseCustomTitleSliderView.setTitle(KKMoneyUtil.GetInMoney((int)(double)RecordManager.getInstance(KKMoneyApplication.getAppContext()).SELECTED_SUM));
-//
-//        titleSlider.startAutoCycle();
     }
 
     private MaterialDialog progressDialog;

@@ -117,7 +117,7 @@
                                 android:layout_weight="1"
                                 android:textColor="@color/drawer_text"
                                 android:paddingLeft="10dp"
-                                android:text="@string/test_user_name"
+                                android:text="您的用户名"
                                 android:layout_gravity="center_vertical|left"
                                 android:gravity="center_vertical|left"
                                 android:clickable="false"
@@ -150,7 +150,7 @@
                                 android:layout_weight="1"
                                 android:textColor="@color/drawer_text"
                                 android:paddingLeft="10dp"
-                                android:text="@string/test_user_email"
+                                android:text="您的邮箱"
                                 android:layout_gravity="center_vertical|left"
                                 android:gravity="center_vertical|left"
                                 />

@@ -158,9 +158,7 @@ public class AccountBookSettingActivity extends AppCompatActivity
 
         mContext = this;
         setContentView(R.layout.activity_account_book_setting);
-
         int currentapiVersion = android.os.Build.VERSION.SDK_INT;
-
         if (currentapiVersion >= Build.VERSION_CODES.LOLLIPOP) {
             // Do something for lollipop and above versions
             Window window = this.getWindow();
@@ -172,7 +170,6 @@ public class AccountBookSettingActivity extends AppCompatActivity
             View statusBarView = findViewById(R.id.status_bar_view);
             statusBarView.getLayoutParams().height = KKMoneyUtil.getStatusBarHeight();
         }
-
         init();
         SettingManager.getInstance().setIsMonthLimit(true);
         updateSettingsToServer(UPDATE_IS_MONTH_LIMIT);
@@ -1290,8 +1287,8 @@ public class AccountBookSettingActivity extends AppCompatActivity
             loginButton.setText(mContext.getResources().getText(R.string.logout_button));
             loginButton.setBackgroundResource(R.drawable.button_logout);
         } else {
-            userName.setText("");
-            userEmail.setText("");
+            userName.setText("未登陆");
+            userEmail.setText("未登录");
             loginButton.setText(getResourceString(R.string.login_button));
         }
         setIconEnable(userNameIcon, loggenOn);
