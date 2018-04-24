@@ -676,8 +676,7 @@ public class AccountBookListViewActivity extends AppCompatActivity
 
         lastPosition = RecordManager.SELECTED_RECORDS.size() - position;
         undid = false;
-        Snackbar snackbar =
-                Snackbar
+        Snackbar snackbar = Snackbar
                         .with(mContext)
                         .type(SnackbarType.MULTI_LINE)
                         .duration(Snackbar.SnackbarDuration.LENGTH_SHORT)
